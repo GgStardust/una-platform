@@ -1,0 +1,417 @@
+{
+  "counties": [
+    {
+      "name": "Alameda County",
+      "portal": "https://www.acgov.org/auditor/fbn/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years, renewal required"
+    },
+    {
+      "name": "Alpine County",
+      "portal": "https://alpinecountyca.gov/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "County receipt"],
+      "notes": "Small county, contact clerk directly"
+    },
+    {
+      "name": "Amador County",
+      "portal": "https://www.amadorgov.org/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Butte County",
+      "portal": "https://www.buttecounty.net/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Calaveras County",
+      "portal": "https://www.calaverasgov.us/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Colusa County",
+      "portal": "https://www.countyofcolusa.org/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Contra Costa County",
+      "portal": "https://www.contracosta.ca.gov/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Del Norte County",
+      "portal": "https://www.co.del-norte.ca.us/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "El Dorado County",
+      "portal": "https://www.edcgov.us/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Fresno County",
+      "portal": "https://www.co.fresno.ca.us/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Glenn County",
+      "portal": "https://www.countyofglenn.net/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Humboldt County",
+      "portal": "https://humboldtgov.org/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Imperial County",
+      "portal": "https://www.imperialcounty.org/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Inyo County",
+      "portal": "https://www.inyocounty.us/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Kern County",
+      "portal": "https://www.kerncounty.com/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Kings County",
+      "portal": "https://www.countyofkings.com/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Lake County",
+      "portal": "https://www.lakecountyca.gov/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Lassen County",
+      "portal": "https://www.lassencounty.org/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Los Angeles County",
+      "portal": "https://www.lacounty.gov/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years, high volume county"
+    },
+    {
+      "name": "Madera County",
+      "portal": "https://www.maderacounty.com/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Marin County",
+      "portal": "https://www.marincounty.org/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Mariposa County",
+      "portal": "https://www.mariposacounty.org/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Mendocino County",
+      "portal": "https://www.mendocinocounty.org/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Merced County",
+      "portal": "https://www.co.merced.ca.us/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Modoc County",
+      "portal": "https://www.modoccounty.org/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Mono County",
+      "portal": "https://monocounty.ca.gov/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Monterey County",
+      "portal": "https://www.co.monterey.ca.us/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Napa County",
+      "portal": "https://www.countyofnapa.org/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Nevada County",
+      "portal": "https://www.nevadacountyca.gov/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Orange County",
+      "portal": "https://ocgov.com/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years, high volume county"
+    },
+    {
+      "name": "Placer County",
+      "portal": "https://www.placer.ca.gov/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Plumas County",
+      "portal": "https://www.plumascounty.us/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Riverside County",
+      "portal": "https://www.rivco.org/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years, high volume county"
+    },
+    {
+      "name": "Sacramento County",
+      "portal": "https://www.saccounty.net/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years, high volume county"
+    },
+    {
+      "name": "San Benito County",
+      "portal": "https://www.cosb.us/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "San Bernardino County",
+      "portal": "https://www.sbcounty.gov/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years, high volume county"
+    },
+    {
+      "name": "San Diego County",
+      "portal": "https://www.sandiegocounty.gov/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years, high volume county"
+    },
+    {
+      "name": "San Francisco County",
+      "portal": "https://sfgov.org/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years, high volume county"
+    },
+    {
+      "name": "San Joaquin County",
+      "portal": "https://www.sjgov.org/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "San Luis Obispo County",
+      "portal": "https://www.slocounty.ca.gov/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "San Mateo County",
+      "portal": "https://www.smcgov.org/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Santa Barbara County",
+      "portal": "https://www.countyofsb.org/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Santa Clara County",
+      "portal": "https://www.sccgov.org/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years, high volume county"
+    },
+    {
+      "name": "Santa Cruz County",
+      "portal": "https://www.santacruzcounty.us/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Shasta County",
+      "portal": "https://www.co.shasta.ca.us/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Sierra County",
+      "portal": "https://www.sierracounty.ca.gov/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Siskiyou County",
+      "portal": "https://www.co.siskiyou.ca.us/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Solano County",
+      "portal": "https://www.solanocounty.com/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Sonoma County",
+      "portal": "https://sonomacounty.ca.gov/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Stanislaus County",
+      "portal": "https://www.stancounty.com/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Sutter County",
+      "portal": "https://www.suttercounty.org/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Tehama County",
+      "portal": "https://www.tehamacounty.ca.gov/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Trinity County",
+      "portal": "https://www.trinitycounty.org/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Tulare County",
+      "portal": "https://tularecounty.ca.gov/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Tuolumne County",
+      "portal": "https://www.tuolumnecounty.ca.gov/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Ventura County",
+      "portal": "https://www.ventura.org/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Yolo County",
+      "portal": "https://www.yolocounty.org/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    },
+    {
+      "name": "Yuba County",
+      "portal": "https://www.co.yuba.ca.us/",
+      "filingFee": "$26",
+      "requirements": ["FBN form", "Proof of publication", "County receipt"],
+      "notes": "FBN expires in 5 years"
+    }
+  ],
+  "generalInfo": {
+    "filingFee": "$26 (standard across all counties)",
+    "expiration": "5 years from filing date",
+    "publicationRequirement": "Most counties require publication in local newspaper",
+    "renewalProcess": "File renewal before expiration date",
+    "penalties": "Late renewal may incur additional fees"
+  }
+}

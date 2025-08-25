@@ -1,0 +1,40 @@
+Date,Income Source,Income Amount,Expense Type,Expense Amount,Notes,Category
+2025-01-01,Start-Up Package,$2500.00,,,Payment received for UNA formation,Income
+2025-01-01,,,Formation Filing,$26.00,DBA/FBN filing fee,Formation
+2025-01-01,,,Bank Account Setup,$25.00,Initial deposit for UNA account,Formation
+2025-01-15,Grant Application,$5000.00,,,Community development grant,Income
+2025-01-15,,,Office Supplies,$150.00,Basic office setup,Operations
+2025-01-15,,,Website Hosting,$12.00,Monthly hosting fee,Technology
+2025-02-01,Consulting Services,$750.00,,,Strategic planning session,Income
+2025-02-01,,,Professional Development,$200.00,Conference registration,Operations
+2025-02-01,,,Insurance,$85.00,Monthly liability insurance,Operations
+2025-03-01,Donation,$1000.00,,,Community supporter donation,Income
+2025-03-01,,,Travel,$125.00,Client meeting expenses,Operations
+2025-03-01,,,Software Tools,$45.00,Project management tool,Technology
+2025-04-01,Service Contract,$3000.00,,,Quarterly consulting contract,Income
+2025-04-01,,,Legal Review,$500.00,Attorney consultation,Professional
+2025-04-01,,,Marketing Materials,$75.00,Brochures and business cards,Marketing
+2025-05-01,Workshop Revenue,$800.00,,,Community workshop fees,Income
+2025-05-01,,,Venue Rental,$200.00,Workshop space rental,Operations
+2025-05-01,,,Materials,$50.00,Workshop supplies,Operations
+2025-06-01,Membership Fees,$1200.00,,,Annual membership renewals,Income
+2025-06-01,,,Newsletter Service,$30.00,Monthly newsletter platform,Marketing
+2025-06-01,,,Utilities,$45.00,Office utilities,Operations
+2025-07-01,Event Sponsorship,$2500.00,,,Community event sponsorship,Income
+2025-07-01,,,Event Costs,$800.00,Event production expenses,Operations
+2025-07-01,,,Volunteer Recognition,$150.00,Thank you gifts,Operations
+2025-08-01,Training Program,$1800.00,,,Professional training sessions,Income
+2025-08-01,,,Training Materials,$300.00,Educational resources,Operations
+2025-08-01,,,Certification,$125.00,Professional certification,Professional
+2025-09-01,Partnership Revenue,$4000.00,,,Collaborative project income,Income
+2025-09-01,,,Partnership Costs,$600.00,Collaboration expenses,Operations
+2025-09-01,,,Communication Tools,$60.00,Video conferencing platform,Technology
+2025-10-01,Book Sales,$650.00,,,Educational material sales,Income
+2025-10-01,,,Printing Costs,$200.00,Book production,Operations
+2025-10-01,,,Distribution,$75.00,Shipping and handling,Operations
+2025-11-01,Consulting Retainer,$5000.00,,,Monthly retainer agreement,Income
+2025-11-01,,,Professional Memberships,$150.00,Industry association dues,Professional
+2025-11-01,,,Office Maintenance,$100.00,General office upkeep,Operations
+2025-12-01,Year-End Donations,$3000.00,,,Holiday giving campaign,Income
+2025-12-01,,,Year-End Expenses,$400.00,Annual reporting and cleanup,Operations
+2025-12-01,,,Tax Preparation,$300.00,CPA services,Professional

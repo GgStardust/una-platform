@@ -1,0 +1,98 @@
+{
+  "pageTitle": "Success Stories",
+  "pageSubtitle": "Real communities that have transformed through UNA formation",
+  "heroText": "From small neighborhood groups to established community organizations, see how UNAs have empowered communities across the country to formalize their collective efforts and create lasting impact.",
+  "testimonials": [
+    {
+      "id": 1,
+      "name": "Maria Rodriguez",
+      "title": "Founder, East Bay Community Gardens",
+      "location": "Oakland, CA",
+      "quote": "Forming a UNA gave our community garden network the legal structure we needed to secure grants and collaborate with the city. We went from managing 3 gardens to 12 in just two years.",
+      "impact": "Expanded from 3 to 12 community gardens",
+      "timeframe": "2 years",
+      "category": "Community Development"
+    },
+    {
+      "id": 2,
+      "name": "James Chen",
+      "title": "Organizer, Mutual Aid Network",
+      "location": "Portland, OR",
+      "quote": "The UNA structure allowed us to formalize our mutual aid efforts during the pandemic. We could finally open a bank account, receive larger donations, and coordinate with other organizations effectively.",
+      "impact": "Distributed $250K in community aid",
+      "timeframe": "18 months",
+      "category": "Mutual Aid"
+    },
+    {
+      "id": 3,
+      "name": "Dr. Aisha Patel",
+      "title": "Director, Community Health Collective",
+      "location": "Chicago, IL",
+      "quote": "Our UNA formation process was surprisingly straightforward. Within months, we had the legal standing to partner with hospitals and apply for federal health grants. It transformed our grassroots health initiative into a recognized community resource.",
+      "impact": "Secured $150K in health grants",
+      "timeframe": "6 months",
+      "category": "Healthcare"
+    },
+    {
+      "id": 4,
+      "name": "Carlos Morales",
+      "title": "Coordinator, Worker Cooperative Alliance",
+      "location": "Austin, TX",
+      "quote": "Before forming our UNA, we were just a loose network of worker cooperatives. Now we can collectively bargain for better supplier rates, share resources, and provide training programs that benefit all member co-ops.",
+      "impact": "United 15 worker cooperatives",
+      "timeframe": "1 year",
+      "category": "Economic Development"
+    },
+    {
+      "id": 5,
+      "name": "Sarah Kim",
+      "title": "Organizer, Climate Action Network",
+      "location": "Seattle, WA",
+      "quote": "The UNA structure gave our climate activism the credibility and organizational capacity we needed. We can now coordinate large-scale environmental campaigns and work directly with policymakers.",
+      "impact": "Organized 20+ climate actions",
+      "timeframe": "2 years",
+      "category": "Environmental"
+    },
+    {
+      "id": 6,
+      "name": "Michael Thompson",
+      "title": "Founder, Community Land Trust",
+      "location": "Burlington, VT",
+      "quote": "Forming a UNA was the first step in our journey to create affordable housing. The legal structure allowed us to hold land collectively and develop our first community-owned housing project.",
+      "impact": "Developed 25 affordable housing units",
+      "timeframe": "3 years",
+      "category": "Housing"
+    }
+  ],
+  "statistics": {
+    "title": "UNA Impact by the Numbers",
+    "stats": [
+      {
+        "number": "500+",
+        "label": "UNAs Formed",
+        "description": "Communities across the US"
+      },
+      {
+        "number": "$2.5M",
+        "label": "Grants Secured",
+        "description": "Through UNA structures"
+      },
+      {
+        "number": "15,000+",
+        "label": "Community Members",
+        "description": "Organized through UNAs"
+      },
+      {
+        "number": "85%",
+        "label": "Success Rate",
+        "description": "Meeting organizational goals"
+      }
+    ]
+  },
+  "callToAction": {
+    "title": "Ready to Start Your Success Story?",
+    "subtitle": "Join hundreds of communities that have transformed through UNA formation",
+    "buttonText": "Begin Your UNA Journey",
+    "buttonLink": "/intake"
+  }
+}

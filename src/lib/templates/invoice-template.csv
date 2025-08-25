@@ -1,0 +1,26 @@
+Invoice Number,Date,Client Name,Client Email,Client Address,Service Description,Quantity,Rate,Amount,Notes
+INV-001,2025-01-01,Community Arts Collective,arts@community.org,"123 Main St, Oakland, CA 94601",UNA Formation Package,1,$2500.00,$2500.00,Complete formation including all documents
+INV-002,2025-01-15,Green Tech Initiative,info@greentech.org,"456 Innovation Dr, San Francisco, CA 94102",Strategic Consultation Session,1.5,$500.00,$750.00,90-minute strategy session
+INV-003,2025-02-01,Local Food Co-op,food@coop.org,"789 Farm Rd, Berkeley, CA 94705",Grant Readiness Package,1,$500.00,$500.00,Grant application support and review
+INV-004,2025-02-15,Community Health Network,health@network.org,"321 Wellness Way, Sacramento, CA 95814",UNA Formation + Legal Review,1,$3000.00,$3000.00,Formation package with attorney review
+INV-005,2025-03-01,Arts Education Foundation,arts@education.org,"654 Creative Ave, Los Angeles, CA 90012",Insignia Creation - Expanded,1,$400.00,$400.00,AI-generated insignia with multiple formats
+INV-006,2025-03-15,Environmental Action Group,action@environment.org,"987 Nature Blvd, San Diego, CA 92101",Full Alignment Package,1,$3500.00,$3500.00,Complete package with strategic consultation
+INV-007,2025-04-01,Community Development Corp,dev@community.org,"147 Growth St, Fresno, CA 93710",Monthly Consulting Retainer,1,$2000.00,$2000.00,Monthly strategic guidance
+INV-008,2025-04-15,Local Business Alliance,business@alliance.org,"258 Commerce Dr, San Jose, CA 95110",UNA Formation + Financial Setup,1,$2800.00,$2800.00,Formation with financial tracking setup
+INV-009,2025-05-01,Community Arts Council,arts@council.org,"369 Culture Way, Oakland, CA 94601",Workshop Facilitation,1,$800.00,$800.00,Community workshop on UNA formation
+INV-010,2025-05-15,Neighborhood Improvement Group,improve@neighborhood.org,"741 Better St, San Francisco, CA 94103",Strategic Planning Session,1,$750.00,$750.00,90-minute strategic planning consultation
+INV-011,2025-06-01,Community Garden Network,garden@network.org,"852 Green Ave, Berkeley, CA 94705",UNA Formation Package,1,$2500.00,$2500.00,Complete formation including all documents
+INV-012,2025-06-15,Local Music Collective,music@collective.org,"963 Harmony Rd, Sacramento, CA 95814",Insignia Creation - Basic,1,$150.00,$150.00,Basic AI-generated insignia
+INV-013,2025-07-01,Community Theater Group,theater@community.org,"159 Stage St, Los Angeles, CA 90012",Grant Readiness + Formation,1,$3000.00,$3000.00,Formation package with grant support
+INV-014,2025-07-15,Environmental Education Center,education@environment.org,"357 Learn Way, San Diego, CA 92101",Strategic Consultation Package,3,$500.00,$1500.00,Three strategic consultation sessions
+INV-015,2025-08-01,Community Food Bank,food@foodbank.org,"486 Hunger Dr, Fresno, CA 93710",UNA Formation + Legal Review,1,$3000.00,$3000.00,Formation with attorney consultation
+INV-016,2025-08-15,Local Arts Initiative,arts@initiative.org,"753 Creative Blvd, San Jose, CA 95110",Full Alignment Package,1,$3500.00,$3500.00,Complete package with strategic guidance
+INV-017,2025-09-01,Community Development Fund,dev@fund.org,"951 Growth Ave, Oakland, CA 94601",Monthly Consulting Retainer,1,$2000.00,$2000.00,Monthly strategic guidance
+INV-018,2025-09-15,Neighborhood Safety Group,safety@neighborhood.org,"264 Security Way, San Francisco, CA 94103",UNA Formation + Financial Setup,1,$2800.00,$2800.00,Formation with financial tracking
+INV-019,2025-10-01,Community Health Initiative,health@initiative.org,"573 Wellness Dr, Berkeley, CA 94705",Strategic Planning + Formation,1,$3250.00,$3250.00,Formation with strategic planning
+INV-020,2025-10-15,Local Business Network,business@network.org,"846 Commerce St, Sacramento, CA 95814",Insignia Creation - Expanded,1,$400.00,$400.00,AI-generated insignia with multiple formats
+INV-021,2025-11-01,Community Arts Collective,arts@community.org,"123 Main St, Oakland, CA 94601",Annual Consulting Package,1,$5000.00,$5000.00,Annual strategic guidance package
+INV-022,2025-11-15,Green Tech Initiative,info@greentech.org,"456 Innovation Dr, San Francisco, CA 94102",Grant Readiness + Legal Review,1,$1000.00,$1000.00,Grant support with legal review
+INV-023,2025-12-01,Local Food Co-op,food@coop.org,"789 Farm Rd, Berkeley, CA 94705",Year-End Strategic Review,1,$750.00,$750.00,Annual strategic review session
+INV-024,2025-12-15,Community Health Network,health@network.org,"321 Wellness Way, Sacramento, CA 95814",UNA Formation + Full Support,1,$4000.00,$4000.00,Formation with comprehensive support
+INV-025,2025-12-31,Arts Education Foundation,arts@education.org,"654 Creative Ave, Los Angeles, CA 90012",Annual Strategic Planning,1,$1500.00,$1500.00,Annual strategic planning session
