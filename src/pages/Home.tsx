@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-import { Users, FileText, Shield, ArrowRight } from 'lucide-react';
+import { Users, ArrowRight, BookOpen, Calendar } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
+import { FLAGS } from '@/lib/flags';
 
 export default function Home() {
   return (
@@ -40,23 +41,23 @@ export default function Home() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
         <div className="text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-navy-900 mb-6">
-            <span className="text-gold-600">UNA Formation Done Right</span>
+            <span className="text-gold-600">UNA Formation Guidance</span>
             <br />
-            California-Specific Legal Guidance
+            Clarity-First Strategy & Resources
           </h1>
           <p className="text-xl text-navy-700 mb-8 max-w-3xl mx-auto">
-            Transform your mission-driven collective into a recognized legal entity with 
-            <strong> California UNA formation</strong> expertise. Get all the documents, 
-            <strong> legal guidance</strong>, and support you need to establish your 
-            <strong> Unincorporated Nonprofit Association</strong> correctly from day one.
+            Get clear guidance for your UNA formation journey with 
+            <strong> California-specific expertise</strong>. Explore your path, access curated resources, 
+            and get personalized strategy sessions to establish your 
+            <strong> Unincorporated Nonprofit Association</strong> with confidence.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/intake" className="bg-gold-500 hover:bg-gold-600 text-white text-lg px-8 py-4 rounded-lg font-semibold transition-colors duration-200 shadow-lg hover:shadow-xl">
-              Start Your Journey
+            <Link to="/explore" className="bg-gold-500 hover:bg-gold-600 text-white text-lg px-8 py-4 rounded-lg font-semibold transition-colors duration-200 shadow-lg hover:shadow-xl">
+              Explore Your Path
               <ArrowRight className="ml-2 h-5 w-5 inline" />
             </Link>
-            <Link to="/explore" className="bg-white hover:bg-navy-50 text-navy-700 text-lg px-8 py-4 rounded-lg font-semibold transition-colors duration-200 border-2 border-navy-200 hover:border-navy-300 shadow-md hover:shadow-lg">
-              Explore Your Path
+            <Link to="/consultation" className="bg-white hover:bg-navy-50 text-navy-700 text-lg px-8 py-4 rounded-lg font-semibold transition-colors duration-200 border-2 border-navy-200 hover:border-navy-300 shadow-md hover:shadow-lg">
+              Strategy Session $250/hr
             </Link>
           </div>
         </div>
@@ -66,29 +67,29 @@ export default function Home() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid md:grid-cols-3 gap-8">
           <div className="card text-center">
+            <BookOpen className="h-12 w-12 text-gold-500 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold mb-2 text-navy-800">Explore Your Path</h3>
+            <p className="text-navy-600">
+              Take our guided assessment to understand your UNA formation options and 
+              get personalized strategic insights for your mission.
+            </p>
+          </div>
+          
+          <div className="card text-center">
             <Users className="h-12 w-12 text-gold-500 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold mb-2 text-navy-800">Collective Formation</h3>
+            <h3 className="text-xl font-semibold mb-2 text-navy-800">Affiliate Resources</h3>
             <p className="text-navy-600">
-              Bring your community together under a recognized legal structure that protects 
-              your mission and enables collective action.
+              Access our curated network of UNA formation experts, legal services, 
+              and community support resources.
             </p>
           </div>
           
           <div className="card text-center">
-            <FileText className="h-12 w-12 text-gold-500 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold mb-2 text-navy-800">Complete Documentation</h3>
+            <Calendar className="h-12 w-12 text-gold-500 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold mb-2 text-navy-800">Strategy Session $250/hr</h3>
             <p className="text-navy-600">
-              Get all the legal documents you need: UNA Agreement, EIN registration, 
-              DBA filing, and financial tracking templates.
-            </p>
-          </div>
-          
-          <div className="card text-center">
-            <Shield className="h-12 w-12 text-gold-500 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold mb-2 text-navy-800">Legal Protection</h3>
-            <p className="text-navy-600">
-              Establish clear governance, protect your collective's interests, and 
-              create a foundation for sustainable growth.
+              Get personalized guidance, strategic planning, and clear next steps 
+              through our 1:1 consultation sessions.
             </p>
           </div>
         </div>
@@ -160,17 +161,31 @@ export default function Home() {
                     Take our 4-step assessment to find your ideal formation approach
                   </div>
                 </Link>
-                <Link 
-                  to="/intake" 
-                  className="block p-4 bg-white rounded-lg border border-navy-200 hover:border-gold-300 hover:shadow-sm transition-all duration-200"
-                >
-                  <div className="font-medium text-gold-600 hover:text-gold-800">
-                    Begin Formation Process
-                  </div>
-                  <div className="text-sm text-navy-600 mt-1">
-                    Start your UNA formation with our comprehensive intake form
-                  </div>
-                </Link>
+                {FLAGS.ENABLE_FORMATION ? (
+                  <Link 
+                    to="/intake" 
+                    className="block p-4 bg-white rounded-lg border border-navy-200 hover:border-gold-300 hover:shadow-sm transition-all duration-200"
+                  >
+                    <div className="font-medium text-gold-600 hover:text-gold-800">
+                      Begin Formation Process
+                    </div>
+                    <div className="text-sm text-navy-600 mt-1">
+                      Start your UNA formation with our comprehensive intake form
+                    </div>
+                  </Link>
+                ) : (
+                  <Link 
+                    to="/consultation" 
+                    className="block p-4 bg-white rounded-lg border border-navy-200 hover:border-gold-300 hover:shadow-sm transition-all duration-200"
+                  >
+                    <div className="font-medium text-gold-600 hover:text-gold-800">
+                      Strategy Session $250/hr
+                    </div>
+                    <div className="text-sm text-navy-600 mt-1">
+                      Get personalized guidance for your UNA formation journey
+                    </div>
+                  </Link>
+                )}
                 <Link 
                   to="/services" 
                   className="block p-4 bg-white rounded-lg border border-navy-200 hover:border-gold-300 hover:shadow-sm transition-all duration-200"
@@ -233,17 +248,17 @@ export default function Home() {
       <div className="bg-navy-600 py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">
-            Ready to Form Your UNA?
+            Ready to Explore Your UNA Path?
           </h2>
           <p className="text-xl text-navy-100 mb-8">
-            Join hundreds of collectives who have used our platform to establish their legal foundation.
+            Get clarity on your formation journey with our guidance-first approach.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/intake" className="bg-white text-navy-600 hover:bg-navy-100 font-semibold py-3 px-8 rounded-lg transition-colors duration-200">
-              Get Started Now
+            <Link to="/explore" className="bg-white text-navy-600 hover:bg-navy-100 font-semibold py-3 px-8 rounded-lg transition-colors duration-200">
+              Explore Your Path
             </Link>
-            <Link to="/success" className="border-2 border-white text-white hover:bg-white hover:text-navy-600 font-semibold py-3 px-8 rounded-lg transition-colors duration-200">
-              See Success Stories
+            <Link to="/consultation" className="border-2 border-white text-white hover:bg-white hover:text-navy-600 font-semibold py-3 px-8 rounded-lg transition-colors duration-200">
+              Book Strategy Session
             </Link>
           </div>
         </div>

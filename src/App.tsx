@@ -19,8 +19,10 @@ import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import AdminDashboard from './components/AdminDashboard';
 import AdminAuth from './components/AdminAuth';
+import FormationGuard from './components/FormationGuard';
 import { IntakeData } from '@/lib/types';
 import { googleAnalyticsService } from '@/lib/analytics';
+import { FLAGS } from '@/lib/flags';
 
 function App() {
   const [intakeData, setIntakeData] = useState<IntakeData | null>(null);
@@ -152,12 +154,14 @@ function App() {
                     >
                       Explore Path
                     </NavLink>
-                    <NavLink 
-                      to="/intake" 
-                      className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50 rounded-b-md"
-                    >
-                      Start Formation
-                    </NavLink>
+                    {FLAGS.ENABLE_FORMATION && (
+                      <NavLink 
+                        to="/intake" 
+                        className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50 rounded-b-md"
+                      >
+                        Start Formation
+                      </NavLink>
+                    )}
                   </div>
                 </div>
                 
@@ -200,12 +204,14 @@ function App() {
                     </svg>
                   </button>
                   <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-md shadow-lg border border-navy-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                    <NavLink 
-                      to="/dashboard" 
-                      className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50 rounded-t-md"
-                    >
-                      Dashboard
-                    </NavLink>
+                    {FLAGS.ENABLE_FORMATION && (
+                      <NavLink 
+                        to="/dashboard" 
+                        className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50 rounded-t-md"
+                      >
+                        Dashboard
+                      </NavLink>
+                    )}
                     <NavLink 
                       to="/pricing" 
                       className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50"
@@ -249,14 +255,26 @@ function App() {
           <Route path="/explore" element={<Explore />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/success" element={<Success />} />
-          <Route path="/intake" element={<Intake setIntakeData={setIntakeData} />} />
+          <Route path="/intake" element={
+            <FormationGuard feature="formation">
+              <Intake setIntakeData={setIntakeData} />
+            </FormationGuard>
+          } />
           <Route path="/consultation" element={<Consultation />} />
           <Route path="/resources" element={<Resources />} />
-          <Route path="/dashboard" element={<Dashboard intakeData={intakeData} />} />
+          <Route path="/dashboard" element={
+            <FormationGuard feature="formation">
+              <Dashboard intakeData={intakeData} />
+            </FormationGuard>
+          } />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/checkout" element={
+            <FormationGuard feature="formation">
+              <Checkout />
+            </FormationGuard>
+          } />
           <Route path="/referrals" element={<Referrals />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />

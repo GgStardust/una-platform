@@ -1,7 +1,13 @@
-import { Calendar, Clock, CheckCircle, ExternalLink, ArrowRight } from 'lucide-react';
+import { Calendar, Clock, CheckCircle, ExternalLink, ArrowRight, Info } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 
 export default function Consultation() {
+  const location = useLocation();
   const bookingUrl = import.meta.env.VITE_BOOKING_URL || 'https://calendly.com/gigi-stardust/una-consultation';
+  
+  // Check if user was redirected from a disabled formation route
+  const redirectMessage = location.state?.message;
+  const fromRoute = location.state?.from;
 
   return (
     <div className="min-h-screen bg-cream-50">
@@ -13,9 +19,28 @@ export default function Consultation() {
           </h1>
           <p className="text-xl text-navy-600 max-w-3xl mx-auto leading-relaxed">
             Get personalized guidance, strategic planning, and clear next steps for your UNA formation journey. 
-            Our 60-90 minute sessions are designed to bring clarity to your vision and create a roadmap for success.
+            We'll refine your idea, outline governance, and—if needed—prepare manual document drafts with you. 
+            <strong>Automated doc generation is coming soon.</strong>
           </p>
         </div>
+
+        {/* Redirect Message */}
+        {redirectMessage && (
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+            <div className="flex items-start space-x-3">
+              <Info className="h-6 w-6 text-blue-600 mt-1 flex-shrink-0" />
+              <div>
+                <h3 className="font-semibold text-blue-800 mb-2">Feature Coming Soon</h3>
+                <p className="text-blue-700 mb-3">{redirectMessage}</p>
+                {fromRoute && (
+                  <p className="text-blue-600 text-sm">
+                    You were redirected from: <span className="font-mono">{fromRoute}</span>
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* What You'll Get */}
         <div className="bg-white rounded-lg shadow-sm border border-navy-200 p-8">
@@ -165,19 +190,31 @@ export default function Consultation() {
         </div>
 
         {/* Payment Information */}
-        <div className="bg-amber-50 rounded-lg border border-amber-200 p-6">
-          <h3 className="text-lg font-semibold text-amber-900 mb-3">Payment Instructions</h3>
-          <p className="text-amber-800 text-sm mb-3">
+        <div className="bg-amber-50 rounded-lg border border-amber-200 p-8">
+          <h3 className="text-xl font-semibold text-amber-900 mb-4">Payment Instructions</h3>
+          <p className="text-amber-800 mb-4">
             Payment instructions will be provided after your session is booked. We accept:
           </p>
-          <ul className="text-amber-800 text-sm space-y-1">
-            <li>• Bank transfer</li>
-            <li>• PayPal</li>
-            <li>• Cryptocurrency</li>
-          </ul>
-          <p className="text-amber-700 text-xs mt-3">
-            Please include your UNA entity name in the payment reference for proper tracking.
-          </p>
+          <div className="grid md:grid-cols-3 gap-4 mb-4">
+            <div className="bg-white rounded-lg p-4 border border-amber-200">
+              <h4 className="font-semibold text-amber-900 mb-2">Bank Transfer</h4>
+              <p className="text-amber-700 text-sm">Direct bank transfer with detailed instructions</p>
+            </div>
+            <div className="bg-white rounded-lg p-4 border border-amber-200">
+              <h4 className="font-semibold text-amber-900 mb-2">PayPal</h4>
+              <p className="text-amber-700 text-sm">Secure PayPal payment processing</p>
+            </div>
+            <div className="bg-white rounded-lg p-4 border border-amber-200">
+              <h4 className="font-semibold text-amber-900 mb-2">Cryptocurrency</h4>
+              <p className="text-amber-700 text-sm">Bitcoin, Ethereum, and other major cryptocurrencies</p>
+            </div>
+          </div>
+          <div className="bg-amber-100 rounded-lg p-4 border border-amber-300">
+            <p className="text-amber-800 text-sm font-medium">
+              <strong>Important:</strong> Please include your UNA entity name in the payment reference for proper tracking. 
+              Payment instructions will be sent after your session is confirmed.
+            </p>
+          </div>
         </div>
 
         {/* FAQ Section */}
