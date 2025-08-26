@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { IntakeData } from '@/lib/types';
 import { intakeFormSchema, IntakeFormData } from '@/lib/validation';
 import { saveIntakeData } from '@/lib/storage';
-import { downloadBlob } from '@/lib/generate';
+
 import { mapExploreToIntake } from '@/lib/prefill';
 import InsigniaUpload from '@/components/InsigniaUpload';
 import { getSmartSuggestions, validateCaliforniaRequirements } from '@/lib/ai-engine';
@@ -26,7 +26,7 @@ export default function Intake({ setIntakeData }: IntakeProps) {
   const [generationStatus, setGenerationStatus] = useState<'idle' | 'generating' | 'success' | 'error'>('idle');
   const [generationMessage, setGenerationMessage] = useState<string | null>(null);
   const [isPrefilledFromExplore, setIsPrefilledFromExplore] = useState(false);
-  const [intakeData, setLocalIntakeData] = useState<IntakeData | null>(null);
+
 
   const {
     register,
@@ -197,7 +197,7 @@ export default function Intake({ setIntakeData }: IntakeProps) {
       // Save data and go to summary page (no PDF generation yet)
     saveIntakeData(completeData);
     setIntakeData(completeData);
-      setLocalIntakeData(completeData);
+      setIntakeData(completeData);
       
       // Move to summary step
       setCurrentStep(8);
@@ -211,87 +211,7 @@ export default function Intake({ setIntakeData }: IntakeProps) {
     }
   };
 
-  // Separate function for PDF generation
-  const generateDocuments = async () => {
-    console.log('generateDocuments called with intakeData:', intakeData);
-    
-    if (!intakeData) {
-      console.error('No intake data available for document generation');
-      setGenerationStatus('error');
-      setGenerationMessage('No intake data available. Please complete the form first.');
-      return;
-    }
-    
-    setGenerationStatus('generating');
-    setGenerationMessage('Generating documents...');
-    
-    try {
-      // Generate documents based on state
-      if (intakeData.entityState === 'CA') {
-        // California users get ALL available documents
-        const { 
-          generateUnaAgreement,
-          generateEinGuide,
-          generateLpUna128,
-          generateDbaGuide,
-          generateFinancialTrackingKit,
-          generateClientAgreement,
-          generateBankAccountGuide
-        } = await import('@/lib/generate');
-        
-        // Generate all documents in sequence
-        const [
-          unaAgreement,
-          einGuide,
-          lpUna128,
-          dbaGuide,
-          financialKit,
-          clientAgreement,
-          bankGuide
-        ] = await Promise.all([
-          generateUnaAgreement(intakeData),
-          generateEinGuide(intakeData),
-          generateLpUna128(intakeData),
-          generateDbaGuide(intakeData),
-          generateFinancialTrackingKit(intakeData),
-          generateClientAgreement(intakeData),
-          generateBankAccountGuide(intakeData)
-        ]);
-        
-        // Download all documents
-        downloadBlob(unaAgreement, `${intakeData.entityName} - UNA Agreement.pdf`, 'application/pdf');
-        downloadBlob(einGuide, `${intakeData.entityName} - EIN Registration Guide.pdf`, 'application/pdf');
-        downloadBlob(lpUna128, `${intakeData.entityName} - LP-UNA-128 Filing Package.pdf`, 'application/pdf');
-        downloadBlob(dbaGuide, `${intakeData.entityName} - DBA Registration Guide.pdf`, 'application/pdf');
-        downloadBlob(financialKit, `${intakeData.entityName} - Financial Tracking Kit.pdf`, 'application/pdf');
-        downloadBlob(clientAgreement, `${intakeData.entityName} - Client Agreement & Disclaimer.pdf`, 'application/pdf');
-        downloadBlob(bankGuide, `${intakeData.entityName} - Bank Account Opening Guide.pdf`, 'application/pdf');
-      } else {
-        // Out-of-state users get comprehensive guide
-        const { generateOutOfStateGuide } = await import('@/lib/generate');
-        const outOfStateGuide = await generateOutOfStateGuide(intakeData);
-        
-        downloadBlob(outOfStateGuide, `${intakeData.entityName} - Out-of-State UNA Formation Guide.pdf`, 'application/pdf');
-      }
-      
-      setGenerationStatus('success');
-      if (intakeData.entityState === 'CA') {
-        setGenerationMessage('Complete UNA formation package generated and downloaded successfully!');
-      } else {
-        setGenerationMessage('Out-of-State Guide generated and downloaded successfully!');
-      }
 
-    } catch (error) {
-      console.error('Error generating documents:', error);
-      setGenerationStatus('error');
-      setGenerationMessage(error instanceof Error ? error.message : 'Failed to generate documents. Please try again.');
-    } finally {
-      // Always reset loading state
-      if (generationStatus === 'generating') {
-        setGenerationStatus('idle');
-      }
-    }
-  };
 
   const nextStep = () => setCurrentStep(prev => Math.min(prev + 1, 8));
   const prevStep = () => setCurrentStep(prev => Math.max(prev - 1, 1));
@@ -318,8 +238,7 @@ export default function Intake({ setIntakeData }: IntakeProps) {
     setGenerationStatus('idle');
     setGenerationMessage(null);
     setIsPrefilledFromExplore(false);
-    setLocalIntakeData(null);
-    setIntakeData(null);
+          setIntakeData(null);
     
     console.log('Form reset completed');
   };
@@ -1583,26 +1502,17 @@ export default function Intake({ setIntakeData }: IntakeProps) {
 
             {/* Generate Documents Section */}
             <div className="text-center space-y-4">
-              {/* Debug info */}
-              <div className="text-sm text-navy-600 bg-cream-50 p-3 rounded-lg">
-                <p><strong>Debug Info:</strong></p>
-                <p>Intake data available: {intakeData ? 'Yes' : 'No'}</p>
-                <p>Generation status: {generationStatus}</p>
-                {intakeData && (
-                  <p>Entity: {intakeData.entityName} | State: {intakeData.entityState}</p>
-                )}
-              </div>
               
               {generationStatus === 'idle' && (
                 <button
                   type="button"
-                  onClick={generateDocuments}
-                  className="bg-emerald-600 text-white px-12 py-4 rounded-lg font-semibold hover:bg-emerald-700 transition-colors flex items-center mx-auto text-lg"
+                  disabled
+                  className="bg-gray-400 text-white px-12 py-4 rounded-lg font-semibold cursor-not-allowed flex items-center mx-auto text-lg"
                 >
                   <svg className="h-6 w-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  Generate & Download Documents
+                  Coming Soon
                 </button>
               )}
               

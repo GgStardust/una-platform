@@ -346,9 +346,9 @@ export default function Dashboard({ intakeData }: DashboardProps) {
                 <Eye className="h-4 w-4 mr-2" />
                 Preview
               </button>
-              <button className="btn-primary flex items-center text-sm">
+              <button className="btn-primary flex items-center text-sm opacity-50 cursor-not-allowed" disabled>
                 <Download className="h-4 w-4 mr-2" />
-                Download
+                Coming Soon
               </button>
             </div>
           </div>
@@ -363,12 +363,12 @@ export default function Dashboard({ intakeData }: DashboardProps) {
             </p>
             <div className="flex space-x-2">
               <button className="btn-secondary flex items-center text-sm">
-                <Eye className="h-4 w-4 mr-2" />
+                <Eye className="h-4 w-2" />
                 Preview
               </button>
-              <button className="btn-primary flex items-center text-sm">
+              <button className="btn-primary flex items-center text-sm opacity-50 cursor-not-allowed" disabled>
                 <Download className="h-4 w-4 mr-2" />
-                Download
+                Coming Soon
               </button>
             </div>
           </div>
@@ -386,9 +386,9 @@ export default function Dashboard({ intakeData }: DashboardProps) {
                 <Eye className="h-4 w-4 mr-2" />
                 Preview
               </button>
-              <button className="btn-primary flex items-center text-sm">
+              <button className="btn-primary flex items-center text-sm opacity-50 cursor-not-allowed" disabled>
                 <Download className="h-4 w-4 mr-2" />
-                Download
+                Coming Soon
               </button>
             </div>
           </div>
@@ -406,23 +406,9 @@ export default function Dashboard({ intakeData }: DashboardProps) {
                 <Eye className="h-4 w-4 mr-2" />
                 Preview
               </button>
-              <button 
-                onClick={async () => {
-                  if (!intakeData) return;
-                  try {
-                    const { generateDbaGuide } = await import('@/lib/generate');
-                    const doc = await generateDbaGuide(intakeData);
-                    const { downloadBlob } = await import('@/lib/generate');
-                    downloadBlob(doc, `${intakeData.entityName} - DBA Registration Guide.pdf`, 'application/pdf');
-                  } catch (error) {
-                    console.error('Error generating DBA Guide:', error);
-                    alert('Error: ' + (error instanceof Error ? error.message : 'Unknown error'));
-                  }
-                }}
-                className="btn-primary flex items-center text-sm"
-              >
+              <button className="btn-primary flex items-center text-sm opacity-50 cursor-not-allowed" disabled>
                 <Download className="h-4 w-4 mr-2" />
-                Download
+                Coming Soon
               </button>
             </div>
           </div>
@@ -440,23 +426,9 @@ export default function Dashboard({ intakeData }: DashboardProps) {
                 <Eye className="h-4 w-4 mr-2" />
                 Preview
               </button>
-              <button 
-                onClick={async () => {
-                  if (!intakeData) return;
-                  try {
-                    const { generateFinancialTrackingKit } = await import('@/lib/generate');
-                    const doc = await generateFinancialTrackingKit(intakeData);
-                    const { downloadBlob } = await import('@/lib/generate');
-                    downloadBlob(doc, `${intakeData.entityName} - Financial Tracking Kit.pdf`, 'application/pdf');
-                  } catch (error) {
-                    console.error('Error generating Financial Kit:', error);
-                    alert('Error: ' + (error instanceof Error ? error.message : 'Unknown error'));
-                  }
-                }}
-                className="btn-primary flex items-center text-sm"
-              >
+              <button className="btn-primary flex items-center text-sm opacity-50 cursor-not-allowed" disabled>
                 <Download className="h-4 w-4 mr-2" />
-                Download
+                Coming Soon
               </button>
             </div>
           </div>
@@ -508,22 +480,9 @@ export default function Dashboard({ intakeData }: DashboardProps) {
                 <Eye className="h-4 w-4 mr-2" />
                 Preview
               </button>
-              <button 
-                onClick={async () => {
-                  if (!intakeData) return;
-                  try {
-                    const { generateBankAccountGuide } = await import('@/lib/generate');
-                    const doc = await generateBankAccountGuide(intakeData);
-                    const { downloadBlob } = await import('@/lib/generate');
-                    downloadBlob(doc, `${intakeData.entityName} - Bank Account Guide.pdf`, 'application/pdf');
-                  } catch (error) {
-                    console.error('Error generating Bank Account Guide:', error);
-                    alert('Error: ' + (error instanceof Error ? error.message : 'Unknown error'));
-                  }
-                }}
-                className="btn-primary flex items-center text-sm">
+              <button className="btn-primary flex items-center text-sm opacity-50 cursor-not-allowed" disabled>
                 <Download className="h-4 w-4 mr-2" />
-                Download
+                Coming Soon
               </button>
             </div>
           </div>
@@ -542,29 +501,9 @@ export default function Dashboard({ intakeData }: DashboardProps) {
             <p className="text-navy-600 mb-4">
               Excel/Google Sheets template for tracking income, expenses, and financial categories.
             </p>
-            <button 
-              onClick={() => {
-                // Create and download CSV file
-                const csvContent = `Date,Income Source,Income Amount,Expense Type,Expense Amount,Notes,Category
-2025-01-01,Start-Up Package,$2500.00,,,Payment received for UNA formation,Income
-2025-01-01,,,Formation Filing,$26.00,DBA/FBN filing fee,Formation
-2025-01-15,Grant Application,$5000.00,,,Community development grant,Income
-2025-01-15,,,Office Supplies,$150.00,Basic office setup,Operations`;
-                
-                const blob = new Blob([csvContent], { type: 'text/csv' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'UNA-Financial-Tracking-Template.csv';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-              }}
-              className="btn-primary flex items-center text-sm w-full justify-center"
-            >
+            <button className="btn-primary flex items-center text-sm w-full justify-center opacity-50 cursor-not-allowed" disabled>
               <Download className="h-4 w-4 mr-2" />
-              Download CSV Template
+              Coming Soon
             </button>
           </div>
 
@@ -576,27 +515,9 @@ export default function Dashboard({ intakeData }: DashboardProps) {
             <p className="text-navy-600 mb-4">
               Professional invoice template for client billing and payment tracking.
             </p>
-            <button 
-              onClick={() => {
-                // Create and download CSV file
-                const csvContent = `Invoice Number,Date,Client Name,Client Email,Client Address,Service Description,Quantity,Rate,Amount,Notes
-INV-001,2025-01-01,Community Arts Collective,arts@community.org,"123 Main St, Oakland, CA 94601",UNA Formation Package,1,$2500.00,$2500.00,Complete formation including all documents
-INV-002,2025-01-15,Green Tech Initiative,info@greentech.org,"456 Innovation Dr, San Francisco, CA 94102",Strategic Consultation Session,1.5,$500.00,$750.00,90-minute strategy session`;
-                
-                const blob = new Blob([csvContent], { type: 'text/csv' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'UNA-Invoice-Template.csv';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-              }}
-              className="btn-primary flex items-center text-sm w-full justify-center"
-            >
+            <button className="btn-primary flex items-center text-sm w-full justify-center opacity-50 cursor-not-allowed" disabled>
               <Download className="h-4 w-4 mr-2" />
-              Download Invoice Template
+              Coming Soon
             </button>
           </div>
 
