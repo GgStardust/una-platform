@@ -57,7 +57,7 @@ export default function Consultation() {
               <ul className="space-y-2 text-sm text-navy-600">
                 <li className="flex items-start space-x-2">
                   <CheckCircle className="h-4 w-4 text-gold-600 mt-0.5 flex-shrink-0" />
-                  <span>60-90 minute focused session</span>
+                  <span>1 hour focused session</span>
                 </li>
                 <li className="flex items-start space-x-2">
                   <CheckCircle className="h-4 w-4 text-gold-600 mt-0.5 flex-shrink-0" />
@@ -72,6 +72,19 @@ export default function Consultation() {
                   <span>Resource recommendations</span>
                 </li>
               </ul>
+              
+              {/* Schedule Button */}
+              <div className="mt-6 text-center">
+                <a 
+                  href={`${bookingUrl}?service=consultation`}
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center bg-gold-600 hover:bg-gold-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200 shadow-md hover:shadow-lg w-full justify-center"
+                >
+                  Schedule Consultation
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </a>
+              </div>
             </div>
 
             {/* Document Creation Package */}
@@ -100,6 +113,19 @@ export default function Consultation() {
                   <span>Personalized implementation plan</span>
                 </li>
               </ul>
+              
+              {/* Schedule Button */}
+              <div className="mt-6 text-center">
+                <a 
+                  href={`${bookingUrl}?service=documents`}
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center bg-navy-600 hover:bg-navy-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200 shadow-md hover:shadow-lg w-full justify-center"
+                >
+                  Schedule Document Creation
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </a>
+              </div>
             </div>
           </div>
 
@@ -114,7 +140,7 @@ export default function Consultation() {
                 Consultation + Documents Package: <span className="text-gold-600">$1000</span>
               </div>
               <a 
-                href={bookingUrl} 
+                href={`${bookingUrl}?service=bundle`}
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="inline-flex items-center bg-gold-600 hover:bg-gold-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200 shadow-md hover:shadow-lg"
@@ -196,12 +222,12 @@ export default function Consultation() {
           
           <div className="text-center">
             <a 
-              href={`${bookingUrl}?service=ongoing`}
+              href={`${bookingUrl}?service=ongoing-support`}
               target="_blank" 
               rel="noopener noreferrer"
               className="inline-flex items-center bg-navy-600 hover:bg-navy-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200 shadow-md hover:shadow-lg"
             >
-              Discuss Ongoing Support
+              Schedule Ongoing Support Discussion
               <ArrowRight className="ml-2 h-4 w-4" />
             </a>
           </div>
@@ -217,13 +243,13 @@ export default function Consultation() {
           <div className="mb-8">
             <div className="flex items-center justify-center space-x-2 text-gold-300 mb-2">
               <Clock className="h-5 w-5" />
-              <span>60-90 minute session</span>
+              <span>1 hour session</span>
             </div>
             <div className="text-3xl font-bold text-gold-300">$250</div>
           </div>
           
           <a
-            href={bookingUrl}
+            href={`${bookingUrl}?service=consultation`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center bg-gold-600 text-white px-8 py-4 rounded-lg text-xl font-semibold hover:bg-gold-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
