@@ -86,7 +86,7 @@ export default function Home() {
           
           <div className="card text-center">
             <Calendar className="h-12 w-12 text-gold-500 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold mb-2 text-navy-800">Strategy Session $250/hr</h3>
+            <h3 className="text-xl font-semibold mb-2 text-navy-800">Schedule Strategy Session</h3>
             <p className="text-navy-600">
               Get personalized guidance, strategic planning, and clear next steps 
               through our 1:1 consultation sessions.

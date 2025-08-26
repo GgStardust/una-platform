@@ -9,6 +9,7 @@ export default function AdminAuth({ children }: AdminAuthProps) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
   useEffect(() => {
@@ -47,8 +48,8 @@ export default function AdminAuth({ children }: AdminAuthProps) {
     e.preventDefault();
     setError('');
 
-    if (!email.trim()) {
-      setError('Please enter your email address');
+    if (!email.trim() || !password.trim()) {
+      setError('Please enter both email and password');
       return;
     }
 
@@ -56,13 +57,20 @@ export default function AdminAuth({ children }: AdminAuthProps) {
     const normalizedEmail = email.trim().toLowerCase();
     
     if (allowedEmails.includes(normalizedEmail)) {
-      // Create session
-      const sessionData = {
-        email: normalizedEmail,
-        timestamp: Date.now()
-      };
-      localStorage.setItem('admin_session', JSON.stringify(sessionData));
-      setIsAuthenticated(true);
+      // Check password (hardcoded for now - you can move this to env vars)
+      const adminPassword = import.meta.env.VITE_ADMIN_PASSWORD || 'una2024';
+      
+      if (password === adminPassword) {
+        // Create session
+        const sessionData = {
+          email: normalizedEmail,
+          timestamp: Date.now()
+        };
+        localStorage.setItem('admin_session', JSON.stringify(sessionData));
+        setIsAuthenticated(true);
+      } else {
+        setError('Invalid password');
+      }
     } else {
       setError('Access denied. This email is not authorized for admin access.');
     }
@@ -88,7 +96,7 @@ export default function AdminAuth({ children }: AdminAuthProps) {
       <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8">
         <div className="text-center mb-8">
           <h1 className="text-2xl font-bold text-navy-900 mb-2">Admin Access Required</h1>
-          <p className="text-navy-600">Please enter your authorized email to continue</p>
+          <p className="text-navy-600">Please enter your authorized email and password to continue</p>
         </div>
 
         <form onSubmit={handleLogin} className="space-y-6">
@@ -103,6 +111,21 @@ export default function AdminAuth({ children }: AdminAuthProps) {
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-3 py-2 border border-navy-300 rounded-md focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-transparent"
               placeholder="Enter your email"
+              required
+            />
+          </div>
+
+          <div>
+            <label htmlFor="password" className="block text-sm font-medium text-navy-700 mb-2">
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full px-3 py-2 border border-navy-300 rounded-md focus:outline-none focus:ring-2 focus:ring-navy-500 focus:border-transparent"
+              placeholder="Enter your password"
               required
             />
           </div>

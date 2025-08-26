@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { BookOpen, Calendar, Check, ArrowRight, Users, Shield, Star } from 'lucide-react';
+import { BookOpen, Calendar, Check, ArrowRight, Users, Star, FileText, Target } from 'lucide-react';
 import { FLAGS } from '@/lib/flags';
 
 export default function Pricing() {
@@ -14,7 +14,7 @@ export default function Pricing() {
             </h1>
             <p className="text-xl text-navy-600 max-w-3xl mx-auto">
               Start with free exploration and get personalized guidance through our strategy sessions. 
-              Our Lite model focuses on clarity and understanding before commitment.
+              Our expert guidance model focuses on clarity and understanding before commitment.
             </p>
           </div>
         </div>
@@ -29,7 +29,7 @@ export default function Pricing() {
             Choose Your Path
           </h2>
           
-          <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* Free Guidance */}
             <div className="relative bg-white rounded-2xl shadow-lg border-2 border-navy-200 hover:border-navy-300 transition-all duration-200">
               <div className="p-8">
@@ -89,7 +89,7 @@ export default function Pricing() {
                   <h3 className="text-2xl font-bold text-navy-900 mb-2">Strategy Session</h3>
                   <p className="text-navy-600 mb-6">Get personalized guidance and strategic planning</p>
                   <div className="text-4xl font-bold text-gold-600 mb-2">$250</div>
-                  <p className="text-navy-500 text-sm">per hour</p>
+                  <p className="text-navy-500 text-sm">one-time session</p>
                 </div>
                 
                 <div className="space-y-4 mb-8">
@@ -99,106 +99,171 @@ export default function Pricing() {
                   </div>
                   <div className="flex items-start">
                     <Check className="h-5 w-5 text-emerald-600 mt-0.5 mr-3 flex-shrink-0" />
-                    <span className="text-navy-700">Strategic summary and roadmap</span>
+                    <span className="text-navy-700">Mission and vision clarity</span>
                   </div>
                   <div className="flex items-start">
                     <Check className="h-5 w-5 text-emerald-600 mt-0.5 mr-3 flex-shrink-0" />
-                    <span className="text-navy-700">Optional document preparation</span>
+                    <span className="text-navy-700">Strategic roadmap and next steps</span>
                   </div>
                   <div className="flex items-start">
                     <Check className="h-5 w-5 text-emerald-600 mt-0.5 mr-3 flex-shrink-0" />
-                    <span className="text-navy-700">Ongoing email support</span>
+                    <span className="text-navy-700">Resource recommendations</span>
                   </div>
                 </div>
                 
                 <Link
                   to="/consultation"
-                  className="w-full bg-gold-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-gold-700 transition-colors flex items-center justify-center"
+                  className="w-full bg-gold-600 text-white py-3 px-6 rounded-lg font-semibold text-center hover:bg-gold-700 transition-colors flex items-center justify-center"
                 >
-                  Book Strategy Session
+                  Schedule Strategy Session
                   <ArrowRight className="h-5 w-5 ml-2" />
                 </Link>
               </div>
+            </div>
+
+            {/* Document Creation Package */}
+            <div className="relative bg-white rounded-2xl shadow-lg border-2 border-navy-200 hover:border-navy-300 transition-all duration-200">
+              <div className="p-8">
+                <div className="text-center mb-8">
+                  <div className="bg-navy-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                    <FileText className="h-8 w-8 text-navy-600" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-navy-900 mb-2">Document Creation & Guidance</h3>
+                  <p className="text-navy-600 mb-6">Complete UNA formation documents with step-by-step guidance</p>
+                  <div className="text-4xl font-bold text-navy-900 mb-2">$750</div>
+                  <p className="text-navy-500 text-sm">complete package</p>
+                </div>
+                
+                <div className="space-y-4 mb-8">
+                  <div className="flex items-start">
+                    <Check className="h-5 w-5 text-emerald-600 mt-0.5 mr-3 flex-shrink-0" />
+                    <span className="text-navy-700">All consultation benefits</span>
+                  </div>
+                  <div className="flex items-start">
+                    <Check className="h-5 w-5 text-emerald-600 mt-0.5 mr-3 flex-shrink-0" />
+                    <span className="text-navy-700">Complete UNA formation documents</span>
+                  </div>
+                  <div className="flex items-start">
+                    <Check className="h-5 w-5 text-emerald-600 mt-0.5 mr-3 flex-shrink-0" />
+                    <span className="text-navy-700">Step-by-step guidance materials</span>
+                  </div>
+                  <div className="flex items-start">
+                    <Check className="h-5 w-5 text-emerald-600 mt-0.5 mr-3 flex-shrink-0" />
+                    <span className="text-navy-700">Personalized implementation plan</span>
+                  </div>
+                </div>
+                
+                <Link
+                  to="/consultation"
+                  className="w-full bg-navy-600 text-white py-3 px-6 rounded-lg font-semibold text-center hover:bg-navy-700 transition-colors flex items-center justify-center"
+                >
+                  Learn More
+                  <ArrowRight className="h-5 w-5 ml-2" />
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Bundle Offer */}
+          <div className="mt-12 bg-gradient-to-r from-gold-100 to-amber-100 rounded-lg p-8 border border-gold-200 max-w-4xl mx-auto">
+            <div className="text-center">
+              <h3 className="text-2xl font-bold text-navy-800 mb-4">Bundle & Save</h3>
+              <p className="text-navy-600 mb-4 text-lg">
+                Book both services together and save $100
+              </p>
+              <div className="text-3xl font-bold text-navy-800 mb-6">
+                Consultation + Documents Package: <span className="text-gold-600">$1000</span>
+              </div>
+              <Link to="/consultation" className="btn-primary px-8 py-3 text-lg">
+                View All Services
+                <ArrowRight className="ml-2 h-5 w-5 inline" />
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Why Choose Our Guidance */}
+        <div className="mb-16">
+          <h2 className="text-3xl font-bold text-navy-900 text-center mb-12">
+            Why Choose Our Guidance?
+          </h2>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="bg-gold-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                <Target className="h-8 w-8 text-gold-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-navy-800 mb-3">Personalized Approach</h3>
+              <p className="text-navy-600">
+                Every UNA is unique. We tailor our guidance to your specific mission, goals, and situation.
+              </p>
+            </div>
+            
+            <div className="text-center">
+              <div className="bg-gold-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                <FileText className="h-8 w-8 text-gold-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-navy-800 mb-3">Complete Documentation</h3>
+              <p className="text-navy-600">
+                Get all the documents you need, prepared with attention to detail and your specific requirements.
+              </p>
+            </div>
+            
+            <div className="text-center">
+              <div className="bg-gold-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                <Users className="h-8 w-8 text-gold-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-navy-800 mb-3">Ongoing Support</h3>
+              <p className="text-navy-600">
+                We're here to support you throughout your UNA formation journey and beyond.
+              </p>
             </div>
           </div>
         </div>
 
         {/* Coming Soon Notice */}
         {!FLAGS.ENABLE_FORMATION && (
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-8 mb-12 text-center">
-            <h3 className="text-2xl font-bold text-blue-900 mb-4">Automated Formation Coming Soon</h3>
-            <p className="text-blue-700 mb-6 max-w-2xl mx-auto">
-              We're building comprehensive automated UNA formation packages. For now, start with our free guidance 
-              and book a strategy session to get personalized support for your formation journey.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/explore" className="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
-                Start Free Exploration
-              </Link>
-              <Link to="/consultation" className="bg-white text-blue-600 px-6 py-3 rounded-lg font-medium border border-blue-200 hover:bg-blue-50 transition-colors">
-                Learn More
+          <div className="bg-amber-50 border border-amber-200 rounded-lg p-8 max-w-4xl mx-auto">
+            <div className="text-center">
+              <h3 className="text-xl font-semibold text-amber-900 mb-2">Automated Formation Coming Soon</h3>
+              <p className="text-amber-800 mb-4">
+                We're building automated UNA formation tools to make the process even easier. 
+                For now, our expert guidance and document preparation services provide the personalized 
+                attention your UNA deserves.
+              </p>
+              <Link to="/consultation" className="btn-primary">
+                Get Expert Guidance Now
+                <ArrowRight className="ml-2 h-4 w-4 inline" />
               </Link>
             </div>
           </div>
         )}
 
-        {/* Trust Indicators */}
-        <div className="text-center">
-          <h3 className="text-2xl font-bold text-navy-900 mb-8">Why Choose Our Guidance?</h3>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="bg-navy-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <Shield className="h-8 w-8 text-navy-600" />
-              </div>
-              <h4 className="text-lg font-semibold text-navy-900 mb-2">Expert Guidance</h4>
-              <p className="text-navy-600">California-specific UNA formation expertise and legal knowledge</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="bg-emerald-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <Users className="h-8 w-8 text-emerald-600" />
-              </div>
-              <h4 className="text-lg font-semibold text-navy-900 mb-2">Personalized Support</h4>
-              <p className="text-navy-600">1:1 strategy sessions tailored to your specific mission and goals</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="bg-gold-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <BookOpen className="h-8 w-8 text-gold-600" />
-              </div>
-              <h4 className="text-lg font-semibold text-navy-900 mb-2">Resource Network</h4>
-              <p className="text-navy-600">Access to our curated network of UNA formation experts and services</p>
-            </div>
-          </div>
-        </div>
-
         {/* FAQ Section */}
         <div className="mt-16">
-          <h3 className="text-2xl font-bold text-navy-900 text-center mb-8">Frequently Asked Questions</h3>
+          <h2 className="text-3xl font-bold text-navy-900 text-center mb-12">
+            Frequently Asked Questions
+          </h2>
           
-          <div className="max-w-3xl mx-auto space-y-6">
-            <div className="bg-white rounded-lg border border-navy-200 p-6">
-              <h4 className="font-semibold text-navy-900 mb-2">What's included in the free guidance?</h4>
-              <p className="text-navy-600">
-                Our free exploration includes a 3-step assessment, personalized insights, resource recommendations, 
-                and clear next steps for your UNA formation journey.
-              </p>
+          <div className="max-w-4xl mx-auto space-y-6">
+            <div className="bg-white rounded-lg p-6 shadow-sm border border-navy-100">
+              <h3 className="font-semibold text-navy-800 mb-2">What if I need more than one session?</h3>
+              <p className="text-navy-600">Many clients find that one session provides the clarity they need to move forward. If you need additional support, we can discuss ongoing consultation packages.</p>
             </div>
             
-            <div className="bg-white rounded-lg border border-navy-200 p-6">
-              <h4 className="font-semibold text-navy-900 mb-2">How long is a strategy session?</h4>
-              <p className="text-navy-600">
-                Strategy sessions are 60-90 minutes long, depending on your needs and the complexity of your situation.
-              </p>
+            <div className="bg-white rounded-lg p-6 shadow-sm border border-navy-100">
+              <h3 className="font-semibold text-navy-800 mb-2">Do you provide ongoing support after the session?</h3>
+              <p className="text-navy-600">Yes! We offer follow-up support and can provide continuing guidance as your UNA grows and evolves.</p>
             </div>
             
-            <div className="bg-white rounded-lg border border-navy-200 p-6">
-              <h4 className="font-semibold text-navy-900 mb-2">Can I get documents prepared during a session?</h4>
-              <p className="text-navy-600">
-                Yes! During your strategy session, we can prepare sample agreements, governance structures, 
-                and formation templates tailored to your specific needs.
-              </p>
+            <div className="bg-white rounded-lg p-6 shadow-sm border border-navy-100">
+              <h3 className="font-semibold text-navy-800 mb-2">What documents do you prepare?</h3>
+              <p className="text-navy-600">We prepare all the essential UNA formation documents including agreements, governance structures, and compliance materials. Everything is personalized to your specific mission and needs.</p>
+            </div>
+            
+            <div className="bg-white rounded-lg p-6 shadow-sm border border-navy-100">
+              <h3 className="font-semibold text-navy-800 mb-2">Can you help with the actual formation process?</h3>
+              <p className="text-navy-600">Absolutely! Our Document Creation & Guidance Package includes complete preparation of your UNA formation documents, plus step-by-step guidance materials tailored to your specific situation.</p>
             </div>
           </div>
         </div>
