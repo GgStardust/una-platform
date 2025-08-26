@@ -3,7 +3,7 @@ import { ArrowLeft, ArrowRight, CheckCircle, Calendar, ExternalLink } from 'luci
 import { ExploreAnswers } from '@/lib/types';
 import { detectUserLocation, getStateSuggestionText, LocationHint } from '@/lib/geolocation';
 
-import { processUserInput } from '@/lib/text/normalizeS2S';
+
 
 export default function Explore() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -367,14 +367,12 @@ export default function Explore() {
 
 // Lite Results Component
 function ExploreLiteResults({ answers, freeTextDescriptions }: { answers: any; freeTextDescriptions: any }) {
-  const summary = processUserInput(freeTextDescriptions.missionDescription || answers.mission.join(', '));
-  const impactSummary = processUserInput(freeTextDescriptions.impactDescription || answers.impact.join(', '));
+  // Import and use the new strategy insights engine
+  const { generateStrategyInsights, generateToolkitRecommendations, generateExecutiveSummary } = require('@/lib/strategy-insights');
   
-  const strategicInsights = [
-    summary.strategicGuidance[0] || 'Your mission shows clear direction and purpose',
-    impactSummary.strategicGuidance[0] || 'Your impact goals align with community needs',
-    'A UNA structure can provide the legal foundation to amplify your work'
-  ].slice(0, 2);
+  const strategyInsights = generateStrategyInsights(answers, freeTextDescriptions);
+  const toolkitRecommendations = generateToolkitRecommendations(answers, freeTextDescriptions);
+  const executiveSummary = generateExecutiveSummary(answers, freeTextDescriptions);
 
   return (
     <div className="min-h-screen bg-cream-50">
@@ -389,56 +387,82 @@ function ExploreLiteResults({ answers, freeTextDescriptions }: { answers: any; f
           </p>
         </div>
 
-        {/* Mission Summary */}
+        {/* Executive Summary */}
         <div className="bg-white rounded-lg shadow-sm border border-navy-200 p-6">
-          <h2 className="text-xl font-semibold text-navy-900 mb-4">Mission & Purpose</h2>
+          <h2 className="text-xl font-semibold text-navy-900 mb-4">Executive Summary</h2>
           <p className="text-navy-700 leading-relaxed">
-            {answers.mission.length > 0 ? 
-              `Your organization focuses on ${answers.mission.join(', ')}. ${freeTextDescriptions.missionDescription ? 
-                summary.refined : 
-                'Your mission provides a clear direction for your work in the community.'
-              }` :
-              'Your mission focus shows potential for community impact and creative expression.'
-            }
+            {executiveSummary}
           </p>
         </div>
 
         {/* Strategic Insights */}
         <div className="bg-gold-50 rounded-lg border border-gold-200 p-6">
           <h2 className="text-xl font-semibold text-navy-900 mb-4">Strategic Insights</h2>
-          <div className="space-y-3">
-            {strategicInsights.map((insight, index) => (
-              <div key={index} className="flex items-start">
-                <div className="bg-gold-100 rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0">
-                  <span className="text-gold-800 text-sm font-medium">{index + 1}</span>
+          <div className="space-y-4">
+            {strategyInsights.slice(0, 3).map((insight: any, index: number) => (
+              <div key={index} className="bg-white rounded-lg p-4 border border-gold-200">
+                <div className="flex items-start justify-between mb-2">
+                  <h3 className="font-semibold text-navy-800">{insight.title}</h3>
+                  <span className={`px-2 py-1 text-xs rounded-full ${
+                    insight.priority === 'high' ? 'bg-red-100 text-red-800' :
+                    insight.priority === 'medium' ? 'bg-yellow-100 text-yellow-800' :
+                    'bg-blue-100 text-blue-800'
+                  }`}>
+                    {insight.priority} priority
+                  </span>
                 </div>
-                <p className="text-navy-700 leading-relaxed">{insight}</p>
+                <p className="text-navy-700 text-sm leading-relaxed mb-2">{insight.description}</p>
+                {insight.action && (
+                  <p className="text-gold-700 text-sm font-medium">{insight.action}</p>
+                )}
+                {insight.category && (
+                  <span className="text-xs text-navy-500 bg-navy-100 px-2 py-1 rounded">
+                    {insight.category}
+                  </span>
+                )}
               </div>
             ))}
           </div>
         </div>
 
-        {/* Affiliate Recommendations */}
+        {/* Toolkit Recommendations */}
         <div className="bg-white rounded-lg shadow-sm border border-navy-200 p-6">
-          <h2 className="text-xl font-semibold text-navy-900 mb-4">Recommended Resources</h2>
-          <p className="text-navy-700 mb-4">
-            Based on your mission and impact goals, we recommend exploring these resources to support your UNA journey:
+          <h2 className="text-xl font-semibold text-navy-900 mb-4">Recommended Toolkit Tools</h2>
+          <p className="text-navy-700 mb-6">
+            Based on your mission and impact goals, we recommend these specific tools to support your UNA journey:
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            <div className="p-4 border border-navy-200 rounded-lg">
-              <h3 className="font-medium text-navy-800 mb-2">Legal & Formation</h3>
-              <p className="text-sm text-navy-600 mb-3">Expert guidance for your UNA formation process</p>
-              <a href="/resources" className="text-gold-600 hover:text-gold-800 text-sm font-medium">
-                Explore Resources →
-              </a>
+          
+          {toolkitRecommendations.map((category: any, index: number) => (
+            <div key={index} className="mb-6 last:mb-0">
+              <h3 className="font-semibold text-navy-800 mb-3 text-lg">{category.category}</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {category.tools.map((tool: any) => (
+                  <div key={tool.id} className="p-3 border border-navy-200 rounded-lg bg-navy-50">
+                    <div className="flex items-start justify-between mb-2">
+                      <h4 className="font-medium text-navy-800 text-sm">{tool.name}</h4>
+                      <span className={`px-2 py-1 text-xs rounded-full ${
+                        tool.priority === 'high' ? 'bg-red-100 text-red-800' :
+                        tool.priority === 'medium' ? 'bg-yellow-100 text-yellow-800' :
+                        'bg-blue-100 text-blue-800'
+                      }`}>
+                        {tool.priority}
+                      </span>
+                    </div>
+                    <p className="text-navy-600 text-xs mb-2">{tool.reason}</p>
+                    <a href="/resources" className="text-gold-600 hover:text-gold-800 text-xs font-medium">
+                      Learn More →
+                    </a>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="p-4 border border-navy-200 rounded-lg">
-              <h3 className="font-medium text-navy-800 mb-2">Community Support</h3>
-              <p className="text-sm text-navy-600 mb-3">Connect with other UNA organizations</p>
-              <a href="/resources" className="text-gold-600 hover:text-gold-800 text-sm font-medium">
-                Explore Resources →
-              </a>
-            </div>
+          ))}
+          
+          <div className="text-center pt-4">
+            <a href="/resources" className="inline-flex items-center bg-navy-600 hover:bg-navy-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+              Explore Full Toolkit
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </a>
           </div>
         </div>
 
