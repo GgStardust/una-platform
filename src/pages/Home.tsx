@@ -57,7 +57,7 @@ export default function Home() {
               <ArrowRight className="ml-2 h-5 w-5 inline" />
             </Link>
             <Link to="/consultation" className="bg-white hover:bg-navy-50 text-navy-700 text-lg px-8 py-4 rounded-lg font-semibold transition-colors duration-200 border-2 border-navy-200 hover:border-navy-300 shadow-md hover:shadow-lg">
-              Strategy Session $250/hr
+              Schedule Strategy Session
             </Link>
           </div>
         </div>
