@@ -13,6 +13,7 @@ import Pricing from './pages/Pricing';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Checkout from './pages/Checkout';
+import Consultation from './pages/Consultation';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import AdminDashboard from './components/AdminDashboard';
@@ -147,6 +148,12 @@ function App() {
                       Services
                     </NavLink>
                     <NavLink 
+                      to="/consultation" 
+                      className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50"
+                    >
+                      Strategy Session
+                    </NavLink>
+                    <NavLink 
                       to="/referrals" 
                       className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50 rounded-b-md"
                     >
@@ -214,6 +221,7 @@ function App() {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/success" element={<Success />} />
           <Route path="/intake" element={<Intake setIntakeData={setIntakeData} />} />
+          <Route path="/consultation" element={<Consultation />} />
           <Route path="/dashboard" element={<Dashboard intakeData={intakeData} />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/signin" element={<SignIn />} />
