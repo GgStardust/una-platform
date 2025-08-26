@@ -17,6 +17,7 @@ import Consultation from './pages/Consultation';
 import Resources from './pages/Resources';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
+import Contact from './pages/Contact';
 import AdminDashboard from './components/AdminDashboard';
 import AdminAuth from './components/AdminAuth';
 import FormationGuard from './components/FormationGuard';
@@ -278,6 +279,7 @@ function App() {
           <Route path="/referrals" element={<Referrals />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/admin" element={
             <AdminAuth>
               <AdminDashboard />
