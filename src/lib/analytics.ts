@@ -462,7 +462,111 @@ class AnalyticsService {
 
 export const analyticsService = AnalyticsService.getInstance();
 
+// Google Analytics Integration
+class GoogleAnalyticsService {
+  private static instance: GoogleAnalyticsService;
+  private isInitialized: boolean = false;
+  private trackingId: string | null = null;
+
+  private constructor() {}
+
+  static getInstance(): GoogleAnalyticsService {
+    if (!GoogleAnalyticsService.instance) {
+      GoogleAnalyticsService.instance = new GoogleAnalyticsService();
+    }
+    return GoogleAnalyticsService.instance;
+  }
+
+  // Initialize Google Analytics
+  initialize(): void {
+    if (this.isInitialized) return;
+
+    const enableAnalytics = import.meta.env.VITE_ENABLE_ANALYTICS === 'true';
+    this.trackingId = import.meta.env.VITE_GOOGLE_ANALYTICS_ID;
+
+    if (!enableAnalytics || !this.trackingId) {
+      console.log('Google Analytics disabled or no tracking ID provided');
+      return;
+    }
+
+    try {
+      this.loadGoogleAnalyticsScript();
+      this.isInitialized = true;
+      console.log('Google Analytics initialized successfully');
+    } catch (error) {
+      console.error('Failed to initialize Google Analytics:', error);
+    }
+  }
+
+  // Load Google Analytics script
+  private loadGoogleAnalyticsScript(): void {
+    if (!this.trackingId) return;
+
+    // Create script element
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${this.trackingId}`;
+    document.head.appendChild(script);
+
+    // Initialize gtag
+    window.dataLayer = window.dataLayer || [];
+    function gtag(...args: any[]) {
+      window.dataLayer.push(args);
+    }
+    gtag('js', new Date());
+    gtag('config', this.trackingId, {
+      page_title: document.title,
+      page_location: window.location.href
+    });
+
+    // Make gtag available globally
+    (window as any).gtag = gtag;
+  }
+
+  // Track page view
+  trackPageView(page: string, title?: string): void {
+    if (!this.isInitialized || !this.trackingId) return;
+
+    try {
+      (window as any).gtag('config', this.trackingId, {
+        page_title: title || document.title,
+        page_location: page
+      });
+    } catch (error) {
+      console.error('Failed to track page view:', error);
+    }
+  }
+
+  // Track custom event
+  trackEvent(eventName: string, parameters?: Record<string, any>): void {
+    if (!this.isInitialized || !this.trackingId) return;
+
+    try {
+      (window as any).gtag('event', eventName, parameters);
+    } catch (error) {
+      console.error('Failed to track event:', error);
+    }
+  }
+
+  // Track conversion
+  trackConversion(goalId: string, value?: number): void {
+    if (!this.isInitialized || !this.trackingId) return;
+
+    try {
+      (window as any).gtag('event', 'conversion', {
+        send_to: `${this.trackingId}/${goalId}`,
+        value: value
+      });
+    } catch (error) {
+      console.error('Failed to track conversion:', error);
+    }
+  }
+}
+
+export const googleAnalyticsService = GoogleAnalyticsService.getInstance();
+
 // Initialize analytics when the module is imported
 if (typeof window !== 'undefined') {
   analyticsService.initialize();
+  googleAnalyticsService.initialize();
 }

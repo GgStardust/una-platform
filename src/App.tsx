@@ -20,6 +20,7 @@ import BlogPost from './pages/BlogPost';
 import AdminDashboard from './components/AdminDashboard';
 import AdminAuth from './components/AdminAuth';
 import { IntakeData } from '@/lib/types';
+import { googleAnalyticsService } from '@/lib/analytics';
 
 function App() {
   const [intakeData, setIntakeData] = useState<IntakeData | null>(null);
@@ -43,6 +44,26 @@ function App() {
       localStorage.setItem('intake', JSON.stringify(intakeData));
     }
   }, [intakeData]);
+
+  // Track page views with Google Analytics
+  useEffect(() => {
+    const currentPath = window.location.pathname;
+    const currentTitle = document.title;
+    
+    // Track page view
+    googleAnalyticsService.trackPageView(currentPath, currentTitle);
+    
+    // Track specific page events
+    if (currentPath === '/explore') {
+      googleAnalyticsService.trackEvent('page_view', { page: 'explore', title: 'Explore Your Path' });
+    } else if (currentPath === '/consultation') {
+      googleAnalyticsService.trackEvent('page_view', { page: 'consultation', title: 'Strategy Session' });
+    } else if (currentPath === '/resources') {
+      googleAnalyticsService.trackEvent('page_view', { page: 'resources', title: 'Resources' });
+    } else if (currentPath.startsWith('/blog')) {
+      googleAnalyticsService.trackEvent('page_view', { page: 'blog', title: currentTitle });
+    }
+  }, []);
 
   return (
     <div className="min-h-screen bg-cream-50">

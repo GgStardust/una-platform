@@ -9,5 +9,9 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, 'src')
     }
+  },
+  assetsInclude: ['**/*.mdx'],
+  optimizeDeps: {
+    exclude: ['@mdx-js/react', '@mdx-js/loader']
   }
 })
