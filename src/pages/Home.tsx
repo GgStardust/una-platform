@@ -145,7 +145,7 @@ export default function Home() {
           </div>
           
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-gradient-to-br from-gold-50 to-gold-100 rounded-lg p-8">
+            <div className="bg-gradient-to-br from-gold-100 to-amber-100 rounded-lg p-8 border border-gold-200">
               <h3 className="text-xl font-semibold text-navy-900 mb-4">
                 Start Your Formation
               </h3>
@@ -179,7 +179,7 @@ export default function Home() {
                     className="block p-4 bg-white rounded-lg border border-navy-200 hover:border-gold-300 hover:shadow-sm transition-all duration-200"
                   >
                     <div className="font-medium text-gold-600 hover:text-gold-800">
-                      Strategy Session $250/hr
+                      Schedule Strategy Session
                     </div>
                     <div className="text-sm text-navy-600 mt-1">
                       Get personalized guidance for your UNA formation journey
@@ -200,7 +200,7 @@ export default function Home() {
               </div>
             </div>
             
-            <div className="bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-lg p-8">
+            <div className="bg-gradient-to-br from-emerald-100 to-teal-100 rounded-lg p-8 border border-emerald-200">
               <h3 className="text-xl font-semibold text-navy-900 mb-4">
                 Expert Guidance & Resources
               </h3>
