@@ -106,13 +106,22 @@ export default function Consultation() {
           {/* Bundle Offer */}
           <div className="mt-6 bg-gradient-to-r from-gold-100 to-amber-100 rounded-lg p-6 border border-gold-200">
             <div className="text-center">
-              <h3 className="text-lg font-semibold text-navy-800 mb-2">Bundle & Save</h3>
-              <p className="text-navy-600 mb-3">
+              <h3 className="text-lg font-semibold text-navy-800 mb-3">Bundle & Save</h3>
+              <p className="text-navy-600 mb-4">
                 Book both services together and save $100
               </p>
-              <div className="text-2xl font-bold text-navy-800">
+              <div className="text-2xl font-bold text-navy-800 mb-4">
                 Consultation + Documents Package: <span className="text-gold-600">$1000</span>
               </div>
+              <a 
+                href={bookingUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center bg-gold-600 hover:bg-gold-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200 shadow-md hover:shadow-lg"
+              >
+                Schedule Document Formation + Bundle
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
             </div>
           </div>
         </div>
@@ -169,6 +178,32 @@ export default function Consultation() {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Ongoing Consultancy */}
+        <div className="bg-white rounded-lg shadow-sm border border-navy-200 p-8">
+          <h2 className="text-2xl font-semibold text-navy-900 mb-6 text-center">Ongoing Consultancy</h2>
+          <p className="text-navy-600 text-lg text-center mb-8 max-w-3xl mx-auto">
+            Continuing support beyond initial setup. Regular check-ins, compliance reviews, 
+            strategic guidance, and responsive advisory support as your UNA grows.
+          </p>
+          
+          <div className="text-center mb-6">
+            <div className="text-3xl font-bold text-navy-800 mb-2">Investment varies by engagement</div>
+            <p className="text-navy-600">Customized support packages based on your needs</p>
+          </div>
+          
+          <div className="text-center">
+            <a 
+              href={`${bookingUrl}?service=ongoing`}
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center bg-navy-600 hover:bg-navy-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200 shadow-md hover:shadow-lg"
+            >
+              Discuss Ongoing Support
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </a>
           </div>
         </div>
 

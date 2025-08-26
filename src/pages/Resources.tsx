@@ -4,13 +4,13 @@ import {
   Calculator, 
   Users, 
   Target, 
-  ExternalLink, 
   ArrowRight,
   Lock,
   CreditCard,
   MessageCircle
 } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
+import AffiliateLink from '../components/AffiliateLink';
 
 export default function Resources() {
   return (
@@ -129,30 +129,21 @@ export default function Resources() {
                       <h4 className="font-medium text-navy-800">Bluevine</h4>
                       <p className="text-sm text-navy-600">Online business banking</p>
                     </div>
-                    <a href="#" className="text-gold-600 hover:text-gold-800 font-medium text-sm">
-                      Learn More
-                      <ExternalLink className="h-4 w-4 ml-1 inline" />
-                    </a>
+                    <AffiliateLink partnerId="bluevine" />
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                     <div>
                       <h4 className="font-medium text-navy-800">Novo</h4>
                       <p className="text-sm text-navy-600">Fee-light business checking</p>
                     </div>
-                    <a href="#" className="text-gold-600 hover:text-gold-800 font-medium text-sm">
-                      Learn More
-                      <ExternalLink className="h-4 w-4 ml-1 inline" />
-                    </a>
+                    <AffiliateLink partnerId="novo" />
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                     <div>
                       <h4 className="font-medium text-navy-800">Wise</h4>
                       <p className="text-sm text-navy-600">International transfers</p>
                     </div>
-                    <a href="#" className="text-gold-600 hover:text-gold-800 font-medium text-sm">
-                      Learn More
-                      <ExternalLink className="h-4 w-4 ml-1 inline" />
-                    </a>
+                    <AffiliateLink partnerId="wise" />
                   </div>
                 </div>
               </div>
@@ -165,20 +156,14 @@ export default function Resources() {
                       <h4 className="font-medium text-navy-800">Ledger</h4>
                       <p className="text-sm text-navy-600">Hardware wallet for asset custody</p>
                     </div>
-                    <a href="#" className="text-gold-600 hover:text-gold-800 font-medium text-sm">
-                      Learn More
-                      <ExternalLink className="h-4 w-4 ml-1 inline" />
-                    </a>
+                    <AffiliateLink partnerId="ledger" />
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                     <div>
                       <h4 className="font-medium text-navy-800">Trezor</h4>
                       <p className="text-sm text-navy-600">Hardware wallet for asset custody</p>
                     </div>
-                    <a href="#" className="text-gold-600 hover:text-gold-800 font-medium text-sm">
-                      Learn More
-                      <ExternalLink className="h-4 w-4 ml-1 inline" />
-                    </a>
+                    <AffiliateLink partnerId="trezor" />
                   </div>
                 </div>
               </div>
@@ -206,30 +191,21 @@ export default function Resources() {
                       <h4 className="font-medium text-navy-800">Proton Mail and Proton VPN</h4>
                       <p className="text-sm text-navy-600">Private email and network protection</p>
                     </div>
-                    <a href="#" className="text-gold-600 hover:text-gold-800 font-medium text-sm">
-                      Learn More
-                      <ExternalLink className="h-4 w-4 ml-1 inline" />
-                    </a>
+                    <AffiliateLink partnerId="proton" />
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                     <div>
                       <h4 className="font-medium text-navy-800">Tutanota</h4>
                       <p className="text-sm text-navy-600">Encrypted email</p>
                     </div>
-                    <a href="#" className="text-gold-600 hover:text-gold-800 font-medium text-sm">
-                      Learn More
-                      <ExternalLink className="h-4 w-4 ml-1 inline" />
-                    </a>
+                    <AffiliateLink partnerId="tutanota" />
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                     <div>
                       <h4 className="font-medium text-navy-800">Mullvad VPN</h4>
                       <p className="text-sm text-navy-600">Privacy-first VPN</p>
                     </div>
-                    <a href="#" className="text-gold-600 hover:text-gold-800 font-medium text-sm">
-                      Learn More
-                      <ExternalLink className="h-4 w-4 ml-1 inline" />
-                    </a>
+                    <AffiliateLink partnerId="mullvad" />
                   </div>
                 </div>
               </div>
@@ -242,20 +218,14 @@ export default function Resources() {
                       <h4 className="font-medium text-navy-800">DigitalOcean</h4>
                       <p className="text-sm text-navy-600">Simple cloud hosting and apps</p>
                     </div>
-                    <a href="#" className="text-gold-600 hover:text-gold-800 font-medium text-sm">
-                      Learn More
-                      <ExternalLink className="h-4 w-4 ml-1 inline" />
-                    </a>
+                    <AffiliateLink partnerId="digitalocean" />
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                     <div>
                       <h4 className="font-medium text-navy-800">Fastmail</h4>
                       <p className="text-sm text-navy-600">Custom domain email</p>
                     </div>
-                    <a href="#" className="text-gold-600 hover:text-gold-800 font-medium text-sm">
-                      Learn More
-                      <ExternalLink className="h-4 w-4 ml-1 inline" />
-                    </a>
+                    <AffiliateLink partnerId="fastmail" />
                   </div>
                 </div>
               </div>
@@ -283,40 +253,28 @@ export default function Resources() {
                       <h4 className="font-medium text-navy-800">FreshBooks</h4>
                       <p className="text-sm text-navy-600">Invoicing and bookkeeping</p>
                     </div>
-                    <a href="#" className="text-gold-600 hover:text-gold-800 font-medium text-sm">
-                      Learn More
-                      <ExternalLink className="h-4 w-4 ml-1 inline" />
-                    </a>
+                    <AffiliateLink partnerId="freshbooks" />
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                     <div>
                       <h4 className="font-medium text-navy-800">Xero</h4>
                       <p className="text-sm text-navy-600">Accounting platform</p>
                     </div>
-                    <a href="#" className="text-gold-600 hover:text-gold-800 font-medium text-sm">
-                      Learn More
-                      <ExternalLink className="h-4 w-4 ml-1 inline" />
-                    </a>
+                    <AffiliateLink partnerId="xero" />
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                     <div>
                       <h4 className="font-medium text-navy-800">Bench</h4>
                       <p className="text-sm text-navy-600">Done-for-you bookkeeping</p>
                     </div>
-                    <a href="#" className="text-gold-600 hover:text-gold-800 font-medium text-sm">
-                      Learn More
-                      <ExternalLink className="h-4 w-4 ml-1 inline" />
-                    </a>
+                    <AffiliateLink partnerId="bench" />
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                     <div>
                       <h4 className="font-medium text-navy-800">Wave</h4>
                       <p className="text-sm text-navy-600">Free invoicing and bookkeeping</p>
                     </div>
-                    <a href="#" className="text-gold-600 hover:text-gold-800 font-medium text-sm">
-                      Learn More
-                      <ExternalLink className="h-4 w-4 ml-1 inline" />
-                    </a>
+                    <AffiliateLink partnerId="wave" />
                   </div>
                 </div>
               </div>
@@ -344,20 +302,14 @@ export default function Resources() {
                       <h4 className="font-medium text-navy-800">Zion HealthShare</h4>
                       <p className="text-sm text-navy-600">Community-based medical cost sharing</p>
                     </div>
-                    <a href="#" className="text-gold-600 hover:text-gold-800 font-medium text-sm">
-                      Learn More
-                      <ExternalLink className="h-4 w-4 ml-1 inline" />
-                    </a>
+                    <AffiliateLink partnerId="zion-healthshare" />
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                     <div>
                       <h4 className="font-medium text-navy-800">Sedera</h4>
                       <p className="text-sm text-navy-600">Medical cost sharing</p>
                     </div>
-                    <a href="#" className="text-gold-600 hover:text-gold-800 font-medium text-sm">
-                      Learn More
-                      <ExternalLink className="h-4 w-4 ml-1 inline" />
-                    </a>
+                    <AffiliateLink partnerId="sedera" />
                   </div>
                 </div>
               </div>
@@ -370,20 +322,14 @@ export default function Resources() {
                       <h4 className="font-medium text-navy-800">Next Insurance</h4>
                       <p className="text-sm text-navy-600">Business liability options</p>
                     </div>
-                    <a href="#" className="text-gold-600 hover:text-gold-800 font-medium text-sm">
-                      Learn More
-                      <ExternalLink className="h-4 w-4 ml-1 inline" />
-                    </a>
+                    <AffiliateLink partnerId="next-insurance" />
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                     <div>
                       <h4 className="font-medium text-navy-800">Hiscox</h4>
                       <p className="text-sm text-navy-600">Small business coverage</p>
                     </div>
-                    <a href="#" className="text-gold-600 hover:text-gold-800 font-medium text-sm">
-                      Learn More
-                      <ExternalLink className="h-4 w-4 ml-1 inline" />
-                    </a>
+                    <AffiliateLink partnerId="hiscox" />
                   </div>
                 </div>
               </div>
@@ -411,50 +357,35 @@ export default function Resources() {
                       <h4 className="font-medium text-navy-800">Mighty Networks</h4>
                       <p className="text-sm text-navy-600">Private community hub</p>
                     </div>
-                    <a href="#" className="text-gold-600 hover:text-gold-800 font-medium text-sm">
-                      Learn More
-                      <ExternalLink className="h-4 w-4 ml-1 inline" />
-                    </a>
+                    <AffiliateLink partnerId="mighty-networks" />
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                     <div>
                       <h4 className="font-medium text-navy-800">Podia</h4>
                       <p className="text-sm text-navy-600">Courses, downloads, memberships</p>
                     </div>
-                    <a href="#" className="text-gold-600 hover:text-gold-800 font-medium text-sm">
-                      Learn More
-                      <ExternalLink className="h-4 w-4 ml-1 inline" />
-                    </a>
+                    <AffiliateLink partnerId="podia" />
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                     <div>
                       <h4 className="font-medium text-navy-800">Thinkific</h4>
                       <p className="text-sm text-navy-600">Online courses and learning paths</p>
                     </div>
-                    <a href="#" className="text-gold-600 hover:text-gold-800 font-medium text-sm">
-                      Learn More
-                      <ExternalLink className="h-4 w-4 ml-1 inline" />
-                    </a>
+                    <AffiliateLink partnerId="thinkific" />
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                     <div>
                       <h4 className="font-medium text-navy-800">LearnWorlds</h4>
                       <p className="text-sm text-navy-600">Learning platform with assessments</p>
                     </div>
-                    <a href="#" className="text-gold-600 hover:text-gold-800 font-medium text-sm">
-                      Learn More
-                      <ExternalLink className="h-4 w-4 ml-1 inline" />
-                    </a>
+                    <AffiliateLink partnerId="learnworlds" />
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                     <div>
                       <h4 className="font-medium text-navy-800">Ghost</h4>
                       <p className="text-sm text-navy-600">Open-source publishing</p>
                     </div>
-                    <a href="#" className="text-gold-600 hover:text-gold-800 font-medium text-sm">
-                      Learn More
-                      <ExternalLink className="h-4 w-4 ml-1 inline" />
-                    </a>
+                    <AffiliateLink partnerId="ghost" />
                   </div>
                 </div>
               </div>
@@ -467,50 +398,35 @@ export default function Resources() {
                       <h4 className="font-medium text-navy-800">Patreon</h4>
                       <p className="text-sm text-navy-600">Recurring member support</p>
                     </div>
-                    <a href="#" className="text-gold-600 hover:text-gold-800 font-medium text-sm">
-                      Learn More
-                      <ExternalLink className="h-4 w-4 ml-1 inline" />
-                    </a>
+                    <AffiliateLink partnerId="patreon" />
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                     <div>
                       <h4 className="font-medium text-navy-800">Buy Me a Coffee</h4>
                       <p className="text-sm text-navy-600">Simple one-time or recurring support</p>
                     </div>
-                    <a href="#" className="text-gold-600 hover:text-gold-800 font-medium text-sm">
-                      Learn More
-                      <ExternalLink className="h-4 w-4 ml-1 inline" />
-                    </a>
+                    <AffiliateLink partnerId="buymeacoffee" />
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                     <div>
                       <h4 className="font-medium text-navy-800">Wefunder</h4>
                       <p className="text-sm text-navy-600">Community crowdfunding portal</p>
                     </div>
-                    <a href="#" className="text-gold-600 hover:text-gold-800 font-medium text-sm">
-                      Learn More
-                      <ExternalLink className="h-4 w-4 ml-1 inline" />
-                    </a>
+                    <AffiliateLink partnerId="wefunder" />
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                     <div>
                       <h4 className="font-medium text-navy-800">Honeycomb</h4>
                       <p className="text-sm text-navy-600">Small business funding</p>
                     </div>
-                    <a href="#" className="text-gold-600 hover:text-gold-800 font-medium text-sm">
-                      Learn More
-                      <ExternalLink className="h-4 w-4 ml-1 inline" />
-                    </a>
+                    <AffiliateLink partnerId="honeycomb" />
                   </div>
                   <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                     <div>
                       <h4 className="font-medium text-navy-800">CNote</h4>
                       <p className="text-sm text-navy-600">Impact cash and investment platform</p>
                     </div>
-                    <a href="#" className="text-gold-600 hover:text-gold-800 font-medium text-sm">
-                      Learn More
-                      <ExternalLink className="h-4 w-4 ml-1 inline" />
-                    </a>
+                    <AffiliateLink partnerId="cnote" />
                   </div>
                 </div>
               </div>
@@ -534,7 +450,7 @@ export default function Resources() {
               <div className="bg-emerald-50 rounded-lg p-6 border border-emerald-200">
                 <h3 className="font-semibold text-emerald-800 mb-2">CPA</h3>
                 <p className="text-emerald-700 text-sm mb-4">By referral through the UNA team</p>
-                <Link to="/consultation" className="btn-primary text-sm px-4 py-2 w-full text-center">
+                <Link to="/contact?type=referral&service=cpa" className="btn-primary text-sm px-4 py-2 w-full text-center">
                   Request Referral
                   <ArrowRight className="ml-2 h-4 w-4 inline" />
                 </Link>
@@ -542,7 +458,7 @@ export default function Resources() {
               <div className="bg-emerald-50 rounded-lg p-6 border border-emerald-200">
                 <h3 className="font-semibold text-emerald-800 mb-2">Attorney</h3>
                 <p className="text-emerald-700 text-sm mb-4">By referral through the UNA team</p>
-                <Link to="/consultation" className="btn-primary text-sm px-4 py-2 w-full text-center">
+                <Link to="/contact?type=referral&service=attorney" className="btn-primary text-sm px-4 py-2 w-full text-center">
                   Request Referral
                   <ArrowRight className="ml-2 h-4 w-4 inline" />
                 </Link>
