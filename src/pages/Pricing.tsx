@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { BookOpen, Calendar, Check, ArrowRight, Users, Star, FileText, Target } from 'lucide-react';
-import { FLAGS } from '@/lib/flags';
+
 
 export default function Pricing() {
   return (
@@ -221,23 +221,7 @@ export default function Pricing() {
           </div>
         </div>
 
-        {/* Coming Soon Notice */}
-        {!FLAGS.ENABLE_FORMATION && (
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-8 max-w-4xl mx-auto">
-            <div className="text-center">
-              <h3 className="text-xl font-semibold text-amber-900 mb-2">Automated Formation Coming Soon</h3>
-              <p className="text-amber-800 mb-4">
-                We're building automated UNA formation tools to make the process even easier. 
-                For now, our expert guidance and document preparation services provide the personalized 
-                attention your UNA deserves.
-              </p>
-              <Link to="/consultation" className="btn-primary">
-                Get Expert Guidance Now
-                <ArrowRight className="ml-2 h-4 w-4 inline" />
-              </Link>
-            </div>
-          </div>
-        )}
+
 
         {/* FAQ Section */}
         <div className="mt-16">

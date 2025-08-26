@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Check, ArrowRight, BookOpen, Calendar, Users, Shield, Info, FileText, Target } from 'lucide-react';
+import { Check, ArrowRight, BookOpen, Calendar, Users, Shield, FileText, Target } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
-import { FLAGS } from '@/lib/flags';
 
 export default function Services() {
   return (
@@ -310,24 +309,7 @@ export default function Services() {
         </div>
       </div>
 
-      {/* Coming Soon Notice */}
-      {!FLAGS.ENABLE_FORMATION && (
-        <div className="bg-amber-50 border border-amber-200 rounded-lg p-8 mx-6 mb-8">
-          <div className="text-center">
-            <Info className="h-12 w-12 text-amber-600 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-amber-900 mb-2">Automated Formation Coming Soon</h3>
-            <p className="text-amber-800 mb-4">
-              We're building automated UNA formation tools to make the process even easier. 
-              For now, our expert guidance and document preparation services provide the personalized 
-              attention your UNA deserves.
-            </p>
-            <Link to="/consultation" className="btn-primary">
-              Get Expert Guidance Now
-              <ArrowRight className="ml-2 h-4 w-4 inline" />
-            </Link>
-          </div>
-        </div>
-      )}
+
 
       {/* Final CTA */}
       <div className="bg-gradient-to-r from-navy-600 to-navy-700 py-16">

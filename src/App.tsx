@@ -237,7 +237,7 @@ function App() {
                     '_blank'
                   );
                 }}
-                className="px-4 py-2 bg-emerald-500 text-white text-sm font-medium rounded-md hover:bg-emerald-600 transition-colors ml-4"
+                className="px-4 py-2 bg-gradient-to-r from-gold-500 to-amber-500 text-white text-sm font-medium rounded-md hover:from-gold-600 hover:to-amber-600 transition-all duration-200 ml-4 shadow-md hover:shadow-lg transform hover:scale-105"
               >
                 Get Help
               </button>

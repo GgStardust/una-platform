@@ -77,10 +77,10 @@ export default function Home() {
           
           <div className="card text-center">
             <Users className="h-12 w-12 text-gold-500 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold mb-2 text-navy-800">Affiliate Resources</h3>
+            <h3 className="text-xl font-semibold mb-2 text-navy-800">UNA Startup Toolkit</h3>
             <p className="text-navy-600">
-              Access our curated network of UNA formation experts, legal services, 
-              and community support resources.
+              Sovereignty-aligned tools and resources to extend your UNA foundation 
+              with optional services that respect your mission.
             </p>
           </div>
           
