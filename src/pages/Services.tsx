@@ -43,7 +43,7 @@ export default function Services() {
                 "itemOffered": {
                   "@type": "Service",
                   "name": "Strategy Session",
-                  "description": "Personalized 60-90 minute consultation for UNA formation planning and guidance."
+                  "description": "Personalized 1 hour consultation for UNA formation planning and guidance."
                 }
               },
               {
@@ -123,7 +123,7 @@ export default function Services() {
             <ul className="text-sm text-navy-600 mb-4 space-y-1">
               <li className="flex items-center">
                 <Check className="h-4 w-4 text-emerald-500 mr-2" />
-                60-90 minute personalized session
+                1 hour personalized session
               </li>
               <li className="flex items-center">
                 <Check className="h-4 w-4 text-emerald-500 mr-2" />
@@ -142,10 +142,15 @@ export default function Services() {
               <div className="text-2xl font-bold text-gold-600">$250</div>
               <div className="text-sm text-navy-500">One-time session</div>
             </div>
-            <Link to="/consultation" className="btn-primary text-sm px-6 py-2 w-full text-center">
+            <a 
+              href={`${import.meta.env.VITE_BOOKING_URL || 'https://calendly.com/gigi-stardust/una-consultation'}?service=consultation`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary text-sm px-6 py-2 w-full text-center"
+            >
               Schedule Strategy Session
               <ArrowRight className="ml-2 h-4 w-4 inline" />
-            </Link>
+            </a>
           </div>
 
           {/* Document Creation Package */}
@@ -180,10 +185,15 @@ export default function Services() {
               <div className="text-2xl font-bold text-navy-600">$750</div>
               <div className="text-sm text-navy-500">Complete package</div>
             </div>
-            <Link to="/consultation" className="btn-primary text-sm px-6 py-2 w-full text-center">
-              Learn More
+            <a 
+              href={`${import.meta.env.VITE_BOOKING_URL || 'https://calendly.com/gigi-stardust/una-consultation'}?service=documents`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary text-sm px-6 py-2 w-full text-center"
+            >
+              Schedule Document Creation
               <ArrowRight className="ml-2 h-4 w-4 inline" />
-            </Link>
+            </a>
           </div>
         </div>
 
@@ -197,10 +207,15 @@ export default function Services() {
             <div className="text-3xl font-bold text-navy-800 mb-4">
               Consultation + Documents Package: <span className="text-gold-600">$1000</span>
             </div>
-            <Link to="/consultation" className="btn-primary px-8 py-3 text-lg">
-              View All Services
+            <a 
+              href={`${import.meta.env.VITE_BOOKING_URL || 'https://calendly.com/gigi-stardust/una-consultation'}?service=bundle`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary px-8 py-3 text-lg"
+            >
+              Schedule Bundle Package
               <ArrowRight className="ml-2 h-5 w-5 inline" />
-            </Link>
+            </a>
           </div>
         </div>
       </div>
