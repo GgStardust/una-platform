@@ -14,6 +14,7 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Checkout from './pages/Checkout';
 import Consultation from './pages/Consultation';
+import Resources from './pages/Resources';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import AdminDashboard from './components/AdminDashboard';
@@ -86,6 +87,12 @@ function App() {
                       className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50 rounded-t-md"
                     >
                       About
+                    </NavLink>
+                    <NavLink 
+                      to="/resources" 
+                      className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50"
+                    >
+                      Resources
                     </NavLink>
                     <NavLink 
                       to="/faq" 
@@ -222,6 +229,7 @@ function App() {
           <Route path="/success" element={<Success />} />
           <Route path="/intake" element={<Intake setIntakeData={setIntakeData} />} />
           <Route path="/consultation" element={<Consultation />} />
+          <Route path="/resources" element={<Resources />} />
           <Route path="/dashboard" element={<Dashboard intakeData={intakeData} />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/signin" element={<SignIn />} />
