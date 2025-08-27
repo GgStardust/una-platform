@@ -41,12 +41,12 @@ export default function Home() {
       {/* Hero Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
         <div className="text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-[#F4F1E8] mb-6 font-montserrat">
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 font-montserrat">
             <span className="text-[#C49A6C]">UNA Formation Guidance</span>
             <br />
-            <span className="text-[#F4F1E8]">Clarity-First Strategy & Resources</span>
+            <span className="text-white">Clarity-First Strategy & Resources</span>
           </h1>
-          <p className="text-xl text-[#F4F1E8] mb-8 max-w-3xl mx-auto font-lora">
+          <p className="text-xl text-white mb-8 max-w-3xl mx-auto font-lora">
             Get clear guidance for your UNA formation journey with 
             <strong className="text-[#C49A6C]"> sovereignty-aligned expertise</strong>. Explore your path, access curated resources, 
             and get personalized strategy sessions to establish your 
