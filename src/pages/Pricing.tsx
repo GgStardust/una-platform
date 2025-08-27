@@ -73,9 +73,9 @@ export default function Pricing() {
             </div>
 
             {/* Strategy Session */}
-            <div className="relative bg-white rounded-2xl shadow-lg border-2 border-gold-500 scale-105">
+            <div className="relative una-card rounded-2xl shadow-lg border-2 border-[#C49A6C] scale-105">
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <div className="bg-gold-500 text-white px-4 py-2 rounded-full text-sm font-semibold flex items-center">
+                <div className="bg-[#C49A6C] text-white px-4 py-2 rounded-full text-sm font-semibold flex items-center">
                   <Star className="h-4 w-4 mr-2" />
                   Most Popular
                 </div>
