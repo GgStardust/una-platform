@@ -58,16 +58,16 @@ export default function Services() {
           }
         }}
       />
-    <div className="min-h-screen bg-cream-50">
+    <div className="min-h-screen bg-[#F4F1E8]">
       {/* Header */}
-      <div className="bg-white py-16">
+      <div className="una-gradient-hero py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl font-bold text-navy-900 mb-6">
-            <strong>UNA Formation Guidance</strong> & Strategy
+          <h1 className="text-4xl font-bold text-[#F4F1E8] mb-6 font-montserrat">
+            <strong className="text-[#C49A6C]">UNA Formation Guidance</strong> & Strategy
           </h1>
-          <p className="text-xl text-navy-600">
-            Get clear guidance for your <strong>Unincorporated Nonprofit Association</strong> 
-            formation journey. Our <strong>expert guidance approach</strong> helps you understand 
+          <p className="text-xl text-[#F4F1E8] font-lora">
+            Get clear guidance for your <strong className="text-[#C49A6C]">Unincorporated Nonprofit Association</strong> 
+            formation journey. Our <strong className="text-[#C49A6C]">expert guidance approach</strong> helps you understand 
             your options and prepare personalized documents.
           </p>
         </div>
@@ -77,76 +77,80 @@ export default function Services() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid md:grid-cols-3 gap-8">
           {/* Free Path Exploration */}
-          <div className="card">
+          <div className="una-card p-6">
             <div className="flex items-center mb-4">
-              <BookOpen className="h-8 w-8 text-navy-500" />
-              <h3 className="text-xl font-semibold ml-3">Free Path Exploration</h3>
+              <div className="bg-gradient-to-r from-[#C49A6C] to-[#2F7E7E] rounded-full w-12 h-12 flex items-center justify-center mr-3">
+                <BookOpen className="h-6 w-6 text-white" />
+              </div>
+              <h3 className="text-xl font-semibold text-[#F4F1E8] font-montserrat">Free Path Exploration</h3>
             </div>
-            <p className="text-navy-600 mb-4">
+            <p className="text-[#F4F1E8] mb-4 font-lora">
               Start your UNA formation journey with our guided assessment to understand 
               your options and get personalized strategic insights.
             </p>
-            <ul className="text-sm text-navy-600 mb-4 space-y-1">
+            <ul className="text-sm text-[#F4F1E8] mb-4 space-y-1 font-lora">
               <li className="flex items-center">
-                <Check className="h-4 w-4 text-emerald-500 mr-2" />
+                <Check className="h-4 w-4 text-[#C49A6C] mr-2" />
                 3-step guided assessment
               </li>
               <li className="flex items-center">
-                <Check className="h-4 w-4 text-emerald-500 mr-2" />
+                <Check className="h-4 w-4 text-[#C49A6C] mr-2" />
                 Mission and impact analysis
               </li>
               <li className="flex items-center">
-                <Check className="h-4 w-4 text-emerald-500 mr-2" />
+                <Check className="h-4 w-4 text-[#C49A6C] mr-2" />
                 Strategic insights and recommendations
               </li>
               <li className="flex items-center">
-                <Check className="h-4 w-4 text-emerald-500 mr-2" />
+                <Check className="h-4 w-4 text-[#C49A6C] mr-2" />
                 Resource and next steps guidance
               </li>
             </ul>
-            <Link to="/explore" className="btn-primary text-sm px-6 py-2 w-full text-center">
+            <Link to="/explore" className="btn-grad btn-primary text-sm px-6 py-2 w-full text-center">
               Start Free Exploration
               <ArrowRight className="ml-2 h-4 w-4 inline" />
             </Link>
           </div>
 
           {/* Strategy Session */}
-          <div className="card">
+          <div className="una-card p-6">
             <div className="flex items-center mb-4">
-              <Calendar className="h-8 w-8 text-gold-500" />
-              <h3 className="text-xl font-semibold ml-3">Strategy Session</h3>
+              <div className="bg-gradient-to-r from-[#2F7E7E] to-[#7A4CA0] rounded-full w-12 h-12 flex items-center justify-center mr-3">
+                <Calendar className="h-6 w-6 text-white" />
+              </div>
+              <h3 className="text-xl font-semibold text-[#F4F1E8] font-montserrat">Strategy Session</h3>
             </div>
-            <p className="text-navy-600 mb-4">
+            <p className="text-[#F4F1E8] mb-4 font-lora">
               Get personalized guidance and strategic planning through our 1:1 consultation 
               sessions tailored to your specific situation.
             </p>
-            <ul className="text-sm text-navy-600 mb-4 space-y-1">
+            <ul className="text-sm text-[#F4F1E8] mb-4 space-y-1 font-lora">
               <li className="flex items-center">
-                <Check className="h-4 w-4 text-emerald-500 mr-2" />
+                <Check className="h-4 w-4 text-[#C49A6C] mr-2" />
                 1 hour personalized session
               </li>
               <li className="flex items-center">
-                <Check className="h-4 w-4 text-emerald-500 mr-2" />
+                <Check className="h-4 w-4 text-[#C49A6C] mr-2" />
                 Strategic summary and roadmap
               </li>
               <li className="flex items-center">
-                <Check className="h-4 w-4 text-emerald-500 mr-2" />
+                <Check className="h-4 w-4 text-[#C49A6C] mr-2" />
                 Mission and vision clarity
               </li>
               <li className="flex items-center">
-                <Check className="h-4 w-4 text-emerald-500 mr-2" />
+                <Check className="h-4 w-4 text-[#C49A6C] mr-2" />
                 Resource recommendations
               </li>
             </ul>
             <div className="text-center mb-4">
-              <div className="text-2xl font-bold text-gold-600">$250</div>
-              <div className="text-sm text-navy-500">One-time session</div>
+              <div className="text-2xl font-bold text-[#C49A6C]">$250</div>
+              <div className="text-sm text-[#F4F1E8]">One-time session</div>
             </div>
             <a 
               href={`${import.meta.env.VITE_BOOKING_URL || 'https://calendly.com/gigi-stardust/una-consultation'}?service=consultation`}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary text-sm px-6 py-2 w-full text-center"
+              className="btn-grad btn-primary text-sm px-6 py-2 w-full text-center"
             >
               Schedule Strategy Session
               <ArrowRight className="ml-2 h-4 w-4 inline" />
@@ -154,42 +158,44 @@ export default function Services() {
           </div>
 
           {/* Document Creation Package */}
-          <div className="card">
+          <div className="una-card p-6">
             <div className="flex items-center mb-4">
-              <FileText className="h-8 w-8 text-navy-500" />
-              <h3 className="text-xl font-semibold ml-3">Document Creation & Guidance</h3>
+              <div className="bg-gradient-to-r from-[#7A4CA0] to-[#C49A6C] rounded-full w-12 h-12 flex items-center justify-center mr-3">
+                <FileText className="h-6 w-6 text-white" />
+              </div>
+              <h3 className="text-xl font-semibold text-[#F4F1E8] font-montserrat">Document Creation & Guidance</h3>
             </div>
-            <p className="text-navy-600 mb-4">
+            <p className="text-[#F4F1E8] mb-4 font-lora">
               Complete preparation of your UNA formation documents with step-by-step guidance 
               materials tailored to your specific situation.
             </p>
-            <ul className="text-sm text-navy-600 mb-4 space-y-1">
+            <ul className="text-sm text-[#F4F1E8] mb-4 space-y-1 font-lora">
               <li className="flex items-center">
-                <Check className="h-4 w-4 text-emerald-500 mr-2" />
+                <Check className="h-4 w-4 text-[#C49A6C] mr-2" />
                 All consultation benefits
               </li>
               <li className="flex items-center">
-                <Check className="h-4 w-4 text-emerald-500 mr-2" />
+                <Check className="h-4 w-4 text-[#C49A6C] mr-2" />
                 Complete UNA formation documents
               </li>
               <li className="flex items-center">
-                <Check className="h-4 w-4 text-emerald-500 mr-2" />
+                <Check className="h-4 w-4 text-[#C49A6C] mr-2" />
                 Step-by-step guidance materials
               </li>
               <li className="flex items-center">
-                <Check className="h-4 w-4 text-emerald-500 mr-2" />
+                <Check className="h-4 w-4 text-[#C49A6C] mr-2" />
                 Personalized implementation plan
               </li>
             </ul>
             <div className="text-center mb-4">
-              <div className="text-2xl font-bold text-navy-600">$750</div>
-              <div className="text-sm text-navy-500">Complete package</div>
+              <div className="text-2xl font-bold text-[#C49A6C]">$750</div>
+              <div className="text-sm text-[#F4F1E8]">Complete package</div>
             </div>
             <a 
               href={`${import.meta.env.VITE_BOOKING_URL || 'https://calendly.com/gigi-stardust/una-consultation'}?service=documents`}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary text-sm px-6 py-2 w-full text-center"
+              className="btn-grad btn-primary text-sm px-6 py-2 w-full text-center"
             >
               Schedule Document Creation
               <ArrowRight className="ml-2 h-4 w-4 inline" />
@@ -198,20 +204,20 @@ export default function Services() {
         </div>
 
         {/* Bundle Offer */}
-        <div className="mt-12 bg-gradient-to-r from-gold-100 to-amber-100 rounded-lg p-8 border border-gold-200">
+        <div className="mt-12 bg-gradient-to-r from-[#C49A6C]/20 to-[#2F7E7E]/20 rounded-lg p-8 border border-[#C49A6C]/30">
           <div className="text-center">
-            <h3 className="text-2xl font-bold text-navy-800 mb-4">Bundle & Save</h3>
-            <p className="text-navy-600 mb-4 text-lg">
+            <h3 className="text-2xl font-bold text-[#1C1F3B] mb-4 font-montserrat">Bundle & Save</h3>
+            <p className="text-[#2A2A28] mb-4 text-lg font-lora">
               Book both services together and save $100
             </p>
-            <div className="text-3xl font-bold text-navy-800 mb-4">
-              Consultation + Documents Package: <span className="text-gold-600">$1000</span>
+            <div className="text-3xl font-bold text-[#1C1F3B] mb-4 font-montserrat">
+              Consultation + Documents Package: <span className="text-[#C49A6C]">$1000</span>
             </div>
             <a 
               href={`${import.meta.env.VITE_BOOKING_URL || 'https://calendly.com/gigi-stardust/una-consultation'}?service=bundle`}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary px-8 py-3 text-lg"
+              className="btn-grad btn-primary px-8 py-3 text-lg"
             >
               Schedule Bundle Package
               <ArrowRight className="ml-2 h-5 w-5 inline" />
@@ -221,33 +227,33 @@ export default function Services() {
       </div>
 
       {/* What's Included in Strategy Session */}
-      <div className="bg-white py-16">
+      <div className="bg-[#F4F1E8] py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-navy-900 text-center mb-12">
+          <h2 className="text-3xl font-bold text-[#1C1F3B] text-center mb-12 font-montserrat">
             What's Included in a Strategy Session
           </h2>
           
           <div className="grid md:grid-cols-2 gap-8">
             <div className="space-y-6">
               <div className="flex items-start">
-                <div className="bg-gold-100 rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1 flex-shrink-0">
-                  <Target className="h-4 w-4 text-gold-800" />
+                <div className="bg-[#C49A6C]/20 rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                  <Target className="h-4 w-4 text-[#C49A6C]" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-navy-900 mb-2">Pre-Session Preparation</h3>
-                  <p className="text-navy-600 text-sm">
+                  <h3 className="font-semibold text-[#1C1F3B] mb-2 font-montserrat">Pre-Session Preparation</h3>
+                  <p className="text-[#2A2A28] text-sm font-lora">
                     Review your exploration results and prepare personalized insights for your specific situation.
                   </p>
                 </div>
               </div>
               
               <div className="flex items-start">
-                <div className="bg-gold-100 rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1 flex-shrink-0">
-                  <Users className="h-4 w-4 text-gold-800" />
+                <div className="bg-[#C49A6C]/20 rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                  <Users className="h-4 w-4 text-[#C49A6C]" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-navy-900 mb-2">Strategic Discussion</h3>
-                  <p className="text-navy-600 text-sm">
+                  <h3 className="font-semibold text-[#1C1F3B] mb-2 font-montserrat">Strategic Discussion</h3>
+                  <p className="text-[#2A2A28] text-sm font-lora">
                     Deep dive into your mission, goals, and formation strategy with expert guidance.
                   </p>
                 </div>
@@ -256,24 +262,24 @@ export default function Services() {
             
             <div className="space-y-6">
               <div className="flex items-start">
-                <div className="bg-gold-100 rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1 flex-shrink-0">
-                  <FileText className="h-4 w-4 text-gold-800" />
+                <div className="bg-[#C49A6C]/20 rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                  <FileText className="h-4 w-4 text-[#C49A6C]" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-navy-900 mb-2">Actionable Roadmap</h3>
-                  <p className="text-navy-600 text-sm">
+                  <h3 className="font-semibold text-[#1C1F3B] mb-2 font-montserrat">Actionable Roadmap</h3>
+                  <p className="text-[#2A2A28] text-sm font-lora">
                     Clear next steps and timeline for your UNA formation journey.
                   </p>
                 </div>
               </div>
               
               <div className="flex items-start">
-                <div className="bg-gold-100 rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1 flex-shrink-0">
-                  <Shield className="h-4 w-4 text-gold-800" />
+                <div className="bg-[#C49A6C]/20 rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1 flex-shrink-0">
+                  <Shield className="h-4 w-4 text-[#C49A6C]" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-navy-900 mb-2">Resource Connections</h3>
-                  <p className="text-navy-600 text-sm">
+                  <h3 className="font-semibold text-[#1C1F3B] mb-2 font-montserrat">Resource Connections</h3>
+                  <p className="text-[#2A2A28] text-sm font-lora">
                     Access to our network of UNA formation resources and specialized services.
                   </p>
                 </div>
@@ -284,39 +290,39 @@ export default function Services() {
       </div>
 
       {/* Why Choose Our Guidance */}
-      <div className="bg-cream-50 py-16">
+      <div className="bg-[#F4F1E8] py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-navy-900 mb-8">
+          <h2 className="text-3xl font-bold text-[#1C1F3B] mb-8 font-montserrat">
             Why Choose Our Guidance?
           </h2>
           
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="bg-gold-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <Target className="h-8 w-8 text-gold-600" />
+              <div className="bg-[#C49A6C]/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                <Target className="h-8 w-8 text-[#C49A6C]" />
               </div>
-              <h3 className="text-xl font-semibold text-navy-800 mb-3">Personalized Approach</h3>
-              <p className="text-navy-600">
+              <h3 className="text-xl font-semibold text-[#1C1F3B] mb-3 font-montserrat">Personalized Approach</h3>
+              <p className="text-[#2A2A28] font-lora">
                 Every UNA is unique. We tailor our guidance to your specific mission, goals, and situation.
               </p>
             </div>
             
             <div className="text-center">
-              <div className="bg-gold-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <FileText className="h-8 w-8 text-gold-600" />
+              <div className="bg-[#C49A6C]/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                <FileText className="h-8 w-8 text-[#C49A6C]" />
               </div>
-              <h3 className="text-xl font-semibold text-navy-800 mb-3">Complete Documentation</h3>
-              <p className="text-navy-600">
+              <h3 className="text-xl font-semibold text-[#1C1F3B] mb-3 font-montserrat">Complete Documentation</h3>
+              <p className="text-[#2A2A28] font-lora">
                 Get all the documents you need, prepared with attention to detail and your specific requirements.
               </p>
             </div>
             
             <div className="text-center">
-              <div className="bg-gold-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <Users className="h-8 w-8 text-gold-600" />
+              <div className="bg-[#C49A6C]/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                <Users className="h-8 w-8 text-[#C49A6C]" />
               </div>
-              <h3 className="text-xl font-semibold text-navy-800 mb-3">Ongoing Support</h3>
-              <p className="text-navy-600">
+              <h3 className="text-xl font-semibold text-[#1C1F3B] mb-3 font-montserrat">Ongoing Support</h3>
+              <p className="text-[#2A2A28] font-lora">
                 We're here to support you throughout your UNA formation journey and beyond.
               </p>
             </div>
@@ -327,22 +333,22 @@ export default function Services() {
 
 
       {/* Final CTA */}
-      <div className="bg-gradient-to-r from-navy-600 to-navy-700 py-16">
+      <div className="bg-gradient-to-r from-[#1C1F3B] to-[#2F7E7E] py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-          <h2 className="text-3xl font-bold mb-6">
+          <h2 className="text-3xl font-bold mb-6 font-montserrat">
             Ready to Start Your UNA Formation Journey?
           </h2>
-          <p className="text-xl mb-8 opacity-90">
+          <p className="text-xl mb-8 opacity-90 font-lora">
             Whether you need clarity on your path or are ready for expert guidance, 
             we're here to help you succeed.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/explore" className="btn-secondary">
+            <Link to="/explore" className="btn-grad btn-secondary">
               Explore Your Path
               <ArrowRight className="ml-2 h-4 w-4 inline" />
             </Link>
-            <Link to="/consultation" className="btn-primary">
+            <Link to="/consultation" className="btn-grad btn-primary">
               Schedule Strategy Session
               <ArrowRight className="ml-2 h-4 w-4 inline" />
             </Link>

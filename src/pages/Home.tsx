@@ -44,13 +44,13 @@ export default function Home() {
           <h1 className="text-4xl md:text-6xl font-bold text-[#F4F1E8] mb-6 font-montserrat">
             <span className="text-[#C49A6C]">UNA Formation Guidance</span>
             <br />
-            Clarity-First Strategy & Resources
+            <span className="text-[#F4F1E8]">Clarity-First Strategy & Resources</span>
           </h1>
           <p className="text-xl text-[#F4F1E8] mb-8 max-w-3xl mx-auto font-lora">
             Get clear guidance for your UNA formation journey with 
-            <strong> sovereignty-aligned expertise</strong>. Explore your path, access curated resources, 
+            <strong className="text-[#C49A6C]"> sovereignty-aligned expertise</strong>. Explore your path, access curated resources, 
             and get personalized strategy sessions to establish your 
-            <strong> Unincorporated Nonprofit Association</strong> with confidence.
+            <strong className="text-[#C49A6C]"> Unincorporated Nonprofit Association</strong> with confidence.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/explore" className="btn-grad btn-primary text-lg px-8 py-4">

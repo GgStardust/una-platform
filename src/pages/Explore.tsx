@@ -245,7 +245,7 @@ export default function Explore() {
             {/* Impact Section */}
             <div>
               <h3 className="text-xl font-semibold text-navy-900 mb-4">What impact do you want to create?</h3>
-              <p className="text-navy-600 mb-6">Select all that align with your vision:</p>
+              <p className="text-navy-600 mb-6">Select all that align with your impact goals:</p>
               
               <div className="grid grid-cols-2 gap-3">
                 {impactOptions.map(option => (
@@ -265,14 +265,14 @@ export default function Explore() {
               
               <div className="mt-6">
                 <label className="block text-sm font-medium text-navy-700 mb-2">
-                  Tell us more about your vision (optional):
+                  Tell us more about your impact goals (optional):
                 </label>
                 <div className="mb-3 flex flex-wrap gap-2">
-                  {visionPrompts.slice(0, 4).map((prompt, index) => (
+                  {impactPrompts.slice(0, 4).map((prompt, index) => (
                     <button
                       key={index}
                       type="button"
-                      onClick={() => insertPrompt('impactDescription', visionPrompts)}
+                      onClick={() => insertPrompt('impactDescription', impactPrompts)}
                       className="una-prompt-chip"
                     >
                       {prompt}
@@ -300,14 +300,14 @@ export default function Explore() {
               
               <div className="mb-6">
                 <label className="block text-sm font-medium text-navy-700 mb-2 text-left">
-                  Additional thoughts or questions? (optional)
+                  Tell us more about your vision (optional):
                 </label>
                 <div className="mb-3 flex flex-wrap gap-2">
-                  {impactPrompts.slice(0, 3).map((prompt, index) => (
+                  {visionPrompts.slice(0, 3).map((prompt, index) => (
                     <button
                       key={index}
                       type="button"
-                      onClick={() => insertPrompt('overallVision', impactPrompts)}
+                      onClick={() => insertPrompt('overallVision', visionPrompts)}
                       className="una-prompt-chip"
                     >
                       {prompt}
@@ -317,7 +317,7 @@ export default function Explore() {
                 <textarea
                   value={freeTextDescriptions.overallVision}
                   onChange={(e) => handleFreeTextChange('overallVision', e.target.value)}
-                  placeholder="Any additional thoughts, questions, or specific areas you'd like guidance on?"
+                  placeholder="What is your long-term vision? How do you see the world changing?"
                   rows={3}
                   className="w-full p-3 border border-navy-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent resize-none"
                 />
@@ -326,7 +326,7 @@ export default function Explore() {
               <div className="bg-gold-50 border border-gold-200 rounded-lg p-6 mb-6">
                 <h4 className="font-semibold text-navy-900 mb-3">Your Selections Summary:</h4>
                 <div className="text-sm text-navy-800 space-y-2">
-                  <p><strong>Location:</strong> {answers.entityState === 'CA' ? 'California' : answers.entityState || 'Not selected'}</p>
+                  <p><strong>Location:</strong> {answers.entityState || 'Not selected'}</p>
                   <p><strong>Mission:</strong> {answers.mission.length > 0 ? answers.mission.join(', ') : 'Not selected'}</p>
                   <p><strong>Impact Goals:</strong> {answers.impact.length > 0 ? answers.impact.join(', ') : 'Not selected'}</p>
                 </div>
