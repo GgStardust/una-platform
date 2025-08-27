@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { BookOpen, Calendar, Check, ArrowRight, Users, Star, FileText, Target } from 'lucide-react';
+import { Check, ArrowRight } from 'lucide-react';
+import Symbol from '../components/Symbol';
 
 
 export default function Pricing() {
@@ -35,7 +36,7 @@ export default function Pricing() {
               <div className="p-8">
                 <div className="text-center mb-8">
                   <div className="bg-gradient-to-r from-[#C49A6C] to-[#2F7E7E] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                    <BookOpen className="h-8 w-8 text-white" />
+                    <Symbol name="orb" size={32} className="text-white" />
                   </div>
                   <h3 className="text-2xl font-bold text-[#F4F1E8] mb-2 font-montserrat">Free Guidance</h3>
                   <p className="text-[#F4F1E8] mb-6 font-lora">Explore your UNA formation options with our guided assessment</p>
@@ -74,17 +75,10 @@ export default function Pricing() {
 
             {/* Strategy Session */}
             <div className="relative una-card rounded-2xl shadow-lg border-2 border-[#C49A6C] scale-105">
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <div className="bg-[#C49A6C] text-white px-4 py-2 rounded-full text-sm font-semibold flex items-center">
-                  <Star className="h-4 w-4 mr-2" />
-                  Most Popular
-                </div>
-              </div>
-              
               <div className="p-8">
                 <div className="text-center mb-8">
                   <div className="bg-gradient-to-r from-[#2F7E7E] to-[#7A4CA0] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                    <Calendar className="h-8 w-8 text-white" />
+                    <Symbol name="triangle" size={32} className="text-white" />
                   </div>
                   <h3 className="text-2xl font-bold text-[#F4F1E8] mb-2 font-montserrat">Strategy Session</h3>
                   <p className="text-[#F4F1E8] mb-6 font-lora">Get personalized guidance and strategic planning</p>
@@ -126,7 +120,7 @@ export default function Pricing() {
               <div className="p-8">
                 <div className="text-center mb-8">
                   <div className="bg-gradient-to-r from-[#7A4CA0] to-[#C49A6C] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                    <FileText className="h-8 w-8 text-white" />
+                    <Symbol name="stack" size={32} className="text-white" />
                   </div>
                   <h3 className="text-2xl font-bold text-[#F4F1E8] mb-2 font-montserrat">Document Creation & Guidance</h3>
                   <p className="text-[#F4F1E8] mb-6 font-lora">Complete UNA formation documents with step-by-step guidance</p>
@@ -184,37 +178,37 @@ export default function Pricing() {
 
         {/* Why Choose Our Guidance */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold text-navy-900 text-center mb-12">
+          <h2 className="text-3xl font-bold text-[#1C1F3B] text-center mb-12 font-montserrat">
             Why Choose Our Guidance?
           </h2>
           
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="bg-gold-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <Target className="h-8 w-8 text-gold-600" />
+              <div className="bg-gradient-to-r from-[#C49A6C] to-[#2F7E7E] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                <Symbol name="orb" size={32} className="text-white" />
               </div>
-              <h3 className="text-xl font-semibold text-navy-800 mb-3">Personalized Approach</h3>
-              <p className="text-navy-600">
+              <h3 className="text-xl font-semibold text-[#1C1F3B] mb-3 font-montserrat">Personalized Approach</h3>
+              <p className="text-[#2A2A28] font-lora">
                 Every UNA is unique. We tailor our guidance to your specific mission, goals, and situation.
               </p>
             </div>
             
             <div className="text-center">
-              <div className="bg-gold-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <FileText className="h-8 w-8 text-gold-600" />
+              <div className="bg-gradient-to-r from-[#2F7E7E] to-[#7A4CA0] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                <Symbol name="stack" size={32} className="text-white" />
               </div>
-              <h3 className="text-xl font-semibold text-navy-800 mb-3">Complete Documentation</h3>
-              <p className="text-navy-600">
+              <h3 className="text-xl font-semibold text-[#1C1F3B] mb-3 font-montserrat">Complete Documentation</h3>
+              <p className="text-[#2A2A28] font-lora">
                 Get all the documents you need, prepared with attention to detail and your specific requirements.
               </p>
             </div>
             
             <div className="text-center">
-              <div className="bg-gold-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <Users className="h-8 w-8 text-gold-600" />
+              <div className="bg-gradient-to-r from-[#7A4CA0] to-[#C49A6C] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                <Symbol name="constellation" size={32} className="text-white" />
               </div>
-              <h3 className="text-xl font-semibold text-navy-800 mb-3">Ongoing Support</h3>
-              <p className="text-navy-600">
+              <h3 className="text-xl font-semibold text-[#1C1F3B] mb-3 font-montserrat">Ongoing Support</h3>
+              <p className="text-[#2A2A28] font-lora">
                 We're here to support you throughout your UNA formation journey and beyond.
               </p>
             </div>
@@ -225,29 +219,29 @@ export default function Pricing() {
 
         {/* FAQ Section */}
         <div className="mt-16">
-          <h2 className="text-3xl font-bold text-navy-900 text-center mb-12">
+          <h2 className="text-3xl font-bold text-[#1C1F3B] text-center mb-12 font-montserrat">
             Frequently Asked Questions
           </h2>
           
           <div className="max-w-4xl mx-auto space-y-6">
-            <div className="bg-white rounded-lg p-6 shadow-sm border border-navy-100">
-              <h3 className="font-semibold text-navy-800 mb-2">What if I need more than one session?</h3>
-              <p className="text-navy-600">Many clients find that one session provides the clarity they need to move forward. If you need additional support, we can discuss ongoing consultation packages.</p>
+            <div className="una-card p-6">
+              <h3 className="font-semibold text-[#F4F1E8] mb-2 font-montserrat">What if I need more than one session?</h3>
+              <p className="text-[#F4F1E8] font-lora">Many clients find that one session provides the clarity they need to move forward. If you need additional support, we can discuss ongoing consultation packages.</p>
             </div>
             
-            <div className="bg-white rounded-lg p-6 shadow-sm border border-navy-100">
-              <h3 className="font-semibold text-navy-800 mb-2">Do you provide ongoing support after the session?</h3>
-              <p className="text-navy-600">Yes! We offer follow-up support and can provide continuing guidance as your UNA grows and evolves.</p>
+            <div className="una-card p-6">
+              <h3 className="font-semibold text-[#F4F1E8] mb-2 font-montserrat">Do you provide ongoing support after the session?</h3>
+              <p className="text-[#F4F1E8] font-lora">Yes! We offer follow-up support and can provide continuing guidance as your UNA grows and evolves.</p>
             </div>
             
-            <div className="bg-white rounded-lg p-6 shadow-sm border border-navy-100">
-              <h3 className="font-semibold text-navy-800 mb-2">What documents do you prepare?</h3>
-              <p className="text-navy-600">We prepare all the essential UNA formation documents including agreements, governance structures, and compliance materials. Everything is personalized to your specific mission and needs.</p>
+            <div className="una-card p-6">
+              <h3 className="font-semibold text-[#F4F1E8] mb-2 font-montserrat">What documents do you prepare?</h3>
+              <p className="text-[#F4F1E8] font-lora">We prepare all the essential UNA formation documents including agreements, governance structures, and compliance materials. Everything is personalized to your specific mission and needs.</p>
             </div>
             
-            <div className="bg-white rounded-lg p-6 shadow-sm border border-navy-100">
-              <h3 className="font-semibold text-navy-800 mb-2">Can you help with the actual formation process?</h3>
-              <p className="text-navy-600">Absolutely! Our Document Creation & Guidance Package includes complete preparation of your UNA formation documents, plus step-by-step guidance materials tailored to your specific situation.</p>
+            <div className="una-card p-6">
+              <h3 className="font-semibold text-[#F4F1E8] mb-2 font-montserrat">Can you help with the actual formation process?</h3>
+              <p className="text-[#F4F1E8] font-lora">Absolutely! Our Document Creation & Guidance Package includes complete preparation of your UNA formation documents, plus step-by-step guidance materials tailored to your specific situation.</p>
             </div>
           </div>
         </div>
