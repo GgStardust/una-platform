@@ -24,73 +24,46 @@ export default function Pricing() {
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         
+        {/* Free Guidance */}
+        <div className="mb-16 text-center">
+          <div className="max-w-2xl mx-auto">
+            <h2 className="text-3xl font-bold text-[#1C1F3B] mb-6 font-montserrat">
+              Start with Free Exploration
+            </h2>
+            <p className="text-[#2A2A28] mb-8 text-lg font-lora">
+              Explore your UNA formation options with our guided assessment - no cost, no commitment
+            </p>
+            <Link
+              to="/explore"
+              className="btn-grad btn-primary px-8 py-3 text-lg inline-flex items-center"
+            >
+              Explore Your Path
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+          </div>
+        </div>
+
         {/* Main Options */}
         <div className="mb-16">
           <h2 className="text-3xl font-bold text-[#1C1F3B] text-center mb-12 font-montserrat">
             Choose Your Path
           </h2>
           
-          <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* Free Guidance */}
+          <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            {/* Initial Consultation */}
             <div className="relative una-card rounded-2xl shadow-lg border-2 border-[#C49A6C]/30 hover:border-[#C49A6C]/50 transition-all duration-200">
               <div className="p-8">
                 <div className="text-center mb-8">
                   <div className="bg-gradient-to-r from-[#C49A6C] to-[#2F7E7E] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
                     <Symbol name="orb" size={32} className="text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-[#F4F1E8] mb-2 font-montserrat">Free Guidance</h3>
-                  <p className="text-[#F4F1E8] mb-6 font-lora">Explore your UNA formation options with our guided assessment</p>
-                  <div className="text-4xl font-bold text-[#C49A6C] mb-2">$0</div>
-                  <p className="text-[#F4F1E8] text-sm">No cost, no commitment</p>
-                </div>
-                
-                <div className="space-y-4 mb-8">
-                  <div className="flex items-start">
-                    <Check className="h-5 w-5 text-[#C49A6C] mt-0.5 mr-3 flex-shrink-0" />
-                    <span className="text-[#F4F1E8]">3-step guided assessment</span>
-                  </div>
-                  <div className="flex items-start">
-                    <Check className="h-5 w-5 text-[#C49A6C] mt-0.5 mr-3 flex-shrink-0" />
-                    <span className="text-[#F4F1E8]">Personalized strategic insights</span>
-                  </div>
-                  <div className="flex items-start">
-                    <Check className="h-5 w-5 text-[#C49A6C] mt-0.5 mr-3 flex-shrink-0" />
-                    <span className="text-[#F4F1E8]">Resource recommendations</span>
-                  </div>
-                  <div className="flex items-start">
-                    <Check className="h-5 w-5 text-[#C49A6C] mt-0.5 mr-3 flex-shrink-0" />
-                    <span className="text-[#F4F1E8]">Clear next steps guidance</span>
-                  </div>
-                </div>
-                
-                <Link
-                  to="/explore"
-                  className="w-full btn-grad btn-primary py-3 px-6 rounded-lg font-semibold text-center flex items-center justify-center"
-                >
-                  Explore Your Path
-                  <ArrowRight className="h-5 w-5 ml-2" />
-                </Link>
-              </div>
-            </div>
-
-            {/* Strategy Session */}
-            <div className="relative una-card rounded-2xl shadow-lg border-2 border-[#C49A6C] scale-105">
-              <div className="p-8">
-                <div className="text-center mb-8">
-                  <div className="bg-gradient-to-r from-[#2F7E7E] to-[#7A4CA0] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                    <Symbol name="triangle" size={32} className="text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-[#F4F1E8] mb-2 font-montserrat">Strategy Session</h3>
-                  <p className="text-[#F4F1E8] mb-6 font-lora">Get personalized guidance and strategic planning</p>
+                  <h3 className="text-2xl font-bold text-[#F4F1E8] mb-2 font-montserrat">Initial Consultation</h3>
+                  <p className="text-[#F4F1E8] mb-6 font-lora">A focused session to review your goals and determine if a UNA is right for you</p>
                   <div className="text-4xl font-bold text-[#C49A6C] mb-2">$250</div>
-                  <p className="text-[#F4F1E8] text-sm">one-time session</p>
+                  <p className="text-[#F4F1E8] text-sm">1 hour session</p>
                 </div>
                 
                 <div className="space-y-4 mb-8">
-                  <div className="flex items-start">
-                    <Check className="h-5 w-5 text-[#C49A6C] mt-0.5 mr-3 flex-shrink-0" />
-                    <span className="text-[#F4F1E8]">1 hour personalized session</span>
-                  </div>
                   <div className="flex items-start">
                     <Check className="h-5 w-5 text-[#C49A6C] mt-0.5 mr-3 flex-shrink-0" />
                     <span className="text-[#F4F1E8]">Mission and vision clarity</span>
@@ -99,6 +72,68 @@ export default function Pricing() {
                     <Check className="h-5 w-5 text-[#C49A6C] mt-0.5 mr-3 flex-shrink-0" />
                     <span className="text-[#F4F1E8]">Strategic roadmap and next steps</span>
                   </div>
+                  <div className="flex items-start">
+                    <Check className="h-5 w-5 text-[#C49A6C] mt-0.5 mr-3 flex-shrink-0" />
+                    <span className="text-[#F4F1E8]">Personalized guidance</span>
+                  </div>
+                  <div className="flex items-start">
+                    <Check className="h-5 w-5 text-[#C49A6C] mt-0.5 mr-3 flex-shrink-0" />
+                    <span className="text-[#F4F1E8]">Clear next steps</span>
+                  </div>
+                </div>
+                
+                <Link
+                  to="/consultation?service=consultation"
+                  className="w-full btn-grad btn-primary py-3 px-6 rounded-lg font-semibold text-center flex items-center justify-center"
+                >
+                  Schedule Consultation
+                  <ArrowRight className="h-5 w-5 ml-2" />
+                </Link>
+              </div>
+            </div>
+
+            {/* Document Creation Package */}
+            <div className="relative una-card rounded-2xl shadow-lg border-2 border-[#C49A6C] scale-105">
+              <div className="p-8">
+                <div className="text-center mb-8">
+                  <div className="bg-gradient-to-r from-[#2F7E7E] to-[#7A4CA0] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                    <Symbol name="triangle" size={32} className="text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-[#F4F1E8] mb-2 font-montserrat">Document Creation & Guidance</h3>
+                  <p className="text-[#F4F1E8] mb-6 font-lora">Complete UNA formation documents with step-by-step guidance</p>
+                  <div className="text-4xl font-bold text-[#C49A6C] mb-2">$750</div>
+                  <p className="text-[#F4F1E8] text-sm">Complete package</p>
+                </div>
+                
+                <div className="space-y-4 mb-8">
+                  <div className="flex items-start">
+                    <Check className="h-5 w-5 text-[#C49A6C] mt-0.5 mr-3 flex-shrink-0" />
+                    <span className="text-[#F4F1E8]">Complete UNA formation documents</span>
+                  </div>
+                  <div className="flex items-start">
+                    <Check className="h-5 w-5 text-[#C49A6C] mt-0.5 mr-3 flex-shrink-0" />
+                    <span className="text-[#F4F1E8]">Step-by-step guidance materials</span>
+                  </div>
+                  <div className="flex items-start">
+                    <Check className="h-5 w-5 text-[#C49A6C] mt-0.5 mr-3 flex-shrink-0" />
+                    <span className="text-[#F4F1E8]">Personalized attention to detail</span>
+                  </div>
+                  <div className="flex items-start">
+                    <Check className="h-5 w-5 text-[#C49A6C] mt-0.5 mr-3 flex-shrink-0" />
+                    <span className="text-[#F4F1E8]">Clear instructions for your situation</span>
+                  </div>
+                </div>
+                
+                <Link
+                  to="/consultation?service=document-creation"
+                  className="w-full btn-grad btn-primary py-3 px-6 rounded-lg font-semibold text-center flex items-center justify-center"
+                >
+                  Get Document Package
+                  <ArrowRight className="h-5 w-5 ml-2" />
+                </Link>
+              </div>
+            </div>
+          </div>
                   <div className="flex items-start">
                     <Check className="h-5 w-5 text-[#C49A6C] mt-0.5 mr-3 flex-shrink-0" />
                     <span className="text-[#F4F1E8]">Resource recommendations</span>
@@ -166,13 +201,34 @@ export default function Pricing() {
                 Book both services together and save $100
               </p>
               <div className="text-3xl font-bold text-[#1C1F3B] mb-6 font-montserrat">
-                Consultation + Documents Package: <span className="text-[#C49A6C]">$1000</span>
+                Consultation + Documents Package: <span className="text-[#C49A6C]">$900</span>
               </div>
-              <Link to="/consultation" className="btn-grad btn-primary px-8 py-3 text-lg">
-                View All Services
+              <Link to="/consultation?service=bundle" className="btn-grad btn-primary px-8 py-3 text-lg">
+                Get Bundle Package
                 <ArrowRight className="ml-2 h-5 w-5 inline" />
               </Link>
             </div>
+          </div>
+        </div>
+
+        {/* Ongoing Support */}
+        <div className="mt-12 bg-gradient-to-r from-[#2F7E7E]/20 to-[#7A4CA0]/20 rounded-lg p-8 border border-[#2F7E7E]/30 max-w-4xl mx-auto">
+          <div className="text-center">
+            <h3 className="text-2xl font-bold text-[#1C1F3B] mb-4 font-montserrat">Ongoing Support</h3>
+            <p className="text-[#2A2A28] mb-4 text-lg font-lora">
+              For clients who want continuing support beyond the initial setup
+            </p>
+            <div className="text-3xl font-bold text-[#1C1F3B] mb-6 font-montserrat">
+              Ongoing Consultancy: <span className="text-[#C49A6C]">TBD</span>
+            </div>
+            <p className="text-[#2A2A28] mb-6 text-base font-lora">
+              Regular check-ins, compliance reviews, strategic guidance, and responsive advisory support as your UNA grows. 
+              Pricing determined based on level of support and access required.
+            </p>
+            <Link to="/consultation?service=ongoing-support" className="btn-grad btn-primary px-8 py-3 text-lg">
+              Discuss Ongoing Support
+              <ArrowRight className="ml-2 h-5 w-5 inline" />
+            </Link>
           </div>
         </div>
 
