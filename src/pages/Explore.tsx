@@ -11,6 +11,7 @@ export default function Explore() {
   const [answers, setAnswers] = useState<ExploreAnswers>({
     entityState: '',
     mission: [],
+    vision: [],
     currentForm: null,
     impact: [],
     environments: [],
@@ -22,8 +23,8 @@ export default function Explore() {
   const [isDetectingLocation, setIsDetectingLocation] = useState(true);
   const [freeTextDescriptions, setFreeTextDescriptions] = useState({
     missionDescription: '',
-    impactDescription: '',
-    overallVision: ''
+    visionDescription: '',
+    overallImpact: ''
   });
 
 
@@ -39,6 +40,7 @@ export default function Explore() {
   
   // Enhanced options for comprehensive flow
   const missionOptions = ['Events', 'Education', 'Art', 'Community', 'Research', 'Healing', 'Other'];
+  const visionOptions = ['Personal growth', 'Community transformation', 'Cultural evolution', 'Systemic change', 'Creative expression', 'Other'];
   const impactOptions = ['Personal transformation', 'Community building', 'Economic empowerment', 'Creative culture', 'Teaching and learning', 'Other'];
   
   // Enhanced prompt systems for better user guidance
@@ -74,6 +76,15 @@ export default function Explore() {
       mission: prev.mission.includes(mission)
         ? prev.mission.filter(m => m !== mission)
         : [...prev.mission, mission]
+    }));
+  };
+
+  const handleVisionToggle = (vision: string) => {
+    setAnswers(prev => ({
+      ...prev,
+      vision: prev.vision.includes(vision)
+        ? prev.vision.filter(v => v !== vision)
+        : [...prev.vision, vision]
     }));
   };
 
@@ -242,6 +253,58 @@ export default function Explore() {
       case 2:
         return (
           <div className="space-y-8">
+            {/* Vision Section */}
+            <div>
+              <h3 className="text-xl font-semibold text-navy-900 mb-4">What is your vision for the future?</h3>
+              <p className="text-navy-600 mb-6">Select all that align with your vision:</p>
+              
+              <div className="grid grid-cols-2 gap-3">
+                {visionOptions.map(option => (
+                  <button
+                    key={option}
+                    onClick={() => handleVisionToggle(option)}
+                    className={`p-3 rounded-lg border-2 transition-all ${
+                      answers.vision.includes(option)
+                        ? 'border-gold-500 bg-gold-50 font-semibold'
+                        : 'border-navy-200 hover:border-navy-300'
+                    }`}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
+              
+              <div className="mt-6">
+                <label className="block text-sm font-medium text-navy-700 mb-2">
+                  Tell us more about your vision (optional):
+                </label>
+                <div className="mb-3 flex flex-wrap gap-2">
+                  {visionPrompts.slice(0, 4).map((prompt, index) => (
+                    <button
+                      key={index}
+                      type="button"
+                      onClick={() => insertPrompt('visionDescription', visionPrompts)}
+                      className="una-prompt-chip"
+                    >
+                      {prompt}
+                    </button>
+                  ))}
+                </div>
+                <textarea
+                  value={freeTextDescriptions.visionDescription}
+                  onChange={(e) => handleFreeTextChange('visionDescription', e.target.value)}
+                  placeholder="What is your long-term vision? How do you see the world changing? What future are you working toward?"
+                  rows={3}
+                  className="w-full p-3 border border-navy-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent resize-none"
+                />
+              </div>
+            </div>
+          </div>
+        );
+
+      case 3:
+        return (
+          <div className="space-y-8">
             {/* Impact Section */}
             <div>
               <h3 className="text-xl font-semibold text-navy-900 mb-4">What impact do you want to create?</h3>
@@ -272,7 +335,7 @@ export default function Explore() {
                     <button
                       key={index}
                       type="button"
-                      onClick={() => insertPrompt('impactDescription', impactPrompts)}
+                      onClick={() => insertPrompt('overallImpact', impactPrompts)}
                       className="una-prompt-chip"
                     >
                       {prompt}
@@ -280,56 +343,23 @@ export default function Explore() {
                   ))}
                 </div>
                 <textarea
-                  value={freeTextDescriptions.impactDescription}
-                  onChange={(e) => handleFreeTextChange('impactDescription', e.target.value)}
+                  value={freeTextDescriptions.overallImpact}
+                  onChange={(e) => handleFreeTextChange('overallImpact', e.target.value)}
                   placeholder="What change do you want to create in the world? Who will benefit? What does success look like?"
                   rows={3}
                   className="w-full p-3 border border-navy-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent resize-none"
                 />
               </div>
             </div>
-          </div>
-        );
-
-      case 3:
-        return (
-          <div className="space-y-6">
-            <div className="text-center">
-              <h3 className="text-xl font-semibold text-navy-900 mb-4">Ready to see your insights?</h3>
-              <p className="text-navy-600 mb-6">Based on your answers, we'll provide strategic insights and next steps for your UNA journey.</p>
-              
-              <div className="mb-6">
-                <label className="block text-sm font-medium text-navy-700 mb-2 text-left">
-                  Tell us more about your vision (optional):
-                </label>
-                <div className="mb-3 flex flex-wrap gap-2">
-                  {visionPrompts.slice(0, 3).map((prompt, index) => (
-                    <button
-                      key={index}
-                      type="button"
-                      onClick={() => insertPrompt('overallVision', visionPrompts)}
-                      className="una-prompt-chip"
-                    >
-                      {prompt}
-                    </button>
-                  ))}
-                </div>
-                <textarea
-                  value={freeTextDescriptions.overallVision}
-                  onChange={(e) => handleFreeTextChange('overallVision', e.target.value)}
-                  placeholder="What is your long-term vision? How do you see the world changing?"
-                  rows={3}
-                  className="w-full p-3 border border-navy-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent resize-none"
-                />
-              </div>
-              
-              <div className="bg-gold-50 border border-gold-200 rounded-lg p-6 mb-6">
-                <h4 className="font-semibold text-navy-900 mb-3">Your Selections Summary:</h4>
-                <div className="text-sm text-navy-800 space-y-2">
-                  <p><strong>Location:</strong> {answers.entityState || 'Not selected'}</p>
-                  <p><strong>Mission:</strong> {answers.mission.length > 0 ? answers.mission.join(', ') : 'Not selected'}</p>
-                  <p><strong>Impact Goals:</strong> {answers.impact.length > 0 ? answers.impact.join(', ') : 'Not selected'}</p>
-                </div>
+            
+            {/* Summary */}
+            <div className="bg-gold-50 border border-gold-200 rounded-lg p-6">
+              <h4 className="font-semibold text-navy-900 mb-3">Your Selections Summary:</h4>
+              <div className="text-sm text-navy-800 space-y-2">
+                <p><strong>Location:</strong> {answers.entityState || 'Not selected'}</p>
+                <p><strong>Mission:</strong> {answers.mission.length > 0 ? answers.mission.join(', ') : 'Not selected'}</p>
+                <p><strong>Vision:</strong> {answers.vision.length > 0 ? answers.vision.join(', ') : 'Not selected'}</p>
+                <p><strong>Impact Goals:</strong> {answers.impact.length > 0 ? answers.impact.join(', ') : 'Not selected'}</p>
               </div>
             </div>
           </div>

@@ -185,16 +185,16 @@ export default function About() {
           
           <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {/* Gigi Stardust */}
-            <div className="card text-center">
-              <div className="h-24 w-24 rounded-full bg-gradient-to-r from-gold-500 to-emerald-500 mx-auto mb-4 flex items-center justify-center">
+            <div className="una-card text-center p-6">
+              <div className="h-24 w-24 rounded-full bg-gradient-to-r from-[#C49A6C] to-[#2F7E7E] mx-auto mb-4 flex items-center justify-center">
                 <Users className="h-12 w-12 text-white" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Gigi Stardust</h3>
-              <p className="text-gold-600 font-medium mb-2">Founder & Systems Architect</p>
-              <p className="text-navy-600 mb-4">
+              <h3 className="text-xl font-semibold mb-2 text-[#F4F1E8] font-montserrat">Gigi Stardust</h3>
+              <p className="text-[#C49A6C] font-medium mb-2">Founder & Systems Architect</p>
+              <p className="text-[#F4F1E8] mb-4 font-lora">
                 Creator of Stardust to Sovereignty™ and architect of purpose-driven organizational structures.
               </p>
-              <div className="text-sm text-navy-500">
+              <div className="text-sm text-[#F4F1E8]">
                 <p>Systems Architecture</p>
                 <p>Organizational Design</p>
                 <p>Consciousness Studies</p>
@@ -202,16 +202,16 @@ export default function About() {
             </div>
 
             {/* Stardust to Sovereignty */}
-            <div className="card text-center">
-              <div className="h-24 w-24 rounded-full bg-gradient-to-r from-emerald-500 to-gold-500 mx-auto mb-4 flex items-center justify-center">
+            <div className="una-card text-center p-6">
+              <div className="h-24 w-24 rounded-full bg-gradient-to-r from-[#2F7E7E] to-[#7A4CA0] mx-auto mb-4 flex items-center justify-center">
                 <Lightbulb className="h-12 w-12 text-white" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Stardust to Sovereignty™</h3>
-              <p className="text-emerald-600 font-medium mb-2">Philosophical Foundation</p>
-              <p className="text-navy-600 mb-4">
+              <h3 className="text-xl font-semibold mb-2 text-[#F4F1E8] font-montserrat">Stardust to Sovereignty™</h3>
+              <p className="text-[#C49A6C] font-medium mb-2">Philosophical Foundation</p>
+              <p className="text-[#F4F1E8] mb-4 font-lora">
                 Sovereign design system expressed through writing, art, and community portals.
               </p>
-              <div className="text-sm text-navy-500">
+              <div className="text-sm text-[#F4F1E8]">
                 <p>Metaphysics & Neuroscience</p>
                 <p>Cosmology & Creative Practice</p>
                 <p>Interspecies Intelligence</p>

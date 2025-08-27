@@ -139,6 +139,7 @@ export interface StorageMetadata {
 export interface ExploreAnswers {
   entityState: string; // Added state field as first requirement
   mission: string[];
+  vision: string[]; // Added vision field for step 2
   currentForm: "solo" | "team" | "community" | "traveling" | "space" | null;
   impact: string[];
   environments: string[];
