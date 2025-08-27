@@ -178,24 +178,18 @@ export default function Explore() {
               )}
               
               <div className="space-y-3">
-                {stateOptions.map(option => (
-                  <button
-                    key={option}
-                    onClick={() => handleStateSelect(option)}
-                    className={`w-full p-4 rounded-lg border-2 transition-all text-left ${
-                      answers.entityState === option
-                        ? 'border-gold-500 bg-gold-50 font-semibold'
-                        : 'border-navy-200 hover:border-navy-300'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span>{option === 'CA' ? 'California' : option}</span>
-                      {answers.entityState === option && (
-                        <CheckCircle className="h-5 w-5 text-gold-600" />
-                      )}
-                    </div>
-                  </button>
-                ))}
+                <select
+                  value={answers.entityState}
+                  onChange={(e) => handleStateSelect(e.target.value)}
+                  className="w-full p-4 rounded-lg border-2 border-navy-200 focus:ring-2 focus:ring-gold-500 focus:border-transparent transition-all"
+                >
+                  <option value="">Select your state</option>
+                  {stateOptions.map(option => (
+                    <option key={option} value={option}>
+                      {option === 'CA' ? 'California' : option}
+                    </option>
+                  ))}
+                </select>
               </div>
               
 
