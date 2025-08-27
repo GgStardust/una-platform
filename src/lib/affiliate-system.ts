@@ -568,6 +568,51 @@ export const financialTools: AffiliatePartner[] = [
     bestFor: 'UNAs that want to invest in community development and social impact',
     status: 'active',
     slug: 'cnote'
+  },
+  {
+    id: 'bluevine',
+    name: 'BlueVine',
+    category: 'financial',
+    description: 'Online business banking solutions',
+    url: 'https://bluevine.com',
+    affiliateId: 'BLUEVINE_UNA_PLATFORM',
+    commission: '25%',
+    features: ['Business checking', 'Invoice factoring', 'Line of credit', 'Fast setup', 'Online banking'],
+    pros: ['Fast setup', 'Invoice factoring', 'Line of credit', 'Good rates', 'Online-first'],
+    cons: ['Limited branches', 'Technical requirements', 'Credit requirements'],
+    bestFor: 'UNAs that need quick business banking with factoring options',
+    status: 'active',
+    slug: 'bluevine'
+  },
+  {
+    id: 'novo',
+    name: 'Novo',
+    category: 'financial',
+    description: 'Fee-light business checking for startups',
+    url: 'https://novo.com',
+    affiliateId: 'NOVO_UNA_PLATFORM',
+    commission: '20%',
+    features: ['No monthly fees', 'Business checking', 'Startup-friendly', 'Fast setup', 'Mobile app'],
+    pros: ['No monthly fees', 'Startup-friendly', 'Fast setup', 'Good mobile app', 'Low fees'],
+    cons: ['Limited features', 'No physical branches', 'Basic services'],
+    bestFor: 'UNAs that want simple business banking with minimal fees',
+    status: 'active',
+    slug: 'novo'
+  },
+  {
+    id: 'wise',
+    name: 'Wise',
+    category: 'financial',
+    description: 'International money transfers and multi-currency accounts',
+    url: 'https://wise.com',
+    affiliateId: 'WISE_UNA_PLATFORM',
+    commission: '15%',
+    features: ['International transfers', 'Multi-currency accounts', 'Low fees', 'Fast transfers', 'Mobile app'],
+    pros: ['Low fees', 'Fast transfers', 'Multi-currency', 'Good rates', 'Global reach'],
+    cons: ['Transfer limits', 'Verification required', 'Limited customer service'],
+    bestFor: 'UNAs that need international transfers and multi-currency accounts',
+    status: 'active',
+    slug: 'wise'
   }
 ];
 
