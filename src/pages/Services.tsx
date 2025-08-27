@@ -62,10 +62,10 @@ export default function Services() {
       {/* Header */}
       <div className="una-gradient-hero py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl font-bold text-[#F4F1E8] mb-6 font-montserrat">
+          <h1 className="text-4xl font-bold text-[#1C1F3B] mb-6 font-montserrat">
             <strong className="text-[#C49A6C]">UNA Formation Guidance</strong> & Strategy
           </h1>
-          <p className="text-xl text-[#F4F1E8] font-lora">
+          <p className="text-xl text-[#1C1F3B] font-lora">
             Get clear guidance for your <strong className="text-[#C49A6C]">Unincorporated Nonprofit Association</strong> 
             formation journey. Our <strong className="text-[#C49A6C]">expert guidance approach</strong> helps you understand 
             your options and prepare personalized documents.
@@ -82,13 +82,13 @@ export default function Services() {
               <div className="bg-gradient-to-r from-[#C49A6C] to-[#2F7E7E] rounded-full w-12 h-12 flex items-center justify-center mr-3">
                 <BookOpen className="h-6 w-6 text-white" />
               </div>
-              <h3 className="text-xl font-semibold text-[#F4F1E8] font-montserrat">Free Path Exploration</h3>
+              <h3 className="text-xl font-semibold text-[#1C1F3B] font-montserrat">Free Path Exploration</h3>
             </div>
-            <p className="text-[#F4F1E8] mb-4 font-lora">
+            <p className="text-[#1C1F3B] mb-4 font-lora">
               Start your UNA formation journey with our guided assessment to understand 
               your options and get personalized strategic insights.
             </p>
-            <ul className="text-sm text-[#F4F1E8] mb-4 space-y-1 font-lora">
+            <ul className="text-sm text-[#1C1F3B] mb-4 space-y-1 font-lora">
               <li className="flex items-center">
                 <Check className="h-4 w-4 text-[#C49A6C] mr-2" />
                 3-step guided assessment
@@ -118,13 +118,13 @@ export default function Services() {
               <div className="bg-gradient-to-r from-[#2F7E7E] to-[#7A4CA0] rounded-full w-12 h-12 flex items-center justify-center mr-3">
                 <Calendar className="h-6 w-6 text-white" />
               </div>
-              <h3 className="text-xl font-semibold text-[#F4F1E8] font-montserrat">Strategy Session</h3>
+              <h3 className="text-xl font-semibold text-[#1C1F3B] font-montserrat">Strategy Session</h3>
             </div>
-            <p className="text-[#F4F1E8] mb-4 font-lora">
+            <p className="text-[#1C1F3B] mb-4 font-lora">
               Get personalized guidance and strategic planning through our 1:1 consultation 
               sessions tailored to your specific situation.
             </p>
-            <ul className="text-sm text-[#F4F1E8] mb-4 space-y-1 font-lora">
+            <ul className="text-sm text-[#1C1F3B] mb-4 space-y-1 font-lora">
               <li className="flex items-center">
                 <Check className="h-4 w-4 text-[#C49A6C] mr-2" />
                 1 hour personalized session
@@ -144,7 +144,7 @@ export default function Services() {
             </ul>
             <div className="text-center mb-4">
               <div className="text-2xl font-bold text-[#C49A6C]">$250</div>
-              <div className="text-sm text-[#F4F1E8]">One-time session</div>
+              <div className="text-sm text-[#1C1F3B]">One-time session</div>
             </div>
             <a 
               href={`${import.meta.env.VITE_BOOKING_URL || 'https://calendly.com/gigi-stardust/una-consultation'}?service=consultation`}
@@ -163,13 +163,13 @@ export default function Services() {
               <div className="bg-gradient-to-r from-[#7A4CA0] to-[#C49A6C] rounded-full w-12 h-12 flex items-center justify-center mr-3">
                 <FileText className="h-6 w-6 text-white" />
               </div>
-              <h3 className="text-xl font-semibold text-[#F4F1E8] font-montserrat">Document Creation & Guidance</h3>
+              <h3 className="text-xl font-semibold text-[#1C1F3B] font-montserrat">Document Creation & Guidance</h3>
             </div>
-            <p className="text-[#F4F1E8] mb-4 font-lora">
+            <p className="text-[#1C1F3B] mb-4 font-lora">
               Complete preparation of your UNA formation documents with step-by-step guidance 
               materials tailored to your specific situation.
             </p>
-            <ul className="text-sm text-[#F4F1E8] mb-4 space-y-1 font-lora">
+            <ul className="text-sm text-[#1C1F3B] mb-4 space-y-1 font-lora">
               <li className="flex items-center">
                 <Check className="h-4 w-4 text-[#C49A6C] mr-2" />
                 All consultation benefits
@@ -189,7 +189,7 @@ export default function Services() {
             </ul>
             <div className="text-center mb-4">
               <div className="text-2xl font-bold text-[#C49A6C]">$750</div>
-              <div className="text-sm text-[#F4F1E8]">Complete package</div>
+              <div className="text-sm text-[#1C1F3B]">Complete package</div>
             </div>
             <a 
               href={`${import.meta.env.VITE_BOOKING_URL || 'https://calendly.com/gigi-stardust/una-consultation'}?service=documents`}
