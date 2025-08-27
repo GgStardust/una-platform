@@ -37,7 +37,7 @@ export default function Home() {
           }
         }}
       />
-    <div className="min-h-screen una-gradient-hero">
+    <div className="min-h-screen una-gradient-hero" style={{background: 'linear-gradient(135deg, #F4F1E8 0%, #E8E0D0 100%)'}}>
       {/* Hero Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
         <div className="text-center">
