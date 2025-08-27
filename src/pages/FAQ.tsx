@@ -156,13 +156,13 @@ export default function FAQ() {
       <div className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center">
-            <h1 className="text-4xl font-bold text-navy-900 mb-4">
+            <h1 className="text-4xl font-bold text-[#1C1F3B] mb-4 font-montserrat">
               Frequently Asked Questions
             </h1>
-            <p className="text-xl text-navy-600 max-w-3xl mx-auto">
+            <p className="text-xl text-[#2A2A28] max-w-3xl mx-auto font-lora">
               Get answers to common questions about UNA formation, legal requirements, 
               and ongoing operations. Can't find what you're looking for? 
-              <Link to="/consultation" className="text-gold-600 hover:text-gold-800 font-medium ml-1">
+              <Link to="/consultation" className="text-[#C49A6C] hover:text-[#A67C4A] font-medium ml-1">
                 Schedule a consultation
               </Link>
               .
@@ -179,12 +179,12 @@ export default function FAQ() {
             return (
               <div key={category.id} className="bg-white rounded-lg shadow-sm border border-navy-200 overflow-hidden">
                 {/* Category Header */}
-                <div className="bg-gradient-to-r from-navy-600 to-navy-700 px-6 py-4">
+                <div className="bg-gradient-to-r from-[#1C1F3B] to-[#2F7E7E] px-6 py-4">
                   <div className="flex items-center space-x-3">
                     <div className={`p-2 bg-gradient-to-r ${category.color} rounded-lg`}>
                       <IconComponent className="h-5 w-5 text-white" />
                     </div>
-                    <h2 className="text-xl font-semibold text-white">{category.title}</h2>
+                    <h2 className="text-xl font-semibold text-white font-montserrat">{category.title}</h2>
                   </div>
                 </div>
                 
@@ -201,18 +201,18 @@ export default function FAQ() {
                             onClick={() => toggleQuestion(questionId)}
                             className="w-full px-4 py-4 text-left flex items-center justify-between hover:bg-navy-50 transition-colors"
                           >
-                            <span className="font-medium text-navy-800">{faq.question}</span>
+                            <span className="font-medium text-[#1C1F3B] font-montserrat">{faq.question}</span>
                             {isOpen ? (
-                              <ChevronUp className="h-5 w-5 text-navy-600" />
+                              <ChevronUp className="h-5 w-5 text-[#2F7E7E]" />
                             ) : (
-                              <ChevronDown className="h-5 w-5 text-navy-600" />
+                              <ChevronDown className="h-5 w-5 text-[#2F7E7E]" />
                             )}
                           </button>
                           
                           {isOpen && (
                             <div className="px-4 pb-4">
-                              <div className="border-t border-navy-200 pt-4">
-                                <p className="text-navy-600 leading-relaxed">{faq.answer}</p>
+                              <div className="border-t border-[#2F7E7E]/20 pt-4">
+                                <p className="text-[#2A2A28] leading-relaxed font-lora">{faq.answer}</p>
                               </div>
                             </div>
                           )}
@@ -227,18 +227,18 @@ export default function FAQ() {
         </div>
 
         {/* Additional Help */}
-        <div className="mt-12 bg-gradient-to-r from-navy-600 to-navy-700 rounded-lg p-8 text-center text-white">
-          <h2 className="text-3xl font-bold mb-4">
+        <div className="mt-12 bg-gradient-to-r from-[#1C1F3B] to-[#2F7E7E] rounded-lg p-8 text-center text-white">
+          <h2 className="text-3xl font-bold mb-4 font-montserrat">
             Still Have Questions?
           </h2>
-          <p className="text-xl mb-8 opacity-90">
+          <p className="text-xl mb-8 opacity-90 font-lora">
             Start your UNA formation journey and get personalized guidance every step of the way.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/explore" className="btn-secondary">
+            <Link to="/explore" className="btn-grad btn-secondary px-6 py-3 rounded-lg font-semibold text-[#1C1F3B] bg-white hover:bg-gray-50 transition-colors">
               Explore Your Path
             </Link>
-            <Link to="/consultation" className="btn-primary">
+            <Link to="/consultation" className="btn-grad btn-primary px-6 py-3 rounded-lg font-semibold text-white transition-colors">
               Schedule Consultation
             </Link>
           </div>

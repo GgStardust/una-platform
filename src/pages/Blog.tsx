@@ -83,10 +83,10 @@ export default function Blog() {
       <div className="bg-gradient-to-r from-navy-600 to-navy-700 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 font-montserrat text-[#1C1F3B]">
               <strong>California UNA Formation</strong> Insights
             </h1>
-            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto font-lora text-[#2A2A28]">
               Expert <strong>legal guidance</strong> on <strong>Unincorporated Nonprofit Association formation</strong>, 
               compliance, and operational excellence. Our <strong>professional UNA formation</strong> expertise 
               ensures your organization is structured correctly.
@@ -115,13 +115,13 @@ export default function Blog() {
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
             {/* Search Bar */}
             <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-navy-400" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-[#2F7E7E]" />
               <input
                 type="text"
                 placeholder="Search articles..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-navy-200 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-2 border border-[#2F7E7E]/30 rounded-lg focus:ring-2 focus:ring-[#C49A6C] focus:border-transparent"
               />
             </div>
 
@@ -133,8 +133,8 @@ export default function Blog() {
                     onClick={() => setSelectedCategory(category || 'all')}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                     selectedCategory === category
-                      ? 'bg-gold-600 text-white'
-                      : 'bg-navy-100 text-navy-700 hover:bg-navy-200'
+                      ? 'bg-[#C49A6C] text-white'
+                      : 'bg-[#2F7E7E]/20 text-[#1C1F3B] hover:bg-[#2F7E7E]/30'
                   }`}
                 >
                     {category}
@@ -150,10 +150,10 @@ export default function Blog() {
           <div className="bg-gradient-to-br from-gold-50 to-cream-100 border-b border-navy-200">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
               <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold text-navy-900 mb-4">
+                <h2 className="text-3xl font-bold text-[#1C1F3B] mb-4 font-montserrat">
                   Featured Article
                 </h2>
-                <p className="text-lg text-navy-600">
+                <p className="text-lg text-[#2A2A28] font-lora">
                   Essential reading for anyone considering UNA formation in California
                 </p>
               </div>
@@ -171,11 +171,11 @@ export default function Blog() {
                       <span>{featuredPost.frontmatter.readTime}</span>
                 </div>
                 
-                <h2 className="text-3xl font-bold text-navy-900 mb-4">
+                <h2 className="text-3xl font-bold text-[#1C1F3B] mb-4 font-montserrat">
                       {featuredPost.frontmatter.title}
                 </h2>
                 
-                <p className="text-lg text-navy-600 mb-6">
+                <p className="text-lg text-[#2A2A28] mb-6 font-lora">
                       {featuredPost.frontmatter.description}
                 </p>
                 
@@ -232,11 +232,11 @@ export default function Blog() {
                     <span>{post.frontmatter.readTime}</span>
                 </div>
                 
-                <h3 className="text-xl font-bold text-navy-900 mb-3 line-clamp-2">
+                <h3 className="text-xl font-bold text-[#1C1F3B] mb-3 line-clamp-2 font-montserrat">
                     {post.frontmatter.title}
                 </h3>
                 
-                <p className="text-navy-600 mb-4 line-clamp-3">
+                <p className="text-[#2A2A28] mb-4 line-clamp-3 font-lora">
                     {post.frontmatter.description}
                 </p>
                 
@@ -270,10 +270,10 @@ export default function Blog() {
       <div className="bg-white border-t border-navy-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-navy-900 mb-4">
+            <h2 className="text-3xl font-bold text-[#1C1F3B] mb-4 font-montserrat">
               Continue Your UNA Formation Journey
             </h2>
-            <p className="text-lg text-navy-600 max-w-2xl mx-auto">
+            <p className="text-lg text-[#2A2A28] max-w-2xl mx-auto font-lora">
               Explore our comprehensive resources and services to ensure your UNA formation is done right.
             </p>
           </div>
@@ -321,7 +321,7 @@ export default function Blog() {
             </div>
             
             <div className="bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-lg p-6">
-              <h3 className="text-lg font-semibold text-navy-900 mb-4">
+              <h3 className="text-lg font-semibold text-[#1C1F3B] mb-4 font-montserrat">
                 Expert Guidance
               </h3>
               <div className="space-y-3">
@@ -332,29 +332,29 @@ export default function Blog() {
                   <div className="font-medium text-emerald-600 hover:text-emerald-800">
                       FAQ & Support
                   </div>
-                  <div className="text-sm text-navy-600">
+                  <div className="text-sm text-[#2A2A28] font-lora">
                       Get answers to common questions
                   </div>
                 </Link>
                 <Link 
                     to="/consultation" 
-                  className="block p-3 bg-white rounded-lg border border-navy-200 hover:border-emerald-300 hover:shadow-sm transition-all duration-200"
+                  className="block p-3 bg-white rounded-lg border border-[#2F7E7E]/30 hover:border-emerald-300 hover:shadow-sm transition-all duration-200"
                 >
                   <div className="font-medium text-emerald-600 hover:text-emerald-800">
                       Schedule Consultation
                   </div>
-                  <div className="text-sm text-navy-600">
+                  <div className="text-sm text-[#2A2A28] font-lora">
                       Get personalized guidance
                   </div>
                 </Link>
                 <Link 
                     to="/resources" 
-                  className="block p-3 bg-white rounded-lg border border-navy-200 hover:border-emerald-300 hover:shadow-sm transition-all duration-200"
+                  className="block p-3 bg-white rounded-lg border border-[#2F7E7E]/30 hover:border-emerald-300 hover:shadow-sm transition-all duration-200"
                 >
                   <div className="font-medium text-emerald-600 hover:text-emerald-800">
                       Resource Library
                   </div>
-                  <div className="text-sm text-navy-600">
+                  <div className="text-sm text-[#2A2A28] font-lora">
                       Access tools and templates
                   </div>
                 </Link>
@@ -362,7 +362,7 @@ export default function Blog() {
             </div>
             
               <div className="bg-gradient-to-br from-navy-50 to-navy-100 rounded-lg p-6">
-              <h3 className="text-lg font-semibold text-navy-900 mb-4">
+              <h3 className="text-lg font-semibold text-[#1C1F3B] mb-4 font-montserrat">
                   Legal & Compliance
               </h3>
               <div className="space-y-3">
@@ -373,29 +373,29 @@ export default function Blog() {
                     <div className="font-medium text-navy-600 hover:text-navy-800">
                       Pricing & Packages
                   </div>
-                  <div className="text-sm text-navy-600">
+                  <div className="text-sm text-[#2A2A28] font-lora">
                       See our formation packages
                   </div>
                 </Link>
                 <Link 
                     to="/about" 
-                    className="block p-3 bg-white rounded-lg border border-navy-200 hover:border-navy-300 hover:shadow-sm transition-all duration-200"
+                    className="block p-3 bg-white rounded-lg border border-[#2F7E7E]/30 hover:border-[#2F7E7E]/50 hover:shadow-sm transition-all duration-200"
                 >
-                    <div className="font-medium text-navy-600 hover:text-navy-800">
+                    <div className="font-medium text-[#2F7E7E] hover:text-[#1C1F3B]">
                       About Our Platform
                   </div>
-                  <div className="text-sm text-navy-600">
+                  <div className="text-sm text-[#2A2A28] font-lora">
                       Learn about our expertise
                   </div>
                 </Link>
                 <Link 
                     to="/contact" 
-                    className="block p-3 bg-white rounded-lg border border-navy-200 hover:border-navy-300 hover:shadow-sm transition-all duration-200"
+                    className="block p-3 bg-white rounded-lg border border-[#2F7E7E]/30 hover:border-[#2F7E7E]/50 hover:shadow-sm transition-all duration-200"
                 >
-                    <div className="font-medium text-navy-600 hover:text-navy-800">
+                    <div className="font-medium text-[#2F7E7E] hover:text-[#1C1F3B]">
                       Contact Us
                   </div>
-                  <div className="text-sm text-navy-600">
+                  <div className="text-sm text-[#2A2A28] font-lora">
                       Get in touch for support
                   </div>
                 </Link>

@@ -90,10 +90,10 @@ export default function Contact() {
         <div className="max-w-4xl mx-auto px-6 py-12">
           {/* Header */}
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-navy-900 mb-4">
+            <h1 className="text-4xl font-bold text-[#1C1F3B] mb-4 font-montserrat">
               Contact Us
             </h1>
-            <p className="text-xl text-navy-600 max-w-2xl mx-auto">
+            <p className="text-xl text-[#2A2A28] max-w-2xl mx-auto font-lora">
               Have questions about UNA formation? Need a referral? Want to discuss ongoing support? 
               We're here to help you succeed.
             </p>
@@ -105,37 +105,37 @@ export default function Contact() {
               <div className="bg-gold-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
                 <Mail className="h-8 w-8 text-gold-600" />
               </div>
-              <h3 className="font-semibold text-navy-800 mb-2">Email</h3>
-              <p className="text-navy-600 text-sm">gigi@gigistardust.com</p>
+              <h3 className="font-semibold text-[#1C1F3B] mb-2 font-montserrat">Email</h3>
+              <p className="text-[#2A2A28] text-sm font-lora">gigi@gigistardust.com</p>
             </div>
             
             <div className="text-center">
               <div className="bg-navy-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <MessageCircle className="h-8 w-8 text-navy-600" />
+                <MessageCircle className="h-8 w-8 text-[#2F7E7E]" />
               </div>
-              <h3 className="font-semibold text-navy-800 mb-2">Contact Form</h3>
-              <p className="text-navy-600 text-sm">Fill out the form below</p>
+              <h3 className="font-semibold text-[#1C1F3B] mb-2 font-montserrat">Contact Form</h3>
+              <p className="text-[#2A2A28] text-sm font-lora">Fill out the form below</p>
             </div>
             
             <div className="text-center">
               <div className="bg-emerald-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
                 <Phone className="h-8 w-8 text-emerald-600" />
               </div>
-              <h3 className="font-semibold text-navy-800 mb-2">Schedule Call</h3>
-              <p className="text-navy-600 text-sm">Book a consultation</p>
+              <h3 className="font-semibold text-[#1C1F3B] mb-2 font-montserrat">Schedule Call</h3>
+              <p className="text-[#2A2A28] text-sm font-lora">Book a consultation</p>
             </div>
           </div>
 
           {/* Contact Form */}
           <div className="bg-white rounded-lg shadow-sm border border-navy-200 p-8">
-            <h2 className="text-2xl font-semibold text-navy-900 mb-6">
+            <h2 className="text-2xl font-semibold text-[#1C1F3B] mb-6 font-montserrat">
               {formData.subject === 'Referral' ? 'Request a Referral' : 'Send Us a Message'}
             </h2>
             
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-navy-700 mb-2">
+                  <label htmlFor="name" className="block text-sm font-medium text-[#1C1F3B] mb-2 font-montserrat">
                     Name *
                   </label>
                   <input
@@ -151,7 +151,7 @@ export default function Contact() {
                 </div>
                 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-navy-700 mb-2">
+                  <label htmlFor="email" className="block text-sm font-medium text-[#1C1F3B] mb-2 font-montserrat">
                     Email *
                   </label>
                   <input
@@ -168,7 +168,7 @@ export default function Contact() {
               </div>
 
               <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-navy-700 mb-2">
+                <label htmlFor="subject" className="block text-sm font-medium text-[#1C1F3B] mb-2 font-montserrat">
                   Subject *
                 </label>
                 <input
@@ -185,7 +185,7 @@ export default function Contact() {
 
               {formData.subject === 'Referral' && (
                 <div>
-                  <label htmlFor="referralType" className="block text-sm font-medium text-navy-700 mb-2">
+                  <label htmlFor="referralType" className="block text-sm font-medium text-[#1C1F3B] mb-2 font-montserrat">
                     Referral Type
                   </label>
                   <select
@@ -205,7 +205,7 @@ export default function Contact() {
               )}
 
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-navy-700 mb-2">
+                <label htmlFor="message" className="block text-sm font-medium text-[#1C1F3B] mb-2 font-montserrat">
                   Message *
                 </label>
                 <textarea
@@ -234,7 +234,7 @@ export default function Contact() {
 
           {/* Alternative Contact */}
           <div className="mt-12 text-center">
-            <p className="text-navy-600 mb-4">
+            <p className="text-[#2A2A28] mb-4 font-lora">
               Prefer to schedule a consultation instead?
             </p>
             <a 

@@ -23,7 +23,7 @@ export interface BlogPost {
   content: string;
 }
 
-import matter from 'gray-matter';
+// import matter from 'gray-matter'; // Will be used when implementing actual MDX file reading
 
 // Get all blog posts from the content directory
 export function getAllBlogPosts(): BlogPost[] {

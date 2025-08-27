@@ -10,7 +10,8 @@ import {
   Activity,
   UserCheck,
   AlertCircle,
-  CheckCircle
+  CheckCircle,
+  FileText
 } from 'lucide-react';
 import { notificationService } from '@/lib/notifications';
 
