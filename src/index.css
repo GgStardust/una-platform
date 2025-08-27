@@ -97,8 +97,7 @@
 
 /* Brand Gradients */
 .una-gradient-hero {
-  background: linear-gradient(135deg, #000000 0%, #0B0D1D 50%, #000000 100%) !important;
-  background-color: #000000 !important;
+  background: linear-gradient(135deg, var(--una-navy) 0%, var(--una-dark-navy) 100%);
 }
 
 .una-gradient-nav {
