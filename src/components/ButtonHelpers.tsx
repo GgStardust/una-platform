@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { routeToCalendar, ROUTES } from '../lib/routes';
+import Symbol from './Symbol';
 
 // Button helper components with consistent styling
 export function ScheduleBundleButton({ 
@@ -13,8 +14,9 @@ export function ScheduleBundleButton({
   return (
     <button 
       onClick={() => routeToCalendar('bundle')}
-      className={`btn-grad ${className}`}
+      className={`btn-grad btn-primary ${className}`}
     >
+      <Symbol name="orb" size={20} className="mr-2" />
       {children}
       <ArrowRight className="ml-2 h-4 w-4" />
     </button>
@@ -31,8 +33,9 @@ export function ScheduleConsultationButton({
   return (
     <button 
       onClick={() => routeToCalendar('consultation')}
-      className={`btn-grad ${className}`}
+      className={`btn-grad btn-primary ${className}`}
     >
+      <Symbol name="triangle" size={20} className="mr-2" />
       {children}
       <ArrowRight className="ml-2 h-4 w-4" />
     </button>
@@ -49,8 +52,9 @@ export function ScheduleDocumentsButton({
   return (
     <button 
       onClick={() => routeToCalendar('documents')}
-      className={`btn-grad ${className}`}
+      className={`btn-grad btn-primary ${className}`}
     >
+      <Symbol name="hex-eye" size={20} className="mr-2" />
       {children}
       <ArrowRight className="ml-2 h-4 w-4" />
     </button>
@@ -67,8 +71,9 @@ export function DiscussOngoingButton({
   return (
     <button 
       onClick={() => routeToCalendar('ongoing')}
-      className={`btn-grad ${className}`}
+      className={`btn-grad btn-primary ${className}`}
     >
+      <Symbol name="stack" size={20} className="mr-2" />
       {children}
       <ArrowRight className="ml-2 h-4 w-4" />
     </button>

@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
-import { Users, ArrowRight, BookOpen, Calendar } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
 import { FLAGS } from '@/lib/flags';
+import Symbol from '../components/Symbol';
 
 export default function Home() {
   return (
@@ -36,27 +37,29 @@ export default function Home() {
           }
         }}
       />
-    <div className="min-h-screen bg-gradient-to-br from-cream-50 to-cream-100">
+    <div className="min-h-screen una-gradient-hero una-constellation-bg">
       {/* Hero Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
         <div className="text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-navy-900 mb-6">
-            <span className="text-gold-600">UNA Formation Guidance</span>
+          <h1 className="text-4xl md:text-6xl font-bold text-[#F4F1E8] mb-6 font-montserrat">
+            <span className="text-[#C49A6C]">UNA Formation Guidance</span>
             <br />
             Clarity-First Strategy & Resources
           </h1>
-          <p className="text-xl text-navy-700 mb-8 max-w-3xl mx-auto">
+          <p className="text-xl text-[#F4F1E8] mb-8 max-w-3xl mx-auto font-lora">
             Get clear guidance for your UNA formation journey with 
-            <strong> California-specific expertise</strong>. Explore your path, access curated resources, 
+            <strong> sovereignty-aligned expertise</strong>. Explore your path, access curated resources, 
             and get personalized strategy sessions to establish your 
             <strong> Unincorporated Nonprofit Association</strong> with confidence.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/explore" className="bg-gold-500 hover:bg-gold-600 text-white text-lg px-8 py-4 rounded-lg font-semibold transition-colors duration-200 shadow-lg hover:shadow-xl">
+            <Link to="/explore" className="btn-grad btn-primary text-lg px-8 py-4">
+              <Symbol name="orb" size={24} className="mr-2" />
               Explore Your Path
               <ArrowRight className="ml-2 h-5 w-5 inline" />
             </Link>
-            <Link to="/consultation" className="bg-white hover:bg-navy-50 text-navy-700 text-lg px-8 py-4 rounded-lg font-semibold transition-colors duration-200 border-2 border-navy-200 hover:border-navy-300 shadow-md hover:shadow-lg">
+            <Link to="/consultation" className="btn-grad btn-secondary text-lg px-8 py-4">
+              <Symbol name="triangle" size={24} className="mr-2" />
               Schedule Strategy Session
             </Link>
           </div>
@@ -66,28 +69,34 @@ export default function Home() {
       {/* Features Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid md:grid-cols-3 gap-8">
-          <div className="card text-center">
-            <BookOpen className="h-12 w-12 text-gold-500 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold mb-2 text-navy-800">Explore Your Path</h3>
-            <p className="text-navy-600">
+          <div className="una-card text-center p-8">
+            <div className="bg-gradient-to-r from-[#C49A6C] to-[#2F7E7E] rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
+              <Symbol name="orb" size={40} className="text-white" />
+            </div>
+            <h3 className="text-xl font-semibold mb-2 text-[#F4F1E8] font-montserrat">Explore Your Path</h3>
+            <p className="text-[#F4F1E8] font-lora">
               Take our guided assessment to understand your UNA formation options and 
               get personalized strategic insights for your mission.
             </p>
           </div>
           
-          <div className="card text-center">
-            <Users className="h-12 w-12 text-gold-500 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold mb-2 text-navy-800">UNA Startup Toolkit</h3>
-            <p className="text-navy-600">
+          <div className="una-card text-center p-8">
+            <div className="bg-gradient-to-r from-[#2F7E7E] to-[#7A4CA0] rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
+              <Symbol name="hex-eye" size={40} className="text-white" />
+            </div>
+            <h3 className="text-xl font-semibold mb-2 text-[#F4F1E8] font-montserrat">UNA Startup Toolkit</h3>
+            <p className="text-[#F4F1E8] font-lora">
               Sovereignty-aligned tools and resources to extend your UNA foundation 
               with optional services that respect your mission.
             </p>
           </div>
           
-          <div className="card text-center">
-            <Calendar className="h-12 w-12 text-gold-500 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold mb-2 text-navy-800">Schedule Strategy Session</h3>
-            <p className="text-navy-600">
+          <div className="una-card text-center p-8">
+            <div className="bg-gradient-to-r from-[#7A4CA0] to-[#C49A6C] rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-6">
+              <Symbol name="triangle" size={40} className="text-white" />
+            </div>
+            <h3 className="text-xl font-semibold mb-2 text-[#F4F1E8] font-montserrat">Schedule Strategy Session</h3>
+            <p className="text-[#F4F1E8] font-lora">
               Get personalized guidance, strategic planning, and clear next steps 
               through our 1:1 consultation sessions.
             </p>
@@ -96,23 +105,23 @@ export default function Home() {
       </div>
 
       {/* What is a UNA Section */}
-      <div className="bg-white py-16">
+      <div className="bg-[#F4F1E8] py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-navy-900 mb-6">
+          <h2 className="text-3xl font-bold text-[#1C1F3B] mb-6 font-montserrat">
             What is a <strong>UNA (Unincorporated Nonprofit Association)</strong>?
           </h2>
-          <p className="text-lg text-navy-700 mb-8">
+          <p className="text-lg text-[#2A2A28] mb-8 font-lora">
             A <strong>UNA</strong> is a flexible legal structure that allows mission-driven groups to operate 
-            collectively without the formal requirements of incorporation. In <strong>California</strong>, 
-            <strong>UNA formation</strong> provides unique advantages for community organizations, activist groups, 
+            collectively without the formal requirements of incorporation. <strong>UNA formation</strong> 
+            provides unique advantages for community organizations, activist groups, 
             mutual aid networks, and other collectives that want legal recognition while maintaining their 
-            grassroots nature. Our <strong>California UNA formation</strong> expertise ensures you get the 
+            grassroots nature. Our <strong>UNA formation</strong> expertise ensures you get the 
             <strong>legal guidance</strong> needed for proper structure.
           </p>
           <div className="grid md:grid-cols-2 gap-6 text-left">
             <div>
-              <h4 className="font-semibold text-navy-800 mb-2">Benefits:</h4>
-              <ul className="text-navy-600 space-y-1">
+              <h4 className="font-semibold text-[#1C1F3B] mb-2 font-montserrat">Benefits:</h4>
+              <ul className="text-[#2A2A28] space-y-1 font-lora">
                 <li>• No filing fees or annual reports</li>
                 <li>• Flexible governance structure</li>
                 <li>• Can open bank accounts</li>
@@ -120,8 +129,8 @@ export default function Home() {
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold text-navy-800 mb-2">Perfect For:</h4>
-              <ul className="text-navy-600 space-y-1">
+              <h4 className="font-semibold text-[#1C1F3B] mb-2 font-montserrat">Perfect For:</h4>
+              <ul className="text-[#2A2A28] space-y-1 font-lora">
                 <li>• Community organizations</li>
                 <li>• Mutual aid networks</li>
                 <li>• Activist groups</li>
@@ -200,42 +209,42 @@ export default function Home() {
               </div>
             </div>
             
-            <div className="bg-gradient-to-br from-emerald-100 to-teal-100 rounded-lg p-8 border border-emerald-200">
-              <h3 className="text-xl font-semibold text-navy-900 mb-4">
+            <div className="bg-gradient-to-br from-[#2F7E7E]/20 to-[#7A4CA0]/20 rounded-lg p-8 border border-[#2F7E7E]/30">
+              <h3 className="text-xl font-semibold text-[#1C1F3B] mb-4 font-montserrat">
                 Expert Guidance & Resources
               </h3>
               <div className="space-y-4">
                 <Link 
-                  to="/blog" 
-                  className="block p-4 bg-white rounded-lg border border-navy-200 hover:border-emerald-300 hover:shadow-sm transition-all duration-200"
+                  to="/resources" 
+                  className="block p-4 bg-white rounded-lg border border-[#2F7E7E]/20 hover:border-[#2F7E7E]/40 hover:shadow-sm transition-all duration-200"
                 >
-                  <div className="font-medium text-emerald-600 hover:text-emerald-800">
-                    Formation Insights
+                  <div className="font-medium text-[#2F7E7E] hover:text-[#7A4CA0]">
+                    UNA Startup Toolkit
                   </div>
-                  <div className="text-sm text-navy-600 mt-1">
-                    Read expert guidance on UNA formation and compliance
+                  <div className="text-sm text-[#2A2A28] mt-1 font-lora">
+                    Sovereignty-aligned tools and resources for your UNA journey
                   </div>
                 </Link>
                 <Link 
                   to="/faq" 
-                  className="block p-4 bg-white rounded-lg border border-navy-200 hover:border-emerald-300 hover:shadow-sm transition-all duration-200"
+                  className="block p-4 bg-white rounded-lg border border-[#2F7E7E]/20 hover:border-[#2F7E7E]/40 hover:shadow-sm transition-all duration-200"
                 >
-                  <div className="font-medium text-emerald-600 hover:text-emerald-800">
-                    Frequently Asked Questions
+                  <div className="font-medium text-[#2F7E7E] hover:text-[#7A4CA0]">
+                    Browse FAQ
                   </div>
-                  <div className="text-sm text-navy-600 mt-1">
-                    Get answers to common UNA formation questions
+                  <div className="text-sm text-[#2A2A28] mt-1 font-lora">
+                    Find answers to common UNA formation questions
                   </div>
                 </Link>
                 <Link 
-                  to="/success" 
-                  className="block p-4 bg-white rounded-lg border border-navy-200 hover:border-emerald-300 hover:shadow-sm transition-all duration-200"
+                  to="/blog" 
+                  className="block p-4 bg-white rounded-lg border border-[#2F7E7E]/20 hover:border-[#2F7E7E]/40 hover:shadow-sm transition-all duration-200"
                 >
-                  <div className="font-medium text-emerald-600 hover:text-emerald-800">
-                    Success Stories
+                  <div className="font-medium text-[#2F7E7E] hover:text-[#7A4CA0]">
+                    Read Our Blog
                   </div>
-                  <div className="text-sm text-navy-600 mt-1">
-                    Learn from real UNA formation experiences
+                  <div className="text-sm text-[#2A2A28] mt-1 font-lora">
+                    Stay updated with UNA formation insights and guidance
                   </div>
                 </Link>
               </div>
@@ -245,19 +254,21 @@ export default function Home() {
       </div>
 
       {/* CTA Section */}
-      <div className="bg-navy-600 py-16">
+      <div className="bg-gradient-to-r from-[#1C1F3B] to-[#2F7E7E] py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">
+          <h2 className="text-3xl font-bold text-[#F4F1E8] mb-4 font-montserrat">
             Ready to Explore Your UNA Path?
           </h2>
-          <p className="text-xl text-navy-100 mb-8">
+          <p className="text-xl text-[#F4F1E8] mb-8 font-lora">
             Get clarity on your formation journey with our guidance-first approach.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/explore" className="bg-white text-navy-600 hover:bg-navy-100 font-semibold py-3 px-8 rounded-lg transition-colors duration-200">
+            <Link to="/explore" className="btn-grad btn-primary px-8 py-3">
+              <Symbol name="orb" size={20} className="mr-2" />
               Explore Your Path
             </Link>
-            <Link to="/consultation" className="border-2 border-white text-white hover:bg-white hover:text-navy-600 font-semibold py-3 px-8 rounded-lg transition-colors duration-200">
+            <Link to="/consultation" className="btn-grad btn-secondary px-8 py-3">
+              <Symbol name="triangle" size={20} className="mr-2" />
               Book Strategy Session
             </Link>
           </div>
