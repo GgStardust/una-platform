@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { ArrowLeft, ArrowRight, CheckCircle, Calendar, ExternalLink } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle, Calendar } from 'lucide-react';
 import { ExploreAnswers } from '@/lib/types';
 import { detectUserLocation, getStateSuggestionText, LocationHint } from '@/lib/geolocation';
+import { generateStrategyInsights, generateToolkitRecommendations, generateExecutiveSummary } from '@/lib/strategy-insights';
 
 
 
@@ -27,12 +28,41 @@ export default function Explore() {
 
 
 
-  // California-only platform
-  const stateOptions = ['CA'];
+  // Full USA states list for broader accessibility
+  const stateOptions = [
+    'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA',
+    'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
+    'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ',
+    'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC',
+    'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
+  ];
   
-  // Simplified options for lite flow
+  // Enhanced options for comprehensive flow
   const missionOptions = ['Events', 'Education', 'Art', 'Community', 'Research', 'Healing', 'Other'];
   const impactOptions = ['Personal transformation', 'Community building', 'Economic empowerment', 'Creative culture', 'Teaching and learning', 'Other'];
+  
+  // Enhanced prompt systems for better user guidance
+  const missionPrompts = [
+    'Describe your core mission in 2-3 sentences',
+    'What problem are you solving?',
+    'Who are you serving?',
+    'What change do you want to create?',
+    'What would success look like?'
+  ];
+  
+  const visionPrompts = [
+    'What is your long-term vision?',
+    'How do you see the world changing?',
+    'What legacy do you want to leave?',
+    'What would you like to be remembered for?'
+  ];
+  
+  const impactPrompts = [
+    'How will you measure success?',
+    'What impact do you want to have?',
+    'How will you know you\'ve made a difference?',
+    'What would transformation look like?'
+  ];
 
   const handleStateSelect = (state: string) => {
     setAnswers(prev => ({ ...prev, entityState: state }));
@@ -61,6 +91,18 @@ export default function Explore() {
       ...prev,
       [field]: value
     }));
+  };
+  
+  // Helper functions for prompt system
+  const getRandomPrompt = (prompts: string[]) => {
+    return prompts[Math.floor(Math.random() * prompts.length)];
+  };
+  
+  const insertPrompt = (field: keyof typeof freeTextDescriptions, prompts: string[]) => {
+    const prompt = getRandomPrompt(prompts);
+    const currentValue = freeTextDescriptions[field];
+    const newValue = currentValue ? `${currentValue}\n\n${prompt}` : prompt;
+    handleFreeTextChange(field, newValue);
   };
 
   // Detect user location on component mount
@@ -145,20 +187,7 @@ export default function Explore() {
                 ))}
               </div>
               
-              <div className="mt-6 p-4 bg-gold-50 border border-gold-200 rounded-lg">
-                <h4 className="font-semibold text-gold-800 mb-2">Not in California?</h4>
-                <p className="text-gold-700 text-sm mb-3">
-                  Our platform is specifically designed for California UNA formation. If you're located elsewhere, 
-                  we recommend scheduling a consultation to discuss your options.
-                </p>
-                <a
-                  href="/consultation"
-                  className="bg-gold-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gold-700 transition-colors inline-flex items-center"
-                >
-                  Schedule Consultation
-                  <ExternalLink className="h-4 w-4 ml-1" />
-                </a>
-              </div>
+
             </div>
 
             {/* Mission Section */}
@@ -186,6 +215,18 @@ export default function Explore() {
                 <label className="block text-sm font-medium text-navy-700 mb-2">
                   Tell us more about your mission (optional):
                 </label>
+                <div className="mb-3 flex flex-wrap gap-2">
+                  {missionPrompts.slice(0, 4).map((prompt, index) => (
+                    <button
+                      key={index}
+                      type="button"
+                      onClick={() => insertPrompt('missionDescription', missionPrompts)}
+                      className="una-prompt-chip"
+                    >
+                      {prompt}
+                    </button>
+                  ))}
+                </div>
                 <textarea
                   value={freeTextDescriptions.missionDescription}
                   onChange={(e) => handleFreeTextChange('missionDescription', e.target.value)}
@@ -226,6 +267,18 @@ export default function Explore() {
                 <label className="block text-sm font-medium text-navy-700 mb-2">
                   Tell us more about your vision (optional):
                 </label>
+                <div className="mb-3 flex flex-wrap gap-2">
+                  {visionPrompts.slice(0, 4).map((prompt, index) => (
+                    <button
+                      key={index}
+                      type="button"
+                      onClick={() => insertPrompt('impactDescription', visionPrompts)}
+                      className="una-prompt-chip"
+                    >
+                      {prompt}
+                    </button>
+                  ))}
+                </div>
                 <textarea
                   value={freeTextDescriptions.impactDescription}
                   onChange={(e) => handleFreeTextChange('impactDescription', e.target.value)}
@@ -247,13 +300,25 @@ export default function Explore() {
               
               <div className="mb-6">
                 <label className="block text-sm font-medium text-navy-700 mb-2 text-left">
-                  Final question: What's your overall vision? (optional)
+                  Additional thoughts or questions? (optional)
                 </label>
+                <div className="mb-3 flex flex-wrap gap-2">
+                  {impactPrompts.slice(0, 3).map((prompt, index) => (
+                    <button
+                      key={index}
+                      type="button"
+                      onClick={() => insertPrompt('overallVision', impactPrompts)}
+                      className="una-prompt-chip"
+                    >
+                      {prompt}
+                    </button>
+                  ))}
+                </div>
                 <textarea
                   value={freeTextDescriptions.overallVision}
                   onChange={(e) => handleFreeTextChange('overallVision', e.target.value)}
-                  placeholder="In a few sentences, what's your big picture vision? What would you love to see happen?"
-                  rows={4}
+                  placeholder="Any additional thoughts, questions, or specific areas you'd like guidance on?"
+                  rows={3}
                   className="w-full p-3 border border-navy-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent resize-none"
                 />
               </div>
@@ -367,9 +432,6 @@ export default function Explore() {
 
 // Lite Results Component
 function ExploreLiteResults({ answers, freeTextDescriptions }: { answers: any; freeTextDescriptions: any }) {
-  // Import and use the new strategy insights engine
-  const { generateStrategyInsights, generateToolkitRecommendations, generateExecutiveSummary } = require('@/lib/strategy-insights');
-  
   const strategyInsights = generateStrategyInsights(answers, freeTextDescriptions);
   const toolkitRecommendations = generateToolkitRecommendations(answers, freeTextDescriptions);
   const executiveSummary = generateExecutiveSummary(answers, freeTextDescriptions);
@@ -476,10 +538,10 @@ function ExploreLiteResults({ answers, freeTextDescriptions }: { answers: any; f
           <div className="space-y-4">
             <div className="flex items-center justify-center space-x-2 text-gold-300">
               <Calendar className="h-5 w-5" />
-              <span>60-90 minute session</span>
+              <span>1 hour session</span>
             </div>
             <div className="flex items-center justify-center space-x-2 text-gold-300">
-              <span className="text-2xl font-bold">$250/hr</span>
+              <span className="text-2xl font-bold">$250</span>
             </div>
           </div>
           <a
