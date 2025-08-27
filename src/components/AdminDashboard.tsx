@@ -194,7 +194,7 @@ export default function AdminDashboard() {
   const [paymentSettings, setPaymentSettings] = useState<PaymentSettings>(defaultPaymentSettings);
   const paymentModule = PaymentModule.getInstance();
   
-  const [activeTab, setActiveTab] = useState<'overview' | 'users' | 'verification' | 'affiliates' | 'payments' | 'analytics' | 'emails' | 'settings' | 'environment' | 'explore-formation'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'users' | 'verification' | 'affiliates' | 'payments' | 'analytics' | 'emails' | 'settings' | 'environment' | 'explore-formation' | 'blog'>('overview');
 
   useEffect(() => {
     loadAdminData();
@@ -668,7 +668,8 @@ Facebook,Complete UNA Formation Guide,Master UNA formation from concept to compl
               { id: 'emails', label: 'Emails', icon: Mail },
               { id: 'settings', label: 'Settings', icon: Settings },
               { id: 'environment', label: 'Environment', icon: Settings },
-              { id: 'explore-formation', label: 'Explore + Formation', icon: Activity }
+              { id: 'explore-formation', label: 'Explore + Formation', icon: Activity },
+              { id: 'blog', label: 'Blog', icon: FileText }
             ].map(tab => (
               <button
                 key={tab.id}
@@ -2964,6 +2965,103 @@ Facebook,Complete UNA Formation Guide,Master UNA formation from concept to compl
                     No exports found. User exploration and formation data will appear here.
                   </div>
                 )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Blog Management Section */}
+        {activeTab === 'blog' && (
+          <div className="space-y-6">
+            <div className="bg-white rounded-lg shadow-sm border border-navy-100">
+              <div className="p-6 border-b border-navy-100">
+                <h3 className="text-lg font-medium text-navy-900">Blog Management</h3>
+                <p className="text-sm text-navy-600 mt-1">Manage MDX blog posts and content</p>
+              </div>
+              <div className="p-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  {/* Import MDX */}
+                  <div className="border border-navy-200 rounded-lg p-4">
+                    <h4 className="font-medium text-navy-900 mb-3">Import MDX Post</h4>
+                    <div className="space-y-3">
+                      <input
+                        type="file"
+                        accept=".mdx,.md"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            const reader = new FileReader();
+                            reader.onload = (event) => {
+                              const content = event.target?.result as string;
+                              // Here you would process the MDX content
+                              console.log('MDX content:', content);
+                              alert('MDX import functionality would be implemented here');
+                            };
+                            reader.readAsText(file);
+                          }
+                        }}
+                        className="w-full p-2 border border-navy-300 rounded-lg"
+                      />
+                      <button className="w-full px-4 py-2 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors">
+                        Import Post
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Export MDX */}
+                  <div className="border border-navy-200 rounded-lg p-4">
+                    <h4 className="font-medium text-navy-900 mb-3">Export Blog Posts</h4>
+                    <div className="space-y-3">
+                      <select className="w-full p-2 border border-navy-300 rounded-lg">
+                        <option value="">Select post to export</option>
+                        <option value="complete-una-formation-guide">Complete UNA Formation Guide</option>
+                        <option value="financial-management-una">Financial Management for UNAs</option>
+                        <option value="una-governance-best-practices">UNA Governance Best Practices</option>
+                      </select>
+                      <button 
+                        onClick={() => alert('MDX export functionality would be implemented here')}
+                        className="w-full px-4 py-2 bg-gold-600 text-white rounded-lg hover:bg-gold-700 transition-colors"
+                      >
+                        Export as MDX
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Blog Posts List */}
+                <div className="mt-6">
+                  <h4 className="font-medium text-navy-900 mb-3">Current Blog Posts</h4>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between p-3 border border-navy-200 rounded-lg">
+                      <div>
+                        <h5 className="font-medium text-navy-900">Complete UNA Formation Guide</h5>
+                        <p className="text-sm text-navy-600">Formation, guide, una</p>
+                      </div>
+                      <div className="flex space-x-2">
+                        <button className="px-3 py-1 text-sm bg-navy-600 text-white rounded hover:bg-navy-700">
+                          Edit
+                        </button>
+                        <button className="px-3 py-1 text-sm bg-gold-600 text-white rounded hover:bg-gold-700">
+                          Export
+                        </button>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-between p-3 border border-navy-200 rounded-lg">
+                      <div>
+                        <h5 className="font-medium text-navy-900">Financial Management for UNAs</h5>
+                        <p className="text-sm text-navy-600">Financial, management, una</p>
+                      </div>
+                      <div className="flex space-x-2">
+                        <button className="px-3 py-1 text-sm bg-navy-600 text-white rounded hover:bg-navy-700">
+                          Edit
+                        </button>
+                        <button className="px-3 py-1 text-sm bg-gold-600 text-white rounded hover:bg-gold-700">
+                          Export
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
