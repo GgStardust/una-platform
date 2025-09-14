@@ -28,8 +28,8 @@ const ALL_STATES = [
   'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
 ];
 
-// Top 10 states with snippets
-const TOP_10_STATES = ['CA', 'TX', 'FL', 'NY', 'IL', 'PA', 'OH', 'GA', 'NC', 'MI'];
+// Top 10 states with snippets (unused for now)
+// const TOP_10_STATES = ['CA', 'TX', 'FL', 'NY', 'IL', 'PA', 'OH', 'GA', 'NC', 'MI'];
 
 // State snippets data (Top 10 states)
 const stateSnippets: Record<string, any> = {
@@ -143,8 +143,8 @@ export default function Intake({
   setIntakeData, 
   formMethods, 
   onSubmit: customOnSubmit, 
-  isSaving: externalSaving, 
-  saveError: externalSaveError 
+  isSaving: _externalSaving, 
+  saveError: _externalSaveError 
 }: IntakeProps) {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
@@ -814,7 +814,7 @@ export default function Intake({
                   className={`input-field ${errors.organizerState ? 'border-red-500' : ''}`}
                 >
                   <option value="">Select State</option>
-                  {CA_ONLY.map(state => (
+                  {US_STATES.map((state: string) => (
                     <option key={state} value={state}>{state === 'CA' ? 'California' : state}</option>
                   ))}
                 </select>
@@ -907,7 +907,7 @@ export default function Intake({
                   className={`input-field ${errors.mailingState ? 'border-red-500' : ''}`}
                 >
                   <option value="">Select State</option>
-                  {CA_ONLY.map(state => (
+                  {US_STATES.map((state: string) => (
                     <option key={state} value={state}>{state === 'CA' ? 'California' : state}</option>
                   ))}
               </select>

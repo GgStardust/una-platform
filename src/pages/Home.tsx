@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
-import { FLAGS } from '@/lib/flags';
 import Symbol from '../components/Symbol';
 
 export default function Home() {
