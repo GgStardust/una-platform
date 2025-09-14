@@ -1,69 +1,130 @@
-# React + TypeScript + Vite
+# UNA Platform - Lite Version
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A revenue-first UNA Formation platform focused on Strategy Sessions, Document Preparation, and comprehensive state-specific guidance.
 
-Currently, two official plugins are available:
+## Quick Start
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-## Expanding the ESLint configuration
+2. **Set up environment:**
+   ```bash
+   npm run setup:env
+   ```
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+3. **Start development server:**
+   ```bash
+   npm run dev
+   ```
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+4. **Set up Stripe webhooks (for payment testing):**
+   ```bash
+   npm run setup:webhooks
+   ```
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## Stripe Webhook Setup
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+For local development with payment testing, you'll need to set up Stripe webhooks:
+
+### Prerequisites
+- Stripe account with test mode enabled
+- Stripe CLI installed: `brew install stripe/stripe-cli/stripe`
+
+### Setup Steps
+
+1. **Authenticate with Stripe:**
+   ```bash
+   stripe login
+   ```
+
+2. **Start webhook forwarding:**
+   ```bash
+   stripe listen --forward-to localhost:5173/api/webhook
+   ```
+
+3. **Update environment variables:**
+   - Copy the webhook signing secret (starts with `whsec_`)
+   - Update `STRIPE_WEBHOOK_SECRET` in your `.env` file
+
+4. **Test webhook integration:**
+   ```bash
+   npm run stripe:test
+   ```
+
+For detailed instructions, see [STRIPE_WEBHOOK_SETUP.md](./STRIPE_WEBHOOK_SETUP.md).
+
+## Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run dev:clean` - Clean start (kills stale processes)
+- `npm run setup:env` - Create .env file with dummy values
+- `npm run setup:webhooks` - Check Stripe webhook setup
+- `npm run seed` - Seed database with state data
+- `npm run stripe:test` - Test Stripe webhook events
+- `npm run build` - Build for production
+
+## Features
+
+- **State-Specific Guidance**: Top 10 states with detailed UNA formation requirements
+- **Payment Integration**: Stripe-powered Strategy Sessions and Document Preparation
+- **Intake Forms**: Multi-step forms with state-specific validation
+- **Blog System**: Comprehensive UNA formation guidance
+- **Admin Dashboard**: Content and user management
+
+## Project Structure
+
+```
+src/
+├── pages/           # Main application pages
+├── components/      # Reusable UI components
+├── lib/            # Utilities and helpers
+├── api/            # Backend API routes
+├── database/       # Database schemas and migrations
+└── scripts/        # Development and setup scripts
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Environment Variables
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+See `env.example` for all required environment variables. Key variables:
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- `VITE_STRIPE_PUBLISHABLE_KEY` - Stripe publishable key
+- `STRIPE_SECRET_KEY` - Stripe secret key
+- `STRIPE_WEBHOOK_SECRET` - Stripe webhook signing secret
+- `VITE_SUPABASE_URL` - Supabase project URL
+- `VITE_SUPABASE_ANON_KEY` - Supabase anonymous key
+
+## Development
+
+The app runs on `http://localhost:5173` with hot reload enabled.
+
+### State Pages
+- `/states/CA` - California UNA requirements
+- `/states/TX` - Texas UNA requirements
+- `/states/FL` - Florida UNA requirements
+- ... (all Top 10 states)
+
+### API Endpoints
+- `/api/create-checkout-session` - Create Stripe checkout sessions
+- `/api/webhook` - Handle Stripe webhook events
+
+## Testing
+
+- **Webhook Testing**: Use `npm run stripe:test` to trigger test events
+- **Payment Flow**: Complete checkout process and verify webhook logs
+- **State Integration**: Test state selection in Explore and Intake forms
+
+## Production Deployment
+
+1. Update environment variables with production values
+2. Set up production Stripe webhook endpoints
+3. Configure Supabase for production
+4. Build and deploy: `npm run build`
+
+## Support
+
+For detailed setup instructions:
+- Stripe Webhooks: [STRIPE_WEBHOOK_SETUP.md](./STRIPE_WEBHOOK_SETUP.md)
+- Database Setup: [SUPABASE_SETUP.md](./SUPABASE_SETUP.md)
+- Booking Module: [BOOKING_MODULE.md](./BOOKING_MODULE.md)

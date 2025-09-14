@@ -45,12 +45,12 @@ export default function Blog() {
   return (
     <>
       <SEOHead
-        title="UNA Formation Insights & Expert Guidance"
-        description="Expert guidance on Unincorporated Nonprofit Association formation, legal compliance, and operational excellence in California. Read our comprehensive blog for UNA formation insights."
+        title="UNA Formation Insights & Expert Guidance - All 50 States"
+        description="Expert guidance on Unincorporated Nonprofit Association formation, legal compliance, and operational excellence for all 50 states. Read our comprehensive blog for UNA formation insights."
         keywords={[
           'UNA formation blog',
           'UNA formation insights',
-          'California UNA formation guide',
+          'UNA formation guide all states',
           'UNA formation legal compliance',
           'UNA formation best practices',
           'UNA formation case studies'
@@ -80,20 +80,20 @@ export default function Blog() {
       />
     <div className="min-h-screen bg-cream-50">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-navy-600 to-navy-700 text-white">
+      <div className="bg-gradient-to-r from-[#1C1F3B] to-[#2F7E7E] text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 font-montserrat text-[#1C1F3B]">
-              <strong>California UNA Formation</strong> Insights
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 font-montserrat text-white">
+              <strong>UNA Formation</strong> Insights
             </h1>
-            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto font-lora text-[#2A2A28]">
-              Expert <strong>legal guidance</strong> on <strong>Unincorporated Nonprofit Association formation</strong>, 
-              compliance, and operational excellence. Our <strong>professional UNA formation</strong> expertise 
-              ensures your organization is structured correctly.
+            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto font-lora text-white/90">
+              Expert <strong>formation guidance</strong> for <strong>Unincorporated Nonprofit Associations</strong> in all 50 states. 
+              Our <strong>research-based approach</strong> and <strong>business formation experience</strong> 
+              ensure your organization is structured correctly.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
-                to="/intake" 
+                to="/explore" 
                 className="bg-white text-navy-600 hover:bg-navy-100 font-semibold py-3 px-8 rounded-lg transition-colors duration-200"
               >
                 Start Your Formation
@@ -306,17 +306,6 @@ export default function Blog() {
                     Begin your UNA formation process
                   </div>
                 </Link>
-                <Link 
-                  to="/services" 
-                  className="block p-3 bg-white rounded-lg border border-navy-200 hover:border-gold-300 hover:shadow-sm transition-all duration-200"
-                >
-                  <div className="font-medium text-gold-600 hover:text-gold-800">
-                    View Services
-                  </div>
-                  <div className="text-sm text-navy-600">
-                    See all formation services
-                  </div>
-                </Link>
               </div>
             </div>
             
@@ -337,7 +326,7 @@ export default function Blog() {
                   </div>
                 </Link>
                 <Link 
-                    to="/consultation" 
+                    to="/services" 
                   className="block p-3 bg-white rounded-lg border border-[#2F7E7E]/30 hover:border-emerald-300 hover:shadow-sm transition-all duration-200"
                 >
                   <div className="font-medium text-emerald-600 hover:text-emerald-800">
@@ -348,14 +337,14 @@ export default function Blog() {
                   </div>
                 </Link>
                 <Link 
-                    to="/resources" 
+                    to="/services" 
                   className="block p-3 bg-white rounded-lg border border-[#2F7E7E]/30 hover:border-emerald-300 hover:shadow-sm transition-all duration-200"
                 >
                   <div className="font-medium text-emerald-600 hover:text-emerald-800">
-                      Resource Library
+                      UNA Services & Toolkit
                   </div>
                   <div className="text-sm text-[#2A2A28] font-lora">
-                      Access tools and templates
+                      Professional guidance and essential tools
                   </div>
                 </Link>
               </div>
@@ -367,7 +356,7 @@ export default function Blog() {
               </h3>
               <div className="space-y-3">
                 <Link 
-                    to="/pricing" 
+                    to="/services" 
                     className="block p-3 bg-white rounded-lg border border-navy-200 hover:border-navy-300 hover:shadow-sm transition-all duration-200"
                 >
                     <div className="font-medium text-navy-600 hover:text-navy-800">

@@ -14,6 +14,7 @@ import {
   FileText
 } from 'lucide-react';
 import { notificationService } from '@/lib/notifications';
+import { getAllBlogPosts } from '@/lib/mdx-loader';
 
 import { analyticsService } from '@/lib/analytics';
 import { VerificationManager } from '@/lib/verification';
@@ -196,13 +197,26 @@ export default function AdminDashboard() {
   const paymentModule = PaymentModule.getInstance();
   
   const [activeTab, setActiveTab] = useState<'overview' | 'users' | 'verification' | 'affiliates' | 'payments' | 'analytics' | 'emails' | 'settings' | 'environment' | 'explore-formation' | 'blog'>('overview');
+  
+  // Blog posts state
+  const [blogPosts, setBlogPosts] = useState<any[]>([]);
 
   useEffect(() => {
     loadAdminData();
     loadAnalyticsData();
     refreshVerificationFlags();
     loadAffiliateData();
+    loadBlogPosts();
   }, []);
+
+  const loadBlogPosts = () => {
+    try {
+      const posts = getAllBlogPosts();
+      setBlogPosts(posts);
+    } catch (error) {
+      console.error('Error loading blog posts:', error);
+    }
+  };
 
   const loadAdminData = async () => {
     try {
@@ -658,7 +672,7 @@ Facebook,Complete UNA Formation Guide,Master UNA formation from concept to compl
 
         {/* Navigation Tabs */}
         <div className="mb-6">
-          <nav className="flex space-x-1 bg-white rounded-lg p-1 shadow-sm">
+          <nav className="flex flex-wrap gap-1 bg-white rounded-lg p-1 shadow-sm">
             {[
               { id: 'overview', label: 'Overview', icon: TrendingUp },
               { id: 'users', label: 'Users', icon: Users },
@@ -675,14 +689,15 @@ Facebook,Complete UNA Formation Guide,Master UNA formation from concept to compl
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap ${
                   activeTab === tab.id
                     ? 'bg-gold-100 text-gold-700'
                     : 'text-navy-600 hover:text-navy-900 hover:bg-navy-50'
                 }`}
               >
-                <tab.icon className="h-4 w-4" />
-                <span>{tab.label}</span>
+                <tab.icon className="h-4 w-4 flex-shrink-0" />
+                <span className="hidden sm:inline">{tab.label}</span>
+                <span className="sm:hidden">{tab.label.split(' ')[0]}</span>
               </button>
             ))}
           </nav>
@@ -3015,9 +3030,11 @@ Facebook,Complete UNA Formation Guide,Master UNA formation from concept to compl
                     <div className="space-y-3">
                       <select className="w-full p-2 border border-navy-300 rounded-lg">
                         <option value="">Select post to export</option>
-                        <option value="complete-una-formation-guide">Complete UNA Formation Guide</option>
-                        <option value="financial-management-una">Financial Management for UNAs</option>
-                        <option value="una-governance-best-practices">UNA Governance Best Practices</option>
+                        {blogPosts.map((post) => (
+                          <option key={post.slug} value={post.slug}>
+                            {post.frontmatter.title}
+                          </option>
+                        ))}
                       </select>
                       <button 
                         onClick={() => alert('MDX export functionality would be implemented here')}
@@ -3031,36 +3048,38 @@ Facebook,Complete UNA Formation Guide,Master UNA formation from concept to compl
 
                 {/* Blog Posts List */}
                 <div className="mt-6">
-                  <h4 className="font-medium text-navy-900 mb-3">Current Blog Posts</h4>
+                  <h4 className="font-medium text-navy-900 mb-3">Current Blog Posts ({blogPosts.length})</h4>
                   <div className="space-y-3">
-                    <div className="flex items-center justify-between p-3 border border-navy-200 rounded-lg">
-                      <div>
-                        <h5 className="font-medium text-navy-900">Complete UNA Formation Guide</h5>
-                        <p className="text-sm text-navy-600">Formation, guide, una</p>
+                    {blogPosts.map((post) => (
+                      <div key={post.slug} className="flex items-center justify-between p-3 border border-navy-200 rounded-lg">
+                        <div>
+                          <h5 className="font-medium text-navy-900">{post.frontmatter.title}</h5>
+                          <p className="text-sm text-navy-600">{post.frontmatter.description}</p>
+                          <p className="text-xs text-navy-500 mt-1">
+                            Published: {post.frontmatter.date} | Tags: {post.frontmatter.tags?.join(', ') || 'None'}
+                          </p>
+                        </div>
+                        <div className="flex space-x-2">
+                          <button 
+                            onClick={() => alert(`Edit functionality for ${post.slug} would be implemented here`)}
+                            className="px-3 py-1 text-sm bg-navy-600 text-white rounded hover:bg-navy-700"
+                          >
+                            Edit
+                          </button>
+                          <button 
+                            onClick={() => alert(`Export functionality for ${post.slug} would be implemented here`)}
+                            className="px-3 py-1 text-sm bg-gold-600 text-white rounded hover:bg-gold-700"
+                          >
+                            Export
+                          </button>
+                        </div>
                       </div>
-                      <div className="flex space-x-2">
-                        <button className="px-3 py-1 text-sm bg-navy-600 text-white rounded hover:bg-navy-700">
-                          Edit
-                        </button>
-                        <button className="px-3 py-1 text-sm bg-gold-600 text-white rounded hover:bg-gold-700">
-                          Export
-                        </button>
+                    ))}
+                    {blogPosts.length === 0 && (
+                      <div className="text-center py-8 text-navy-500">
+                        No blog posts found. Check your MDX loader configuration.
                       </div>
-                    </div>
-                    <div className="flex items-center justify-between p-3 border border-navy-200 rounded-lg">
-                      <div>
-                        <h5 className="font-medium text-navy-900">Financial Management for UNAs</h5>
-                        <p className="text-sm text-navy-600">Financial, management, una</p>
-                      </div>
-                      <div className="flex space-x-2">
-                        <button className="px-3 py-1 text-sm bg-navy-600 text-white rounded hover:bg-navy-700">
-                          Edit
-                        </button>
-                        <button className="px-3 py-1 text-sm bg-gold-600 text-white rounded hover:bg-gold-700">
-                          Export
-                        </button>
-                      </div>
-                    </div>
+                    )}
                   </div>
                 </div>
               </div>

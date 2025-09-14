@@ -7,26 +7,41 @@ import About from './pages/About';
 import Explore from './pages/Explore';
 import Success from './pages/Success';
 import Intake from './pages/Intake';
+import IntakeWithSupabase from './pages/IntakeWithSupabase';
 import Dashboard from './pages/Dashboard';
 import Referrals from './pages/Referrals';
-import Pricing from './pages/Pricing';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Checkout from './pages/Checkout';
-import Consultation from './pages/Consultation';
-import Resources from './pages/Resources';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
+import StatePage from './pages/StatePage';
+import Toolkit from './pages/Toolkit';
 import Contact from './pages/Contact';
+import Schedule from './pages/Schedule';
+import PaymentSuccess from './pages/PaymentSuccess';
 import AdminDashboard from './components/AdminDashboard';
 import AdminAuth from './components/AdminAuth';
 import FormationGuard from './components/FormationGuard';
 import { IntakeData } from '@/lib/types';
 import { googleAnalyticsService } from '@/lib/analytics';
-import { FLAGS } from '@/lib/flags';
 
 function App() {
   const [intakeData, setIntakeData] = useState<IntakeData | null>(null);
+
+  // Check if running with dummy credentials
+  const isDummyMode = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY === 'dummy-publishable-key' || 
+                     import.meta.env.VITE_SUPABASE_URL === 'http://localhost:9999';
+
+  // Console warning for developers
+  useEffect(() => {
+    if (isDummyMode) {
+      console.warn('🚨 UNA Platform is running with dummy credentials!');
+      console.warn('   - Stripe: Using dummy publishable key');
+      console.warn('   - Supabase: Using dummy URL (localhost:9999)');
+      console.warn('   - Replace .env values with real credentials for production');
+    }
+  }, [isDummyMode]);
 
   // Load intake data from localStorage on app start
   useEffect(() => {
@@ -59,7 +74,7 @@ function App() {
     // Track specific page events
     if (currentPath === '/explore') {
       googleAnalyticsService.trackEvent('page_view', { page: 'explore', title: 'Explore Your Path' });
-    } else if (currentPath === '/consultation') {
+    } else if (currentPath === '/services') {
       googleAnalyticsService.trackEvent('page_view', { page: 'consultation', title: 'Strategy Session' });
     } else if (currentPath === '/resources') {
       googleAnalyticsService.trackEvent('page_view', { page: 'resources', title: 'Resources' });
@@ -70,6 +85,13 @@ function App() {
 
   return (
     <div className="min-h-screen bg-cream-50">
+      {/* Dummy Credentials Warning Banner */}
+      {isDummyMode && (
+        <div className="bg-yellow-500 text-black text-center py-2 px-4 font-semibold">
+          ⚠️ Running with dummy environment values - Not connected to real Stripe/Supabase
+        </div>
+      )}
+      
       {/* Navigation */}
       <nav className="una-gradient-nav shadow-lg border-b border-[#C49A6C]/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -98,6 +120,38 @@ function App() {
                   Home
                 </NavLink>
                 
+                {/* Start */}
+                <NavLink 
+                  to="/explore" 
+                  className="px-3 py-2 rounded-md text-sm font-medium text-[#F4F1E8] hover:text-[#C49A6C] hover:bg-[#C49A6C]/10 transition-colors"
+                >
+                  Start
+                </NavLink>
+                
+                {/* Services Dropdown */}
+                <div className="relative group">
+                  <button className="px-3 py-2 rounded-md text-sm font-medium text-[#F4F1E8] hover:text-[#C49A6C] hover:bg-[#C49A6C]/10 transition-colors">
+                    Services
+                    <svg className="ml-1 h-4 w-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                  <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-md shadow-lg border border-navy-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                    <NavLink 
+                      to="/toolkit" 
+                      className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50 rounded-t-md"
+                    >
+                      UNA Formation Toolkit
+                    </NavLink>
+                    <NavLink 
+                      to="/services" 
+                      className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50 rounded-b-md"
+                    >
+                      Consulting Services
+                    </NavLink>
+                  </div>
+                </div>
+                
                 {/* Learn Dropdown */}
                 <div className="relative group">
                   <button className="px-3 py-2 rounded-md text-sm font-medium text-[#F4F1E8] hover:text-[#C49A6C] hover:bg-[#C49A6C]/10 transition-colors">
@@ -108,16 +162,10 @@ function App() {
                   </button>
                   <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-md shadow-lg border border-navy-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                     <NavLink 
-                      to="/about" 
+                      to="/blog" 
                       className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50 rounded-t-md"
                     >
-                      About
-                    </NavLink>
-                    <NavLink 
-                      to="/resources" 
-                      className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50"
-                    >
-                      Resources
+                      Blog
                     </NavLink>
                     <NavLink 
                       to="/faq" 
@@ -126,107 +174,28 @@ function App() {
                       FAQ
                     </NavLink>
                     <NavLink 
-                      to="/blog" 
-                      className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50"
-                    >
-                      Blog
-                    </NavLink>
-                    <NavLink 
                       to="/success" 
-                      className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50 rounded-b-md"
+                      className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50"
                     >
                       Success Stories
                     </NavLink>
-                  </div>
-                </div>
-                
-                {/* Start Dropdown */}
-                <div className="relative group">
-                  <button className="px-3 py-2 rounded-md text-sm font-medium text-[#F4F1E8] hover:text-[#C49A6C] hover:bg-[#C49A6C]/10 transition-colors">
-                    Start
-                    <svg className="ml-1 h-4 w-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </button>
-                  <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-md shadow-lg border border-navy-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                     <NavLink 
-                      to="/explore" 
-                      className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50 rounded-t-md"
-                    >
-                      Explore Path
-                    </NavLink>
-                    {FLAGS.ENABLE_FORMATION && (
-                      <NavLink 
-                        to="/intake" 
-                        className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50 rounded-b-md"
-                      >
-                        Start Formation
-                      </NavLink>
-                    )}
-                  </div>
-                </div>
-                
-                {/* Support Dropdown */}
-                <div className="relative group">
-                  <button className="px-3 py-2 rounded-md text-sm font-medium text-navy-600 hover:text-navy-900 hover:bg-navy-50 transition-colors">
-                    Support
-                    <svg className="ml-1 h-4 w-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </button>
-                  <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-md shadow-lg border border-navy-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                    <NavLink 
-                      to="/services" 
-                      className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50 rounded-t-md"
-                    >
-                      Services
-                    </NavLink>
-                    <NavLink 
-                      to="/consultation" 
-                      className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50"
-                    >
-                      Strategy Session
-                    </NavLink>
-                    <NavLink 
-                      to="/referrals" 
+                      to="/about" 
                       className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50 rounded-b-md"
                     >
-                      Referrals
+                      About
                     </NavLink>
                   </div>
                 </div>
                 
-                {/* Account Dropdown */}
-                <div className="relative group">
-                  <button className="px-3 py-2 rounded-md text-sm font-medium text-navy-600 hover:text-navy-900 hover:bg-navy-50 transition-colors">
-                    Account
-                    <svg className="ml-1 h-4 w-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l7-7-7-7" />
-                    </svg>
-                  </button>
-                  <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-md shadow-lg border border-navy-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                    {FLAGS.ENABLE_FORMATION && (
-                      <NavLink 
-                        to="/dashboard" 
-                        className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50 rounded-t-md"
-                      >
-                        Dashboard
-                      </NavLink>
-                    )}
-                    <NavLink 
-                      to="/pricing" 
-                      className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50"
-                    >
-                      Pricing
-                    </NavLink>
-                    <NavLink 
-                      to="/admin" 
-                      className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50 rounded-b-md"
-                    >
-                      Admin
-                    </NavLink>
-                  </div>
-                </div>
+                {/* Admin */}
+                <NavLink 
+                  to="/admin" 
+                  className="px-3 py-2 rounded-md text-sm font-medium text-[#F4F1E8] hover:text-[#C49A6C] hover:bg-[#C49A6C]/10 transition-colors"
+                >
+                  Admin
+                </NavLink>
+                
               </div>
               
               {/* Contact/Help Button */}
@@ -238,7 +207,7 @@ function App() {
                     '_blank'
                   );
                 }}
-                className="px-4 py-2 bg-gradient-to-r from-gold-500 to-amber-500 text-white text-sm font-medium rounded-md hover:from-gold-600 hover:to-amber-600 transition-all duration-200 ml-4 shadow-md hover:shadow-lg transform hover:scale-105"
+                className="px-4 py-2 bg-gradient-to-r from-[#C49A6C] to-[#A67C4A] text-white text-sm font-medium rounded-md hover:from-[#A67C4A] hover:to-[#8B6B3A] transition-all duration-200 ml-4 shadow-md hover:shadow-lg transform hover:scale-105"
               >
                 Get Help
               </button>
@@ -261,14 +230,14 @@ function App() {
               <Intake setIntakeData={setIntakeData} />
             </FormationGuard>
           } />
-          <Route path="/consultation" element={<Consultation />} />
-          <Route path="/resources" element={<Resources />} />
+          <Route path="/intake-form" element={
+            <IntakeWithSupabase setIntakeData={setIntakeData} />
+          } />
           <Route path="/dashboard" element={
             <FormationGuard feature="formation">
               <Dashboard intakeData={intakeData} />
             </FormationGuard>
           } />
-          <Route path="/pricing" element={<Pricing />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/checkout" element={
@@ -279,7 +248,11 @@ function App() {
           <Route path="/referrals" element={<Referrals />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/states/:stateCode" element={<StatePage />} />
+          <Route path="/toolkit" element={<Toolkit />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/schedule" element={<Schedule />} />
+          <Route path="/success" element={<PaymentSuccess />} />
           <Route path="/admin" element={
             <AdminAuth>
               <AdminDashboard />

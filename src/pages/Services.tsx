@@ -1,8 +1,24 @@
 import { Link } from 'react-router-dom';
-import { Check, ArrowRight, BookOpen, Calendar, Users, Shield, FileText, Target } from 'lucide-react';
+import { Check, ArrowRight, BookOpen, Users, Shield, FileText, Target, Clock } from 'lucide-react';
+import { useState } from 'react';
+import { redirectToCheckout, STRIPE_PRODUCTS } from '@/lib/stripe';
 import SEOHead from '../components/SEOHead';
 
 export default function Services() {
+  const [isLoading, setIsLoading] = useState<string | null>(null);
+
+  const handlePayment = async (productId: keyof typeof STRIPE_PRODUCTS) => {
+    setIsLoading(productId);
+    try {
+      await redirectToCheckout(productId);
+    } catch (error) {
+      console.error('Payment error:', error);
+      alert('Payment failed. Please try again.');
+    } finally {
+      setIsLoading(null);
+    }
+  };
+
   return (
     <>
       <SEOHead
@@ -82,13 +98,13 @@ export default function Services() {
               <div className="bg-gradient-to-r from-[#C49A6C] to-[#2F7E7E] rounded-full w-12 h-12 flex items-center justify-center mr-3">
                 <BookOpen className="h-6 w-6 text-white" />
               </div>
-              <h3 className="text-xl font-semibold text-[#1C1F3B] font-montserrat">Free Path Exploration</h3>
+              <h3 className="text-xl font-semibold text-white font-montserrat">Free Path Exploration</h3>
             </div>
-            <p className="text-[#1C1F3B] mb-4 font-lora">
+            <p className="text-white/90 mb-4 font-lora">
               Start your UNA formation journey with our guided assessment to understand 
               your options and get personalized strategic insights.
             </p>
-            <ul className="text-sm text-[#1C1F3B] mb-4 space-y-1 font-lora">
+            <ul className="text-sm text-white/90 mb-4 space-y-1 font-lora">
               <li className="flex items-center">
                 <Check className="h-4 w-4 text-[#C49A6C] mr-2" />
                 3-step guided assessment
@@ -112,22 +128,22 @@ export default function Services() {
             </Link>
           </div>
 
-          {/* Strategy Session */}
+          {/* Strategy Session - Payment Enabled */}
           <div className="una-card p-6">
             <div className="flex items-center mb-4">
               <div className="bg-gradient-to-r from-[#2F7E7E] to-[#7A4CA0] rounded-full w-12 h-12 flex items-center justify-center mr-3">
-                <Calendar className="h-6 w-6 text-white" />
+                <Clock className="h-6 w-6 text-white" />
               </div>
-              <h3 className="text-xl font-semibold text-[#1C1F3B] font-montserrat">Strategy Session</h3>
+              <h3 className="text-xl font-semibold text-white font-montserrat">Strategy Session</h3>
             </div>
-            <p className="text-[#1C1F3B] mb-4 font-lora">
+            <p className="text-white/90 mb-4 font-lora">
               Get personalized guidance and strategic planning through our 1:1 consultation 
               sessions tailored to your specific situation.
             </p>
-            <ul className="text-sm text-[#1C1F3B] mb-4 space-y-1 font-lora">
+            <ul className="text-sm text-white/90 mb-4 space-y-1 font-lora">
               <li className="flex items-center">
                 <Check className="h-4 w-4 text-[#C49A6C] mr-2" />
-                1 hour personalized session
+                60-90 minute personalized session
               </li>
               <li className="flex items-center">
                 <Check className="h-4 w-4 text-[#C49A6C] mr-2" />
@@ -139,22 +155,38 @@ export default function Services() {
               </li>
               <li className="flex items-center">
                 <Check className="h-4 w-4 text-[#C49A6C] mr-2" />
-                Resource recommendations
+                State-specific requirements review
+              </li>
+              <li className="flex items-center">
+                <Check className="h-4 w-4 text-[#C49A6C] mr-2" />
+                Follow-up resources
               </li>
             </ul>
             <div className="text-center mb-4">
               <div className="text-2xl font-bold text-[#C49A6C]">$250</div>
-              <div className="text-sm text-[#1C1F3B]">One-time session</div>
+              <div className="text-sm text-white/90">One-time session</div>
             </div>
-            <a 
-              href={`${import.meta.env.VITE_BOOKING_URL || 'https://calendly.com/gigi-stardust/una-consultation'}?service=consultation`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-grad btn-primary text-sm px-6 py-2 w-full text-center"
+            <button
+              onClick={() => handlePayment('STRATEGY_SESSION')}
+              disabled={isLoading === 'STRATEGY_SESSION'}
+              className={`w-full py-3 px-6 rounded-lg font-semibold text-white transition-all duration-200 ${
+                isLoading === 'STRATEGY_SESSION'
+                  ? 'bg-gray-500 cursor-not-allowed'
+                  : 'bg-gradient-to-r from-[#C49A6C] to-[#A67C4A] hover:from-[#B88A5A] hover:to-[#956B3F] hover:shadow-lg transform hover:scale-105'
+              }`}
             >
-              Schedule Strategy Session
-              <ArrowRight className="ml-2 h-4 w-4 inline" />
-            </a>
+              {isLoading === 'STRATEGY_SESSION' ? (
+                <div className="flex items-center justify-center">
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                  Processing...
+                </div>
+              ) : (
+                <div className="flex items-center justify-center">
+                  Book Strategy Session
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </div>
+              )}
+            </button>
           </div>
 
           {/* Document Creation Package */}
@@ -163,13 +195,13 @@ export default function Services() {
               <div className="bg-gradient-to-r from-[#7A4CA0] to-[#C49A6C] rounded-full w-12 h-12 flex items-center justify-center mr-3">
                 <FileText className="h-6 w-6 text-white" />
               </div>
-              <h3 className="text-xl font-semibold text-[#1C1F3B] font-montserrat">Document Creation & Guidance</h3>
+              <h3 className="text-xl font-semibold text-white font-montserrat">Document Preparation</h3>
             </div>
-            <p className="text-[#1C1F3B] mb-4 font-lora">
+            <p className="text-white/90 mb-4 font-lora">
               Complete preparation of your UNA formation documents with step-by-step guidance 
               materials tailored to your specific situation.
             </p>
-            <ul className="text-sm text-[#1C1F3B] mb-4 space-y-1 font-lora">
+            <ul className="text-sm text-white/90 mb-4 space-y-1 font-lora">
               <li className="flex items-center">
                 <Check className="h-4 w-4 text-[#C49A6C] mr-2" />
                 All consultation benefits
@@ -189,17 +221,60 @@ export default function Services() {
             </ul>
             <div className="text-center mb-4">
               <div className="text-2xl font-bold text-[#C49A6C]">$750</div>
-              <div className="text-sm text-[#1C1F3B]">Complete package</div>
+              <div className="text-sm text-white/90">Complete package</div>
+              <div className="mt-2 p-2 bg-green-500/20 border border-green-400/30 rounded-lg">
+                <div className="text-xs text-green-300 font-semibold">Strategy Session Credit</div>
+                <div className="text-xs text-green-200">
+                  $250 Strategy Session payment applies as credit toward Document Preparation
+                </div>
+              </div>
             </div>
-            <a 
-              href={`${import.meta.env.VITE_BOOKING_URL || 'https://calendly.com/gigi-stardust/una-consultation'}?service=documents`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-grad btn-primary text-sm px-6 py-2 w-full text-center"
+            <button
+              onClick={() => handlePayment('DOCUMENT_PREP')}
+              disabled={isLoading === 'DOCUMENT_PREP'}
+              className={`w-full py-3 px-6 rounded-lg font-semibold text-white transition-all duration-200 ${
+                isLoading === 'DOCUMENT_PREP'
+                  ? 'bg-gray-500 cursor-not-allowed'
+                  : 'bg-gradient-to-r from-[#2F7E7E] to-[#7A4CA0] hover:from-[#1F6B6B] hover:to-[#6B3F8F] hover:shadow-lg transform hover:scale-105'
+              }`}
             >
-              Schedule Document Creation
-              <ArrowRight className="ml-2 h-4 w-4 inline" />
-            </a>
+              {isLoading === 'DOCUMENT_PREP' ? (
+                <div className="flex items-center justify-center">
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                  Processing...
+                </div>
+              ) : (
+                <div className="flex items-center justify-center">
+                  Book Document Prep
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </div>
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Upsell Credit Explanation */}
+        <div className="mt-12 bg-gradient-to-r from-green-500/10 to-blue-500/10 rounded-lg p-8 border border-green-400/30">
+          <div className="text-center">
+            <h3 className="text-2xl font-bold text-[#1C1F3B] mb-4 font-montserrat">Strategy Session Credit System</h3>
+            <p className="text-[#2A2A28] mb-6 text-lg font-lora max-w-4xl mx-auto">
+              When you invest in a $250 Strategy Session, that payment is fully credited toward Document Preparation if you move forward. 
+              Your strategy work becomes the foundation for your documents, so you save $250 on the $750 preparation service.
+            </p>
+            <div className="grid md:grid-cols-3 gap-6 text-left">
+              <div className="bg-white/50 rounded-lg p-4">
+                <h4 className="font-semibold text-[#1C1F3B] mb-2">Step 1: Strategy Session</h4>
+                <p className="text-sm text-[#2A2A28]">Invest $250 in personalized guidance and strategic planning</p>
+              </div>
+              <div className="bg-white/50 rounded-lg p-4">
+                <h4 className="font-semibold text-[#1C1F3B] mb-2">Step 2: Document Preparation</h4>
+                <p className="text-sm text-[#2A2A28]">Apply your $250 credit toward the $750 document service</p>
+              </div>
+              <div className="bg-white/50 rounded-lg p-4">
+                <h4 className="font-semibold text-[#1C1F3B] mb-2">Step 3: Complete Package</h4>
+                <p className="text-sm text-[#2A2A28]">Pay only $500 more for full document preparation</p>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -208,20 +283,37 @@ export default function Services() {
           <div className="text-center">
             <h3 className="text-2xl font-bold text-[#1C1F3B] mb-4 font-montserrat">Bundle & Save</h3>
             <p className="text-[#2A2A28] mb-4 text-lg font-lora">
-              Book both services together and save $100
+              Get both services with maximum value - your Strategy Session becomes the foundation for your documents
             </p>
             <div className="text-3xl font-bold text-[#1C1F3B] mb-4 font-montserrat">
-              Consultation + Documents Package: <span className="text-[#C49A6C]">$1000</span>
+              Strategy Session + Document Preparation: <span className="text-[#C49A6C]">$750</span>
             </div>
-            <a 
-              href={`${import.meta.env.VITE_BOOKING_URL || 'https://calendly.com/gigi-stardust/una-consultation'}?service=bundle`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-grad btn-primary px-8 py-3 text-lg"
+            <div className="text-sm text-[#2A2A28] mb-4 font-lora">
+              <div className="line-through text-gray-500">Strategy Session: $250</div>
+              <div className="line-through text-gray-500">Document Preparation: $750</div>
+              <div className="font-semibold text-green-600">Total: $750 (Save $250!)</div>
+            </div>
+            <button
+              onClick={() => handlePayment('BUNDLE')}
+              disabled={isLoading === 'BUNDLE'}
+              className={`px-8 py-3 text-lg rounded-lg font-semibold text-white transition-all duration-200 ${
+                isLoading === 'BUNDLE'
+                  ? 'bg-gray-500 cursor-not-allowed'
+                  : 'bg-gradient-to-r from-[#7A4CA0] to-[#C49A6C] hover:from-[#6B3F8F] hover:to-[#B88A5A] hover:shadow-lg transform hover:scale-105'
+              }`}
             >
-              Schedule Bundle Package
-              <ArrowRight className="ml-2 h-5 w-5 inline" />
-            </a>
+              {isLoading === 'BUNDLE' ? (
+                <div className="flex items-center justify-center">
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                  Processing...
+                </div>
+              ) : (
+                <div className="flex items-center justify-center">
+                  Book Bundle Package
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </div>
+              )}
+            </button>
           </div>
         </div>
       </div>
@@ -348,10 +440,27 @@ export default function Services() {
               Explore Your Path
               <ArrowRight className="ml-2 h-4 w-4 inline" />
             </Link>
-            <Link to="/consultation" className="btn-grad btn-primary">
-              Schedule Strategy Session
-              <ArrowRight className="ml-2 h-4 w-4 inline" />
-            </Link>
+            <button
+              onClick={() => handlePayment('STRATEGY_SESSION')}
+              disabled={isLoading === 'STRATEGY_SESSION'}
+              className={`px-8 py-3 rounded-lg font-semibold text-white transition-all duration-200 ${
+                isLoading === 'STRATEGY_SESSION'
+                  ? 'bg-gray-500 cursor-not-allowed'
+                  : 'bg-gradient-to-r from-[#C49A6C] to-[#A67C4A] hover:from-[#B88A5A] hover:to-[#956B3F] hover:shadow-lg transform hover:scale-105'
+              }`}
+            >
+              {isLoading === 'STRATEGY_SESSION' ? (
+                <div className="flex items-center justify-center">
+                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                  Processing...
+                </div>
+              ) : (
+                <div className="flex items-center justify-center">
+                  Book Strategy Session
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </div>
+              )}
+            </button>
           </div>
         </div>
       </div>

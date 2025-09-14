@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { ArrowLeft, ArrowRight, CheckCircle, Calendar } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle, Calendar, MapPin, DollarSign, FileText, Building } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { ExploreAnswers } from '@/lib/types';
 import { detectUserLocation, getStateSuggestionText, LocationHint } from '@/lib/geolocation';
 import { generateStrategyInsights, generateToolkitRecommendations, generateExecutiveSummary } from '@/lib/strategy-insights';
@@ -26,6 +27,114 @@ export default function Explore() {
     visionDescription: '',
     overallImpact: ''
   });
+
+  // State snippets data (Top 10 states)
+  const stateSnippets: Record<string, any> = {
+    'CA': {
+      state_code: 'CA',
+      title: 'California UNA Formation',
+      summary: 'California recognizes UNAs under the Nonprofit Corporation Law with strong legal protections. Filing fee: $30-50, annual reports required ($20-40), tax registration needed for organizations over $25K gross receipts.',
+      requirements: {
+        filing_fee: '$30-50',
+        annual_reports: { required: true, fee: '$20-40' },
+        tax_registration: { required: true, threshold: '$25,000 gross receipts' }
+      }
+    },
+    'TX': {
+      state_code: 'TX',
+      title: 'Texas UNA Formation',
+      summary: 'Texas has one of the most UNA-friendly frameworks with clear statutes. Filing fee: $25, no annual reports required, straightforward tax registration. Excellent choice for minimal regulatory burden.',
+      requirements: {
+        filing_fee: '$25',
+        annual_reports: { required: false, fee: '$0' },
+        tax_registration: { required: true, threshold: 'All organizations' }
+      }
+    },
+    'FL': {
+      state_code: 'FL',
+      title: 'Florida UNA Formation',
+      summary: 'Florida recognizes UNAs under its Nonprofit Corporation Act with solid protections. Filing fee: $35-50, annual reports required ($61.25), tax registration needed for taxable activities.',
+      requirements: {
+        filing_fee: '$35-50',
+        annual_reports: { required: true, fee: '$61.25' },
+        tax_registration: { required: true, threshold: 'Taxable activities' }
+      }
+    },
+    'NY': {
+      state_code: 'NY',
+      title: 'New York UNA Formation',
+      summary: 'New York has a complex legal framework with requirements varying by county. Filing fees: $50-100, annual reports required (varies by county), mandatory tax registration. Requires careful navigation.',
+      requirements: {
+        filing_fee: '$50-100',
+        annual_reports: { required: true, fee: 'Varies by county' },
+        tax_registration: { required: true, threshold: 'All organizations' }
+      }
+    },
+    'IL': {
+      state_code: 'IL',
+      title: 'Illinois UNA Formation',
+      summary: 'Illinois provides clear UNA recognition with solid legal protections. Filing fee: $50, annual reports required ($10), tax registration needed for taxable activities. Central location advantage.',
+      requirements: {
+        filing_fee: '$50',
+        annual_reports: { required: true, fee: '$10' },
+        tax_registration: { required: true, threshold: 'Taxable activities' }
+      }
+    },
+    'PA': {
+      state_code: 'PA',
+      title: 'Pennsylvania UNA Formation',
+      summary: 'Pennsylvania recognizes UNAs with good legal protections. Filing fee: $125, annual reports required ($7), tax registration needed for taxable activities. Higher initial cost but low ongoing fees.',
+      requirements: {
+        filing_fee: '$125',
+        annual_reports: { required: true, fee: '$7' },
+        tax_registration: { required: true, threshold: 'Taxable activities' }
+      }
+    },
+    'OH': {
+      state_code: 'OH',
+      title: 'Ohio UNA Formation',
+      summary: 'Ohio has a straightforward approach with clear guidelines and minimal complexity. Filing fee: $25, annual reports required ($5), tax registration needed for taxable activities. Very affordable option.',
+      requirements: {
+        filing_fee: '$25',
+        annual_reports: { required: true, fee: '$5' },
+        tax_registration: { required: true, threshold: 'Taxable activities' }
+      }
+    },
+    'GA': {
+      state_code: 'GA',
+      title: 'Georgia UNA Formation',
+      summary: 'Georgia provides clear UNA recognition with solid legal protections. Filing fee: $30, annual reports required ($20), tax registration needed for taxable activities. Growing economy advantage.',
+      requirements: {
+        filing_fee: '$30',
+        annual_reports: { required: true, fee: '$20' },
+        tax_registration: { required: true, threshold: 'Taxable activities' }
+      }
+    },
+    'NC': {
+      state_code: 'NC',
+      title: 'North Carolina UNA Formation',
+      summary: 'North Carolina has a well-established legal framework with comprehensive protections. Filing fee: $60, annual reports required ($15), tax registration needed for taxable activities. Moderate costs overall.',
+      requirements: {
+        filing_fee: '$60',
+        annual_reports: { required: true, fee: '$15' },
+        tax_registration: { required: true, threshold: 'Taxable activities' }
+      }
+    },
+    'MI': {
+      state_code: 'MI',
+      title: 'Michigan UNA Formation',
+      summary: 'Michigan provides clear UNA recognition with solid legal protections. Filing fee: $20, annual reports required ($10), tax registration needed for taxable activities. Very affordable with low ongoing costs.',
+      requirements: {
+        filing_fee: '$20',
+        annual_reports: { required: true, fee: '$10' },
+        tax_registration: { required: true, threshold: 'Taxable activities' }
+      }
+    }
+  };
+
+  const getStateSnippet = (stateCode: string) => {
+    return stateSnippets[stateCode] || null;
+  };
 
 
 
@@ -190,6 +299,50 @@ export default function Explore() {
                     </option>
                   ))}
                 </select>
+
+                {/* State Snippet Display */}
+                {answers.entityState && getStateSnippet(answers.entityState) && (
+                  <div className="mt-6 bg-gradient-to-r from-[#C49A6C]/10 to-[#B88A5A]/10 rounded-lg p-6 border border-[#C49A6C]/20">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex items-center">
+                        <MapPin className="h-5 w-5 text-[#C49A6C] mr-2" />
+                        <h3 className="text-lg font-semibold text-navy-900">
+                          {getStateSnippet(answers.entityState).title}
+                        </h3>
+                      </div>
+                      <Link 
+                        to={`/states/${answers.entityState}`}
+                        className="text-[#C49A6C] hover:text-[#B88A5A] text-sm font-medium"
+                      >
+                        View Details →
+                      </Link>
+                    </div>
+                    
+                    <p className="text-navy-700 mb-4">{getStateSnippet(answers.entityState).summary}</p>
+                    
+                    <div className="grid grid-cols-3 gap-4 text-sm">
+                      <div className="flex items-center">
+                        <DollarSign className="h-4 w-4 text-[#C49A6C] mr-2" />
+                        <span className="font-medium text-navy-900">Filing Fee:</span>
+                        <span className="ml-1 text-navy-700">{getStateSnippet(answers.entityState).requirements.filing_fee}</span>
+                      </div>
+                      <div className="flex items-center">
+                        <FileText className="h-4 w-4 text-[#C49A6C] mr-2" />
+                        <span className="font-medium text-navy-900">Annual Reports:</span>
+                        <span className="ml-1 text-navy-700">
+                          {getStateSnippet(answers.entityState).requirements.annual_reports.required ? 'Yes' : 'No'}
+                        </span>
+                      </div>
+                      <div className="flex items-center">
+                        <Building className="h-4 w-4 text-[#C49A6C] mr-2" />
+                        <span className="font-medium text-navy-900">Tax Registration:</span>
+                        <span className="ml-1 text-navy-700">
+                          {getStateSnippet(answers.entityState).requirements.tax_registration.required ? 'Required' : 'Optional'}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
               
 
@@ -393,7 +546,7 @@ export default function Explore() {
           <div className="flex-1 mb-3">
             <div className="h-3 bg-navy-200 rounded-full overflow-hidden">
               <div 
-                className="h-3 bg-gradient-to-r from-gold-500 to-gold-600 rounded-full transition-all duration-500 ease-out"
+                className="h-3 bg-gradient-to-r from-[#C49A6C] to-[#A67C4A] rounded-full transition-all duration-500 ease-out"
                 style={{ width: `${(currentStep / 3) * 100}%` }}
               />
             </div>

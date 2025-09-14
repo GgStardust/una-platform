@@ -12,7 +12,7 @@ interface AffiliateLinkProps {
 export default function AffiliateLink({ 
   partnerId, 
   children = "Learn More", 
-  className = "text-gold-600 hover:text-gold-800 font-medium text-sm",
+  className = "text-white hover:text-white/80 font-medium text-sm",
   fallbackText = "Learn More"
 }: AffiliateLinkProps) {
   // Find the partner in our affiliate data

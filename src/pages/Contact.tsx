@@ -238,7 +238,7 @@ export default function Contact() {
               Prefer to schedule a consultation instead?
             </p>
             <a 
-              href="/consultation"
+              href="/services"
               className="btn-grad btn-secondary"
             >
               Schedule Consultation

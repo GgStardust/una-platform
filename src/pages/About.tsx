@@ -61,8 +61,8 @@ export default function About() {
               <div className="bg-gradient-to-r from-[#C49A6C] to-[#2F7E7E] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
                 <Target className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-[#F4F1E8] font-montserrat">Mission-Aligned</h3>
-              <p className="text-[#F4F1E8] font-lora">
+              <h3 className="text-xl font-semibold mb-2 text-white font-montserrat">Mission-Aligned</h3>
+              <p className="text-white/90 font-lora">
                 Structures that serve your creative vision and collective purpose, not bureaucratic requirements.
               </p>
             </div>
@@ -71,8 +71,8 @@ export default function About() {
               <div className="bg-gradient-to-r from-[#2F7E7E] to-[#7A4CA0] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
                 <Shield className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-[#F4F1E8] font-montserrat">Legal Protection</h3>
-              <p className="text-[#F4F1E8] font-lora">
+              <h3 className="text-xl font-semibold mb-2 text-white font-montserrat">Legal Protection</h3>
+              <p className="text-white/90 font-lora">
                 Professional agreements and filings that establish clear governance and protect collective interests.
               </p>
             </div>
@@ -81,8 +81,8 @@ export default function About() {
               <div className="bg-gradient-to-r from-[#7A4CA0] to-[#C49A6C] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
                 <Users className="h-8 w-8 text-white" />
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-[#F4F1E8] font-montserrat">Collective Integrity</h3>
-              <p className="text-[#F4F1E8] font-lora">
+              <h3 className="text-xl font-semibold mb-2 text-white font-montserrat">Collective Integrity</h3>
+              <p className="text-white/90 font-lora">
                 Frameworks that honor collaboration, sovereignty, and the unique needs of mission-driven groups.
               </p>
             </div>
@@ -189,12 +189,12 @@ export default function About() {
               <div className="h-24 w-24 rounded-full bg-gradient-to-r from-[#C49A6C] to-[#2F7E7E] mx-auto mb-4 flex items-center justify-center">
                 <Users className="h-12 w-12 text-white" />
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-[#F4F1E8] font-montserrat">Gigi Stardust</h3>
+              <h3 className="text-xl font-semibold mb-2 text-white font-montserrat">Gigi Stardust</h3>
               <p className="text-[#C49A6C] font-medium mb-2">Founder & Systems Architect</p>
-              <p className="text-[#F4F1E8] mb-4 font-lora">
+              <p className="text-white/90 mb-4 font-lora">
                 Creator of Stardust to Sovereignty™ and architect of purpose-driven organizational structures.
               </p>
-              <div className="text-sm text-[#F4F1E8]">
+              <div className="text-sm text-white/90">
                 <p>Systems Architecture</p>
                 <p>Organizational Design</p>
                 <p>Consciousness Studies</p>
@@ -206,12 +206,12 @@ export default function About() {
               <div className="h-24 w-24 rounded-full bg-gradient-to-r from-[#2F7E7E] to-[#7A4CA0] mx-auto mb-4 flex items-center justify-center">
                 <Lightbulb className="h-12 w-12 text-white" />
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-[#F4F1E8] font-montserrat">Stardust to Sovereignty™</h3>
+              <h3 className="text-xl font-semibold mb-2 text-white font-montserrat">Stardust to Sovereignty™</h3>
               <p className="text-[#C49A6C] font-medium mb-2">Philosophical Foundation</p>
-              <p className="text-[#F4F1E8] mb-4 font-lora">
+              <p className="text-white/90 mb-4 font-lora">
                 Sovereign design system expressed through writing, art, and community portals.
               </p>
-              <div className="text-sm text-[#F4F1E8]">
+              <div className="text-sm text-white/90">
                 <p>Metaphysics & Neuroscience</p>
                 <p>Cosmology & Creative Practice</p>
                 <p>Interspecies Intelligence</p>
@@ -232,10 +232,10 @@ export default function About() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              to="/intake"
+              to="/consultation"
               className="bg-white text-navy-600 hover:bg-cream-50 font-semibold py-3 px-8 rounded-lg transition-colors duration-200"
             >
-              Start Your UNA Formation
+              Book Strategy Session
             </Link>
             <Link
               to="/success"

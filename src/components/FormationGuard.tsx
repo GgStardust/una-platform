@@ -17,7 +17,7 @@ export default function FormationGuard({ children, feature = 'formation' }: Form
   if (!isFeatureEnabled) {
     return (
       <Navigate 
-        to="/consultation" 
+        to="/services" 
         replace 
         state={{ 
           message: "Automated docs are coming soon. Book a session to prepare documents manually.",

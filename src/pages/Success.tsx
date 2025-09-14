@@ -654,8 +654,8 @@ export default function Success() {
           <p className="text-xl text-navy-100 mb-8">
             Start your UNA formation journey and join these inspiring organizations.
           </p>
-          <Link to="/intake" className="bg-white text-navy-600 hover:bg-navy-100 font-semibold py-3 px-8 rounded-lg transition-colors duration-200">
-            Get Started Now
+          <Link to="/consultation" className="bg-white text-navy-600 hover:bg-navy-100 font-semibold py-3 px-8 rounded-lg transition-colors duration-200">
+            Book Strategy Session
           </Link>
         </div>
       </div>
@@ -749,11 +749,11 @@ export default function Success() {
                   Ready to start your own UNA journey?
                 </span>
                 <Link
-                  to="/intake"
+                  to="/consultation"
                   onClick={closeCaseStudy}
                   className="bg-gold-600 text-white py-2 px-6 rounded-lg hover:bg-gold-700 transition-colors duration-200"
                 >
-                  Get Started
+                  Book Strategy Session
                 </Link>
               </div>
             </div>

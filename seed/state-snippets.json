@@ -1,0 +1,212 @@
+[
+  {
+    "state_code": "CA",
+    "title": "California UNA Formation",
+    "summary": "California recognizes UNAs under the Nonprofit Corporation Law with strong legal protections. Filing fee: $30-50, annual reports required ($20-40), tax registration needed for organizations over $25K gross receipts.",
+    "requirements": {
+      "recognition": "Nonprofit Corporation Law",
+      "filing_fee": "$30-50",
+      "annual_reports": {
+        "required": true,
+        "fee": "$20-40",
+        "description": "Basic organizational information and financial summaries"
+      },
+      "tax_registration": {
+        "required": true,
+        "threshold": "$25,000 gross receipts",
+        "agency": "Franchise Tax Board"
+      },
+      "banking": "Generally familiar with UNA accounts",
+      "property_ownership": "Well-established through case law"
+    }
+  },
+  {
+    "state_code": "TX",
+    "title": "Texas UNA Formation",
+    "summary": "Texas has one of the most UNA-friendly frameworks with clear statutes. Filing fee: $25, no annual reports required, straightforward tax registration. Excellent choice for minimal regulatory burden.",
+    "requirements": {
+      "recognition": "Texas Business Organizations Code",
+      "filing_fee": "$25",
+      "annual_reports": {
+        "required": false,
+        "fee": "$0",
+        "description": "No annual reports required"
+      },
+      "tax_registration": {
+        "required": true,
+        "threshold": "All organizations",
+        "agency": "Comptroller"
+      },
+      "banking": "Very familiar with UNA accounts",
+      "property_ownership": "Well-established"
+    }
+  },
+  {
+    "state_code": "FL",
+    "title": "Florida UNA Formation",
+    "summary": "Florida recognizes UNAs under its Nonprofit Corporation Act with solid protections. Filing fee: $35-50, annual reports required ($61.25), tax registration needed for taxable activities.",
+    "requirements": {
+      "recognition": "Nonprofit Corporation Act",
+      "filing_fee": "$35-50",
+      "annual_reports": {
+        "required": true,
+        "fee": "$61.25",
+        "description": "Basic organizational information"
+      },
+      "tax_registration": {
+        "required": true,
+        "threshold": "Taxable activities",
+        "agency": "Department of Revenue"
+      },
+      "banking": "Generally familiar with UNA accounts",
+      "property_ownership": "Well-established"
+    }
+  },
+  {
+    "state_code": "NY",
+    "title": "New York UNA Formation",
+    "summary": "New York has a complex legal framework with requirements varying by county. Filing fees: $50-100, annual reports required (varies by county), mandatory tax registration. Requires careful navigation.",
+    "requirements": {
+      "recognition": "Varies by county",
+      "filing_fee": "$50-100",
+      "annual_reports": {
+        "required": true,
+        "fee": "Varies by county",
+        "description": "Requirements vary by county and organizational size"
+      },
+      "tax_registration": {
+        "required": true,
+        "threshold": "All organizations",
+        "agency": "Department of Taxation and Finance"
+      },
+      "banking": "Familiar but may require additional documentation",
+      "property_ownership": "Well-established but may require additional steps"
+    }
+  },
+  {
+    "state_code": "IL",
+    "title": "Illinois UNA Formation",
+    "summary": "Illinois provides clear UNA recognition with solid legal protections. Filing fee: $50, annual reports required ($10), tax registration needed for taxable activities. Central location advantage.",
+    "requirements": {
+      "recognition": "General Not For Profit Corporation Act",
+      "filing_fee": "$50",
+      "annual_reports": {
+        "required": true,
+        "fee": "$10",
+        "description": "Basic organizational information"
+      },
+      "tax_registration": {
+        "required": true,
+        "threshold": "Taxable activities",
+        "agency": "Department of Revenue"
+      },
+      "banking": "Generally familiar with UNA accounts",
+      "property_ownership": "Well-established"
+    }
+  },
+  {
+    "state_code": "PA",
+    "title": "Pennsylvania UNA Formation",
+    "summary": "Pennsylvania recognizes UNAs with good legal protections. Filing fee: $125, annual reports required ($7), tax registration needed for taxable activities. Higher initial cost but low ongoing fees.",
+    "requirements": {
+      "recognition": "Nonprofit Corporation Law",
+      "filing_fee": "$125",
+      "annual_reports": {
+        "required": true,
+        "fee": "$7",
+        "description": "Basic organizational information"
+      },
+      "tax_registration": {
+        "required": true,
+        "threshold": "Taxable activities",
+        "agency": "Department of Revenue"
+      },
+      "banking": "Generally familiar with UNA accounts",
+      "property_ownership": "Well-established"
+    }
+  },
+  {
+    "state_code": "OH",
+    "title": "Ohio UNA Formation",
+    "summary": "Ohio has a straightforward approach with clear guidelines and minimal complexity. Filing fee: $25, annual reports required ($5), tax registration needed for taxable activities. Very affordable option.",
+    "requirements": {
+      "recognition": "Nonprofit Corporation Law",
+      "filing_fee": "$25",
+      "annual_reports": {
+        "required": true,
+        "fee": "$5",
+        "description": "Basic organizational information"
+      },
+      "tax_registration": {
+        "required": true,
+        "threshold": "Taxable activities",
+        "agency": "Department of Taxation"
+      },
+      "banking": "Generally familiar with UNA accounts",
+      "property_ownership": "Well-established"
+    }
+  },
+  {
+    "state_code": "GA",
+    "title": "Georgia UNA Formation",
+    "summary": "Georgia provides clear UNA recognition with solid legal protections. Filing fee: $30, annual reports required ($20), tax registration needed for taxable activities. Growing economy advantage.",
+    "requirements": {
+      "recognition": "Nonprofit Corporation Code",
+      "filing_fee": "$30",
+      "annual_reports": {
+        "required": true,
+        "fee": "$20",
+        "description": "Basic organizational information"
+      },
+      "tax_registration": {
+        "required": true,
+        "threshold": "Taxable activities",
+        "agency": "Department of Revenue"
+      },
+      "banking": "Generally familiar with UNA accounts",
+      "property_ownership": "Well-established"
+    }
+  },
+  {
+    "state_code": "NC",
+    "title": "North Carolina UNA Formation",
+    "summary": "North Carolina has a well-established legal framework with comprehensive protections. Filing fee: $60, annual reports required ($15), tax registration needed for taxable activities. Moderate costs overall.",
+    "requirements": {
+      "recognition": "Nonprofit Corporation Act",
+      "filing_fee": "$60",
+      "annual_reports": {
+        "required": true,
+        "fee": "$15",
+        "description": "Basic organizational information"
+      },
+      "tax_registration": {
+        "required": true,
+        "threshold": "Taxable activities",
+        "agency": "Department of Revenue"
+      },
+      "banking": "Generally familiar with UNA accounts",
+      "property_ownership": "Well-established"
+    }
+  },
+  {
+    "state_code": "MI",
+    "title": "Michigan UNA Formation",
+    "summary": "Michigan provides clear UNA recognition with solid legal protections. Filing fee: $20, annual reports required ($10), tax registration needed for taxable activities. Very affordable with low ongoing costs.",
+    "requirements": {
+      "recognition": "Nonprofit Corporation Act",
+      "filing_fee": "$20",
+      "annual_reports": {
+        "required": true,
+        "fee": "$10",
+        "description": "Basic organizational information"
+      },
+      "tax_registration": {
+        "required": true,
+        "threshold": "Taxable activities",
+        "agency": "Department of Treasury"
+      },
+      "banking": "Generally familiar with UNA accounts",
+      "property_ownership": "Well-established"
+    }
+  }
+]

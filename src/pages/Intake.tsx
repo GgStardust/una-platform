@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, Save, AlertCircle, CheckCircle, Lightbulb, Users, Shield } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Save, AlertCircle, CheckCircle, Lightbulb, Users, Shield, MapPin, DollarSign, FileText, Building } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, Link } from 'react-router-dom';
@@ -13,12 +13,139 @@ import { getSmartSuggestions, validateCaliforniaRequirements } from '@/lib/ai-en
 
 interface IntakeProps {
   setIntakeData: (data: IntakeData | null) => void;
+  formMethods?: any;
+  onSubmit?: (data: IntakeFormData) => Promise<void>;
+  isSaving?: boolean;
+  saveError?: string | null;
 }
 
-// California-only platform
-const CA_ONLY = ['CA'];
+// All 50 states supported
+const ALL_STATES = [
+  'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA',
+  'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
+  'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ',
+  'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC',
+  'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
+];
 
-export default function Intake({ setIntakeData }: IntakeProps) {
+// Top 10 states with snippets
+const TOP_10_STATES = ['CA', 'TX', 'FL', 'NY', 'IL', 'PA', 'OH', 'GA', 'NC', 'MI'];
+
+// State snippets data (Top 10 states)
+const stateSnippets: Record<string, any> = {
+  'CA': {
+    state_code: 'CA',
+    title: 'California UNA Formation',
+    summary: 'California recognizes UNAs under the Nonprofit Corporation Law with strong legal protections. Filing fee: $30-50, annual reports required ($20-40), tax registration needed for organizations over $25K gross receipts.',
+    requirements: {
+      filing_fee: '$30-50',
+      annual_reports: { required: true, fee: '$20-40' },
+      tax_registration: { required: true, threshold: '$25,000 gross receipts' }
+    }
+  },
+  'TX': {
+    state_code: 'TX',
+    title: 'Texas UNA Formation',
+    summary: 'Texas has one of the most UNA-friendly frameworks with clear statutes. Filing fee: $25, no annual reports required, straightforward tax registration. Excellent choice for minimal regulatory burden.',
+    requirements: {
+      filing_fee: '$25',
+      annual_reports: { required: false, fee: '$0' },
+      tax_registration: { required: true, threshold: 'All organizations' }
+    }
+  },
+  'FL': {
+    state_code: 'FL',
+    title: 'Florida UNA Formation',
+    summary: 'Florida recognizes UNAs under its Nonprofit Corporation Act with solid protections. Filing fee: $35-50, annual reports required ($61.25), tax registration needed for taxable activities.',
+    requirements: {
+      filing_fee: '$35-50',
+      annual_reports: { required: true, fee: '$61.25' },
+      tax_registration: { required: true, threshold: 'Taxable activities' }
+    }
+  },
+  'NY': {
+    state_code: 'NY',
+    title: 'New York UNA Formation',
+    summary: 'New York has a complex legal framework with requirements varying by county. Filing fees: $50-100, annual reports required (varies by county), mandatory tax registration. Requires careful navigation.',
+    requirements: {
+      filing_fee: '$50-100',
+      annual_reports: { required: true, fee: 'Varies by county' },
+      tax_registration: { required: true, threshold: 'All organizations' }
+    }
+  },
+  'IL': {
+    state_code: 'IL',
+    title: 'Illinois UNA Formation',
+    summary: 'Illinois provides clear UNA recognition with solid legal protections. Filing fee: $50, annual reports required ($10), tax registration needed for taxable activities. Central location advantage.',
+    requirements: {
+      filing_fee: '$50',
+      annual_reports: { required: true, fee: '$10' },
+      tax_registration: { required: true, threshold: 'Taxable activities' }
+    }
+  },
+  'PA': {
+    state_code: 'PA',
+    title: 'Pennsylvania UNA Formation',
+    summary: 'Pennsylvania recognizes UNAs with good legal protections. Filing fee: $125, annual reports required ($7), tax registration needed for taxable activities. Higher initial cost but low ongoing fees.',
+    requirements: {
+      filing_fee: '$125',
+      annual_reports: { required: true, fee: '$7' },
+      tax_registration: { required: true, threshold: 'Taxable activities' }
+    }
+  },
+  'OH': {
+    state_code: 'OH',
+    title: 'Ohio UNA Formation',
+    summary: 'Ohio has a straightforward approach with clear guidelines and minimal complexity. Filing fee: $25, annual reports required ($5), tax registration needed for taxable activities. Very affordable option.',
+    requirements: {
+      filing_fee: '$25',
+      annual_reports: { required: true, fee: '$5' },
+      tax_registration: { required: true, threshold: 'Taxable activities' }
+    }
+  },
+  'GA': {
+    state_code: 'GA',
+    title: 'Georgia UNA Formation',
+    summary: 'Georgia provides clear UNA recognition with solid legal protections. Filing fee: $30, annual reports required ($20), tax registration needed for taxable activities. Growing economy advantage.',
+    requirements: {
+      filing_fee: '$30',
+      annual_reports: { required: true, fee: '$20' },
+      tax_registration: { required: true, threshold: 'Taxable activities' }
+    }
+  },
+  'NC': {
+    state_code: 'NC',
+    title: 'North Carolina UNA Formation',
+    summary: 'North Carolina has a well-established legal framework with comprehensive protections. Filing fee: $60, annual reports required ($15), tax registration needed for taxable activities. Moderate costs overall.',
+    requirements: {
+      filing_fee: '$60',
+      annual_reports: { required: true, fee: '$15' },
+      tax_registration: { required: true, threshold: 'Taxable activities' }
+    }
+  },
+  'MI': {
+    state_code: 'MI',
+    title: 'Michigan UNA Formation',
+    summary: 'Michigan provides clear UNA recognition with solid legal protections. Filing fee: $20, annual reports required ($10), tax registration needed for taxable activities. Very affordable with low ongoing costs.',
+    requirements: {
+      filing_fee: '$20',
+      annual_reports: { required: true, fee: '$10' },
+      tax_registration: { required: true, threshold: 'Taxable activities' }
+    }
+  }
+};
+
+const getStateSnippet = (stateCode: string) => {
+  return stateSnippets[stateCode] || null;
+};
+
+export default function Intake({ 
+  setIntakeData, 
+  formMethods, 
+  onSubmit: customOnSubmit, 
+  isSaving: externalSaving, 
+  saveError: externalSaveError 
+}: IntakeProps) {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -28,13 +155,8 @@ export default function Intake({ setIntakeData }: IntakeProps) {
   const [isPrefilledFromExplore, setIsPrefilledFromExplore] = useState(false);
 
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    setValue,
-    formState: { errors, isValid },
-  } = useForm<IntakeFormData>({
+  // Use external form methods if provided, otherwise create new ones
+  const form = useForm<IntakeFormData>({
     resolver: zodResolver(intakeFormSchema),
     mode: 'onChange',
     defaultValues: {
@@ -80,6 +202,14 @@ export default function Intake({ setIntakeData }: IntakeProps) {
       witnessSignatureDate: ''
     }
   });
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors, isValid },
+  } = formMethods || form;
 
   const watchedValues = watch();
 
@@ -186,18 +316,22 @@ export default function Intake({ setIntakeData }: IntakeProps) {
         data.statesOfOperation.split(',').map(s => s.trim()).filter(s => s.length > 0) : 
         undefined;
 
-    const completeData: IntakeData = {
+      const completeData: IntakeData = {
         ...data,
         statesOfOperation: statesArray,
         insigniaFile: insigniaFile || undefined,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString()
-    };
-    
-      // Save data and go to summary page (no PDF generation yet)
-    saveIntakeData(completeData);
-    setIntakeData(completeData);
-      setIntakeData(completeData);
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+      
+      // Use custom onSubmit if provided (Supabase), otherwise use localStorage
+      if (customOnSubmit) {
+        await customOnSubmit(data);
+      } else {
+        // Original localStorage approach
+        saveIntakeData(completeData);
+        setIntakeData(completeData);
+      }
       
       // Move to summary step
       setCurrentStep(8);
@@ -477,17 +611,77 @@ export default function Intake({ setIntakeData }: IntakeProps) {
                   className={`input-field ${errors.entityState ? 'border-red-500' : ''}`}
                 >
                   <option value="">Select State</option>
-                  {CA_ONLY.map(state => (
-                    <option key={state} value={state}>{state === 'CA' ? 'California' : state}</option>
+                  {ALL_STATES.map(state => (
+                    <option key={state} value={state}>
+                      {state === 'CA' ? 'California' : 
+                       state === 'TX' ? 'Texas' :
+                       state === 'FL' ? 'Florida' :
+                       state === 'NY' ? 'New York' :
+                       state === 'IL' ? 'Illinois' :
+                       state === 'PA' ? 'Pennsylvania' :
+                       state === 'OH' ? 'Ohio' :
+                       state === 'GA' ? 'Georgia' :
+                       state === 'NC' ? 'North Carolina' :
+                       state === 'MI' ? 'Michigan' : state}
+                    </option>
                   ))}
                 </select>
                 {errors.entityState && (
                   <p className="mt-1 text-sm text-red-600">{errors.entityState.message}</p>
                 )}
+
+                {/* State Snippet Display */}
+                {watchedValues.entityState && getStateSnippet(watchedValues.entityState) && (
+                  <div className="mt-4 bg-gradient-to-r from-[#C49A6C]/10 to-[#B88A5A]/10 rounded-lg p-4 border border-[#C49A6C]/20">
+                    <div className="flex items-start justify-between mb-3">
+                      <div className="flex items-center">
+                        <MapPin className="h-4 w-4 text-[#C49A6C] mr-2" />
+                        <h4 className="text-sm font-semibold text-navy-900">
+                          {getStateSnippet(watchedValues.entityState).title}
+                        </h4>
+                      </div>
+                      <Link 
+                        to={`/states/${watchedValues.entityState}`}
+                        className="text-[#C49A6C] hover:text-[#B88A5A] text-xs font-medium"
+                      >
+                        View Details →
+                      </Link>
+                    </div>
+                    
+                    <p className="text-xs text-navy-700 mb-3">{getStateSnippet(watchedValues.entityState).summary}</p>
+                    
+                    <div className="grid grid-cols-3 gap-3 text-xs">
+                      <div className="flex items-center">
+                        <DollarSign className="h-3 w-3 text-[#C49A6C] mr-1" />
+                        <span className="font-medium text-navy-900">Filing:</span>
+                        <span className="ml-1 text-navy-700">{getStateSnippet(watchedValues.entityState).requirements.filing_fee}</span>
+                      </div>
+                      <div className="flex items-center">
+                        <FileText className="h-3 w-3 text-[#C49A6C] mr-1" />
+                        <span className="font-medium text-navy-900">Reports:</span>
+                        <span className="ml-1 text-navy-700">
+                          {getStateSnippet(watchedValues.entityState).requirements.annual_reports.required ? 'Yes' : 'No'}
+                        </span>
+                      </div>
+                      <div className="flex items-center">
+                        <Building className="h-3 w-3 text-[#C49A6C] mr-1" />
+                        <span className="font-medium text-navy-900">Tax:</span>
+                        <span className="ml-1 text-navy-700">
+                          {getStateSnippet(watchedValues.entityState).requirements.tax_registration.required ? 'Required' : 'Optional'}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                )}
                 
-                {/* CA-only notice */}
+                {/* State support notice */}
                 <p className="mt-2 text-sm text-gold-600">
-                  Our platform is currently optimized for California-based organizations.
+                  We handle {watchedValues.entityState ? `${watchedValues.entityState} ` : ''}requirements. 
+                  {watchedValues.entityState && getStateSnippet(watchedValues.entityState) ? (
+                    <span> See details → <Link to={`/states/${watchedValues.entityState}`} className="text-[#C49A6C] hover:underline">/states/{watchedValues.entityState}</Link></span>
+                  ) : (
+                    <span> For detailed state requirements, check our <Link to="/blog/top-10-states-una-requirements" className="text-[#C49A6C] hover:underline">Top 10 States Guide</Link>.</span>
+                  )}
                 </p>
               </div>
             </div>
@@ -1685,7 +1879,7 @@ export default function Intake({ setIntakeData }: IntakeProps) {
           <div className="mt-4">
             <div className="bg-navy-200 rounded-full h-3 overflow-hidden">
               <div 
-                className="bg-gradient-to-r from-gold-500 to-gold-600 h-3 rounded-full transition-all duration-500 ease-out shadow-sm"
+                className="bg-gradient-to-r from-[#C49A6C] to-[#A67C4A] h-3 rounded-full transition-all duration-500 ease-out shadow-sm"
                 style={{ width: `${(currentStep / 8) * 100}%` }}
               ></div>
             </div>
