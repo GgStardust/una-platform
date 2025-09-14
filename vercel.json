@@ -1,14 +1,11 @@
 {
-  "functions": {
-    "api/*.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" },
-    { "source": "/(.*)", "destination": "/index.html" }
+  "version": 2,
+  "builds": [
+    { "src": "vite.config.ts", "use": "@vercel/static-build" },
+    { "src": "api/**/*.js", "use": "@vercel/node" }
   ],
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "framework": "vite"
+  "routes": [
+    { "src": "/api/(.*)", "dest": "api/$1.js" },
+    { "src": "/(.*)", "dest": "dist/$1" }
+  ]
 }
