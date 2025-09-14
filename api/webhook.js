@@ -1,35 +1,10 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const fs = require('fs');
-const path = require('path');
 
-// Payment storage file (MVP approach)
-const PAYMENTS_FILE = path.join(process.cwd(), 'payments.json');
+// Simple in-memory storage for MVP (will be replaced with Supabase)
+let payments = [];
 
-// Load existing payments
-function loadPayments() {
-  try {
-    if (fs.existsSync(PAYMENTS_FILE)) {
-      const data = fs.readFileSync(PAYMENTS_FILE, 'utf8');
-      return JSON.parse(data);
-    }
-  } catch (error) {
-    console.error('Error loading payments:', error);
-  }
-  return [];
-}
-
-// Save payments
-function savePayments(payments) {
-  try {
-    fs.writeFileSync(PAYMENTS_FILE, JSON.stringify(payments, null, 2));
-  } catch (error) {
-    console.error('Error saving payments:', error);
-  }
-}
-
-// Add new payment
+// Add new payment (in-memory for now)
 function addPayment(paymentData) {
-  const payments = loadPayments();
   payments.push({
     id: paymentData.id,
     stripe_session_id: paymentData.stripe_session_id,
@@ -39,7 +14,7 @@ function addPayment(paymentData) {
     status: paymentData.status,
     created_at: new Date().toISOString(),
   });
-  savePayments(payments);
+  console.log('💾 Payment stored in memory:', paymentData);
 }
 
 export default async function handler(req, res) {
