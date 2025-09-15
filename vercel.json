@@ -1,11 +1,21 @@
 {
-  "version": 2,
   "builds": [
-    { "src": "una-platform/package.json", "use": "@vercel/static-build" },
-    { "src": "una-platform/api/**/*.js", "use": "@vercel/node" }
+    {
+      "src": "una-platform/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "una-platform/api/$1.js" },
-    { "src": "/(.*)", "dest": "una-platform/dist/$1" }
+    {
+      "src": "/api/(.*)",
+      "dest": "una-platform/api/$1.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "una-platform/dist/$1"
+    }
   ]
 }
