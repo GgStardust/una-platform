@@ -1,7 +1,7 @@
 {
   "builds": [
     {
-      "src": "una-platform/package.json",
+      "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
         "distDir": "dist"
@@ -11,11 +11,11 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "una-platform/api/$1.js"
+      "dest": "api/$1.js"
     },
     {
       "src": "/(.*)",
-      "dest": "una-platform/dist/$1"
+      "dest": "dist/$1"
     }
   ]
 }

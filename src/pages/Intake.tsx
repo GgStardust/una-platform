@@ -814,7 +814,7 @@ export default function Intake({
                   className={`input-field ${errors.organizerState ? 'border-red-500' : ''}`}
                 >
                   <option value="">Select State</option>
-                  {US_STATES.map((state: string) => (
+                  {ALL_STATES.map((state: string) => (
                     <option key={state} value={state}>{state === 'CA' ? 'California' : state}</option>
                   ))}
                 </select>
@@ -907,7 +907,7 @@ export default function Intake({
                   className={`input-field ${errors.mailingState ? 'border-red-500' : ''}`}
                 >
                   <option value="">Select State</option>
-                  {US_STATES.map((state: string) => (
+                  {ALL_STATES.map((state: string) => (
                     <option key={state} value={state}>{state === 'CA' ? 'California' : state}</option>
                   ))}
               </select>
