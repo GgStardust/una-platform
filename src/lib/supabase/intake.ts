@@ -7,11 +7,11 @@ export interface IntakeRecord {
   una_name?: string;
   state?: string;
   purpose?: string;
-  members?: any[];
-  governance?: any;
-  operations?: any;
-  extras?: any;
-  organizer_info?: any;
+  members?: Record<string, unknown>[];
+  governance?: Record<string, unknown>;
+  operations?: Record<string, unknown>;
+  extras?: Record<string, unknown>;
+  organizer_info?: Record<string, unknown>;
   created_at?: string;
   updated_at?: string;
 }

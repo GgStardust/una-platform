@@ -29,7 +29,18 @@ export default function Explore() {
   });
 
   // State snippets data (Top 10 states)
-  const stateSnippets: Record<string, any> = {
+  interface StateSnippet {
+    state_code: string;
+    title: string;
+    summary: string;
+    requirements: {
+      filing_fee: string;
+      annual_reports: { required: boolean; fee: string };
+      tax_registration: { required: boolean; threshold: string };
+    };
+  }
+  
+  const stateSnippets: Record<string, StateSnippet> = {
     'CA': {
       state_code: 'CA',
       title: 'California UNA Formation',
@@ -232,7 +243,7 @@ export default function Explore() {
         const hint = await detectUserLocation();
         setLocationHint(hint);
       } catch (error) {
-        console.warn('Location detection failed:', error);
+        // Location detection failed
       } finally {
         setIsDetectingLocation(false);
       }

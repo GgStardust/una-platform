@@ -998,7 +998,7 @@ Facebook,Complete UNA Formation Guide,Master UNA formation from concept to compl
                             <div className="mb-3">
                               <h4 className="text-sm font-medium text-navy-900 mb-2">Next Steps:</h4>
                               <ul className="text-sm text-navy-700 space-y-1">
-                                {flag.nextSteps.map((step, index) => (
+                                {flag.nextSteps.map((step: string, index: number) => (
                                   <li key={index} className="flex items-start">
                                     <span className="text-gold-600 mr-2">•</span>
                                     {step}

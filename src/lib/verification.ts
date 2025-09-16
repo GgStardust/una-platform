@@ -384,7 +384,7 @@ export class VerificationManager {
       const allStatuses: VerificationStatus[] = JSON.parse(stored);
       return allStatuses.find(status => status.entityId === entityId) || null;
     } catch (error) {
-      console.error('Error reading verification status:', error);
+      // Error reading verification status
       return null;
     }
   }
@@ -404,7 +404,7 @@ export class VerificationManager {
       
       localStorage.setItem(this.VERIFICATION_KEY, JSON.stringify(allStatuses));
     } catch (error) {
-      console.error('Error saving verification status:', error);
+      // Error saving verification status
     }
   }
 
@@ -417,7 +417,7 @@ export class VerificationManager {
       const allReferrals: ReferralStatus[] = JSON.parse(stored);
       return allReferrals.filter(referral => referral.entityId === entityId);
     } catch (error) {
-      console.error('Error reading referral status:', error);
+      // Error reading referral status
       return [];
     }
   }
@@ -437,7 +437,7 @@ export class VerificationManager {
       
       localStorage.setItem(this.REFERRAL_KEY, JSON.stringify(allReferrals));
     } catch (error) {
-      console.error('Error saving referral status:', error);
+      // Error saving referral status
     }
   }
 
@@ -612,7 +612,7 @@ export class VerificationManager {
       
       return flags;
     } catch (error) {
-      console.error('Error generating verification flags:', error);
+      // Error generating verification flags
       return [];
     }
   }
@@ -633,7 +633,7 @@ export class VerificationManager {
         localStorage.setItem('verificationFlags', JSON.stringify(flags));
       }
     } catch (error) {
-      console.error('Error resolving flag:', error);
+      // Error resolving flag
     }
   }
 
@@ -653,7 +653,7 @@ export class VerificationManager {
         localStorage.setItem('verificationFlags', JSON.stringify(flags));
       }
     } catch (error) {
-      console.error('Error dismissing flag:', error);
+      // Error dismissing flag
     }
   }
 
@@ -674,7 +674,7 @@ export class VerificationManager {
       const flags = this.getVerificationFlags();
       return JSON.stringify(flags, null, 2);
     } catch (error) {
-      console.error('Error exporting flags:', error);
+      // Error exporting flags
       return '[]';
     }
   }

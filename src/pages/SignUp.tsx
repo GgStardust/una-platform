@@ -37,7 +37,7 @@ export default function SignUp() {
     try {
       await authService.signUp(formData.email, formData.name, formData.password);
       navigate('/dashboard', { replace: true });
-    } catch (err) {
+    } catch (error) {
       setError('An error occurred. Please try again.');
     } finally {
       setIsLoading(false);

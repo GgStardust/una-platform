@@ -13,6 +13,7 @@
       "vite/client"
     ],
     "jsx": "react-jsx",
-    "moduleResolution": "Bundler"
+    "module": "ESNext",
+    "moduleResolution": "bundler"
   }
 }

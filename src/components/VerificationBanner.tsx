@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AlertTriangle, AlertCircle, Info, ExternalLink, CheckCircle, Shield } from 'lucide-react';
-import { VerificationFlag, VerificationStatus } from '@/lib/types';
+import { VerificationStatus, VerificationFlag } from '@/lib/types';
 import { VerificationManager } from '@/lib/verification';
 import { calculateRiskAssessment } from '@/lib/verification';
 

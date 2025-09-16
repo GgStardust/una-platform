@@ -27,10 +27,14 @@ app.post('/api/webhook', (req, res) => {
 });
 
 // Proxy all other requests to Vite dev server
-app.use('*', createProxyMiddleware({
+app.use('/', createProxyMiddleware({
   target: `http://localhost:${VITE_PORT}`,
   changeOrigin: true,
   ws: true, // Enable WebSocket proxying for HMR
+  // Exclude API routes from proxying
+  filter: (pathname, req) => {
+    return !pathname.startsWith('/api/');
+  }
 }));
 
 // Start server

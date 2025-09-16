@@ -281,7 +281,7 @@ export function generateFormationRefinements(exploreData: any): FormationRefinem
   const refinements: FormationRefinement[] = [];
   
   // Mission/Purpose refinement
-  if (exploreData.mission && exploreData.mission.length > 0) {
+  if (exploreData.mission && Array.isArray(exploreData.mission) && exploreData.mission.length > 0) {
     const original = exploreData.mission.join(', ');
     const refined = `This organization is dedicated to ${exploreData.mission.join(', ')}`;
     const strategicContext = 'Your mission defines the core purpose and direction of your organization';
@@ -296,7 +296,7 @@ export function generateFormationRefinements(exploreData: any): FormationRefinem
   }
   
   // Activities refinement
-  if (exploreData.freeTextDescriptions?.missionDescription) {
+  if (exploreData.freeTextDescriptions?.missionDescription && typeof exploreData.freeTextDescriptions.missionDescription === 'string') {
     const original = exploreData.freeTextDescriptions.missionDescription;
     const refined = normalizeS2SText(original);
     const strategicContext = 'Your activities are the practical expression of your mission in the community';

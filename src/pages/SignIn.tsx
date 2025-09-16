@@ -25,7 +25,7 @@ export default function SignIn() {
     try {
       await authService.signIn(formData.email, formData.password);
       navigate(from, { replace: true });
-    } catch (err) {
+    } catch (error) {
       setError('Invalid email or password. Please try again.');
     } finally {
       setIsLoading(false);

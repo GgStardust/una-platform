@@ -1,19 +1,4 @@
-import { IntakeData } from './types';
-
-export interface VerificationFlag {
-  id: string;
-  type: 'warning' | 'referral' | 'legal' | 'cpa';
-  title: string;
-  description: string;
-  severity: 'low' | 'medium' | 'high';
-  requiresAction: boolean;
-  referralType?: 'attorney' | 'cpa' | 'specialist';
-  referralReason: string;
-  recommendation?: string;
-  nextSteps: string[];
-  faqLink?: string;
-  blogLink?: string;
-}
+import { IntakeData, VerificationFlag } from './types';
 
 export interface VerificationResult {
   canProceed: boolean;
@@ -45,7 +30,9 @@ export function checkVerificationFlags(data: IntakeData): VerificationFlag[] {
         'Review property title language',
         'Ensure proper transfer mechanisms',
         'Consider tax implications'
-      ]
+      ],
+      status: 'active',
+      createdAt: new Date().toISOString()
     });
   }
 
@@ -65,7 +52,9 @@ export function checkVerificationFlags(data: IntakeData): VerificationFlag[] {
         'Prepare IRS 501(c)(3) application',
         'Ensure compliance with state requirements',
         'Plan for ongoing compliance'
-      ]
+      ],
+      status: 'active',
+      createdAt: new Date().toISOString()
     });
   }
 
@@ -85,7 +74,9 @@ export function checkVerificationFlags(data: IntakeData): VerificationFlag[] {
         'Draft fiscal sponsorship agreement',
         'Ensure compliance with IRS rules',
         'Plan for financial oversight'
-      ]
+      ],
+      status: 'active',
+      createdAt: new Date().toISOString()
     });
   }
 
@@ -108,7 +99,9 @@ export function checkVerificationFlags(data: IntakeData): VerificationFlag[] {
         'Document family member roles clearly'
       ],
       faqLink: '/faq#family-leadership',
-      blogLink: '/blog/family-leadership-in-unas'
+      blogLink: '/blog/family-leadership-in-unas',
+      status: 'active',
+      createdAt: new Date().toISOString()
     });
   }
 
@@ -129,7 +122,9 @@ export function checkVerificationFlags(data: IntakeData): VerificationFlag[] {
         'Review compliance requirements for each state',
         'Consider foreign qualification needs',
         'Plan for state-specific filings'
-      ]
+      ],
+      status: 'active',
+      createdAt: new Date().toISOString()
     });
   }
 
@@ -151,7 +146,9 @@ export function checkVerificationFlags(data: IntakeData): VerificationFlag[] {
         'Ensure clear role definitions',
         'Plan for decision-making processes',
         'Document governance procedures'
-      ]
+      ],
+      status: 'active',
+      createdAt: new Date().toISOString()
     });
   }
 
@@ -175,7 +172,9 @@ export function checkVerificationFlags(data: IntakeData): VerificationFlag[] {
         'Review compliance needs'
       ],
       faqLink: '/faq#grant-seeking',
-      blogLink: '/blog/grant-readiness-for-unas'
+      blogLink: '/blog/grant-readiness-for-unas',
+      status: 'active',
+      createdAt: new Date().toISOString()
     });
   }
 

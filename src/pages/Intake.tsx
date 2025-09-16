@@ -13,7 +13,14 @@ import { getSmartSuggestions, validateCaliforniaRequirements } from '@/lib/ai-en
 
 interface IntakeProps {
   setIntakeData: (data: IntakeData | null) => void;
-  formMethods?: any;
+  formMethods?: {
+    register: (name: string, options?: Record<string, unknown>) => Record<string, unknown>;
+    handleSubmit: (onSubmit: (data: IntakeFormData) => void) => (e?: React.FormEvent) => void;
+    watch: (name?: string) => any;
+    setValue: (name: string, value: unknown) => void;
+    reset: (values?: Partial<IntakeFormData>) => void;
+    formState: { errors: Record<string, any>; isValid: boolean };
+  };
   onSubmit?: (data: IntakeFormData) => Promise<void>;
   isSaving?: boolean;
   saveError?: string | null;
@@ -28,11 +35,19 @@ const ALL_STATES = [
   'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
 ];
 
-// Top 10 states with snippets (unused for now)
-// const TOP_10_STATES = ['CA', 'TX', 'FL', 'NY', 'IL', 'PA', 'OH', 'GA', 'NC', 'MI'];
-
 // State snippets data (Top 10 states)
-const stateSnippets: Record<string, any> = {
+interface StateSnippet {
+  state_code: string;
+  title: string;
+  summary: string;
+  requirements: {
+    filing_fee: string;
+    annual_reports: { required: boolean; fee: string };
+    tax_registration: { required: boolean; threshold: string };
+  };
+}
+
+const stateSnippets: Record<string, StateSnippet> = {
   'CA': {
     state_code: 'CA',
     title: 'California UNA Formation',
@@ -135,7 +150,7 @@ const stateSnippets: Record<string, any> = {
   }
 };
 
-const getStateSnippet = (stateCode: string) => {
+const getStateSnippet = (stateCode: string): StateSnippet | null => {
   return stateSnippets[stateCode] || null;
 };
 
@@ -146,6 +161,10 @@ export default function Intake({
   isSaving: _externalSaving, 
   saveError: _externalSaveError 
 }: IntakeProps) {
+  // Suppress unused parameter warnings
+  void _externalSaving;
+  void _externalSaveError;
+  
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -252,7 +271,7 @@ export default function Intake({
           }
         }
       } catch (error) {
-        console.error('Error parsing exploration data:', error);
+        // Error parsing exploration data
       }
     }
   }, [setValue, watchedValues]);
@@ -271,7 +290,7 @@ export default function Intake({
           }
         });
       } catch (error) {
-        console.error('Error loading saved intake data:', error);
+        // Error loading saved intake data
       }
     }
   }, [setValue]);
@@ -294,7 +313,12 @@ export default function Intake({
     try {
       // California-specific validation
       if (data.entityState === 'CA') {
-        const californiaErrors = validateCaliforniaRequirements(data);
+        const californiaErrors = validateCaliforniaRequirements({
+          ...data,
+          statesOfOperation: data.statesOfOperation ? [data.statesOfOperation] : undefined,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString()
+        });
         if (californiaErrors.length > 0) {
           setGenerationStatus('error');
           setGenerationMessage(`California requirements not met: ${californiaErrors.join(', ')}`);
@@ -637,7 +661,7 @@ export default function Intake({
                       <div className="flex items-center">
                         <MapPin className="h-4 w-4 text-[#C49A6C] mr-2" />
                         <h4 className="text-sm font-semibold text-navy-900">
-                          {getStateSnippet(watchedValues.entityState).title}
+                          {getStateSnippet(watchedValues.entityState)?.title || 'State Information'}
                         </h4>
                       </div>
                       <Link 
@@ -648,26 +672,26 @@ export default function Intake({
                       </Link>
                     </div>
                     
-                    <p className="text-xs text-navy-700 mb-3">{getStateSnippet(watchedValues.entityState).summary}</p>
+                    <p className="text-xs text-navy-700 mb-3">{getStateSnippet(watchedValues.entityState)?.summary || 'No summary available'}</p>
                     
                     <div className="grid grid-cols-3 gap-3 text-xs">
                       <div className="flex items-center">
                         <DollarSign className="h-3 w-3 text-[#C49A6C] mr-1" />
                         <span className="font-medium text-navy-900">Filing:</span>
-                        <span className="ml-1 text-navy-700">{getStateSnippet(watchedValues.entityState).requirements.filing_fee}</span>
+                        <span className="ml-1 text-navy-700">{getStateSnippet(watchedValues.entityState)?.requirements.filing_fee || 'N/A'}</span>
                       </div>
                       <div className="flex items-center">
                         <FileText className="h-3 w-3 text-[#C49A6C] mr-1" />
                         <span className="font-medium text-navy-900">Reports:</span>
                         <span className="ml-1 text-navy-700">
-                          {getStateSnippet(watchedValues.entityState).requirements.annual_reports.required ? 'Yes' : 'No'}
+                          {getStateSnippet(watchedValues.entityState)?.requirements.annual_reports.required ? 'Yes' : 'No'}
                         </span>
                       </div>
                       <div className="flex items-center">
                         <Building className="h-3 w-3 text-[#C49A6C] mr-1" />
                         <span className="font-medium text-navy-900">Tax:</span>
                         <span className="ml-1 text-navy-700">
-                          {getStateSnippet(watchedValues.entityState).requirements.tax_registration.required ? 'Required' : 'Optional'}
+                          {getStateSnippet(watchedValues.entityState)?.requirements.tax_registration.required ? 'Required' : 'Optional'}
                         </span>
                       </div>
                     </div>

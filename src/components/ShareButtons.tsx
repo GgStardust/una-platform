@@ -38,7 +38,7 @@ export default function ShareButtons({ url, postSlug }: ShareButtonsProps) {
       await navigator.clipboard.writeText(addUTMs('copy'));
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
+    } catch (error) {
       // Fallback for older browsers
       const textArea = document.createElement('textarea');
       textArea.value = addUTMs('copy');

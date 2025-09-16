@@ -12,7 +12,8 @@ import {
   Info
 } from 'lucide-react';
 import { IntakeData } from '@/lib/types';
-import { checkVerificationFlags, VerificationFlag } from '@/lib/verification-docket';
+import { checkVerificationFlags } from '@/lib/verification-docket';
+import { VerificationFlag } from '@/lib/types';
 
 export default function Referrals() {
   const [, setIntakeData] = useState<IntakeData | null>(null);
@@ -29,7 +30,7 @@ export default function Referrals() {
         const flags = checkVerificationFlags(data);
         setVerificationFlags(flags);
       } catch (error) {
-        console.error('Error parsing intake data:', error);
+        // Error parsing intake data
       }
     }
   }, []);
@@ -180,7 +181,7 @@ export default function Referrals() {
                         <div>
                           <h4 className="font-medium text-navy-900 mb-2">Next Steps:</h4>
                           <ul className="text-sm text-navy-700 space-y-1">
-                            {flag.nextSteps.map((step, stepIndex) => (
+                            {flag.nextSteps.map((step: string, stepIndex: number) => (
                               <li key={stepIndex} className="flex items-start">
                                 <span className="text-navy-400 mr-2">•</span>
                                 {step}

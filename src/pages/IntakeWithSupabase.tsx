@@ -91,7 +91,7 @@ export default function IntakeWithSupabase({ setIntakeData }: IntakeWithSupabase
           
           // Reset form with loaded data
           reset(formData);
-          console.log('Loaded existing intake data from Supabase');
+          // Loaded existing intake data from Supabase
         }
       } catch (error) {
         console.error('Error loading intake data:', error);
@@ -116,7 +116,7 @@ export default function IntakeWithSupabase({ setIntakeData }: IntakeWithSupabase
         const intakeData = mapFormDataToIntake(watchedValues, paymentId, bookingId);
         await saveIntake(intakeData);
         
-        console.log('Auto-saved intake data to Supabase');
+        // Auto-saved intake data to Supabase
       } catch (error) {
         console.error('Error auto-saving intake data:', error);
         setSaveError('Failed to save data');
@@ -160,7 +160,7 @@ export default function IntakeWithSupabase({ setIntakeData }: IntakeWithSupabase
       // Also save to localStorage for backward compatibility
       setIntakeData(completeData);
       
-      console.log('Successfully saved intake data to Supabase');
+      // Successfully saved intake data to Supabase
     } catch (error) {
       console.error('Error saving intake data:', error);
       setSaveError('Failed to save data. Please try again.');
@@ -215,11 +215,11 @@ export default function IntakeWithSupabase({ setIntakeData }: IntakeWithSupabase
           setIntakeData={setIntakeData}
           // Pass the enhanced form methods
           formMethods={{
-            register,
-            handleSubmit,
-            watch,
-            setValue,
-            reset,
+            register: register as (name: string, options?: Record<string, unknown>) => Record<string, unknown>,
+            handleSubmit: handleSubmit as (onSubmit: (data: IntakeFormData) => void) => (e?: React.FormEvent) => void,
+            watch: watch as (name?: string) => any,
+            setValue: setValue as (name: string, value: unknown) => void,
+            reset: reset as (values?: Partial<IntakeFormData>) => void,
             formState: { errors, isValid }
           }}
           onSubmit={onSubmit}

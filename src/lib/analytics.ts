@@ -3,7 +3,7 @@
 
 export interface AnalyticsEvent {
   name: string;
-  properties?: Record<string, any>;
+  properties?: Record<string, unknown>;
   timestamp: number;
   userId?: string;
   sessionId: string;
@@ -17,7 +17,7 @@ export interface ConversionGoal {
   type: 'page_view' | 'form_submit' | 'button_click' | 'time_on_page' | 'scroll_depth';
   target: string;
   value?: number;
-  conditions?: Record<string, any>;
+  conditions?: Record<string, unknown>;
 }
 
 export interface UserJourney {
@@ -83,9 +83,9 @@ class AnalyticsService {
       this.startSession();
       
       this.isInitialized = true;
-      console.log('Analytics service initialized successfully');
+      // Analytics service initialized successfully
     } catch (error) {
-      console.error('Failed to initialize analytics service:', error);
+      // Failed to initialize analytics service
     }
   }
 
@@ -152,7 +152,7 @@ class AnalyticsService {
       try {
         observer.observe({ entryTypes: ['navigation', 'paint', 'largest-contentful-paint', 'layout-shift', 'first-input'] });
       } catch (error) {
-        console.warn('Performance monitoring setup failed:', error);
+        // Performance monitoring setup failed
       }
     }
   }
@@ -231,7 +231,7 @@ class AnalyticsService {
       this.checkConversionGoals(event);
       
       // Log event for debugging
-      console.log('Analytics event tracked:', event);
+      // Analytics event tracked
       
       // In production, this would send to analytics service
       this.sendToAnalyticsService(event);
@@ -510,7 +510,7 @@ class GoogleAnalyticsService {
 
     // Initialize gtag
     window.dataLayer = window.dataLayer || [];
-    function gtag(...args: any[]) {
+    function gtag(...args: unknown[]) {
       window.dataLayer.push(args);
     }
     gtag('js', new Date());

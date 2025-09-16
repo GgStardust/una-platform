@@ -12,7 +12,7 @@ export default function EmblemDesigner({ intakeData, onClose }: EmblemDesignerPr
 
   // Emblem generation removed - users upload existing files
   useEffect(() => {
-    console.log('Emblem designer opened - users upload existing files');
+    // Emblem designer opened - users upload existing files
   }, [intakeData]);
 
   // Download functions removed - users upload existing files

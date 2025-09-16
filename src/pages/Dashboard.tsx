@@ -9,7 +9,7 @@ import {
   TrendingUp,
   Palette
 } from 'lucide-react';
-import { IntakeData } from '@/lib/types';
+import { IntakeData, VerificationFlag } from '@/lib/types';
 import { checkVerificationFlags, getReferralGuidance } from '@/lib/verification-docket';
 import VerificationBanner from '@/components/VerificationBanner';
 import ScheduleDialog from '@/components/ScheduleDialog';
@@ -21,8 +21,17 @@ interface DashboardProps {
 
 export default function Dashboard({ intakeData }: DashboardProps) {
   const location = useLocation();
-  const [verificationStatus, setVerificationStatus] = useState<any | null>(null);
-  const [verificationFlags, setVerificationFlags] = useState<any[]>([]);
+  const [verificationStatus, setVerificationStatus] = useState<{
+    status: string;
+    message: string;
+    documentsVerified?: boolean;
+    referralVerified?: boolean;
+    overallVerified?: boolean;
+    verificationDate?: string;
+    verifiedBy?: string;
+    details?: Record<string, unknown>;
+  } | null>(null);
+  const [verificationFlags, setVerificationFlags] = useState<VerificationFlag[]>([]);
   const [entityId, setEntityId] = useState<string>('');
   const [isScheduleDialogOpen, setIsScheduleDialogOpen] = useState(false);
   const [explorationResult, setExplorationResult] = useState<{ path: string; at: number } | null>(null);
@@ -50,7 +59,16 @@ export default function Dashboard({ intakeData }: DashboardProps) {
           verifiedBy: null,
         };
       }
-      setVerificationStatus(status);
+      setVerificationStatus({
+        status: 'pending',
+        message: 'Verification in progress',
+        documentsVerified: status.documentsVerified,
+        referralVerified: status.referralVerified,
+        overallVerified: status.overallVerified,
+        verificationDate: status.verificationDate || undefined,
+        verifiedBy: status.verifiedBy || undefined,
+        details: {}
+      });
       
       // Check for exploration result
       const exploreResult = localStorage.getItem('explore_result');
@@ -59,7 +77,7 @@ export default function Dashboard({ intakeData }: DashboardProps) {
           const result = JSON.parse(exploreResult);
           setExplorationResult(result);
         } catch (error) {
-          console.error('Error parsing exploration result:', error);
+          // Error parsing exploration result
         }
       }
     }
@@ -455,7 +473,7 @@ export default function Dashboard({ intakeData }: DashboardProps) {
                     const { downloadBlob } = await import('@/lib/generate');
                     downloadBlob(doc, `${intakeData.entityName} - Client Agreement.pdf`, 'application/pdf');
                   } catch (error) {
-                    console.error('Error generating Client Agreement:', error);
+                    // Error generating Client Agreement
                     alert('Error: ' + (error instanceof Error ? error.message : 'Unknown error'));
                   }
                 }}

@@ -1,30 +1,35 @@
 import { Routes, Route, NavLink } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import Home from './pages/Home';
-import Services from './pages/Services';
-import FAQ from './pages/FAQ';
-import About from './pages/About';
-import Explore from './pages/Explore';
-import Success from './pages/Success';
-import Intake from './pages/Intake';
-import IntakeWithSupabase from './pages/IntakeWithSupabase';
-import Dashboard from './pages/Dashboard';
-import Referrals from './pages/Referrals';
-import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
-import Checkout from './pages/Checkout';
-import Blog from './pages/Blog';
-import BlogPost from './pages/BlogPost';
-import StatePage from './pages/StatePage';
-import Toolkit from './pages/Toolkit';
-import Contact from './pages/Contact';
-import Schedule from './pages/Schedule';
-import PaymentSuccess from './pages/PaymentSuccess';
-import AdminDashboard from './components/AdminDashboard';
-import AdminAuth from './components/AdminAuth';
-import FormationGuard from './components/FormationGuard';
+import { useState, useEffect, Suspense, lazy } from 'react';
 import { IntakeData } from '@/lib/types';
 import { googleAnalyticsService } from '@/lib/analytics';
+import LoadingSpinner from './components/LoadingSpinner';
+
+// Lazy load all page components for better performance
+const Home = lazy(() => import('./pages/Home'));
+const Services = lazy(() => import('./pages/Services'));
+const FAQ = lazy(() => import('./pages/FAQ'));
+const About = lazy(() => import('./pages/About'));
+const Explore = lazy(() => import('./pages/Explore'));
+const Success = lazy(() => import('./pages/Success'));
+const Intake = lazy(() => import('./pages/Intake'));
+const IntakeWithSupabase = lazy(() => import('./pages/IntakeWithSupabase'));
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const Referrals = lazy(() => import('./pages/Referrals'));
+const SignIn = lazy(() => import('./pages/SignIn'));
+const SignUp = lazy(() => import('./pages/SignUp'));
+const Checkout = lazy(() => import('./pages/Checkout'));
+const Blog = lazy(() => import('./pages/Blog'));
+const BlogPost = lazy(() => import('./pages/BlogPost'));
+const StatePage = lazy(() => import('./pages/StatePage'));
+const Toolkit = lazy(() => import('./pages/Toolkit'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Schedule = lazy(() => import('./pages/Schedule'));
+const PaymentSuccess = lazy(() => import('./pages/PaymentSuccess'));
+
+// Lazy load components
+const AdminDashboard = lazy(() => import('./components/AdminDashboard'));
+const AdminAuth = lazy(() => import('./components/AdminAuth'));
+const FormationGuard = lazy(() => import('./components/FormationGuard'));
 
 function App() {
   const [intakeData, setIntakeData] = useState<IntakeData | null>(null);
@@ -36,10 +41,10 @@ function App() {
   // Console warning for developers
   useEffect(() => {
     if (isDummyMode) {
-      console.warn('🚨 UNA Platform is running with dummy credentials!');
-      console.warn('   - Stripe: Using dummy publishable key');
-      console.warn('   - Supabase: Using dummy URL (localhost:9999)');
-      console.warn('   - Replace .env values with real credentials for production');
+      // UNA Platform is running with dummy credentials
+      // - Stripe: Using dummy publishable key
+      // - Supabase: Using dummy URL (localhost:9999)
+      // - Replace .env values with real credentials for production
     }
   }, [isDummyMode]);
 
@@ -51,7 +56,7 @@ function App() {
         const parsedData = JSON.parse(savedIntakeData);
         setIntakeData(parsedData);
       } catch (error) {
-        console.error('Error parsing saved intake data:', error);
+        // Error parsing saved intake data
       }
     }
   }, []);
@@ -218,7 +223,8 @@ function App() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <Routes>
+        <Suspense fallback={<LoadingSpinner message="Loading page..." />}>
+          <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/services" element={<Services />} />
           <Route path="/about" element={<About />} />
@@ -258,7 +264,8 @@ function App() {
               <AdminDashboard />
             </AdminAuth>
           } />
-        </Routes>
+          </Routes>
+        </Suspense>
       </main>
     </div>
   );
