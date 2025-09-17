@@ -1,756 +1,727 @@
-import { useState, useEffect } from 'react';
-import { ArrowLeft, ArrowRight, CheckCircle, Calendar, MapPin, DollarSign, FileText, Building } from 'lucide-react';
+import { useState } from 'react';
+import { ArrowLeft, ArrowRight, Users, Building, Target, Heart, Palette, BookOpen, Shield, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { ExploreAnswers } from '@/lib/types';
-import { detectUserLocation, getStateSuggestionText, LocationHint } from '@/lib/geolocation';
-import { generateStrategyInsights, generateToolkitRecommendations, generateExecutiveSummary } from '@/lib/strategy-insights';
+import SEOHead from '../components/SEOHead';
+import { saveExploreResponse } from '../lib/supabase/explore';
 
+interface ExploreAnswers {
+  state: string;
+  readiness: {
+    hasMembers: boolean | null;
+    hasBylaws: boolean | null;
+    hasEIN: boolean | null;
+    needsEINHelp: boolean | null;
+    needsBanking: boolean | null;
+  };
+  collectiveTypes: string[];
+  priorities: string[];
+  otherPriority: string;
+}
 
+const US_STATES = [
+  'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware',
+  'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
+  'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
+  'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico',
+  'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania',
+  'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
+  'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+];
+
+const COLLECTIVE_TYPES = [
+  { 
+    id: 'advocacy', 
+    label: 'Advocacy Group', 
+    description: 'Work together to raise awareness, influence policy, or support a shared cause in your community.',
+    icon: Target 
+  },
+  { 
+    id: 'creative', 
+    label: 'Creative Collective', 
+    description: 'Collaborate on arts, media, design, or cultural expression that benefits your members and the public.',
+    icon: Palette 
+  },
+  { 
+    id: 'healing', 
+    label: 'Healing & Wellness Circle', 
+    description: 'Gather around health, well-being, spiritual, or supportive practices.',
+    icon: Heart 
+  },
+  { 
+    id: 'education', 
+    label: 'Educational Group', 
+    description: 'Provide learning, training, or shared knowledge to members or the wider public.',
+    icon: BookOpen 
+  },
+  { 
+    id: 'cooperative', 
+    label: 'Cooperative / Mutual Aid', 
+    description: 'Pool resources, share costs, or provide direct support among members.',
+    icon: Users 
+  },
+  { 
+    id: 'community', 
+    label: 'Community Builders', 
+    description: 'Organize local projects, events, or ongoing neighborhood improvement.',
+    icon: Shield 
+  },
+  { 
+    id: 'other', 
+    label: 'Other', 
+    description: 'If your group does not fit these categories, describe it in your own words.',
+    icon: Building 
+  }
+];
+
+const PRIORITY_CATEGORIES = {
+  'Formal Recognition': [
+    'To give our group formal recognition',
+    'To apply for grants or funding',
+    'To open a bank account in the group\'s name',
+    'To build credibility with partners or the public'
+  ],
+  'Organization & Structure': [
+    'To create clear rules and agreements for members',
+    'To organize events or programs together',
+    'To strengthen community voice and influence'
+  ],
+  'Other': [
+    'Other (specify below)'
+  ]
+};
 
 export default function Explore() {
   const [currentStep, setCurrentStep] = useState(1);
-  const [answers, setAnswers] = useState<ExploreAnswers>({
-    entityState: '',
-    mission: [],
-    vision: [],
-    currentForm: null,
-    impact: [],
-    environments: [],
-    support: [],
-    otherText: ''
-  });
   const [showResults, setShowResults] = useState(false);
-  const [locationHint, setLocationHint] = useState<LocationHint | null>(null);
-  const [isDetectingLocation, setIsDetectingLocation] = useState(true);
-  const [freeTextDescriptions, setFreeTextDescriptions] = useState({
-    missionDescription: '',
-    visionDescription: '',
-    overallImpact: ''
+  const [answers, setAnswers] = useState<ExploreAnswers>({
+    state: '',
+    readiness: {
+      hasMembers: null,
+      hasBylaws: null,
+      hasEIN: null,
+      needsEINHelp: null,
+      needsBanking: null
+    },
+    collectiveTypes: [],
+    priorities: [],
+    otherPriority: ''
   });
+  const [customPriority, setCustomPriority] = useState('');
+  const [validationWarnings, setValidationWarnings] = useState<string[]>([]);
 
-  // State snippets data (Top 10 states)
-  interface StateSnippet {
-    state_code: string;
-    title: string;
-    summary: string;
-    requirements: {
-      filing_fee: string;
-      annual_reports: { required: boolean; fee: string };
-      tax_registration: { required: boolean; threshold: string };
-    };
-  }
-  
-  const stateSnippets: Record<string, StateSnippet> = {
-    'CA': {
-      state_code: 'CA',
-      title: 'California UNA Formation',
-      summary: 'California recognizes UNAs under the Nonprofit Corporation Law with strong legal protections. Filing fee: $30-50, annual reports required ($20-40), tax registration needed for organizations over $25K gross receipts.',
-      requirements: {
-        filing_fee: '$30-50',
-        annual_reports: { required: true, fee: '$20-40' },
-        tax_registration: { required: true, threshold: '$25,000 gross receipts' }
+  const handleReadinessChange = (field: keyof ExploreAnswers['readiness'], value: boolean) => {
+    setAnswers(prev => ({
+      ...prev,
+      readiness: {
+        ...prev.readiness,
+        [field]: value
       }
-    },
-    'TX': {
-      state_code: 'TX',
-      title: 'Texas UNA Formation',
-      summary: 'Texas has one of the most UNA-friendly frameworks with clear statutes. Filing fee: $25, no annual reports required, straightforward tax registration. Excellent choice for minimal regulatory burden.',
-      requirements: {
-        filing_fee: '$25',
-        annual_reports: { required: false, fee: '$0' },
-        tax_registration: { required: true, threshold: 'All organizations' }
-      }
-    },
-    'FL': {
-      state_code: 'FL',
-      title: 'Florida UNA Formation',
-      summary: 'Florida recognizes UNAs under its Nonprofit Corporation Act with solid protections. Filing fee: $35-50, annual reports required ($61.25), tax registration needed for taxable activities.',
-      requirements: {
-        filing_fee: '$35-50',
-        annual_reports: { required: true, fee: '$61.25' },
-        tax_registration: { required: true, threshold: 'Taxable activities' }
-      }
-    },
-    'NY': {
-      state_code: 'NY',
-      title: 'New York UNA Formation',
-      summary: 'New York has a complex legal framework with requirements varying by county. Filing fees: $50-100, annual reports required (varies by county), mandatory tax registration. Requires careful navigation.',
-      requirements: {
-        filing_fee: '$50-100',
-        annual_reports: { required: true, fee: 'Varies by county' },
-        tax_registration: { required: true, threshold: 'All organizations' }
-      }
-    },
-    'IL': {
-      state_code: 'IL',
-      title: 'Illinois UNA Formation',
-      summary: 'Illinois provides clear UNA recognition with solid legal protections. Filing fee: $50, annual reports required ($10), tax registration needed for taxable activities. Central location advantage.',
-      requirements: {
-        filing_fee: '$50',
-        annual_reports: { required: true, fee: '$10' },
-        tax_registration: { required: true, threshold: 'Taxable activities' }
-      }
-    },
-    'PA': {
-      state_code: 'PA',
-      title: 'Pennsylvania UNA Formation',
-      summary: 'Pennsylvania recognizes UNAs with good legal protections. Filing fee: $125, annual reports required ($7), tax registration needed for taxable activities. Higher initial cost but low ongoing fees.',
-      requirements: {
-        filing_fee: '$125',
-        annual_reports: { required: true, fee: '$7' },
-        tax_registration: { required: true, threshold: 'Taxable activities' }
-      }
-    },
-    'OH': {
-      state_code: 'OH',
-      title: 'Ohio UNA Formation',
-      summary: 'Ohio has a straightforward approach with clear guidelines and minimal complexity. Filing fee: $25, annual reports required ($5), tax registration needed for taxable activities. Very affordable option.',
-      requirements: {
-        filing_fee: '$25',
-        annual_reports: { required: true, fee: '$5' },
-        tax_registration: { required: true, threshold: 'Taxable activities' }
-      }
-    },
-    'GA': {
-      state_code: 'GA',
-      title: 'Georgia UNA Formation',
-      summary: 'Georgia provides clear UNA recognition with solid legal protections. Filing fee: $30, annual reports required ($20), tax registration needed for taxable activities. Growing economy advantage.',
-      requirements: {
-        filing_fee: '$30',
-        annual_reports: { required: true, fee: '$20' },
-        tax_registration: { required: true, threshold: 'Taxable activities' }
-      }
-    },
-    'NC': {
-      state_code: 'NC',
-      title: 'North Carolina UNA Formation',
-      summary: 'North Carolina has a well-established legal framework with comprehensive protections. Filing fee: $60, annual reports required ($15), tax registration needed for taxable activities. Moderate costs overall.',
-      requirements: {
-        filing_fee: '$60',
-        annual_reports: { required: true, fee: '$15' },
-        tax_registration: { required: true, threshold: 'Taxable activities' }
-      }
-    },
-    'MI': {
-      state_code: 'MI',
-      title: 'Michigan UNA Formation',
-      summary: 'Michigan provides clear UNA recognition with solid legal protections. Filing fee: $20, annual reports required ($10), tax registration needed for taxable activities. Very affordable with low ongoing costs.',
-      requirements: {
-        filing_fee: '$20',
-        annual_reports: { required: true, fee: '$10' },
-        tax_registration: { required: true, threshold: 'Taxable activities' }
-      }
+    }));
+  };
+
+  const handleCollectiveTypeToggle = (typeId: string) => {
+    setAnswers(prev => ({
+      ...prev,
+      collectiveTypes: prev.collectiveTypes.includes(typeId)
+        ? prev.collectiveTypes.filter(id => id !== typeId)
+        : [...prev.collectiveTypes, typeId]
+    }));
+  };
+
+  const handlePriorityToggle = (priority: string) => {
+    setAnswers(prev => ({
+      ...prev,
+      priorities: prev.priorities.includes(priority)
+        ? prev.priorities.filter(p => p !== priority)
+        : [...prev.priorities, priority]
+    }));
+  };
+
+  const validateStep = (step: number): boolean => {
+    const warnings: string[] = [];
+    
+    if (step === 1) {
+      if (!answers.state) warnings.push('Please select your state');
+      if (answers.readiness.hasMembers === null) warnings.push('Please indicate if you have committed members');
+      if (answers.readiness.hasBylaws === null) warnings.push('Please indicate if you have governing rules');
+      if (answers.readiness.hasEIN === null) warnings.push('Please indicate if you have an EIN');
+      if (answers.readiness.needsBanking === null) warnings.push('Please indicate if you plan to open a bank account');
+    } else if (step === 2) {
+      if (answers.collectiveTypes.length === 0) warnings.push('Please select your collective type(s)');
+    } else if (step === 3) {
+      if (answers.priorities.length === 0 && !customPriority) warnings.push('Please select at least one formation priority');
     }
+    
+    setValidationWarnings(warnings);
+    return warnings.length === 0;
   };
-
-  const getStateSnippet = (stateCode: string) => {
-    return stateSnippets[stateCode] || null;
-  };
-
-
-
-  // Full USA states list for broader accessibility
-  const stateOptions = [
-    'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA',
-    'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
-    'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ',
-    'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC',
-    'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY'
-  ];
-  
-  // Enhanced options for comprehensive flow
-  const missionOptions = ['Events', 'Education', 'Art', 'Community', 'Research', 'Healing', 'Other'];
-  const visionOptions = ['Personal growth', 'Community transformation', 'Cultural evolution', 'Systemic change', 'Creative expression', 'Other'];
-  const impactOptions = ['Personal transformation', 'Community building', 'Economic empowerment', 'Creative culture', 'Teaching and learning', 'Other'];
-  
-  // Enhanced prompt systems for better user guidance
-  const missionPrompts = [
-    'Describe your core mission in 2-3 sentences',
-    'What problem are you solving?',
-    'Who are you serving?',
-    'What change do you want to create?',
-    'What would success look like?'
-  ];
-  
-  const visionPrompts = [
-    'What is your long-term vision?',
-    'How do you see the world changing?',
-    'What legacy do you want to leave?',
-    'What would you like to be remembered for?'
-  ];
-  
-  const impactPrompts = [
-    'How will you measure success?',
-    'What impact do you want to have?',
-    'How will you know you\'ve made a difference?',
-    'What would transformation look like?'
-  ];
-
-  const handleStateSelect = (state: string) => {
-    setAnswers(prev => ({ ...prev, entityState: state }));
-  };
-
-  const handleMissionToggle = (mission: string) => {
-    setAnswers(prev => ({
-      ...prev,
-      mission: prev.mission.includes(mission)
-        ? prev.mission.filter(m => m !== mission)
-        : [...prev.mission, mission]
-    }));
-  };
-
-  const handleVisionToggle = (vision: string) => {
-    setAnswers(prev => ({
-      ...prev,
-      vision: prev.vision.includes(vision)
-        ? prev.vision.filter(v => v !== vision)
-        : [...prev.vision, vision]
-    }));
-  };
-
-  const handleImpactToggle = (impact: string) => {
-    setAnswers(prev => ({
-      ...prev,
-      impact: prev.impact.includes(impact)
-        ? prev.impact.filter(i => i !== impact)
-        : [...prev.impact, impact]
-    }));
-  };
-
-  const handleFreeTextChange = (field: keyof typeof freeTextDescriptions, value: string) => {
-    setFreeTextDescriptions(prev => ({
-      ...prev,
-      [field]: value
-    }));
-  };
-  
-  // Helper functions for prompt system
-  const getRandomPrompt = (prompts: string[]) => {
-    return prompts[Math.floor(Math.random() * prompts.length)];
-  };
-  
-  const insertPrompt = (field: keyof typeof freeTextDescriptions, prompts: string[]) => {
-    const prompt = getRandomPrompt(prompts);
-    const currentValue = freeTextDescriptions[field];
-    const newValue = currentValue ? `${currentValue}\n\n${prompt}` : prompt;
-    handleFreeTextChange(field, newValue);
-  };
-
-  // Detect user location on component mount
-  useEffect(() => {
-    const detectLocation = async () => {
-      try {
-        const hint = await detectUserLocation();
-        setLocationHint(hint);
-      } catch (error) {
-        // Location detection failed
-      } finally {
-        setIsDetectingLocation(false);
-      }
-    };
-
-    detectLocation();
-  }, []);
 
   const nextStep = () => {
+    if (validateStep(currentStep)) {
     if (currentStep < 3) {
-      setCurrentStep(prev => prev + 1);
+        setCurrentStep(currentStep + 1);
+      } else {
+        handleSubmit();
+      }
     }
   };
 
   const prevStep = () => {
     if (currentStep > 1) {
-      setCurrentStep(prev => prev - 1);
+      setCurrentStep(currentStep - 1);
+      setValidationWarnings([]);
     }
   };
 
-  const handleSubmit = () => {
-    // Save to localStorage
-    const completeExploreData = {
-      answers,
-      freeTextDescriptions
-    };
-    localStorage.setItem('explore', JSON.stringify(completeExploreData));
-    localStorage.setItem('explore_result', JSON.stringify({
-      path: 'LITE_MODE',
-      at: Date.now()
-    }));
-    
+  const handleSubmit = async () => {
+    try {
+      const finalAnswers = {
+        state: answers.state,
+        readiness: answers.readiness,
+        collective_type: answers.collectiveTypes.join(', '),
+        priorities: customPriority ? [...answers.priorities, customPriority] : answers.priorities
+      };
+      
+      await saveExploreResponse(finalAnswers);
+      setShowResults(true);
+    } catch (error) {
+      console.error('Error saving explore response:', error);
+      // Still show results even if save fails
     setShowResults(true);
+    }
   };
 
-  const renderStep = () => {
-    switch (currentStep) {
-      case 1:
-        return (
-          <div className="space-y-8">
-            {/* Location Section */}
-            <div>
-              <h3 className="text-xl font-semibold text-navy-900 mb-4">Where are you located?</h3>
-              <p className="text-navy-600 mb-6">Our platform is currently optimized for California-based organizations:</p>
-              
-              {!isDetectingLocation && locationHint && getStateSuggestionText(locationHint) && (
-                <div className="mb-4 p-3 bg-gold-50 border border-gold-200 rounded-lg">
-                  <p className="text-navy-700 text-sm">
-                    {getStateSuggestionText(locationHint)}
-                  </p>
-                </div>
-              )}
-              
-              <div className="space-y-3">
-                <select
-                  value={answers.entityState}
-                  onChange={(e) => handleStateSelect(e.target.value)}
-                  className="w-full p-4 rounded-lg border-2 border-navy-200 focus:ring-2 focus:ring-gold-500 focus:border-transparent transition-all"
-                >
-                  <option value="">Select your state</option>
-                  {stateOptions.map(option => (
-                    <option key={option} value={option}>
-                      {option === 'CA' ? 'California' : option}
-                    </option>
-                  ))}
-                </select>
 
-                {/* State Snippet Display */}
-                {answers.entityState && getStateSnippet(answers.entityState) && (
-                  <div className="mt-6 bg-gradient-to-r from-[#C49A6C]/10 to-[#B88A5A]/10 rounded-lg p-6 border border-[#C49A6C]/20">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex items-center">
-                        <MapPin className="h-5 w-5 text-[#C49A6C] mr-2" />
-                        <h3 className="text-lg font-semibold text-navy-900">
-                          {getStateSnippet(answers.entityState).title}
-                        </h3>
-                      </div>
-                      <Link 
-                        to={`/states/${answers.entityState}`}
-                        className="text-[#C49A6C] hover:text-[#B88A5A] text-sm font-medium"
-                      >
-                        View Details →
-                      </Link>
-                    </div>
-                    
-                    <p className="text-navy-700 mb-4">{getStateSnippet(answers.entityState).summary}</p>
-                    
-                    <div className="grid grid-cols-3 gap-4 text-sm">
-                      <div className="flex items-center">
-                        <DollarSign className="h-4 w-4 text-[#C49A6C] mr-2" />
-                        <span className="font-medium text-navy-900">Filing Fee:</span>
-                        <span className="ml-1 text-navy-700">{getStateSnippet(answers.entityState).requirements.filing_fee}</span>
-                      </div>
-                      <div className="flex items-center">
-                        <FileText className="h-4 w-4 text-[#C49A6C] mr-2" />
-                        <span className="font-medium text-navy-900">Annual Reports:</span>
-                        <span className="ml-1 text-navy-700">
-                          {getStateSnippet(answers.entityState).requirements.annual_reports.required ? 'Yes' : 'No'}
-                        </span>
-                      </div>
-                      <div className="flex items-center">
-                        <Building className="h-4 w-4 text-[#C49A6C] mr-2" />
-                        <span className="font-medium text-navy-900">Tax Registration:</span>
-                        <span className="ml-1 text-navy-700">
-                          {getStateSnippet(answers.entityState).requirements.tax_registration.required ? 'Required' : 'Optional'}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-              
+  const getActionList = (): string[] => {
+    const actions = [];
+    const { readiness } = answers;
+    
+    if (!readiness.hasEIN) actions.push('Apply for EIN (federal tax ID)');
+    if (!readiness.hasBylaws) actions.push('Draft your UNA Agreement and bylaws');
+    if (!readiness.hasMembers) actions.push('Gather committed members (minimum 2 required)');
+    if (answers.state) actions.push(`Complete state registration in ${answers.state}`);
+    actions.push('Open a bank account in the UNA name');
+    
+    return actions;
+  };
 
-            </div>
-
-            {/* Mission Section */}
-            <div>
-              <h3 className="text-xl font-semibold text-navy-900 mb-4">What is your mission focus?</h3>
-              <p className="text-navy-600 mb-6">Select all that resonate with your work:</p>
-              
-              <div className="grid grid-cols-2 gap-3">
-                {missionOptions.map(option => (
-                  <button
-                    key={option}
-                    onClick={() => handleMissionToggle(option)}
-                    className={`p-3 rounded-lg border-2 transition-all ${
-                      answers.mission.includes(option)
-                        ? 'border-gold-500 bg-gold-50 font-semibold'
-                        : 'border-navy-200 hover:border-navy-300'
-                    }`}
-                  >
-                    {option}
-                  </button>
-                ))}
-              </div>
-              
-              <div className="mt-6">
-                <label className="block text-sm font-medium text-navy-700 mb-2">
-                  Tell us more about your mission (optional):
-                </label>
-                <div className="mb-3 flex flex-wrap gap-2">
-                  {missionPrompts.slice(0, 4).map((prompt, index) => (
-                    <button
-                      key={index}
-                      type="button"
-                      onClick={() => insertPrompt('missionDescription', missionPrompts)}
-                      className="una-prompt-chip"
-                    >
-                      {prompt}
-                    </button>
-                  ))}
-                </div>
-                <textarea
-                  value={freeTextDescriptions.missionDescription}
-                  onChange={(e) => handleFreeTextChange('missionDescription', e.target.value)}
-                  placeholder="Describe your mission in your own words... What drives you? What change do you want to create?"
-                  rows={4}
-                  className="w-full p-3 border border-navy-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent resize-none"
-                />
-              </div>
-            </div>
-          </div>
-        );
-
-      case 2:
-        return (
-          <div className="space-y-8">
-            {/* Vision Section */}
-            <div>
-              <h3 className="text-xl font-semibold text-navy-900 mb-4">What is your vision for the future?</h3>
-              <p className="text-navy-600 mb-6">Select all that align with your vision:</p>
-              
-              <div className="grid grid-cols-2 gap-3">
-                {visionOptions.map(option => (
-                  <button
-                    key={option}
-                    onClick={() => handleVisionToggle(option)}
-                    className={`p-3 rounded-lg border-2 transition-all ${
-                      answers.vision.includes(option)
-                        ? 'border-gold-500 bg-gold-50 font-semibold'
-                        : 'border-navy-200 hover:border-navy-300'
-                    }`}
-                  >
-                    {option}
-                  </button>
-                ))}
-              </div>
-              
-              <div className="mt-6">
-                <label className="block text-sm font-medium text-navy-700 mb-2">
-                  Tell us more about your vision (optional):
-                </label>
-                <div className="mb-3 flex flex-wrap gap-2">
-                  {visionPrompts.slice(0, 4).map((prompt, index) => (
-                    <button
-                      key={index}
-                      type="button"
-                      onClick={() => insertPrompt('visionDescription', visionPrompts)}
-                      className="una-prompt-chip"
-                    >
-                      {prompt}
-                    </button>
-                  ))}
-                </div>
-                <textarea
-                  value={freeTextDescriptions.visionDescription}
-                  onChange={(e) => handleFreeTextChange('visionDescription', e.target.value)}
-                  placeholder="What is your long-term vision? How do you see the world changing? What future are you working toward?"
-                  rows={3}
-                  className="w-full p-3 border border-navy-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent resize-none"
-                />
-              </div>
-            </div>
-          </div>
-        );
-
-      case 3:
-        return (
-          <div className="space-y-8">
-            {/* Impact Section */}
-            <div>
-              <h3 className="text-xl font-semibold text-navy-900 mb-4">What impact do you want to create?</h3>
-              <p className="text-navy-600 mb-6">Select all that align with your impact goals:</p>
-              
-              <div className="grid grid-cols-2 gap-3">
-                {impactOptions.map(option => (
-                  <button
-                    key={option}
-                    onClick={() => handleImpactToggle(option)}
-                    className={`p-3 rounded-lg border-2 transition-all ${
-                      answers.impact.includes(option)
-                        ? 'border-gold-500 bg-gold-50 font-semibold'
-                        : 'border-navy-200 hover:border-navy-300'
-                    }`}
-                  >
-                    {option}
-                  </button>
-                ))}
-              </div>
-              
-              <div className="mt-6">
-                <label className="block text-sm font-medium text-navy-700 mb-2">
-                  Tell us more about your impact goals (optional):
-                </label>
-                <div className="mb-3 flex flex-wrap gap-2">
-                  {impactPrompts.slice(0, 4).map((prompt, index) => (
-                    <button
-                      key={index}
-                      type="button"
-                      onClick={() => insertPrompt('overallImpact', impactPrompts)}
-                      className="una-prompt-chip"
-                    >
-                      {prompt}
-                    </button>
-                  ))}
-                </div>
-                <textarea
-                  value={freeTextDescriptions.overallImpact}
-                  onChange={(e) => handleFreeTextChange('overallImpact', e.target.value)}
-                  placeholder="What change do you want to create in the world? Who will benefit? What does success look like?"
-                  rows={3}
-                  className="w-full p-3 border border-navy-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent resize-none"
-                />
-              </div>
-            </div>
-            
-            {/* Summary */}
-            <div className="bg-gold-50 border border-gold-200 rounded-lg p-6">
-              <h4 className="font-semibold text-navy-900 mb-3">Your Selections Summary:</h4>
-              <div className="text-sm text-navy-800 space-y-2">
-                <p><strong>Location:</strong> {answers.entityState || 'Not selected'}</p>
-                <p><strong>Mission:</strong> {answers.mission.length > 0 ? answers.mission.join(', ') : 'Not selected'}</p>
-                <p><strong>Vision:</strong> {answers.vision.length > 0 ? answers.vision.join(', ') : 'Not selected'}</p>
-                <p><strong>Impact Goals:</strong> {answers.impact.length > 0 ? answers.impact.join(', ') : 'Not selected'}</p>
-              </div>
-            </div>
-          </div>
-        );
-
-      default:
-        return null;
+  const isStepComplete = (step: number): boolean => {
+    if (step === 1) {
+      return answers.state !== '' && 
+             answers.readiness.hasMembers !== null && 
+             answers.readiness.hasBylaws !== null && 
+             answers.readiness.hasEIN !== null && 
+             answers.readiness.needsBanking !== null;
+    } else if (step === 2) {
+      return answers.collectiveTypes.length > 0;
+    } else if (step === 3) {
+      return answers.priorities.length > 0 || customPriority !== '';
     }
+    return false;
   };
 
   if (showResults) {
-    return <ExploreLiteResults answers={answers} freeTextDescriptions={freeTextDescriptions} />;
+        return (
+      <>
+        <SEOHead
+          title="UNA Formation Assessment Results | UNA Platform"
+          description="Get personalized recommendations for your UNA formation based on your readiness and priorities."
+        />
+        
+        <div className="min-h-screen bg-gradient-to-br from-[#1E2A38] via-[#3DB5B0] to-[#2C2C2C]">
+          <div className="container mx-auto px-4 py-12">
+            {/* Results Header */}
+            <div className="text-center mb-12">
+              <h1 className="text-h1-lg font-bold text-white font-montserrat mb-4">
+                Your UNA Formation Assessment
+              </h1>
+              <p className="text-body-lg text-white font-lora">
+                Personalized recommendations based on your readiness and priorities
+              </p>
+            </div>
+
+            {/* Results Card */}
+            <div className="una-card p-8 max-w-4xl mx-auto">
+              {/* Readiness Summary */}
+              <div className="mb-8">
+                <h2 className="text-h2 font-semibold text-white font-montserrat mb-4">
+                  Readiness Summary
+                </h2>
+                <div className="space-y-4">
+                  <p className="text-white/90 font-lora leading-relaxed">
+                    You already have several important pieces in place: committed members and the beginnings of a shared purpose. These foundations make it possible to move into the next stage of UNA formation.
+                  </p>
+                  <p className="text-white/90 font-lora leading-relaxed">
+                    To be fully ready, you'll want to complete a few key steps: applying for an EIN, preparing a UNA Agreement, checking your state's requirements, and setting up a bank account. Once these are in place, your UNA can operate confidently and securely.
+                  </p>
+                </div>
+              </div>
+              
+              {/* Readiness Checklist */}
+              <div className="mb-8">
+                <h2 className="text-h2 font-semibold text-white font-montserrat mb-6">
+                  Readiness Checklist
+                </h2>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="bg-gradient-to-r from-green-500/20 to-green-600/20 border border-green-400/30 rounded-lg p-6">
+                    <h3 className="text-body-lg font-semibold text-green-300 font-montserrat mb-4 flex items-center">
+                      <span className="text-green-400 mr-2">✓</span>
+                      Ready
+                    </h3>
+                    <ul className="space-y-2">
+                      {answers.readiness.hasMembers && <li className="text-green-200 font-lora flex items-center"><span className="text-green-400 mr-2">✓</span>2+ members</li>}
+                      {answers.readiness.hasBylaws && <li className="text-green-200 font-lora flex items-center"><span className="text-green-400 mr-2">✓</span>Purpose statement</li>}
+                      {answers.readiness.hasBylaws && <li className="text-green-200 font-lora flex items-center"><span className="text-green-400 mr-2">✓</span>UNA Agreement</li>}
+                      {answers.readiness.hasEIN && <li className="text-green-200 font-lora flex items-center"><span className="text-green-400 mr-2">✓</span>EIN (federal tax ID)</li>}
+                      {answers.readiness.needsBanking && <li className="text-green-200 font-lora flex items-center"><span className="text-green-400 mr-2">✓</span>Bank account</li>}
+                      {!answers.readiness.hasMembers && !answers.readiness.hasBylaws && !answers.readiness.hasEIN && !answers.readiness.needsBanking && (
+                        <li className="text-green-200 font-lora">Nothing yet - that's okay!</li>
+                      )}
+                    </ul>
+            </div>
+
+                  <div className="bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-400/30 rounded-lg p-6">
+                    <h3 className="text-body-lg font-semibold text-amber-300 font-montserrat mb-4 flex items-center">
+                      <span className="text-amber-400 mr-2">○</span>
+                      Still to Prepare
+                    </h3>
+                    <ul className="space-y-2">
+                      {!answers.readiness.hasMembers && <li className="text-amber-200 font-lora flex items-center"><span className="text-amber-400 mr-2">○</span>2+ members</li>}
+                      {!answers.readiness.hasBylaws && <li className="text-amber-200 font-lora flex items-center"><span className="text-amber-400 mr-2">○</span>Purpose statement</li>}
+                      {!answers.readiness.hasBylaws && <li className="text-amber-200 font-lora flex items-center"><span className="text-amber-400 mr-2">○</span>UNA Agreement</li>}
+                      {!answers.readiness.hasEIN && <li className="text-amber-200 font-lora flex items-center"><span className="text-amber-400 mr-2">○</span>EIN (federal tax ID)</li>}
+                      <li className="text-amber-200 font-lora flex items-center"><span className="text-amber-400 mr-2">○</span>State registration (if required)</li>
+                      {!answers.readiness.needsBanking && <li className="text-amber-200 font-lora flex items-center"><span className="text-amber-400 mr-2">○</span>Bank account</li>}
+                      <li className="text-amber-200 font-lora flex items-center"><span className="text-amber-400 mr-2">○</span>Recordkeeping system</li>
+                    </ul>
+              </div>
+                </div>
+              </div>
+              
+              {/* Download Guide Button */}
+              <div className="mb-8 text-center">
+                <Link
+                  to="/una-formation-guide"
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-[#3DB5B0] to-[#1E2A38] text-white px-8 py-4 rounded-xl font-bold font-montserrat shadow-lg hover:shadow-xl transition-all duration-200 hover:transform hover:scale-105"
+                >
+                  <ExternalLink className="h-5 w-5" />
+                  Download the UNA Formation Guide
+                </Link>
+              </div>
+              
+              {/* Next Steps */}
+              <div className="mb-8">
+                <h2 className="text-h2 font-semibold text-white font-montserrat mb-4">
+                  Your Next Steps
+                </h2>
+                <div className="bg-gradient-to-r from-blue-500/20 to-blue-600/20 border border-blue-400/30 rounded-lg p-6 mb-6">
+                  <ol className="space-y-3">
+                    {getActionList().map((action, index) => (
+                      <li key={index} className="text-blue-200 font-lora flex items-start">
+                        <span className="text-blue-400 font-bold mr-3 mt-0.5">{index + 1}.</span>
+                        <span>{action}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+                
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Link
+                    to="/consultation"
+                    className="btn-grad btn-primary px-8 py-3 text-center font-montserrat"
+                  >
+                    Book a Strategy Session
+                  </Link>
+                  <Link
+                    to="/toolkit"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-grad btn-secondary px-8 py-3 text-center font-montserrat"
+                  >
+                    Explore DIY Toolkit
+                  </Link>
+                </div>
+              </div>
+            </div>
+            
+            {/* Start Over Button */}
+            <div className="text-center mt-8">
+              <button
+                onClick={() => {
+                  setShowResults(false);
+                  setCurrentStep(1);
+                  setAnswers({
+                    state: '',
+                    readiness: {
+                      hasMembers: null,
+                      hasBylaws: null,
+                      hasEIN: null,
+                      needsEINHelp: null,
+                      needsBanking: null
+                    },
+                    collectiveTypes: [],
+                    priorities: [],
+                    otherPriority: ''
+                  });
+                  setCustomPriority('');
+                  setValidationWarnings([]);
+                }}
+                className="text-white hover:text-white/80 font-lora underline transition-colors"
+              >
+                Start Over
+              </button>
+            </div>
+          </div>
+        </div>
+      </>
+    );
   }
 
   return (
-    <div className="min-h-screen bg-cream-50">
-      <div className="max-w-3xl mx-auto p-6 space-y-6">
+    <>
+      <SEOHead
+        title="UNA Formation Assessment | UNA Platform"
+        description="Take our comprehensive assessment to get personalized recommendations for your UNA formation journey."
+      />
+      
+      <div className="min-h-screen bg-gradient-to-br from-[#1E2A38] via-[#3DB5B0] to-[#2C2C2C]">
+        <div className="container mx-auto px-4 py-12">
         {/* Header */}
-        <div className="text-center">
-          <h1 className="text-3xl font-bold text-navy-900 mb-4">UNA Exploration</h1>
-          <p className="text-navy-600 text-lg">
-            Answer 3 simple questions to get strategic insights and next steps for your UNA formation journey.
-          </p>
-        </div>
-
-        {/* Progress */}
-        <div className="bg-white rounded-lg p-4 border border-navy-200">
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-sm font-medium text-navy-700">
-              Your UNA Journey
-            </span>
-            <span className="text-sm text-gold-600 font-semibold">
-              Step {currentStep} of 3
-            </span>
+          <div className="text-center mb-12">
+            <h1 className="text-h1-lg font-bold text-white font-montserrat mb-4">
+              UNA Formation Assessment
+            </h1>
+            <p className="text-body-lg text-white font-lora">
+              Get personalized recommendations for your UNA formation journey
+            </p>
           </div>
           
-          <div className="flex-1 mb-3">
-            <div className="h-3 bg-navy-200 rounded-full overflow-hidden">
-              <div 
-                className="h-3 bg-gradient-to-r from-[#C49A6C] to-[#A67C4A] rounded-full transition-all duration-500 ease-out"
+          {/* Progress Bar */}
+          <div className="max-w-2xl mx-auto mb-8">
+            <div className="flex items-center justify-between mb-4">
+              {[1, 2, 3].map((step) => (
+                <div
+                  key={step}
+                  className={`w-8 h-8 rounded-full flex items-center justify-center font-montserrat font-semibold ${
+                    currentStep >= step
+                      ? 'bg-gradient-to-r from-[#3DB5B0] to-[#1E2A38] text-white'
+                      : 'bg-white/20 text-white/80'
+                  }`}
+                >
+                  {step}
+                </div>
+              ))}
+            </div>
+            <div className="w-full bg-white/20 rounded-full h-2">
+              <div
+                className="bg-gradient-to-r from-[#3DB5B0] to-[#1E2A38] h-2 rounded-full transition-all duration-300"
                 style={{ width: `${(currentStep / 3) * 100}%` }}
               />
             </div>
           </div>
           
-          <div className="flex justify-between text-xs text-navy-500">
-            <span className={currentStep >= 1 ? 'text-gold-600 font-medium' : ''}>Location</span>
-            <span className={currentStep >= 2 ? 'text-gold-600 font-medium' : ''}>Mission</span>
-            <span className={currentStep >= 3 ? 'text-gold-600 font-medium' : ''}>Impact</span>
-          </div>
+          {/* Step Content */}
+          <div className="max-w-2xl mx-auto">
+            {/* Step 1: Location & Readiness */}
+            {currentStep === 1 && (
+              <div className="bg-gradient-to-br from-[#1E2A38] to-[#3DB5B0] rounded-xl p-8 shadow-2xl">
+                <h2 className="text-h2 font-semibold text-white font-montserrat mb-6">
+                  Step 1: Location & Readiness
+                </h2>
+                
+                {/* State Selection */}
+                <div className="mb-6">
+                  <label className="block text-white font-medium font-montserrat mb-2">
+                    In what state will your UNA be based?
+                  </label>
+                  <select
+                    value={answers.state}
+                    onChange={(e) => setAnswers(prev => ({ ...prev, state: e.target.value }))}
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3DB5B0] focus:border-transparent font-lora"
+                  >
+                    <option value="">Select your state</option>
+                    {US_STATES.map(state => (
+                      <option key={state} value={state}>{state}</option>
+                    ))}
+                  </select>
         </div>
 
-        {/* Step Content */}
-        <div className="bg-white rounded-lg shadow-sm p-6">
-          {renderStep()}
+                {/* Readiness Questions */}
+                <div className="space-y-6">
+                  <div>
+                    <label className="block text-white font-medium font-montserrat mb-3">
+                      Do you already have at least two people committed to forming this UNA?
+                    </label>
+                    <div className="flex flex-col space-y-3 items-center">
+                      <button
+                        onClick={() => handleReadinessChange('hasMembers', true)}
+                        className={`px-8 py-3 rounded-xl font-bold transition-all duration-200 font-montserrat text-white shadow-lg text-body-lg ${
+                          answers.readiness.hasMembers === true
+                            ? 'bg-gradient-to-r from-[#3DB5B0] to-[#1E2A38] shadow-xl transform scale-105 border-2 border-[#3DB5B0]'
+                            : 'bg-gradient-to-r from-[#1E2A38] to-[#3DB5B0] hover:from-[#2A2F4A] hover:to-[#4AC5C0] hover:shadow-xl hover:transform hover:scale-105 active:from-[#0F1220] active:to-[#2A9B96]'
+                        }`}
+                      >
+                        Yes
+                      </button>
+                      <button
+                        onClick={() => handleReadinessChange('hasMembers', false)}
+                        className={`px-8 py-3 rounded-xl font-bold transition-all duration-200 font-montserrat text-white shadow-lg text-body-lg ${
+                          answers.readiness.hasMembers === false
+                            ? 'bg-gradient-to-r from-[#3DB5B0] to-[#1E2A38] shadow-xl transform scale-105 border-2 border-[#3DB5B0]'
+                            : 'bg-gradient-to-r from-[#1E2A38] to-[#3DB5B0] hover:from-[#2A2F4A] hover:to-[#4AC5C0] hover:shadow-xl hover:transform hover:scale-105 active:from-[#0F1220] active:to-[#2A9B96]'
+                        }`}
+                      >
+                        No
+                      </button>
+                    </div>
+                    {answers.readiness.hasMembers === true && (
+                      <p className="text-sm text-green-600 font-lora mt-2">
+                        UNA law requires two or more people to form.
+                      </p>
+                    )}
+                    {answers.readiness.hasMembers === false && (
+                      <p className="text-sm text-red-600 font-lora mt-2">
+                        A UNA requires at least two people. You'll need to gather members before formalizing.
+                      </p>
+                    )}
         </div>
 
-        {/* Navigation */}
-        <div className="flex justify-between items-center">
+                  <div>
+                    <label className="block text-white font-medium font-montserrat mb-3">
+                      Do you already have governing rules (bylaws or agreements)?
+                    </label>
+                    <div className="flex flex-col space-y-3 items-center">
+                      <button
+                        onClick={() => handleReadinessChange('hasBylaws', true)}
+                        className={`px-8 py-3 rounded-xl font-bold transition-all duration-200 font-montserrat text-white shadow-lg text-body-lg ${
+                          answers.readiness.hasBylaws === true
+                            ? 'bg-gradient-to-r from-[#3DB5B0] to-[#1E2A38] shadow-xl transform scale-105 border-2 border-[#3DB5B0]'
+                            : 'bg-gradient-to-r from-[#1E2A38] to-[#3DB5B0] hover:from-[#2A2F4A] hover:to-[#4AC5C0] hover:shadow-xl hover:transform hover:scale-105 active:from-[#0F1220] active:to-[#2A9B96]'
+                        }`}
+                      >
+                        Yes
+                      </button>
           <button
-            onClick={prevStep}
-            disabled={currentStep === 1}
-            className={`flex items-center px-4 py-2 rounded-lg transition-colors ${
-              currentStep === 1
-                ? 'bg-navy-100 text-navy-400 cursor-not-allowed'
-                : 'bg-navy-200 text-navy-700 hover:bg-navy-300'
-            }`}
-          >
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Previous
+                        onClick={() => handleReadinessChange('hasBylaws', false)}
+                        className={`px-8 py-3 rounded-xl font-bold transition-all duration-200 font-montserrat text-white shadow-lg text-body-lg ${
+                          answers.readiness.hasBylaws === false
+                            ? 'bg-gradient-to-r from-[#3DB5B0] to-[#1E2A38] shadow-xl transform scale-105 border-2 border-[#3DB5B0]'
+                            : 'bg-gradient-to-r from-[#1E2A38] to-[#3DB5B0] hover:from-[#2A2F4A] hover:to-[#4AC5C0] hover:shadow-xl hover:transform hover:scale-105 active:from-[#0F1220] active:to-[#2A9B96]'
+                        }`}
+                      >
+                        No
           </button>
+                    </div>
+                  </div>
 
-          {currentStep < 3 ? (
+                  <div>
+                    <label className="block text-white font-medium font-montserrat mb-3">
+                      Do you have an EIN (federal tax ID)?
+                    </label>
+                    <div className="flex flex-col space-y-3 items-center">
             <button
-              onClick={nextStep}
-              disabled={currentStep === 1 && !answers.entityState}
-              className={`flex items-center px-8 py-3 rounded-lg transition-all duration-200 font-semibold ${
-                currentStep === 1 && !answers.entityState
-                  ? 'bg-navy-300 text-navy-500 cursor-not-allowed'
-                  : 'bg-gradient-to-r from-gold-600 to-gold-700 text-white hover:from-gold-700 hover:to-gold-800 shadow-lg hover:shadow-xl transform hover:scale-105'
-              }`}
-            >
-              Continue
-              <ArrowRight className="h-4 w-4 ml-2" />
+                        onClick={() => handleReadinessChange('hasEIN', true)}
+                        className={`px-8 py-3 rounded-xl font-bold transition-all duration-200 font-montserrat text-white shadow-lg text-body-lg ${
+                          answers.readiness.hasEIN === true
+                            ? 'bg-gradient-to-r from-[#3DB5B0] to-[#1E2A38] shadow-xl transform scale-105 border-2 border-[#3DB5B0]'
+                            : 'bg-gradient-to-r from-[#1E2A38] to-[#3DB5B0] hover:from-[#2A2F4A] hover:to-[#4AC5C0] hover:shadow-xl hover:transform hover:scale-105 active:from-[#0F1220] active:to-[#2A9B96]'
+                        }`}
+                      >
+                        Yes
             </button>
-          ) : (
             <button
-              onClick={handleSubmit}
-              className="bg-gradient-to-r from-emerald-600 to-emerald-700 text-white px-8 py-3 rounded-lg hover:from-emerald-700 hover:to-emerald-800 transition-all duration-200 flex items-center font-semibold shadow-lg hover:shadow-xl transform hover:scale-105"
-            >
-              Get Your Insights
-              <CheckCircle className="h-4 w-4 ml-2" />
+                        onClick={() => handleReadinessChange('hasEIN', false)}
+                        className={`px-8 py-3 rounded-xl font-bold transition-all duration-200 font-montserrat text-white shadow-lg text-body-lg ${
+                          answers.readiness.hasEIN === false
+                            ? 'bg-gradient-to-r from-[#3DB5B0] to-[#1E2A38] shadow-xl transform scale-105 border-2 border-[#3DB5B0]'
+                            : 'bg-gradient-to-r from-[#1E2A38] to-[#3DB5B0] hover:from-[#2A2F4A] hover:to-[#4AC5C0] hover:shadow-xl hover:transform hover:scale-105 active:from-[#0F1220] active:to-[#2A9B96]'
+                        }`}
+                      >
+                        No
             </button>
+                    </div>
+                    {answers.readiness.hasEIN === false && (
+                      <p className="text-sm text-red-600 font-lora mt-2">
+                        You'll need an EIN for banking and grant eligibility. We can help you apply.
+                      </p>
           )}
+        </div>
+
+                  <div>
+                    <label className="block text-white font-medium font-montserrat mb-3">
+                      Do you plan to open a bank account in the UNA's name?
+                    </label>
+                    <div className="flex flex-col space-y-3 items-center">
+                      <button
+                        onClick={() => handleReadinessChange('needsBanking', true)}
+                        className={`px-8 py-3 rounded-xl font-bold transition-all duration-200 font-montserrat text-white shadow-lg text-body-lg ${
+                          answers.readiness.needsBanking === true
+                            ? 'bg-gradient-to-r from-[#3DB5B0] to-[#1E2A38] shadow-xl transform scale-105 border-2 border-[#3DB5B0]'
+                            : 'bg-gradient-to-r from-[#1E2A38] to-[#3DB5B0] hover:from-[#2A2F4A] hover:to-[#4AC5C0] hover:shadow-xl hover:transform hover:scale-105 active:from-[#0F1220] active:to-[#2A9B96]'
+                        }`}
+                      >
+                        Yes
+                      </button>
+                      <button
+                        onClick={() => handleReadinessChange('needsBanking', false)}
+                        className={`px-8 py-3 rounded-xl font-bold transition-all duration-200 font-montserrat text-white shadow-lg text-body-lg ${
+                          answers.readiness.needsBanking === false
+                            ? 'bg-gradient-to-r from-[#3DB5B0] to-[#1E2A38] shadow-xl transform scale-105 border-2 border-[#3DB5B0]'
+                            : 'bg-gradient-to-r from-[#1E2A38] to-[#3DB5B0] hover:from-[#2A2F4A] hover:to-[#4AC5C0] hover:shadow-xl hover:transform hover:scale-105 active:from-[#0F1220] active:to-[#2A9B96]'
+                        }`}
+                      >
+                        No
+                      </button>
+                    </div>
         </div>
       </div>
     </div>
-  );
-}
+            )}
 
-// Lite Results Component
-function ExploreLiteResults({ answers, freeTextDescriptions }: { answers: any; freeTextDescriptions: any }) {
-  const strategyInsights = generateStrategyInsights(answers, freeTextDescriptions);
-  const toolkitRecommendations = generateToolkitRecommendations(answers, freeTextDescriptions);
-  const executiveSummary = generateExecutiveSummary(answers, freeTextDescriptions);
-
+            {/* Step 2: Collective Type */}
+            {currentStep === 2 && (
+              <div className="bg-gradient-to-br from-[#1E2A38] to-[#3DB5B0] rounded-xl p-8 shadow-2xl">
+                <h2 className="text-h2 font-semibold text-white font-montserrat mb-6">
+                  Step 2: Collective Type
+                </h2>
+                
+                <div className="mb-6">
+                  <label className="block text-white font-medium font-montserrat mb-4">
+                    What kind of UNA are you creating? (Select all that apply)
+                  </label>
+                  
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {COLLECTIVE_TYPES.map((type) => {
+                      const Icon = type.icon;
   return (
-    <div className="min-h-screen bg-cream-50">
-      <div className="max-w-4xl mx-auto p-6 space-y-8">
-        {/* Header */}
-        <div className="text-center">
-          <h1 className="text-3xl font-bold text-navy-900 mb-4">
-            Your UNA Strategy Insights
-          </h1>
-          <p className="text-lg text-navy-600">
-            Based on your exploration, here's what we've discovered and your next steps
-          </p>
+                        <button
+                          key={type.id}
+                          onClick={() => handleCollectiveTypeToggle(type.id)}
+                          className={`p-4 rounded-xl border-2 transition-all duration-200 font-montserrat text-left shadow-lg ${
+                            answers.collectiveTypes.includes(type.id)
+                              ? 'border-[#3DB5B0] bg-gradient-to-r from-[#1E2A38] to-[#3DB5B0] shadow-xl transform scale-105'
+                              : 'border-[#1E2A38] bg-gradient-to-r from-[#1E2A38] to-[#3DB5B0] hover:from-[#2A2F4A] hover:to-[#4AC5C0] hover:shadow-xl hover:transform hover:scale-105 active:from-[#0F1220] active:to-[#2A9B96]'
+                          }`}
+                        >
+                          <div className="flex items-start space-x-3">
+                            <Icon className="h-5 w-5 text-white mt-0.5 flex-shrink-0" />
+                            <div className="flex-1">
+                              <div className="text-white font-bold mb-1">{type.label}</div>
+                              <div className="text-white/80 text-sm font-lora leading-relaxed">{type.description}</div>
+                            </div>
+        </div>
+                        </button>
+                      );
+                    })}
         </div>
 
-        {/* Executive Summary */}
-        <div className="bg-white rounded-lg shadow-sm border border-navy-200 p-6">
-          <h2 className="text-xl font-semibold text-navy-900 mb-4">Executive Summary</h2>
-          <p className="text-navy-700 leading-relaxed">
-            {executiveSummary}
-          </p>
-        </div>
-
-        {/* Strategic Insights */}
-        <div className="bg-gold-50 rounded-lg border border-gold-200 p-6">
-          <h2 className="text-xl font-semibold text-navy-900 mb-4">Strategic Insights</h2>
-          <div className="space-y-4">
-            {strategyInsights.slice(0, 3).map((insight: any, index: number) => (
-              <div key={index} className="bg-white rounded-lg p-4 border border-gold-200">
-                <div className="flex items-start justify-between mb-2">
-                  <h3 className="font-semibold text-navy-800">{insight.title}</h3>
-                  <span className={`px-2 py-1 text-xs rounded-full ${
-                    insight.priority === 'high' ? 'bg-red-100 text-red-800' :
-                    insight.priority === 'medium' ? 'bg-yellow-100 text-yellow-800' :
-                    'bg-blue-100 text-blue-800'
-                  }`}>
-                    {insight.priority} priority
-                  </span>
                 </div>
-                <p className="text-navy-700 text-sm leading-relaxed mb-2">{insight.description}</p>
-                {insight.action && (
-                  <p className="text-gold-700 text-sm font-medium">{insight.action}</p>
-                )}
-                {insight.category && (
-                  <span className="text-xs text-navy-500 bg-navy-100 px-2 py-1 rounded">
-                    {insight.category}
-                  </span>
-                )}
               </div>
+            )}
+
+            {/* Step 3: Formation Priorities */}
+            {currentStep === 3 && (
+              <div className="bg-gradient-to-br from-[#1E2A38] to-[#3DB5B0] rounded-xl p-8 shadow-2xl">
+                <h2 className="text-h2 font-semibold text-white font-montserrat mb-6">
+                  Step 3: Why You're Forming a UNA
+                </h2>
+                
+                <div className="mb-6">
+                  <label className="block text-white font-medium font-montserrat mb-4">
+                    What are your main reasons for forming a UNA? (Select all that apply)
+                  </label>
+                  
+                  <div className="space-y-6">
+                    {Object.entries(PRIORITY_CATEGORIES).map(([category, priorities]) => (
+                      <div key={category}>
+                        <h3 className="text-body-lg font-semibold text-white font-montserrat mb-3">
+                          {category}
+                        </h3>
+                        <div className="space-y-2">
+                          {priorities.map((priority) => (
+                            <label
+                              key={priority}
+                              className={`flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 ${
+                                answers.priorities.includes(priority)
+                                  ? 'bg-gradient-to-r from-[#3DB5B0]/20 to-[#1E2A38]/20 border border-[#3DB5B0]'
+                                  : 'hover:bg-white/10'
+                              }`}
+                            >
+                              <input
+                                type="checkbox"
+                                checked={answers.priorities.includes(priority)}
+                                onChange={() => handlePriorityToggle(priority)}
+                                className="h-4 w-4 text-[#3DB5B0] focus:ring-[#3DB5B0] border-gray-300 rounded"
+                              />
+                              <span className="text-white font-lora">{priority}</span>
+                            </label>
             ))}
           </div>
         </div>
-
-        {/* Toolkit Recommendations */}
-        <div className="bg-white rounded-lg shadow-sm border border-navy-200 p-6">
-          <h2 className="text-xl font-semibold text-navy-900 mb-4">Recommended Toolkit Tools</h2>
-          <p className="text-navy-700 mb-6">
-            Based on your mission and impact goals, we recommend these specific tools to support your UNA journey:
-          </p>
-          
-          {toolkitRecommendations.map((category: any, index: number) => (
-            <div key={index} className="mb-6 last:mb-0">
-              <h3 className="font-semibold text-navy-800 mb-3 text-lg">{category.category}</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {category.tools.map((tool: any) => (
-                  <div key={tool.id} className="p-3 border border-navy-200 rounded-lg bg-navy-50">
-                    <div className="flex items-start justify-between mb-2">
-                      <h4 className="font-medium text-navy-800 text-sm">{tool.name}</h4>
-                      <span className={`px-2 py-1 text-xs rounded-full ${
-                        tool.priority === 'high' ? 'bg-red-100 text-red-800' :
-                        tool.priority === 'medium' ? 'bg-yellow-100 text-yellow-800' :
-                        'bg-blue-100 text-blue-800'
-                      }`}>
-                        {tool.priority}
-                      </span>
+                    ))}
+                    
+                    <div>
+                      <h3 className="text-lg font-semibold text-white font-montserrat mb-3">
+                        Other
+                      </h3>
+                      <input
+                        type="text"
+                        value={customPriority}
+                        onChange={(e) => setCustomPriority(e.target.value)}
+                        placeholder="Please specify your other priority"
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3DB5B0] focus:border-transparent font-lora"
+                      />
                     </div>
-                    <p className="text-navy-600 text-xs mb-2">{tool.reason}</p>
-                    <a href="/resources" className="text-gold-600 hover:text-gold-800 text-xs font-medium">
-                      Learn More →
-                    </a>
                   </div>
-                ))}
+                </div>
               </div>
-            </div>
-          ))}
-          
-          <div className="text-center pt-4">
-            <a href="/resources" className="inline-flex items-center bg-navy-600 hover:bg-navy-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
-              Explore Full Toolkit
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </a>
-          </div>
-        </div>
+            )}
 
-        {/* CTA Section */}
-        <div className="bg-gradient-to-r from-navy-600 to-navy-700 rounded-lg p-8 text-center text-white">
-          <h2 className="text-2xl font-bold mb-4">Ready to bring your UNA into focus?</h2>
-          <p className="text-lg mb-6 opacity-90">
-            Schedule a 60-90 minute UNA Strategy Session to get personalized guidance, 
-            strategic planning, and next steps for your formation journey.
-          </p>
-          <div className="space-y-4">
-            <div className="flex items-center justify-center space-x-2 text-gold-300">
-              <Calendar className="h-5 w-5" />
-              <span>1 hour session</span>
-            </div>
-            <div className="flex items-center justify-center space-x-2 text-gold-300">
-              <span className="text-2xl font-bold">$250</span>
+            {/* Validation Warnings */}
+            {validationWarnings.length > 0 && (
+              <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+                <h3 className="text-red-900 font-semibold font-montserrat mb-2">
+                  Please complete the following:
+                </h3>
+                <ul className="text-red-800 font-lora space-y-1">
+                  {validationWarnings.map((warning, index) => (
+                    <li key={index}>• {warning}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Navigation */}
+            <div className="flex justify-between items-center mt-8">
+              <button
+                onClick={prevStep}
+                disabled={currentStep === 1}
+                className={`flex items-center space-x-2 px-6 py-3 rounded-xl font-bold transition-all duration-200 font-montserrat ${
+                  currentStep === 1
+                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                    : 'bg-gradient-to-r from-[#1E2A38] to-[#3DB5B0] text-white shadow-lg hover:from-[#2A2F4A] hover:to-[#4AC5C0] hover:shadow-xl hover:transform hover:scale-105 active:from-[#0F1220] active:to-[#2A9B96]'
+                }`}
+              >
+                <ArrowLeft className="h-4 w-4" />
+                <span>Back</span>
+              </button>
+              
+              <button
+                onClick={nextStep}
+                disabled={!isStepComplete(currentStep)}
+                className={`flex items-center space-x-2 px-6 py-3 rounded-xl font-bold transition-all duration-200 font-montserrat ${
+                  isStepComplete(currentStep)
+                    ? 'bg-gradient-to-r from-[#1E2A38] to-[#3DB5B0] text-white shadow-lg hover:from-[#2A2F4A] hover:to-[#4AC5C0] hover:shadow-xl hover:transform hover:scale-105 active:from-[#0F1220] active:to-[#2A9B96]'
+                    : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                }`}
+              >
+                <span>{currentStep === 3 ? 'Get Results' : 'Next'}</span>
+                <ArrowRight className="h-4 w-4" />
+              </button>
             </div>
           </div>
-          <a
-            href="/consultation"
-            className="inline-flex items-center bg-gold-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gold-700 transition-all duration-200 mt-6 shadow-lg hover:shadow-xl transform hover:scale-105"
-          >
-            Schedule UNA Strategy Session
-            <ArrowRight className="h-5 w-5 ml-2" />
-          </a>
-        </div>
-
-        {/* Start Over */}
-        <div className="text-center">
-          <button
-            onClick={() => window.location.reload()}
-            className="text-gold-600 hover:text-gold-800 font-medium"
-          >
-            Start over with new answers
-          </button>
         </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -13,8 +13,9 @@ import {
   CheckCircle,
   FileText
 } from 'lucide-react';
-import { notificationService } from '@/lib/notifications';
 import { getAllBlogPosts } from '@/lib/mdx-loader';
+import { emailTemplates } from '@/lib/emailTemplates';
+import EmailModal from './EmailModal';
 
 import { analyticsService } from '@/lib/analytics';
 import { VerificationManager } from '@/lib/verification';
@@ -34,6 +35,7 @@ import {
   defaultPaymentSettings 
 } from '@/lib/payment-module';
 import { exploreFormationExportService } from '@/lib/explore-formation-export';
+import { getLeads } from '@/lib/supabase/leads';
 
 interface AdminStats {
   totalUsers: number;
@@ -73,6 +75,7 @@ interface AnalyticsData {
   };
 }
 
+
 export default function AdminDashboard() {
   const [stats, setStats] = useState<AdminStats>({
     totalUsers: 0,
@@ -84,8 +87,8 @@ export default function AdminDashboard() {
   });
   const [recentActivity, setRecentActivity] = useState<UserActivity[]>([]);
   const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
-  const [emailSubject, setEmailSubject] = useState('');
-  const [emailBody, setEmailBody] = useState('');
+  const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
+  const [selectedTemplate, setSelectedTemplate] = useState<any>(null);
 
   const [analyticsData, setAnalyticsData] = useState<AnalyticsData>({
     totalEvents: 0,
@@ -196,10 +199,14 @@ export default function AdminDashboard() {
   const [paymentSettings, setPaymentSettings] = useState<PaymentSettings>(defaultPaymentSettings);
   const paymentModule = PaymentModule.getInstance();
   
-  const [activeTab, setActiveTab] = useState<'overview' | 'users' | 'verification' | 'affiliates' | 'payments' | 'analytics' | 'emails' | 'settings' | 'environment' | 'explore-formation' | 'blog'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'users' | 'verification' | 'affiliates' | 'payments' | 'analytics' | 'emails' | 'settings' | 'environment' | 'explore-formation' | 'blog' | 'leads'>('overview');
   
   // Blog posts state
   const [blogPosts, setBlogPosts] = useState<any[]>([]);
+  
+  // Leads state
+  const [leads, setLeads] = useState<any[]>([]);
+  const [leadsLoading, setLeadsLoading] = useState(false);
 
   useEffect(() => {
     loadAdminData();
@@ -250,7 +257,21 @@ export default function AdminDashboard() {
     }
   };
 
-
+  const loadLeads = async () => {
+    setLeadsLoading(true);
+    try {
+      const { data, error } = await getLeads();
+      if (error) {
+        console.error('Error loading leads:', error);
+      } else {
+        setLeads(data || []);
+      }
+    } catch (error) {
+      console.error('Error loading leads:', error);
+    } finally {
+      setLeadsLoading(false);
+    }
+  };
 
   const loadAnalyticsData = async () => {
     try {
@@ -285,58 +306,55 @@ export default function AdminDashboard() {
     );
   };
 
-  const handleBulkEmail = async () => {
-    if (selectedUsers.length === 0 || !emailSubject || !emailBody) return;
 
-    try {
-      const selectedUserEmails = recentActivity
-        .filter(user => selectedUsers.includes(user.id))
-        .map(user => user.email);
 
-      for (const email of selectedUserEmails) {
-        await notificationService.sendEmail({
-          to: email,
-          template: 'followUp',
-          data: { name: email.split('@')[0] },
-          priority: 'normal'
-        });
-      }
-
-      alert(`Bulk email sent to ${selectedUserEmails.length} users`);
-      setEmailSubject('');
-      setEmailBody('');
-      setSelectedUsers([]);
-    } catch (error) {
-      console.error('Error sending bulk email:', error);
-      alert('Failed to send bulk email');
-    }
+  const handleCloseEmailModal = () => {
+    setIsEmailModalOpen(false);
+    setSelectedTemplate(null);
   };
 
-  const handleCustomEmail = async () => {
-    if (!emailSubject || !emailBody) return;
+  const handleOpenEmailTemplate = (templateKey: string, user?: UserActivity) => {
+    const template = emailTemplates[templateKey as keyof typeof emailTemplates];
+    if (!template) return;
 
-    try {
-      // Send to all active users
-      const activeUserEmails = recentActivity
-        .filter(user => user.status === 'active')
-        .map(user => user.email);
+    // Extract client data from user or use defaults
+    const clientData = user ? {
+      firstName: user.email.split('@')[0], // Extract name from email
+      name: user.email.split('@')[0],
+      email: user.email,
+      bookingDate: new Date().toLocaleDateString(),
+      entityName: 'UNA Organization', // Default or from user data
+      state: 'California' // Default or from user data
+    } : {
+      firstName: 'Client',
+      name: 'Client Name',
+      email: 'client@example.com',
+      bookingDate: new Date().toLocaleDateString(),
+      entityName: 'UNA Organization',
+      state: 'California'
+    };
 
-      for (const email of activeUserEmails) {
-        await notificationService.sendEmail({
-          to: email,
-          template: 'followUp',
-          data: { name: email.split('@')[0] },
-          priority: 'normal'
-        });
-      }
+    // Replace placeholders with client data
+    let subject = template.subject
+      .replace(/\[First Name\]/g, clientData.firstName)
+      .replace(/\[Client Name\]/g, clientData.name)
+      .replace(/\[Date\/Time\]/g, clientData.bookingDate)
+      .replace(/\[Booking Date\/Time\]/g, clientData.bookingDate)
+      .replace(/\[Client Email\]/g, clientData.email)
+      .replace(/\[Date\]/g, clientData.bookingDate);
 
-      alert(`Custom email sent to ${activeUserEmails.length} active users`);
-      setEmailSubject('');
-      setEmailBody('');
-    } catch (error) {
-      console.error('Error sending custom email:', error);
-      alert('Failed to send custom email');
-    }
+    let body = template.body
+      .replace(/\[First Name\]/g, clientData.firstName)
+      .replace(/\[Client Name\]/g, clientData.name)
+      .replace(/\[Client Email\]/g, clientData.email)
+      .replace(/\[Date\/Time\]/g, clientData.bookingDate)
+      .replace(/\[Booking Date\/Time\]/g, clientData.bookingDate)
+      .replace(/\[Date\]/g, clientData.bookingDate)
+      .replace(/\[Secure Intake Link\]/g, `${window.location.origin}/intake`)
+      .replace(/\[Checkout Link\]/g, `${window.location.origin}/checkout`);
+
+    setSelectedTemplate({ subject, body, templateKey, clientData });
+    setIsEmailModalOpen(true);
   };
 
   const getStatusIcon = (status: string) => {
@@ -676,6 +694,7 @@ Facebook,Complete UNA Formation Guide,Master UNA formation from concept to compl
             {[
               { id: 'overview', label: 'Overview', icon: TrendingUp },
               { id: 'users', label: 'Users', icon: Users },
+              { id: 'leads', label: 'Leads', icon: Mail },
               { id: 'verification', label: 'Verification', icon: AlertCircle },
               { id: 'affiliates', label: 'Affiliates', icon: Users },
               { id: 'payments', label: 'Payments', icon: CreditCard },
@@ -806,6 +825,36 @@ Facebook,Complete UNA Formation Guide,Master UNA formation from concept to compl
                 </div>
               </div>
             </div>
+
+            {/* Connected Services Status */}
+            <div className="bg-white rounded-lg p-6 shadow-sm border border-navy-100">
+              <h3 className="text-lg font-semibold text-navy-900 mb-4">Connected Services</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="flex items-center justify-between p-4 bg-emerald-50 rounded-lg border border-emerald-200">
+                  <div className="flex items-center">
+                    <CheckCircle className="h-5 w-5 text-emerald-600 mr-3" />
+                    <span className="font-medium text-navy-900">Supabase</span>
+                  </div>
+                  <span className="text-emerald-600 text-sm font-medium">✅ Connected</span>
+                </div>
+                
+                <div className="flex items-center justify-between p-4 bg-red-50 rounded-lg border border-red-200">
+                  <div className="flex items-center">
+                    <AlertCircle className="h-5 w-5 text-red-600 mr-3" />
+                    <span className="font-medium text-navy-900">SendGrid</span>
+                  </div>
+                  <span className="text-red-600 text-sm font-medium">❌ Not Configured</span>
+                </div>
+                
+                <div className="flex items-center justify-between p-4 bg-amber-50 rounded-lg border border-amber-200">
+                  <div className="flex items-center">
+                    <Settings className="h-5 w-5 text-amber-600 mr-3" />
+                    <span className="font-medium text-navy-900">Stripe</span>
+                  </div>
+                  <span className="text-amber-600 text-sm font-medium">⚠️ Check Required</span>
+                </div>
+              </div>
+            </div>
           </div>
         )}
 
@@ -885,6 +934,74 @@ Facebook,Complete UNA Formation Guide,Master UNA formation from concept to compl
                       </td>
                     </tr>
                   ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        {/* Leads Tab */}
+        {activeTab === 'leads' && (
+          <div className="bg-white rounded-lg shadow-sm border border-navy-100">
+            <div className="p-6 border-b border-navy-100">
+              <div className="flex justify-between items-center">
+                <div>
+                  <h2 className="text-xl font-semibold text-navy-900">Lead Management</h2>
+                  <p className="text-navy-600 mt-1">Track email captures from the UNA Formation Guide</p>
+                </div>
+                <button
+                  onClick={loadLeads}
+                  disabled={leadsLoading}
+                  className="btn-grad btn-primary px-4 py-2 text-sm"
+                >
+                  {leadsLoading ? 'Loading...' : 'Refresh'}
+                </button>
+              </div>
+            </div>
+            
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="bg-navy-50">
+                  <tr>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-navy-500 uppercase tracking-wider">Name</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-navy-500 uppercase tracking-wider">Email</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-navy-500 uppercase tracking-wider">Source</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-navy-500 uppercase tracking-wider">Date</th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-navy-200">
+                  {leadsLoading ? (
+                    <tr>
+                      <td colSpan={4} className="px-6 py-4 text-center text-navy-500">
+                        Loading leads...
+                      </td>
+                    </tr>
+                  ) : leads.length === 0 ? (
+                    <tr>
+                      <td colSpan={4} className="px-6 py-4 text-center text-navy-500">
+                        No leads found
+                      </td>
+                    </tr>
+                  ) : (
+                    leads.map((lead) => (
+                      <tr key={lead.id} className="hover:bg-navy-50">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-navy-900">
+                          {lead.name || 'N/A'}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-navy-600">
+                          {lead.email}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-navy-600">
+                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gold-100 text-gold-800">
+                            {lead.source || 'Unknown'}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-navy-600">
+                          {new Date(lead.created_at).toLocaleDateString()}
+                        </td>
+                      </tr>
+                    ))
+                  )}
                 </tbody>
               </table>
             </div>
@@ -2571,65 +2688,74 @@ Facebook,Complete UNA Formation Guide,Master UNA formation from concept to compl
           <div className="space-y-6">
             <div className="bg-white rounded-lg shadow-sm border border-navy-100">
               <div className="p-6 border-b border-navy-100">
-                <h3 className="text-lg font-semibold text-navy-900">Email Management</h3>
-                <p className="text-navy-600 mt-1">Send targeted emails to users</p>
+                <h3 className="text-lg font-semibold text-navy-900">Email Template Management</h3>
+                <p className="text-navy-600 mt-1">Generate copy-paste email templates for manual sending</p>
               </div>
               
               <div className="p-6 space-y-6">
-                {/* Bulk Email */}
+                {/* Email Templates */}
                 <div>
-                  <h4 className="text-md font-medium text-navy-900 mb-4">Bulk Email to Selected Users</h4>
-                  <div className="space-y-4">
-                    <input
-                      type="text"
-                      placeholder="Email subject"
-                      value={emailSubject}
-                      onChange={(e) => setEmailSubject(e.target.value)}
-                      className="w-full px-3 py-2 border border-navy-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent"
-                    />
-                    <textarea
-                      placeholder="Email content"
-                      value={emailBody}
-                      onChange={(e) => setEmailBody(e.target.value)}
-                      rows={4}
-                      className="w-full px-3 py-2 border border-navy-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent"
-                    />
-                    <button
-                      onClick={handleBulkEmail}
-                      disabled={selectedUsers.length === 0 || !emailSubject || !emailBody}
-                      className="px-4 py-2 bg-gold-600 text-white rounded-lg hover:bg-gold-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                    >
-                      Send to {selectedUsers.length} Selected Users
-                    </button>
+                  <h4 className="text-md font-medium text-navy-900 mb-4">Email Templates</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {Object.entries(emailTemplates).map(([key, template]) => (
+                      <div key={key} className="border border-navy-200 rounded-lg p-4 hover:border-navy-300 transition-colors">
+                        <div className="flex items-start justify-between mb-2">
+                          <h5 className="font-medium text-navy-900">{template.label}</h5>
+                          <Mail className="h-4 w-4 text-navy-400" />
+                        </div>
+                        <p className="text-sm text-navy-600 mb-3">{template.subject}</p>
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => handleOpenEmailTemplate(key)}
+                            className="px-3 py-1 bg-navy-600 text-white text-sm rounded hover:bg-navy-700 transition-colors"
+                          >
+                            Generate Template
+                          </button>
+                          {selectedUsers.length > 0 && (
+                            <button
+                              onClick={() => {
+                                const user = recentActivity.find(u => selectedUsers.includes(u.id));
+                                if (user) handleOpenEmailTemplate(key, user);
+                              }}
+                              className="px-3 py-1 bg-gold-600 text-white text-sm rounded hover:bg-gold-700 transition-colors"
+                            >
+                              For Selected User
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
-                {/* Custom Email */}
-                <div className="pt-6 border-t border-navy-100">
-                  <h4 className="text-md font-medium text-navy-900 mb-4">Custom Email to All Active Users</h4>
-                  <div className="space-y-4">
-                    <input
-                      type="text"
-                      placeholder="Email subject"
-                      value={emailSubject}
-                      onChange={(e) => setEmailSubject(e.target.value)}
-                      className="w-full px-3 py-2 border border-navy-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent"
-                    />
-                    <textarea
-                      placeholder="Email content"
-                      value={emailBody}
-                      onChange={(e) => setEmailBody(e.target.value)}
-                      rows={4}
-                      className="w-full px-3 py-2 border border-navy-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent"
-                    />
-                    <button
-                      onClick={handleCustomEmail}
-                      disabled={!emailSubject || !emailBody}
-                      className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                    >
-                      Send to All Active Users
-                    </button>
+                {/* Selected Users Info */}
+                {selectedUsers.length > 0 && (
+                  <div className="bg-navy-50 rounded-lg p-4">
+                    <h4 className="text-md font-medium text-navy-900 mb-2">
+                      Selected Users ({selectedUsers.length})
+                    </h4>
+                    <div className="space-y-1">
+                      {recentActivity
+                        .filter(user => selectedUsers.includes(user.id))
+                        .map(user => (
+                          <div key={user.id} className="text-sm text-navy-600">
+                            {user.email} - {user.status}
+                          </div>
+                        ))}
+                    </div>
                   </div>
+                )}
+
+                {/* Instructions */}
+                <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+                  <h4 className="text-md font-medium text-emerald-900 mb-2">How to Use</h4>
+                  <ul className="text-sm text-emerald-700 space-y-1">
+                    <li>• Select a template to generate a pre-filled email</li>
+                    <li>• Edit the subject and body as needed</li>
+                    <li>• Copy the content and paste into Gmail or your email client</li>
+                    <li>• Client data is automatically substituted from user records</li>
+                    <li>• Future: Templates can be sent directly via email service</li>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -3087,6 +3213,14 @@ Facebook,Complete UNA Formation Guide,Master UNA formation from concept to compl
           </div>
         )}
       </div>
+
+      {/* Email Template Modal */}
+      <EmailModal
+        isOpen={isEmailModalOpen}
+        onClose={handleCloseEmailModal}
+        subject={selectedTemplate?.subject || ''}
+        body={selectedTemplate?.body || ''}
+      />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ExternalLink } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
 import AffiliateLink from '../components/AffiliateLink';
 import Symbol from '../components/Symbol';
@@ -48,6 +48,19 @@ export default function Toolkit() {
               <span className="px-4 py-2 bg-[#7A4CA0]/10 text-[#7A4CA0] rounded-full text-sm font-medium">
                 No Attorney Required for Basic Formation
               </span>
+            </div>
+            
+            {/* PDF Download Section */}
+            <div className="mt-8 text-center">
+              <a
+                href="/assets/una-formation-guide.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center btn-grad btn-primary px-8 py-4 text-lg font-montserrat"
+              >
+                <ExternalLink className="h-5 w-5 mr-2" />
+                Download Complete UNA Formation Guide (PDF)
+              </a>
             </div>
           </div>
 
@@ -217,14 +230,14 @@ export default function Toolkit() {
               </div>
               <div className="bg-[#C49A6C]/20 rounded-lg p-6 border border-[#C49A6C]/30">
                 <h3 className="font-semibold text-white mb-2 font-montserrat">Expert Referral Network</h3>
-                <p className="text-white text-sm mb-4 font-lora">When you need specialized legal or financial advice, we connect you with trusted professionals in your area.</p>
+                <p className="text-white text-sm mb-4 font-lora">Expert referrals available upon request. Provided as an add-on outside core packages.</p>
                 <div className="text-sm text-white font-lora mb-4">
                   • Attorneys for complex legal matters<br/>
                   • CPAs for tax and accounting<br/>
                   • Business consultants for growth
                 </div>
-                <Link to="/referrals" className="btn-grad btn-primary text-sm px-4 py-2 w-full text-center">
-                  View Referral Network
+                <Link to="/contact" className="btn-grad btn-primary text-sm px-4 py-2 w-full text-center">
+                  Request Referral
                   <ArrowRight className="ml-2 h-4 w-4 inline" />
                 </Link>
               </div>

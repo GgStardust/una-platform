@@ -228,6 +228,9 @@ export default function Contact() {
                   Send Message
                   <Send className="ml-2 h-5 w-5" />
                 </button>
+                <p className="text-sm text-[#2A2A28] mt-3 font-lora">
+                  We typically respond within 24-48 hours during business days.
+                </p>
               </div>
             </form>
           </div>

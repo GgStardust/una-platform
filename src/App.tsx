@@ -1,5 +1,6 @@
-import { Routes, Route, NavLink } from 'react-router-dom';
+import { Routes, Route, NavLink, Link } from 'react-router-dom';
 import { useState, useEffect, Suspense, lazy } from 'react';
+import { ExternalLink } from 'lucide-react';
 import { IntakeData } from '@/lib/types';
 import { googleAnalyticsService } from '@/lib/analytics';
 import LoadingSpinner from './components/LoadingSpinner';
@@ -14,7 +15,6 @@ const Success = lazy(() => import('./pages/Success'));
 const Intake = lazy(() => import('./pages/Intake'));
 const IntakeWithSupabase = lazy(() => import('./pages/IntakeWithSupabase'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
-const Referrals = lazy(() => import('./pages/Referrals'));
 const SignIn = lazy(() => import('./pages/SignIn'));
 const SignUp = lazy(() => import('./pages/SignUp'));
 const Checkout = lazy(() => import('./pages/Checkout'));
@@ -25,6 +25,8 @@ const Toolkit = lazy(() => import('./pages/Toolkit'));
 const Contact = lazy(() => import('./pages/Contact'));
 const Schedule = lazy(() => import('./pages/Schedule'));
 const PaymentSuccess = lazy(() => import('./pages/PaymentSuccess'));
+const UnaFormationGuide = lazy(() => import('./pages/UnaFormationGuide'));
+const UnaFormationGuideLanding = lazy(() => import('./pages/UnaFormationGuideLanding'));
 
 // Lazy load components
 const AdminDashboard = lazy(() => import('./components/AdminDashboard'));
@@ -104,7 +106,7 @@ function App() {
             <div className="flex items-center">
               <NavLink 
                 to="/" 
-                className="text-xl font-bold text-[#F4F1E8] hover:text-[#C49A6C] transition-colors font-montserrat"
+                className="text-xl font-bold text-[#F4F1E8] hover:text-[#3DB5B0] transition-colors font-montserrat"
               >
                 UNA Platform
               </NavLink>
@@ -118,7 +120,7 @@ function App() {
                     `px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                       isActive 
                         ? 'text-[#C49A6C] bg-[#C49A6C]/20 border-b-2 border-[#C49A6C]' 
-                        : 'text-[#F4F1E8] hover:text-[#C49A6C] hover:bg-[#C49A6C]/10'
+                        : 'text-[#F4F1E8] hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10'
                     }`
                   }
                 >
@@ -128,14 +130,14 @@ function App() {
                 {/* Start */}
                 <NavLink 
                   to="/explore" 
-                  className="px-3 py-2 rounded-md text-sm font-medium text-[#F4F1E8] hover:text-[#C49A6C] hover:bg-[#C49A6C]/10 transition-colors"
+                  className="px-3 py-2 rounded-md text-sm font-medium text-[#F4F1E8] hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors"
                 >
                   Start
                 </NavLink>
                 
                 {/* Services Dropdown */}
                 <div className="relative group">
-                  <button className="px-3 py-2 rounded-md text-sm font-medium text-[#F4F1E8] hover:text-[#C49A6C] hover:bg-[#C49A6C]/10 transition-colors">
+                  <button className="px-3 py-2 rounded-md text-sm font-medium text-[#F4F1E8] hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors">
                     Services
                     <svg className="ml-1 h-4 w-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -159,7 +161,7 @@ function App() {
                 
                 {/* Learn Dropdown */}
                 <div className="relative group">
-                  <button className="px-3 py-2 rounded-md text-sm font-medium text-[#F4F1E8] hover:text-[#C49A6C] hover:bg-[#C49A6C]/10 transition-colors">
+                  <button className="px-3 py-2 rounded-md text-sm font-medium text-[#F4F1E8] hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors">
                     Learn
                     <svg className="ml-1 h-4 w-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -196,7 +198,7 @@ function App() {
                 {/* Admin */}
                 <NavLink 
                   to="/admin" 
-                  className="px-3 py-2 rounded-md text-sm font-medium text-[#F4F1E8] hover:text-[#C49A6C] hover:bg-[#C49A6C]/10 transition-colors"
+                  className="px-3 py-2 rounded-md text-sm font-medium text-[#F4F1E8] hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors"
                 >
                   Admin
                 </NavLink>
@@ -251,7 +253,6 @@ function App() {
               <Checkout />
             </FormationGuard>
           } />
-          <Route path="/referrals" element={<Referrals />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/states/:stateCode" element={<StatePage />} />
@@ -259,6 +260,8 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/success" element={<PaymentSuccess />} />
+            <Route path="/una-formation-guide" element={<UnaFormationGuideLanding />} />
+            <Route path="/una-formation-guide-full" element={<UnaFormationGuide />} />
           <Route path="/admin" element={
             <AdminAuth>
               <AdminDashboard />
@@ -267,6 +270,80 @@ function App() {
           </Routes>
         </Suspense>
       </main>
+
+      {/* Footer */}
+      <footer className="bg-gradient-to-r from-[#1E2A38] to-[#3DB5B0] text-white py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-3 gap-8 mb-8">
+            <div>
+              <h3 className="text-h2 font-bold font-montserrat mb-4">UNA Platform</h3>
+              <p className="text-white/90 font-lora mb-4">
+                Professional guidance for Unincorporated Nonprofit Association formation with sovereignty-aligned expertise.
+              </p>
+            </div>
+            <div>
+              <h4 className="text-body-lg font-semibold font-montserrat mb-4">Quick Links</h4>
+              <div className="space-y-2">
+                <NavLink to="/explore" className="block text-white/90 hover:text-[#3DB5B0] transition-colors font-lora">
+                  Explore Your Path
+                </NavLink>
+                <NavLink to="/toolkit" className="block text-white/90 hover:text-[#3DB5B0] transition-colors font-lora">
+                  UNA Formation Toolkit
+                </NavLink>
+                <NavLink to="/services" className="block text-white/90 hover:text-[#3DB5B0] transition-colors font-lora">
+                  Strategy Sessions
+                </NavLink>
+                <NavLink to="/blog" className="block text-white/90 hover:text-[#3DB5B0] transition-colors font-lora">
+                  Blog & Resources
+                </NavLink>
+              </div>
+            </div>
+            <div>
+              <h4 className="text-body-lg font-semibold font-montserrat mb-4">Get Help</h4>
+              <p className="text-white/90 font-lora mb-4">
+                Need personalized guidance for your UNA formation?
+              </p>
+              <button
+                onClick={() => {
+                  window.open(
+                    'mailto:gigi@gigistardust.com?subject=UNA Formation Help&body=Hi Gigi,%0D%0A%0D%0AI need help with UNA formation.%0D%0A%0D%0APlease let me know when you might be available for a conversation.%0D%0A%0D%0AThank you!',
+                    '_blank'
+                  );
+                }}
+                className="btn-grad btn-primary px-6 py-2 text-sm font-montserrat"
+              >
+                Contact Us
+              </button>
+            </div>
+          </div>
+          
+          {/* Unified CTA Section */}
+          <div className="border-t border-white/20 pt-8 mb-8">
+            <div className="text-center">
+              <h3 className="text-h2 font-semibold font-montserrat mb-2">Ready to start your UNA journey?</h3>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link to="/consultation" className="btn-grad btn-primary px-6 py-3">
+                  Book Strategy Session
+                </Link>
+                <a
+                  href="/una-formation-guide"
+                  className="inline-flex items-center gap-2 border-2 border-white text-white px-6 py-3 rounded-lg font-bold font-montserrat hover:bg-white hover:text-[#1C1F3B] transition-all duration-200"
+                >
+                  <ExternalLink className="h-5 w-5" />
+                  Download Free Guide
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          {/* Copyright */}
+          <div className="border-t border-white/20 pt-6 text-center">
+            <p className="text-white/70 font-lora">
+              © 2024 UNA Platform. All rights reserved. | Prepared by UNA Guide | unaguide.com
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

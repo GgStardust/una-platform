@@ -38,6 +38,34 @@ export default function About() {
         </div>
       </div>
 
+      {/* Founder Mission Callout */}
+      <div className="py-16 bg-gradient-to-r from-[#1E2A38] to-[#3DB5B0]">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-white/20">
+            <div className="text-center">
+              <h3 className="text-2xl font-bold text-white mb-6 font-montserrat">A Vision for Sovereignty</h3>
+              <div className="max-w-3xl mx-auto space-y-4">
+                <p className="text-lg text-white/90 leading-relaxed font-lora">
+                  "My mission is to help visionaries, educators, artists, and community builders create organizations 
+                  that truly reflect their values and purpose. Too often, we're forced to fit our dreams into 
+                  structures that don't serve us or our communities."
+                </p>
+                <p className="text-lg text-white/90 leading-relaxed font-lora">
+                  "The UNA platform represents a different path—one where structure serves sovereignty, where 
+                  legal frameworks support rather than constrain our collective vision. This is about creating 
+                  the world we want to live in, one organization at a time."
+                </p>
+                <div className="mt-6">
+                  <span className="inline-block bg-gradient-to-r from-[#C49A6C] to-[#B8955A] text-white px-6 py-3 rounded-lg font-bold font-montserrat">
+                    — Gigi Stardust, Founder
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Mission Section */}
       <div className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

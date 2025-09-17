@@ -7,7 +7,7 @@ const faqCategories = [
     id: 'basics',
     title: 'UNA Basics',
     icon: Target,
-    color: 'from-gold-500 to-amber-500',
+    color: 'from-[#3DB5B0] to-[#1E2A38]',
     questions: [
       {
         question: "What is a UNA?",
@@ -27,7 +27,7 @@ const faqCategories = [
     id: 'formation',
     title: 'Formation & Setup',
     icon: Building2,
-    color: 'from-blue-500 to-indigo-500',
+    color: 'from-[#1E2A38] to-[#3DB5B0]',
     questions: [
       {
         question: "How much does it cost to form a UNA?",
@@ -51,7 +51,7 @@ const faqCategories = [
     id: 'legal',
     title: 'Legal & Compliance',
     icon: Shield,
-    color: 'from-purple-500 to-pink-500',
+    color: 'from-[#E57373] to-[#3DB5B0]',
     questions: [
       {
         question: "What should I include in my entity purpose?",
@@ -75,7 +75,7 @@ const faqCategories = [
     id: 'governance',
     title: 'Governance & Operations',
     icon: Users,
-    color: 'from-green-500 to-emerald-500',
+    color: 'from-[#3DB5B0] to-[#1E2A38]',
     questions: [
       {
         question: "What is the Organizer's role?",
@@ -99,7 +99,7 @@ const faqCategories = [
     id: 'financial',
     title: 'Financial & Funding',
     icon: Calculator,
-    color: 'from-red-500 to-pink-500',
+    color: 'from-[#E57373] to-[#1E2A38]',
     questions: [
       {
         question: "What are grant plans?",
@@ -119,7 +119,7 @@ const faqCategories = [
     id: 'support',
     title: 'Support & Services',
     icon: HelpCircle,
-    color: 'from-indigo-500 to-purple-500',
+    color: 'from-[#1E2A38] to-[#E57373]',
     questions: [
       {
         question: "What services do you provide?",
