@@ -645,20 +645,6 @@ export default function Success() {
         </div>
       </div>
 
-      {/* CTA Section */}
-      <div className="bg-navy-600 py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">
-            Ready to Write Your Success Story?
-          </h2>
-          <p className="text-xl text-navy-100 mb-8">
-            Start your UNA formation journey and join these inspiring organizations.
-          </p>
-          <Link to="/consultation" className="bg-white text-navy-600 hover:bg-navy-100 font-semibold py-3 px-8 rounded-lg transition-colors duration-200">
-            Book Strategy Session
-          </Link>
-        </div>
-      </div>
 
       {/* Case Study Modal */}
       {isCaseStudyOpen && selectedCaseStudy && (
@@ -749,7 +735,7 @@ export default function Success() {
                   Ready to start your own UNA journey?
                 </span>
                 <Link
-                  to="/consultation"
+                  to="/services"
                   onClick={closeCaseStudy}
                   className="bg-gold-600 text-white py-2 px-6 rounded-lg hover:bg-gold-700 transition-colors duration-200"
                 >

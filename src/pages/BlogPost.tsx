@@ -208,7 +208,7 @@ export default function BlogPost() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center mb-8">
             <div className="flex items-center justify-center space-x-2 text-sm text-navy-500 mb-4">
-              <span className="bg-gold-100 text-gold-800 px-3 py-1 rounded-full text-xs font-medium">
+              <span className="bg-gold-100 text-gold-800 px-3 py-1 rounded-full text-sm font-medium">
                   {post.frontmatter.category}
               </span>
               <span>•</span>
@@ -275,34 +275,6 @@ export default function BlogPost() {
         </div>
       </div>
 
-      {/* CTA Section */}
-      <div className="bg-gold-50 border-t border-gold-200">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold text-navy-900 mb-4">
-              Ready to Form Your UNA the Right Way?
-            </h2>
-            <p className="text-lg text-navy-600 mb-8 max-w-2xl mx-auto">
-              Don't leave your UNA formation to chance. Our California-specific platform provides 
-              the professional guidance and comprehensive tools you need.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link 
-                to="/intake" 
-                className="bg-gold-600 text-white hover:bg-gold-700 font-semibold py-3 px-8 rounded-lg transition-colors duration-200"
-              >
-                Start Your Formation
-              </Link>
-              <Link 
-                to="/services" 
-                className="border-2 border-gold-600 text-gold-600 hover:bg-gold-50 font-semibold py-3 px-8 rounded-lg transition-colors duration-200"
-              >
-                View Our Services
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* Related Articles */}
       <div className="bg-cream-50 border-t border-navy-200">

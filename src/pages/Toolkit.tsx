@@ -52,15 +52,13 @@ export default function Toolkit() {
             
             {/* PDF Download Section */}
             <div className="mt-8 text-center">
-              <a
-                href="/assets/una-formation-guide.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/una-formation-guide"
                 className="inline-flex items-center btn-grad btn-primary px-8 py-4 text-lg font-montserrat"
               >
                 <ExternalLink className="h-5 w-5 mr-2" />
                 Download Complete UNA Formation Guide (PDF)
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -244,23 +242,6 @@ export default function Toolkit() {
             </div>
           </div>
 
-          {/* CTA Section */}
-          <div className="bg-gradient-to-r from-[#1C1F3B] to-[#2F7E7E] rounded-lg p-8 text-center text-white">
-            <h2 className="text-3xl font-bold mb-4 font-montserrat">Ready to Build Your UNA Toolkit?</h2>
-            <p className="text-xl mb-6 opacity-90 font-lora">
-              Start with the foundation, then add the tools that serve your mission.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/explore" className="btn-grad btn-secondary">
-                Explore Your Path
-                <ArrowRight className="ml-2 h-4 w-4 inline" />
-              </Link>
-              <Link to="/services" className="btn-grad btn-primary">
-                View All Services
-                <ArrowRight className="ml-2 h-4 w-4 inline" />
-              </Link>
-            </div>
-          </div>
         </div>
       </div>
     </>

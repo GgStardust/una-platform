@@ -241,7 +241,7 @@ const UnaFormationGuide: React.FC = () => {
               </div>
               <div className="flex flex-wrap gap-4">
                 <a
-                  href="/consultation"
+                  href="/services"
                   className="inline-flex items-center gap-2 bg-gradient-to-r from-[#C49A6C] to-[#B8955A] text-white px-6 py-3 rounded-lg font-bold font-montserrat hover:shadow-lg transition-all duration-200"
                 >
                   Book Strategy Session ($250)
@@ -280,7 +280,7 @@ const UnaFormationGuide: React.FC = () => {
                   Our team can guide you through the entire UNA formation process.
                 </p>
                 <a
-                  href="/consultation"
+                  href="/services"
                   className="inline-flex items-center gap-2 bg-white text-[#C49A6C] px-4 py-2 rounded-lg font-bold font-montserrat text-sm hover:bg-gray-100 transition-all duration-200 w-full justify-center"
                 >
                   Book Strategy Session

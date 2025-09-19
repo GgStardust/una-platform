@@ -175,7 +175,7 @@ const UnaFormationGuideLanding: React.FC = () => {
                     Our Strategy Sessions provide personalized guidance for your specific UNA formation needs.
                   </p>
                   <a
-                    href="/consultation"
+                    href="/services"
                     className="inline-flex items-center gap-2 bg-gradient-to-r from-[#1E2A38] to-[#3DB5B0] text-white px-6 py-3 rounded-lg font-bold font-montserrat hover:shadow-lg transition-all duration-200"
                   >
                     Book Strategy Session

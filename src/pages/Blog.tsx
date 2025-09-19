@@ -80,13 +80,13 @@ export default function Blog() {
       />
     <div className="min-h-screen bg-cream-50">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-[#1C1F3B] to-[#2F7E7E] text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="una-gradient-hero">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 font-montserrat text-white">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 font-montserrat text-[#F4F1E8]">
               <strong>UNA Formation</strong> Insights
             </h1>
-            <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto font-lora text-white/90">
+            <p className="text-xl md:text-2xl mb-8 text-[#F4F1E8] max-w-4xl mx-auto font-lora">
               Expert <strong>formation guidance</strong> for <strong>Unincorporated Nonprofit Associations</strong> in all 50 states. 
               Our <strong>research-based approach</strong> and <strong>business formation experience</strong> 
               ensure your organization is structured correctly.
@@ -162,7 +162,7 @@ export default function Blog() {
             <div className="md:flex">
               <div className="md:w-2/3 p-8">
                 <div className="flex items-center space-x-2 text-sm text-navy-500 mb-4">
-                  <span className="bg-gold-100 text-gold-800 px-2 py-1 rounded-full text-xs font-medium">
+                  <span className="bg-gold-100 text-gold-800 px-2 py-1 rounded-full text-sm font-medium">
                     Featured
                   </span>
                   <span>•</span>
@@ -225,7 +225,7 @@ export default function Blog() {
               <article key={post.slug} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
               <div className="p-6">
                 <div className="flex items-center space-x-2 text-sm text-navy-500 mb-4">
-                  <span className="bg-navy-100 text-navy-800 px-2 py-1 rounded-full text-xs font-medium">
+                  <span className="bg-navy-100 text-navy-800 px-2 py-1 rounded-full text-sm font-medium">
                       {post.frontmatter.category}
                   </span>
                   <span>•</span>

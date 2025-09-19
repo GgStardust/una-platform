@@ -402,27 +402,6 @@ export default function StatePage() {
             </div>
           </div>
 
-          {/* CTA Section */}
-          <div className="bg-gradient-to-r from-[#C49A6C] to-[#B88A5A] rounded-lg p-8 text-center text-white">
-            <h2 className="text-2xl font-bold mb-4">Ready to Form Your UNA in {stateName}?</h2>
-            <p className="text-lg mb-6 opacity-90">
-              Get personalized guidance for {stateName} UNA formation with our Strategy Session.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link 
-                to="/services"
-                className="inline-flex items-center px-6 py-3 bg-white text-[#C49A6C] rounded-lg hover:bg-gray-100 transition-colors font-semibold"
-              >
-                Book Strategy Session
-              </Link>
-              <Link 
-                to="/blog/top-10-states-una-requirements"
-                className="inline-flex items-center px-6 py-3 border-2 border-white text-white rounded-lg hover:bg-white hover:text-[#C49A6C] transition-colors font-semibold"
-              >
-                Compare All States
-              </Link>
-            </div>
-          </div>
         </div>
       </div>
     </>

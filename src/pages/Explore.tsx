@@ -228,23 +228,23 @@ export default function Explore() {
           description="Get personalized recommendations for your UNA formation based on your readiness and priorities."
         />
         
-        <div className="min-h-screen bg-gradient-to-br from-[#1E2A38] via-[#3DB5B0] to-[#2C2C2C]">
+        <div className="min-h-screen bg-gradient-to-br from-navy-600 via-navy-500 to-navy-700">
           <div className="container mx-auto px-4 py-12">
             {/* Results Header */}
-            <div className="text-center mb-12">
-              <h1 className="text-h1-lg font-bold text-white font-montserrat mb-4">
+            <div className="text-center mb-16">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white font-montserrat mb-6 tracking-tight">
                 Your UNA Formation Assessment
               </h1>
-              <p className="text-body-lg text-white font-lora">
+              <p className="text-xl md:text-2xl text-white/90 font-lora max-w-4xl mx-auto leading-relaxed">
                 Personalized recommendations based on your readiness and priorities
               </p>
             </div>
 
             {/* Results Card */}
-            <div className="una-card p-8 max-w-4xl mx-auto">
+            <div className="bg-gradient-to-br from-[#1E2A38] to-[#3DB5B0] rounded-xl p-8 shadow-2xl max-w-4xl mx-auto">
               {/* Readiness Summary */}
               <div className="mb-8">
-                <h2 className="text-h2 font-semibold text-white font-montserrat mb-4">
+                <h2 className="text-2xl md:text-3xl font-black text-white font-montserrat mb-6 tracking-tight">
                   Readiness Summary
                 </h2>
                 <div className="space-y-4">
@@ -259,40 +259,40 @@ export default function Explore() {
               
               {/* Readiness Checklist */}
               <div className="mb-8">
-                <h2 className="text-h2 font-semibold text-white font-montserrat mb-6">
+                <h2 className="text-2xl md:text-3xl font-black text-white font-montserrat mb-6 tracking-tight">
                   Readiness Checklist
                 </h2>
                 <div className="grid md:grid-cols-2 gap-6">
-                  <div className="bg-gradient-to-r from-green-500/20 to-green-600/20 border border-green-400/30 rounded-lg p-6">
-                    <h3 className="text-body-lg font-semibold text-green-300 font-montserrat mb-4 flex items-center">
-                      <span className="text-green-400 mr-2">✓</span>
+                  <div className="bg-white border border-gray-200 rounded-lg p-6">
+                    <h3 className="text-xl font-semibold text-navy-600 font-montserrat mb-4 flex items-center">
+                      <span className="text-emerald-600 mr-2">✓</span>
                       Ready
                     </h3>
                     <ul className="space-y-2">
-                      {answers.readiness.hasMembers && <li className="text-green-200 font-lora flex items-center"><span className="text-green-400 mr-2">✓</span>2+ members</li>}
-                      {answers.readiness.hasBylaws && <li className="text-green-200 font-lora flex items-center"><span className="text-green-400 mr-2">✓</span>Purpose statement</li>}
-                      {answers.readiness.hasBylaws && <li className="text-green-200 font-lora flex items-center"><span className="text-green-400 mr-2">✓</span>UNA Agreement</li>}
-                      {answers.readiness.hasEIN && <li className="text-green-200 font-lora flex items-center"><span className="text-green-400 mr-2">✓</span>EIN (federal tax ID)</li>}
-                      {answers.readiness.needsBanking && <li className="text-green-200 font-lora flex items-center"><span className="text-green-400 mr-2">✓</span>Bank account</li>}
+                      {answers.readiness.hasMembers && <li className="text-navy-600 font-lora flex items-center"><span className="text-emerald-600 mr-2">✓</span>2+ members</li>}
+                      {answers.readiness.hasBylaws && <li className="text-navy-600 font-lora flex items-center"><span className="text-emerald-600 mr-2">✓</span>Purpose statement</li>}
+                      {answers.readiness.hasBylaws && <li className="text-navy-600 font-lora flex items-center"><span className="text-emerald-600 mr-2">✓</span>UNA Agreement</li>}
+                      {answers.readiness.hasEIN && <li className="text-navy-600 font-lora flex items-center"><span className="text-emerald-600 mr-2">✓</span>EIN (federal tax ID)</li>}
+                      {answers.readiness.needsBanking && <li className="text-navy-600 font-lora flex items-center"><span className="text-emerald-600 mr-2">✓</span>Bank account</li>}
                       {!answers.readiness.hasMembers && !answers.readiness.hasBylaws && !answers.readiness.hasEIN && !answers.readiness.needsBanking && (
-                        <li className="text-green-200 font-lora">Nothing yet - that's okay!</li>
+                        <li className="text-navy-600 font-lora">Nothing yet - that's okay!</li>
                       )}
                     </ul>
             </div>
 
-                  <div className="bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-400/30 rounded-lg p-6">
-                    <h3 className="text-body-lg font-semibold text-amber-300 font-montserrat mb-4 flex items-center">
-                      <span className="text-amber-400 mr-2">○</span>
+                  <div className="bg-white border border-gray-200 rounded-lg p-6">
+                    <h3 className="text-xl font-semibold text-navy-600 font-montserrat mb-4 flex items-center">
+                      <span className="text-amber-600 mr-2">○</span>
                       Still to Prepare
                     </h3>
                     <ul className="space-y-2">
-                      {!answers.readiness.hasMembers && <li className="text-amber-200 font-lora flex items-center"><span className="text-amber-400 mr-2">○</span>2+ members</li>}
-                      {!answers.readiness.hasBylaws && <li className="text-amber-200 font-lora flex items-center"><span className="text-amber-400 mr-2">○</span>Purpose statement</li>}
-                      {!answers.readiness.hasBylaws && <li className="text-amber-200 font-lora flex items-center"><span className="text-amber-400 mr-2">○</span>UNA Agreement</li>}
-                      {!answers.readiness.hasEIN && <li className="text-amber-200 font-lora flex items-center"><span className="text-amber-400 mr-2">○</span>EIN (federal tax ID)</li>}
-                      <li className="text-amber-200 font-lora flex items-center"><span className="text-amber-400 mr-2">○</span>State registration (if required)</li>
-                      {!answers.readiness.needsBanking && <li className="text-amber-200 font-lora flex items-center"><span className="text-amber-400 mr-2">○</span>Bank account</li>}
-                      <li className="text-amber-200 font-lora flex items-center"><span className="text-amber-400 mr-2">○</span>Recordkeeping system</li>
+                      {!answers.readiness.hasMembers && <li className="text-navy-600 font-lora flex items-center"><span className="text-amber-600 mr-2">○</span>2+ members</li>}
+                      {!answers.readiness.hasBylaws && <li className="text-navy-600 font-lora flex items-center"><span className="text-amber-600 mr-2">○</span>Purpose statement</li>}
+                      {!answers.readiness.hasBylaws && <li className="text-navy-600 font-lora flex items-center"><span className="text-amber-600 mr-2">○</span>UNA Agreement</li>}
+                      {!answers.readiness.hasEIN && <li className="text-navy-600 font-lora flex items-center"><span className="text-amber-600 mr-2">○</span>EIN (federal tax ID)</li>}
+                      <li className="text-navy-600 font-lora flex items-center"><span className="text-amber-600 mr-2">○</span>State registration (if required)</li>
+                      {!answers.readiness.needsBanking && <li className="text-navy-600 font-lora flex items-center"><span className="text-amber-600 mr-2">○</span>Bank account</li>}
+                      <li className="text-navy-600 font-lora flex items-center"><span className="text-amber-600 mr-2">○</span>Recordkeeping system</li>
                     </ul>
               </div>
                 </div>
@@ -311,14 +311,14 @@ export default function Explore() {
               
               {/* Next Steps */}
               <div className="mb-8">
-                <h2 className="text-h2 font-semibold text-white font-montserrat mb-4">
+                <h2 className="text-2xl md:text-3xl font-black text-white font-montserrat mb-6 tracking-tight">
                   Your Next Steps
                 </h2>
-                <div className="bg-gradient-to-r from-blue-500/20 to-blue-600/20 border border-blue-400/30 rounded-lg p-6 mb-6">
+                <div className="bg-white border border-gray-200 rounded-lg p-6 mb-6">
                   <ol className="space-y-3">
                     {getActionList().map((action, index) => (
-                      <li key={index} className="text-blue-200 font-lora flex items-start">
-                        <span className="text-blue-400 font-bold mr-3 mt-0.5">{index + 1}.</span>
+                      <li key={index} className="text-navy-600 font-lora flex items-start">
+                        <span className="text-secondary-teal-600 font-bold mr-3 mt-0.5">{index + 1}.</span>
                         <span>{action}</span>
                       </li>
                     ))}
@@ -327,7 +327,7 @@ export default function Explore() {
                 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Link
-                    to="/consultation"
+                    to="/services"
                     className="btn-grad btn-primary px-8 py-3 text-center font-montserrat"
                   >
                     Book a Strategy Session
@@ -384,14 +384,14 @@ export default function Explore() {
         description="Take our comprehensive assessment to get personalized recommendations for your UNA formation journey."
       />
       
-      <div className="min-h-screen bg-gradient-to-br from-[#1E2A38] via-[#3DB5B0] to-[#2C2C2C]">
+      <div className="min-h-screen bg-gradient-to-br from-navy-600 via-navy-500 to-navy-700">
         <div className="container mx-auto px-4 py-12">
         {/* Header */}
-          <div className="text-center mb-12">
-            <h1 className="text-h1-lg font-bold text-white font-montserrat mb-4">
+          <div className="text-center mb-16">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white font-montserrat mb-6 tracking-tight">
               UNA Formation Assessment
             </h1>
-            <p className="text-body-lg text-white font-lora">
+            <p className="text-xl md:text-2xl text-white/90 font-lora max-w-3xl mx-auto leading-relaxed">
               Get personalized recommendations for your UNA formation journey
             </p>
           </div>
@@ -421,17 +421,17 @@ export default function Explore() {
           </div>
           
           {/* Step Content */}
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-4xl mx-auto">
             {/* Step 1: Location & Readiness */}
             {currentStep === 1 && (
               <div className="bg-gradient-to-br from-[#1E2A38] to-[#3DB5B0] rounded-xl p-8 shadow-2xl">
-                <h2 className="text-h2 font-semibold text-white font-montserrat mb-6">
+                <h2 className="text-2xl md:text-3xl font-black text-white font-montserrat mb-8 tracking-tight">
                   Step 1: Location & Readiness
                 </h2>
                 
                 {/* State Selection */}
                 <div className="mb-6">
-                  <label className="block text-white font-medium font-montserrat mb-2">
+                  <label className="block text-white text-lg font-bold font-montserrat mb-4">
                     In what state will your UNA be based?
                   </label>
                   <select
@@ -449,13 +449,13 @@ export default function Explore() {
                 {/* Readiness Questions */}
                 <div className="space-y-6">
                   <div>
-                    <label className="block text-white font-medium font-montserrat mb-3">
+                    <label className="block text-white text-lg font-bold font-montserrat mb-4">
                       Do you already have at least two people committed to forming this UNA?
                     </label>
                     <div className="flex flex-col space-y-3 items-center">
                       <button
                         onClick={() => handleReadinessChange('hasMembers', true)}
-                        className={`px-8 py-3 rounded-xl font-bold transition-all duration-200 font-montserrat text-white shadow-lg text-body-lg ${
+                        className={`px-8 py-3 rounded-xl font-black transition-all duration-200 font-montserrat text-white shadow-lg text-xl ${
                           answers.readiness.hasMembers === true
                             ? 'bg-gradient-to-r from-[#3DB5B0] to-[#1E2A38] shadow-xl transform scale-105 border-2 border-[#3DB5B0]'
                             : 'bg-gradient-to-r from-[#1E2A38] to-[#3DB5B0] hover:from-[#2A2F4A] hover:to-[#4AC5C0] hover:shadow-xl hover:transform hover:scale-105 active:from-[#0F1220] active:to-[#2A9B96]'
@@ -465,7 +465,7 @@ export default function Explore() {
                       </button>
                       <button
                         onClick={() => handleReadinessChange('hasMembers', false)}
-                        className={`px-8 py-3 rounded-xl font-bold transition-all duration-200 font-montserrat text-white shadow-lg text-body-lg ${
+                        className={`px-8 py-3 rounded-xl font-black transition-all duration-200 font-montserrat text-white shadow-lg text-xl ${
                           answers.readiness.hasMembers === false
                             ? 'bg-gradient-to-r from-[#3DB5B0] to-[#1E2A38] shadow-xl transform scale-105 border-2 border-[#3DB5B0]'
                             : 'bg-gradient-to-r from-[#1E2A38] to-[#3DB5B0] hover:from-[#2A2F4A] hover:to-[#4AC5C0] hover:shadow-xl hover:transform hover:scale-105 active:from-[#0F1220] active:to-[#2A9B96]'
@@ -487,13 +487,13 @@ export default function Explore() {
         </div>
 
                   <div>
-                    <label className="block text-white font-medium font-montserrat mb-3">
+                    <label className="block text-white text-lg font-bold font-montserrat mb-4">
                       Do you already have governing rules (bylaws or agreements)?
                     </label>
                     <div className="flex flex-col space-y-3 items-center">
                       <button
                         onClick={() => handleReadinessChange('hasBylaws', true)}
-                        className={`px-8 py-3 rounded-xl font-bold transition-all duration-200 font-montserrat text-white shadow-lg text-body-lg ${
+                        className={`px-8 py-3 rounded-xl font-black transition-all duration-200 font-montserrat text-white shadow-lg text-xl ${
                           answers.readiness.hasBylaws === true
                             ? 'bg-gradient-to-r from-[#3DB5B0] to-[#1E2A38] shadow-xl transform scale-105 border-2 border-[#3DB5B0]'
                             : 'bg-gradient-to-r from-[#1E2A38] to-[#3DB5B0] hover:from-[#2A2F4A] hover:to-[#4AC5C0] hover:shadow-xl hover:transform hover:scale-105 active:from-[#0F1220] active:to-[#2A9B96]'
@@ -503,7 +503,7 @@ export default function Explore() {
                       </button>
           <button
                         onClick={() => handleReadinessChange('hasBylaws', false)}
-                        className={`px-8 py-3 rounded-xl font-bold transition-all duration-200 font-montserrat text-white shadow-lg text-body-lg ${
+                        className={`px-8 py-3 rounded-xl font-black transition-all duration-200 font-montserrat text-white shadow-lg text-xl ${
                           answers.readiness.hasBylaws === false
                             ? 'bg-gradient-to-r from-[#3DB5B0] to-[#1E2A38] shadow-xl transform scale-105 border-2 border-[#3DB5B0]'
                             : 'bg-gradient-to-r from-[#1E2A38] to-[#3DB5B0] hover:from-[#2A2F4A] hover:to-[#4AC5C0] hover:shadow-xl hover:transform hover:scale-105 active:from-[#0F1220] active:to-[#2A9B96]'
@@ -515,13 +515,13 @@ export default function Explore() {
                   </div>
 
                   <div>
-                    <label className="block text-white font-medium font-montserrat mb-3">
+                    <label className="block text-white text-lg font-bold font-montserrat mb-4">
                       Do you have an EIN (federal tax ID)?
                     </label>
                     <div className="flex flex-col space-y-3 items-center">
             <button
                         onClick={() => handleReadinessChange('hasEIN', true)}
-                        className={`px-8 py-3 rounded-xl font-bold transition-all duration-200 font-montserrat text-white shadow-lg text-body-lg ${
+                        className={`px-8 py-3 rounded-xl font-black transition-all duration-200 font-montserrat text-white shadow-lg text-xl ${
                           answers.readiness.hasEIN === true
                             ? 'bg-gradient-to-r from-[#3DB5B0] to-[#1E2A38] shadow-xl transform scale-105 border-2 border-[#3DB5B0]'
                             : 'bg-gradient-to-r from-[#1E2A38] to-[#3DB5B0] hover:from-[#2A2F4A] hover:to-[#4AC5C0] hover:shadow-xl hover:transform hover:scale-105 active:from-[#0F1220] active:to-[#2A9B96]'
@@ -531,7 +531,7 @@ export default function Explore() {
             </button>
             <button
                         onClick={() => handleReadinessChange('hasEIN', false)}
-                        className={`px-8 py-3 rounded-xl font-bold transition-all duration-200 font-montserrat text-white shadow-lg text-body-lg ${
+                        className={`px-8 py-3 rounded-xl font-black transition-all duration-200 font-montserrat text-white shadow-lg text-xl ${
                           answers.readiness.hasEIN === false
                             ? 'bg-gradient-to-r from-[#3DB5B0] to-[#1E2A38] shadow-xl transform scale-105 border-2 border-[#3DB5B0]'
                             : 'bg-gradient-to-r from-[#1E2A38] to-[#3DB5B0] hover:from-[#2A2F4A] hover:to-[#4AC5C0] hover:shadow-xl hover:transform hover:scale-105 active:from-[#0F1220] active:to-[#2A9B96]'
@@ -548,13 +548,13 @@ export default function Explore() {
         </div>
 
                   <div>
-                    <label className="block text-white font-medium font-montserrat mb-3">
+                    <label className="block text-white text-lg font-bold font-montserrat mb-4">
                       Do you plan to open a bank account in the UNA's name?
                     </label>
                     <div className="flex flex-col space-y-3 items-center">
                       <button
                         onClick={() => handleReadinessChange('needsBanking', true)}
-                        className={`px-8 py-3 rounded-xl font-bold transition-all duration-200 font-montserrat text-white shadow-lg text-body-lg ${
+                        className={`px-8 py-3 rounded-xl font-black transition-all duration-200 font-montserrat text-white shadow-lg text-xl ${
                           answers.readiness.needsBanking === true
                             ? 'bg-gradient-to-r from-[#3DB5B0] to-[#1E2A38] shadow-xl transform scale-105 border-2 border-[#3DB5B0]'
                             : 'bg-gradient-to-r from-[#1E2A38] to-[#3DB5B0] hover:from-[#2A2F4A] hover:to-[#4AC5C0] hover:shadow-xl hover:transform hover:scale-105 active:from-[#0F1220] active:to-[#2A9B96]'
@@ -564,7 +564,7 @@ export default function Explore() {
                       </button>
                       <button
                         onClick={() => handleReadinessChange('needsBanking', false)}
-                        className={`px-8 py-3 rounded-xl font-bold transition-all duration-200 font-montserrat text-white shadow-lg text-body-lg ${
+                        className={`px-8 py-3 rounded-xl font-black transition-all duration-200 font-montserrat text-white shadow-lg text-xl ${
                           answers.readiness.needsBanking === false
                             ? 'bg-gradient-to-r from-[#3DB5B0] to-[#1E2A38] shadow-xl transform scale-105 border-2 border-[#3DB5B0]'
                             : 'bg-gradient-to-r from-[#1E2A38] to-[#3DB5B0] hover:from-[#2A2F4A] hover:to-[#4AC5C0] hover:shadow-xl hover:transform hover:scale-105 active:from-[#0F1220] active:to-[#2A9B96]'
@@ -581,33 +581,33 @@ export default function Explore() {
             {/* Step 2: Collective Type */}
             {currentStep === 2 && (
               <div className="bg-gradient-to-br from-[#1E2A38] to-[#3DB5B0] rounded-xl p-8 shadow-2xl">
-                <h2 className="text-h2 font-semibold text-white font-montserrat mb-6">
+                <h2 className="text-2xl md:text-3xl font-black text-white font-montserrat mb-8 tracking-tight">
                   Step 2: Collective Type
                 </h2>
                 
                 <div className="mb-6">
-                  <label className="block text-white font-medium font-montserrat mb-4">
+                  <label className="block text-white text-lg font-bold font-montserrat mb-6">
                     What kind of UNA are you creating? (Select all that apply)
                   </label>
                   
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {COLLECTIVE_TYPES.map((type) => {
                       const Icon = type.icon;
   return (
                         <button
                           key={type.id}
                           onClick={() => handleCollectiveTypeToggle(type.id)}
-                          className={`p-4 rounded-xl border-2 transition-all duration-200 font-montserrat text-left shadow-lg ${
+                          className={`p-6 rounded-xl border-2 transition-all duration-200 font-montserrat text-left shadow-lg ${
                             answers.collectiveTypes.includes(type.id)
                               ? 'border-[#3DB5B0] bg-gradient-to-r from-[#1E2A38] to-[#3DB5B0] shadow-xl transform scale-105'
                               : 'border-[#1E2A38] bg-gradient-to-r from-[#1E2A38] to-[#3DB5B0] hover:from-[#2A2F4A] hover:to-[#4AC5C0] hover:shadow-xl hover:transform hover:scale-105 active:from-[#0F1220] active:to-[#2A9B96]'
                           }`}
                         >
                           <div className="flex items-start space-x-3">
-                            <Icon className="h-5 w-5 text-white mt-0.5 flex-shrink-0" />
+                            <Icon className="h-6 w-6 text-white mt-1 flex-shrink-0" />
                             <div className="flex-1">
-                              <div className="text-white font-bold mb-1">{type.label}</div>
-                              <div className="text-white/80 text-sm font-lora leading-relaxed">{type.description}</div>
+                              <div className="text-white font-black text-xl mb-2">{type.label}</div>
+                              <div className="text-white/80 text-base font-lora leading-relaxed">{type.description}</div>
                             </div>
         </div>
                         </button>
@@ -622,19 +622,19 @@ export default function Explore() {
             {/* Step 3: Formation Priorities */}
             {currentStep === 3 && (
               <div className="bg-gradient-to-br from-[#1E2A38] to-[#3DB5B0] rounded-xl p-8 shadow-2xl">
-                <h2 className="text-h2 font-semibold text-white font-montserrat mb-6">
+                <h2 className="text-2xl md:text-3xl font-black text-white font-montserrat mb-8 tracking-tight">
                   Step 3: Why You're Forming a UNA
                 </h2>
                 
                 <div className="mb-6">
-                  <label className="block text-white font-medium font-montserrat mb-4">
+                  <label className="block text-white text-lg font-bold font-montserrat mb-6">
                     What are your main reasons for forming a UNA? (Select all that apply)
                   </label>
                   
                   <div className="space-y-6">
                     {Object.entries(PRIORITY_CATEGORIES).map(([category, priorities]) => (
                       <div key={category}>
-                        <h3 className="text-body-lg font-semibold text-white font-montserrat mb-3">
+                        <h3 className="text-xl font-black text-white font-montserrat mb-4 tracking-tight">
                           {category}
                         </h3>
                         <div className="space-y-2">
@@ -653,7 +653,7 @@ export default function Explore() {
                                 onChange={() => handlePriorityToggle(priority)}
                                 className="h-4 w-4 text-[#3DB5B0] focus:ring-[#3DB5B0] border-gray-300 rounded"
                               />
-                              <span className="text-white font-lora">{priority}</span>
+                              <span className="text-white font-lora font-bold text-base">{priority}</span>
                             </label>
             ))}
           </div>

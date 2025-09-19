@@ -78,10 +78,10 @@ export default function Services() {
       {/* Header */}
       <div className="una-gradient-hero py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl font-bold text-[#1C1F3B] mb-6 font-montserrat">
+          <h1 className="text-4xl font-bold text-white mb-6 font-montserrat">
             <strong className="text-[#C49A6C]">UNA Formation Guidance</strong> & Strategy
           </h1>
-          <p className="text-xl text-[#1C1F3B] font-lora">
+          <p className="text-xl text-white font-lora">
             Get clear guidance for your <strong className="text-[#C49A6C]">Unincorporated Nonprofit Association</strong> 
             formation journey. Our <strong className="text-[#C49A6C]">expert guidance approach</strong> helps you understand 
             your options and prepare personalized documents.
@@ -223,8 +223,8 @@ export default function Services() {
               <div className="text-2xl font-bold text-[#C49A6C]">$750</div>
               <div className="text-sm text-white/90">Complete package</div>
               <div className="mt-2 p-2 bg-green-500/20 border border-green-400/30 rounded-lg">
-                <div className="text-xs text-green-300 font-semibold">Strategy Session Credit</div>
-                <div className="text-xs text-green-200">
+                <div className="text-sm text-green-300 font-semibold">Strategy Session Credit</div>
+                <div className="text-sm text-green-200">
                   $250 Strategy Session payment applies as credit toward Document Preparation
                 </div>
               </div>
@@ -424,46 +424,6 @@ export default function Services() {
 
 
 
-      {/* Final CTA */}
-      <div className="bg-gradient-to-r from-[#1C1F3B] to-[#2F7E7E] py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-          <h2 className="text-3xl font-bold mb-6 font-montserrat">
-            Ready to Start Your UNA Formation Journey?
-          </h2>
-          <p className="text-xl mb-8 opacity-90 font-lora">
-            Whether you need clarity on your path or are ready for expert guidance, 
-            we're here to help you succeed.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/explore" className="btn-grad btn-secondary">
-              Explore Your Path
-              <ArrowRight className="ml-2 h-4 w-4 inline" />
-            </Link>
-            <button
-              onClick={() => handlePayment('STRATEGY_SESSION')}
-              disabled={isLoading === 'STRATEGY_SESSION'}
-              className={`px-8 py-3 rounded-lg font-semibold text-white transition-all duration-200 ${
-                isLoading === 'STRATEGY_SESSION'
-                  ? 'bg-gray-500 cursor-not-allowed'
-                  : 'bg-gradient-to-r from-[#C49A6C] to-[#A67C4A] hover:from-[#B88A5A] hover:to-[#956B3F] hover:shadow-lg transform hover:scale-105'
-              }`}
-            >
-              {isLoading === 'STRATEGY_SESSION' ? (
-                <div className="flex items-center justify-center">
-                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                  Processing...
-                </div>
-              ) : (
-                <div className="flex items-center justify-center">
-                  Book Strategy Session
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </div>
-              )}
-            </button>
-          </div>
-        </div>
-      </div>
     </div>
     </>
   );

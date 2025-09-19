@@ -303,17 +303,12 @@ function App() {
               <p className="text-white/90 font-lora mb-4">
                 Need personalized guidance for your UNA formation?
               </p>
-              <button
-                onClick={() => {
-                  window.open(
-                    'mailto:gigi@gigistardust.com?subject=UNA Formation Help&body=Hi Gigi,%0D%0A%0D%0AI need help with UNA formation.%0D%0A%0D%0APlease let me know when you might be available for a conversation.%0D%0A%0D%0AThank you!',
-                    '_blank'
-                  );
-                }}
+              <Link
+                to="/contact"
                 className="btn-grad btn-primary px-6 py-2 text-sm font-montserrat"
               >
                 Contact Us
-              </button>
+              </Link>
             </div>
           </div>
           
@@ -322,7 +317,7 @@ function App() {
             <div className="text-center">
               <h3 className="text-h2 font-semibold font-montserrat mb-2">Ready to start your UNA journey?</h3>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link to="/consultation" className="btn-grad btn-primary px-6 py-3">
+                <Link to="/services" className="btn-grad btn-primary px-6 py-3">
                   Book Strategy Session
                 </Link>
                 <a

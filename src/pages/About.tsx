@@ -8,10 +8,10 @@ export default function About() {
       <div className="una-gradient-hero">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 font-montserrat text-[#1C1F3B]">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 font-montserrat text-[#F4F1E8]">
               About the UNA Platform
             </h1>
-            <p className="text-xl md:text-2xl mb-8 text-[#1C1F3B] max-w-4xl mx-auto font-lora">
+            <p className="text-xl md:text-2xl mb-8 text-[#F4F1E8] max-w-4xl mx-auto font-lora">
               Empowering mission-driven founders to align structure with purpose through sovereign, accessible legal frameworks.
             </p>
           </div>
@@ -249,42 +249,6 @@ export default function About() {
         </div>
       </div>
 
-      {/* CTA Section */}
-      <div className="py-16 bg-gradient-to-r from-navy-600 to-navy-800">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-white mb-4">
-            Ready to Begin Your Sovereign Journey?
-          </h2>
-          <p className="text-xl text-cream-100 mb-8">
-            Join the growing community of mission-driven founders who have found their legal foundation through the UNA platform.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              to="/consultation"
-              className="bg-white text-navy-600 hover:bg-cream-50 font-semibold py-3 px-8 rounded-lg transition-colors duration-200"
-            >
-              Book Strategy Session
-            </Link>
-            <Link
-              to="/success"
-              className="border-2 border-white text-white hover:bg-white hover:text-navy-600 font-semibold py-3 px-8 rounded-lg transition-colors duration-200"
-            >
-              See Success Stories
-            </Link>
-            <button
-              onClick={() => {
-                window.open(
-                  'mailto:gigi@gigistardust.com?subject=UNA Platform Questions&body=Hi Gigi,%0D%0A%0D%0AI have questions about the UNA platform and would like to learn more.%0D%0A%0D%0APlease let me know when you might be available for a conversation.%0D%0A%0D%0AThank you!',
-                  '_blank'
-                );
-              }}
-              className="border-2 border-white text-white hover:bg-white hover:text-navy-600 font-semibold py-3 px-8 rounded-lg transition-colors duration-200"
-            >
-              Contact Gigi
-            </button>
-          </div>
-        </div>
-      </div>
 
       {/* Footer Navigation */}
       <div className="bg-white border-t border-navy-200">

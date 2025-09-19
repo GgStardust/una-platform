@@ -151,23 +151,6 @@ export default function BlogIndex() {
           </div>
         )}
 
-        {/* CTA Section */}
-        <div className="mt-16 bg-[#C49A6C] rounded-lg p-8 text-center">
-          <h3 className="text-2xl font-bold text-white mb-4">
-            Ready to Form Your UNA?
-          </h3>
-          <p className="text-white/90 mb-6 max-w-2xl mx-auto">
-            Get personalized guidance for your state's specific requirements. 
-            Book a Strategy Session with our experts.
-          </p>
-          <Link
-            to="/services"
-            className="inline-flex items-center px-6 py-3 bg-white text-[#C49A6C] font-semibold rounded-md hover:bg-cream-50 transition-colors"
-          >
-            Book Strategy Session
-            <ArrowRight className="h-5 w-5 ml-2" />
-          </Link>
-        </div>
       </div>
     </div>
   );
