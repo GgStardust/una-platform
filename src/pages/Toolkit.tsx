@@ -39,13 +39,13 @@ export default function Toolkit() {
               get personalized consulting, and access essential tools for your UNA journey.
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-4">
-              <span className="px-4 py-2 bg-[#C49A6C]/10 text-[#C49A6C] rounded-full text-sm font-medium">
+              <span className="px-4 py-2 bg-[#C49A6C]/10 text-[#C49A6C] rounded-full text-base font-medium">
                 All 50 States Covered
               </span>
-              <span className="px-4 py-2 bg-[#2F7E7E]/10 text-[#2F7E7E] rounded-full text-sm font-medium">
+              <span className="px-4 py-2 bg-[#2F7E7E]/10 text-[#2F7E7E] rounded-full text-base font-medium">
                 Legal Research + Business Experience
               </span>
-              <span className="px-4 py-2 bg-[#7A4CA0]/10 text-[#7A4CA0] rounded-full text-sm font-medium">
+              <span className="px-4 py-2 bg-[#7A4CA0]/10 text-[#7A4CA0] rounded-full text-base font-medium">
                 No Attorney Required for Basic Formation
               </span>
             </div>
@@ -78,7 +78,7 @@ export default function Toolkit() {
               <div className="bg-[#C49A6C]/20 rounded-lg p-6 border border-[#C49A6C]/30">
                 <h3 className="font-semibold text-white mb-2 font-montserrat">Free Path Exploration</h3>
                 <p className="text-white text-sm mb-4 font-lora">Take our 4-step assessment to understand your UNA formation options and get strategic insights.</p>
-                <Link to="/explore" className="btn-grad btn-primary text-sm px-4 py-2 w-full text-center">
+                <Link to="/explore" className="btn-grad btn-primary text-sm px-6 py-3 w-full text-center">
                   Start Free Assessment
                   <ArrowRight className="ml-2 h-4 w-4 inline" />
                 </Link>
@@ -86,7 +86,7 @@ export default function Toolkit() {
               <div className="bg-[#2F7E7E]/20 rounded-lg p-6 border border-[#2F7E7E]/30">
                 <h3 className="font-semibold text-white mb-2 font-montserrat">State Requirements Guide</h3>
                 <p className="text-white text-sm mb-4 font-lora">Research-based guidance for UNA formation in all 50 states. No attorney required for basic formation.</p>
-                <Link to="/blog" className="btn-grad btn-primary text-sm px-4 py-2 w-full text-center">
+                <Link to="/blog" className="btn-grad btn-primary text-sm px-6 py-3 w-full text-center">
                   View State Guides
                   <ArrowRight className="ml-2 h-4 w-4 inline" />
                 </Link>
@@ -220,7 +220,7 @@ export default function Toolkit() {
                 </div>
                 <Link 
                   to="/services"
-                  className="btn-grad btn-primary text-sm px-4 py-2 w-full text-center"
+                  className="btn-grad btn-primary text-sm px-6 py-3 w-full text-center"
                 >
                   Discuss Ongoing Support
                   <ArrowRight className="ml-2 h-4 w-4 inline" />
@@ -234,7 +234,7 @@ export default function Toolkit() {
                   • CPAs for tax and accounting<br/>
                   • Business consultants for growth
                 </div>
-                <Link to="/contact" className="btn-grad btn-primary text-sm px-4 py-2 w-full text-center">
+                <Link to="/contact" className="btn-grad btn-primary text-sm px-6 py-3 w-full text-center">
                   Request Referral
                   <ArrowRight className="ml-2 h-4 w-4 inline" />
                 </Link>

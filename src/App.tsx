@@ -1,6 +1,6 @@
 import { Routes, Route, NavLink, Link } from 'react-router-dom';
 import { useState, useEffect, Suspense, lazy } from 'react';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Menu, X } from 'lucide-react';
 import { IntakeData } from '@/lib/types';
 import { googleAnalyticsService } from '@/lib/analytics';
 import LoadingSpinner from './components/LoadingSpinner';
@@ -35,6 +35,7 @@ const FormationGuard = lazy(() => import('./components/FormationGuard'));
 
 function App() {
   const [intakeData, setIntakeData] = useState<IntakeData | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Check if running with dummy credentials
   const isDummyMode = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY === 'dummy-publishable-key' || 
@@ -103,6 +104,7 @@ function App() {
       <nav className="una-gradient-nav shadow-lg border-b border-[#C49A6C]/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
+            {/* Logo */}
             <div className="flex items-center">
               <NavLink 
                 to="/" 
@@ -111,104 +113,99 @@ function App() {
                 UNA Platform
               </NavLink>
             </div>
-            <div className="flex items-center space-x-6">
-              {/* Main Navigation */}
-              <div className="flex items-center space-x-6">
-                <NavLink 
-                  to="/" 
-                  className={({ isActive }) =>
-                    `px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                      isActive 
-                        ? 'text-[#C49A6C] bg-[#C49A6C]/20 border-b-2 border-[#C49A6C]' 
-                        : 'text-[#F4F1E8] hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10'
-                    }`
-                  }
-                >
-                  Home
-                </NavLink>
-                
-                {/* Start */}
-                <NavLink 
-                  to="/explore" 
-                  className="px-3 py-2 rounded-md text-sm font-medium text-[#F4F1E8] hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors"
-                >
-                  Start
-                </NavLink>
-                
-                {/* Services Dropdown */}
-                <div className="relative group">
-                  <button className="px-3 py-2 rounded-md text-sm font-medium text-[#F4F1E8] hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors">
-                    Services
-                    <svg className="ml-1 h-4 w-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </button>
-                  <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-md shadow-lg border border-navy-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                    <NavLink 
-                      to="/toolkit" 
-                      className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50 rounded-t-md"
-                    >
-                      UNA Formation Toolkit
-                    </NavLink>
-                    <NavLink 
-                      to="/services" 
-                      className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50 rounded-b-md"
-                    >
-                      Consulting Services
-                    </NavLink>
-                  </div>
+
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-6">
+              <NavLink 
+                to="/" 
+                className={({ isActive }) =>
+                  `px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                    isActive 
+                      ? 'text-[#C49A6C] bg-[#C49A6C]/20 border-b-2 border-[#C49A6C]' 
+                      : 'text-[#F4F1E8] hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10'
+                  }`
+                }
+              >
+                Home
+              </NavLink>
+              
+              <NavLink 
+                to="/explore" 
+                className="px-3 py-2 rounded-md text-sm font-medium text-[#F4F1E8] hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors"
+              >
+                Start
+              </NavLink>
+              
+              {/* Services Dropdown */}
+              <div className="relative group">
+                <button className="px-3 py-2 rounded-md text-sm font-medium text-[#F4F1E8] hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors">
+                  Services
+                  <svg className="ml-1 h-4 w-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-md shadow-lg border border-navy-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                  <NavLink 
+                    to="/toolkit" 
+                    className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50 rounded-t-md"
+                  >
+                    UNA Formation Toolkit
+                  </NavLink>
+                  <NavLink 
+                    to="/services" 
+                    className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50 rounded-b-md"
+                  >
+                    Consulting Services
+                  </NavLink>
                 </div>
-                
-                {/* Learn Dropdown */}
-                <div className="relative group">
-                  <button className="px-3 py-2 rounded-md text-sm font-medium text-[#F4F1E8] hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors">
-                    Learn
-                    <svg className="ml-1 h-4 w-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </button>
-                  <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-md shadow-lg border border-navy-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                    <NavLink 
-                      to="/blog" 
-                      className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50 rounded-t-md"
-                    >
-                      Blog
-                    </NavLink>
-                    <NavLink 
-                      to="/faq" 
-                      className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50"
-                    >
-                      FAQ
-                    </NavLink>
-                    <NavLink 
-                      to="/success" 
-                      className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50"
-                    >
-                      Success Stories
-                    </NavLink>
-                    <NavLink 
-                      to="/about" 
-                      className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50 rounded-b-md"
-                    >
-                      About
-                    </NavLink>
-                  </div>
-                </div>
-                
-                {/* Admin */}
-                <NavLink 
-                  to="/admin" 
-                  className="px-3 py-2 rounded-md text-sm font-medium text-[#F4F1E8] hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors"
-                >
-                  Admin
-                </NavLink>
-                
               </div>
               
-              {/* Contact/Help Button */}
+              {/* Learn Dropdown */}
+              <div className="relative group">
+                <button className="px-3 py-2 rounded-md text-sm font-medium text-[#F4F1E8] hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors">
+                  Learn
+                  <svg className="ml-1 h-4 w-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-md shadow-lg border border-navy-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                  <NavLink 
+                    to="/blog" 
+                    className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50 rounded-t-md"
+                  >
+                    Blog
+                  </NavLink>
+                  <NavLink 
+                    to="/faq" 
+                    className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50"
+                  >
+                    FAQ
+                  </NavLink>
+                  <NavLink 
+                    to="/success" 
+                    className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50"
+                  >
+                    Success Stories
+                  </NavLink>
+                  <NavLink 
+                    to="/about" 
+                    className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50 rounded-b-md"
+                  >
+                    About
+                  </NavLink>
+                </div>
+              </div>
+              
+              <NavLink 
+                to="/admin" 
+                className="px-3 py-2 rounded-md text-sm font-medium text-[#F4F1E8] hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors"
+              >
+                Admin
+              </NavLink>
+              
+              {/* Desktop Help Button */}
               <button
                 onClick={() => {
-                  // Open email directly for now
                   window.open(
                     'mailto:gigi@gigistardust.com?subject=UNA Formation Help&body=Hi Gigi,%0D%0A%0D%0AI need help with UNA formation.%0D%0A%0D%0APlease let me know when you might be available for a conversation.%0D%0A%0D%0AThank you!',
                     '_blank'
@@ -219,12 +216,126 @@ function App() {
                 Get Help
               </button>
             </div>
+
+            {/* Mobile menu button */}
+            <div className="md:hidden flex items-center">
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="p-2 rounded-md text-[#F4F1E8] hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors"
+                aria-label="Toggle mobile menu"
+              >
+                {isMobileMenuOpen ? (
+                  <X className="h-6 w-6" />
+                ) : (
+                  <Menu className="h-6 w-6" />
+                )}
+              </button>
+            </div>
           </div>
+
+          {/* Mobile Navigation Menu */}
+          {isMobileMenuOpen && (
+            <div className="md:hidden">
+              <div className="px-2 pt-2 pb-3 space-y-1 bg-white/95 backdrop-blur-sm rounded-lg mt-2 shadow-lg border border-[#C49A6C]/20">
+                <NavLink 
+                  to="/" 
+                  className={({ isActive }) =>
+                    `block px-3 py-3 rounded-md text-base font-medium transition-colors ${
+                      isActive 
+                        ? 'text-[#C49A6C] bg-[#C49A6C]/20' 
+                        : 'text-navy-700 hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10'
+                    }`
+                  }
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Home
+                </NavLink>
+                
+                <NavLink 
+                  to="/explore" 
+                  className="block px-3 py-3 rounded-md text-base font-medium text-navy-700 hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Start
+                </NavLink>
+                
+                <NavLink 
+                  to="/toolkit" 
+                  className="block px-3 py-3 rounded-md text-base font-medium text-navy-700 hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  UNA Formation Toolkit
+                </NavLink>
+                
+                <NavLink 
+                  to="/services" 
+                  className="block px-3 py-3 rounded-md text-base font-medium text-navy-700 hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Consulting Services
+                </NavLink>
+                
+                <NavLink 
+                  to="/blog" 
+                  className="block px-3 py-3 rounded-md text-base font-medium text-navy-700 hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Blog
+                </NavLink>
+                
+                <NavLink 
+                  to="/faq" 
+                  className="block px-3 py-3 rounded-md text-base font-medium text-navy-700 hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  FAQ
+                </NavLink>
+                
+                <NavLink 
+                  to="/success" 
+                  className="block px-3 py-3 rounded-md text-base font-medium text-navy-700 hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Success Stories
+                </NavLink>
+                
+                <NavLink 
+                  to="/about" 
+                  className="block px-3 py-3 rounded-md text-base font-medium text-navy-700 hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  About
+                </NavLink>
+                
+                <NavLink 
+                  to="/admin" 
+                  className="block px-3 py-3 rounded-md text-base font-medium text-navy-700 hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Admin
+                </NavLink>
+                
+                {/* Mobile Help Button */}
+                <button
+                  onClick={() => {
+                    window.open(
+                      'mailto:gigi@gigistardust.com?subject=UNA Formation Help&body=Hi Gigi,%0D%0A%0D%0AI need help with UNA formation.%0D%0A%0D%0APlease let me know when you might be available for a conversation.%0D%0A%0D%0AThank you!',
+                      '_blank'
+                    );
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="w-full mt-4 px-4 py-3 bg-gradient-to-r from-[#C49A6C] to-[#A67C4A] text-white text-base font-medium rounded-md hover:from-[#A67C4A] hover:to-[#8B6B3A] transition-all duration-200 shadow-md"
+                >
+                  Get Help
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+      <main className="max-w-7xl mx-auto py-4 px-4 sm:py-6 sm:px-6 lg:px-8">
         <Suspense fallback={<LoadingSpinner message="Loading page..." />}>
           <Routes>
           <Route path="/" element={<Home />} />
@@ -305,7 +416,7 @@ function App() {
               </p>
               <Link
                 to="/contact"
-                className="btn-grad btn-primary px-6 py-2 text-sm font-montserrat"
+                className="btn-grad btn-primary px-6 py-3 text-sm font-montserrat"
               >
                 Contact Us
               </Link>

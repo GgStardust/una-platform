@@ -606,7 +606,7 @@ export default function Success() {
                     <p className="text-sm text-navy-600">{story.subtitle}</p>
                   </div>
                 </div>
-                <span className="inline-block px-2 py-1 text-xs font-medium bg-gold-100 text-gold-800 rounded-full">
+                <span className="inline-block px-2 py-1 text-sm font-medium bg-gold-100 text-gold-800 rounded-full">
                   {story.category}
                 </span>
               </div>

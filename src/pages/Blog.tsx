@@ -121,7 +121,7 @@ export default function Blog() {
                 placeholder="Search articles..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-[#2F7E7E]/30 rounded-lg focus:ring-2 focus:ring-[#C49A6C] focus:border-transparent"
+                className="w-full pl-10 pr-4 py-3 border border-[#2F7E7E]/30 rounded-lg focus:ring-2 focus:ring-[#C49A6C] focus:border-transparent text-base min-h-[44px]"
               />
             </div>
 
@@ -161,8 +161,8 @@ export default function Blog() {
           <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
             <div className="md:flex">
               <div className="md:w-2/3 p-8">
-                <div className="flex items-center space-x-2 text-sm text-navy-500 mb-4">
-                  <span className="bg-gold-100 text-gold-800 px-2 py-1 rounded-full text-sm font-medium">
+                <div className="flex items-center space-x-2 text-base text-navy-500 mb-4">
+                  <span className="bg-gold-100 text-gold-800 px-2 py-1 rounded-full text-base font-medium">
                     Featured
                   </span>
                   <span>•</span>
@@ -180,7 +180,7 @@ export default function Blog() {
                 </p>
                 
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4 text-sm text-navy-500">
+                  <div className="flex items-center space-x-4 text-base text-navy-500">
                     <span className="flex items-center">
                       <User className="h-4 w-4 mr-1" />
                           {featuredPost.frontmatter.author}
@@ -207,7 +207,7 @@ export default function Blog() {
                   <h3 className="text-lg font-semibold text-navy-900 mb-2">
                     Featured Article
                   </h3>
-                  <p className="text-navy-600 text-sm">
+                  <p className="text-navy-600 text-base">
                     Essential reading for anyone considering UNA formation in California
                   </p>
                     </div>
@@ -224,8 +224,8 @@ export default function Blog() {
           {filteredPosts.map(post => (
               <article key={post.slug} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
               <div className="p-6">
-                <div className="flex items-center space-x-2 text-sm text-navy-500 mb-4">
-                  <span className="bg-navy-100 text-navy-800 px-2 py-1 rounded-full text-sm font-medium">
+                <div className="flex items-center space-x-2 text-base text-navy-500 mb-4">
+                  <span className="bg-navy-100 text-navy-800 px-2 py-1 rounded-full text-base font-medium">
                       {post.frontmatter.category}
                   </span>
                   <span>•</span>
@@ -241,7 +241,7 @@ export default function Blog() {
                 </p>
                 
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4 text-sm text-navy-500">
+                  <div className="flex items-center space-x-4 text-base text-navy-500">
                     <span className="flex items-center">
                       <User className="h-4 w-4 mr-1" />
                         {post.frontmatter.author}

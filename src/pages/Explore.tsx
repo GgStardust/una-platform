@@ -437,7 +437,7 @@ export default function Explore() {
                   <select
                     value={answers.state}
                     onChange={(e) => setAnswers(prev => ({ ...prev, state: e.target.value }))}
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3DB5B0] focus:border-transparent font-lora"
+                    className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3DB5B0] focus:border-transparent font-lora text-base min-h-[44px]"
                   >
                     <option value="">Select your state</option>
                     {US_STATES.map(state => (
@@ -651,7 +651,7 @@ export default function Explore() {
                                 type="checkbox"
                                 checked={answers.priorities.includes(priority)}
                                 onChange={() => handlePriorityToggle(priority)}
-                                className="h-4 w-4 text-[#3DB5B0] focus:ring-[#3DB5B0] border-gray-300 rounded"
+                                className="h-5 w-5 text-[#3DB5B0] focus:ring-[#3DB5B0] border-gray-300 rounded min-h-[44px] min-w-[44px]"
                               />
                               <span className="text-white font-lora font-bold text-base">{priority}</span>
                             </label>
@@ -669,7 +669,7 @@ export default function Explore() {
                         value={customPriority}
                         onChange={(e) => setCustomPriority(e.target.value)}
                         placeholder="Please specify your other priority"
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3DB5B0] focus:border-transparent font-lora"
+                        className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#3DB5B0] focus:border-transparent font-lora text-base min-h-[44px]"
                       />
                     </div>
                   </div>

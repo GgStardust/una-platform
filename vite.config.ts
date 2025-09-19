@@ -41,6 +41,19 @@ export default defineConfig({
       }
     },
     // Increase chunk size warning limit to 600KB (reasonable for modern apps)
-    chunkSizeWarningLimit: 600
+    chunkSizeWarningLimit: 600,
+    // Mobile performance optimizations
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true
+      }
+    }
+  },
+  // Mobile-specific optimizations
+  server: {
+    host: true,
+    port: 5173
   }
 })

@@ -122,7 +122,7 @@ export default function Services() {
                 Resource and next steps guidance
               </li>
             </ul>
-            <Link to="/explore" className="btn-grad btn-primary text-sm px-6 py-2 w-full text-center">
+            <Link to="/explore" className="btn-grad btn-primary text-sm px-6 py-3 w-full text-center">
               Start Free Exploration
               <ArrowRight className="ml-2 h-4 w-4 inline" />
             </Link>
