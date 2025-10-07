@@ -145,8 +145,8 @@ export default function Toolkit() {
               <div className="bg-[#2F7E7E]/10 rounded-lg p-6 border border-[#2F7E7E]/30">
                 <h3 className="font-semibold text-[#1C1F3B] mb-2 font-montserrat">State Requirements Guide</h3>
                 <p className="text-[#1C1F3B]/80 text-sm mb-4 font-lora">Research-based guidance for UNA formation in all 50 states. No attorney required for basic formation.</p>
-                <Link to="/blog" className="inline-flex items-center justify-center bg-gradient-to-r from-[#2F7E7E] to-[#246666] text-white px-6 py-3 rounded-full text-sm font-semibold hover:shadow-lg transition-all duration-200 w-full font-montserrat">
-                  Explore Options
+                <Link to="/blog/top-10-states-una-requirements" className="inline-flex items-center justify-center bg-gradient-to-r from-[#2F7E7E] to-[#246666] text-white px-6 py-3 rounded-full text-sm font-semibold hover:shadow-lg transition-all duration-200 w-full font-montserrat">
+                  View State Requirements Guide
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </div>
