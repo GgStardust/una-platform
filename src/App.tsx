@@ -14,7 +14,6 @@ const Explore = lazy(() => import('./pages/Explore'));
 const Success = lazy(() => import('./pages/Success'));
 const IntakeSimplified = lazy(() => import('./pages/IntakeSimplified'));
 const IntakeWithSupabase = lazy(() => import('./pages/IntakeWithSupabase'));
-const Intake = lazy(() => import('./pages/Intake'));
 const Confirmation = lazy(() => import('./pages/Confirmation'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const SignIn = lazy(() => import('./pages/SignIn'));
@@ -340,11 +339,6 @@ function App() {
           <Route path="/intake" element={
             <FormationGuard feature="formation">
               <IntakeSimplified setIntakeData={setIntakeData} />
-            </FormationGuard>
-          } />
-          <Route path="/intake-full" element={
-            <FormationGuard feature="formation">
-              <Intake setIntakeData={setIntakeData} />
             </FormationGuard>
           } />
           <Route path="/intake-form" element={

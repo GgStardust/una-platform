@@ -53,6 +53,8 @@ export default function IntakeSimplified({ setIntakeData }: IntakeSimplifiedProp
 
   const onSubmit = async (data: IntakeFormData) => {
     try {
+      console.log('Form submitted with data:', data);
+      
       // Save to localStorage
       const completeData = {
         ...data,
@@ -60,6 +62,8 @@ export default function IntakeSimplified({ setIntakeData }: IntakeSimplifiedProp
         updatedAt: new Date().toISOString()
       };
       localStorage.setItem('intake_simplified', JSON.stringify(completeData));
+      
+      console.log('Data saved to localStorage:', completeData);
       
       // Clear draft
       localStorage.removeItem('intake_simplified_draft');
@@ -69,6 +73,7 @@ export default function IntakeSimplified({ setIntakeData }: IntakeSimplifiedProp
 
       // Redirect to confirmation page after a brief delay
       setTimeout(() => {
+        console.log('Redirecting to confirmation page');
         navigate('/confirmation');
       }, 2000);
     } catch (error) {
@@ -180,7 +185,7 @@ export default function IntakeSimplified({ setIntakeData }: IntakeSimplifiedProp
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-white font-semibold mb-2">
-                    Intended Start Date <span className="text-[#C49A6C]">*</span>
+                    Intended Start Date <span className="text-white/50 text-sm">(optional)</span>
                   </label>
                   <input
                     type="date"
@@ -194,14 +199,14 @@ export default function IntakeSimplified({ setIntakeData }: IntakeSimplifiedProp
 
                 <div>
                   <label className="block text-white font-semibold mb-2">
-                    Number of Founding Members <span className="text-[#C49A6C]">*</span>
+                    Number of Founding Members <span className="text-white/50 text-sm">(optional)</span>
                   </label>
                   <input
                     type="number"
                     min="2"
                     {...register('numberOfMembers')}
                     className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/30 text-white placeholder-white/50 focus:border-[#C49A6C] focus:ring-2 focus:ring-[#C49A6C]/50 transition-all"
-                    placeholder="Minimum 2"
+                    placeholder="Minimum 2 (if known)"
                   />
                   {errors.numberOfMembers && (
                     <p className="text-red-300 text-sm mt-1">{errors.numberOfMembers.message}</p>
@@ -403,12 +408,6 @@ export default function IntakeSimplified({ setIntakeData }: IntakeSimplifiedProp
             </p>
           </div>
 
-          {/* Optional Toggle */}
-          <div className="text-center mt-6">
-            <p className="text-sm text-white/70 font-lora">
-              Need full UNA formation support? <a href="/intake-full" className="text-[#C49A6C] hover:text-[#B8955A] underline font-montserrat">Use the extended form →</a>
-            </p>
-          </div>
         </form>
       </div>
     </div>

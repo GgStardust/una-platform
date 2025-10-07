@@ -2,23 +2,23 @@ import { z } from 'zod';
 
 // Simplified intake schema - focused on essentials for document preparation
 export const intakeFormSchema = z.object({
-  // Entity Basics (5 fields)
+  // Entity Basics (3 required, 2 optional)
   entityName: z.string().min(2, 'Entity name must be at least 2 characters'),
   entityPurpose: z.string().min(20, 'Please describe your purpose in at least 20 characters'),
   entityState: z.string().min(2, 'State is required'),
-  entityStartDate: z.string().min(1, 'Intended start date is required'),
-  numberOfMembers: z.string().min(1, 'Number of founding members is required'),
+  entityStartDate: z.string().optional(), // Optional - might not know when to start
+  numberOfMembers: z.string().optional(), // Optional - might not know yet
 
-  // Primary Contact (4 fields)
+  // Primary Contact (2 required, 2 optional)
   organizerName: z.string().min(2, 'Primary contact name is required'),
   organizerEmail: z.string().email('Valid email is required'),
-  organizerPhone: z.string().min(10, 'Phone number must be at least 10 digits'),
-  organizerAddress: z.string().min(5, 'Primary address is required'),
+  organizerPhone: z.string().optional(), // Optional - personal info
+  organizerAddress: z.string().optional(), // Optional - personal info
 
-  // Formation Details (3 fields)
+  // Formation Details (2 required, 1 optional)
   needsEIN: z.boolean(),
   needsBanking: z.boolean(),
-  leadershipStructure: z.string().min(10, 'Please briefly describe your leadership structure'),
+  leadershipStructure: z.string().optional(), // Optional - might not know yet
 
   // Optional Information (3 fields)
   additionalNotes: z.string().optional(),

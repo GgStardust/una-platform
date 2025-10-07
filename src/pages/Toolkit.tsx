@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { ArrowRight, ExternalLink, Sparkles } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
 import AffiliateLink from '../components/AffiliateLink';
 import Symbol from '../components/Symbol';
-import { GlassCard, GradientHeader, SectionContainer, PremiumButton } from '@/components/ui';
+import { GlassCard, GradientHeader, SectionContainer } from '@/components/ui';
 
 interface ExploreData {
   state: string;

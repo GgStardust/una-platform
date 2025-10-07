@@ -9,12 +9,18 @@ export default function Confirmation() {
   useEffect(() => {
     // Load intake data from localStorage
     const savedData = localStorage.getItem('intake_simplified');
+    console.log('Confirmation page - savedData from localStorage:', savedData);
+    
     if (savedData) {
       try {
-        setIntakeData(JSON.parse(savedData));
+        const parsedData = JSON.parse(savedData);
+        console.log('Confirmation page - parsed data:', parsedData);
+        setIntakeData(parsedData);
       } catch (error) {
         console.error('Error parsing intake data:', error);
       }
+    } else {
+      console.log('No intake data found in localStorage');
     }
   }, []);
 
@@ -37,15 +43,22 @@ export default function Confirmation() {
             Your session is reserved. You'll receive a direct confirmation once payment is received.
           </p>
 
-          {intakeData && (
+          {intakeData ? (
             <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6 mb-8 text-left">
               <h3 className="text-lg font-semibold text-white mb-4 font-montserrat">Session Details</h3>
               <div className="space-y-2 text-sm text-white/90 font-lora">
-                <div><strong>Organization:</strong> {intakeData.entityName}</div>
-                <div><strong>Contact:</strong> {intakeData.organizerName}</div>
-                <div><strong>Email:</strong> {intakeData.organizerEmail}</div>
-                <div><strong>State:</strong> {intakeData.entityState}</div>
+                <div><strong>Organization:</strong> {intakeData.entityName || 'Not provided'}</div>
+                <div><strong>Contact:</strong> {intakeData.organizerName || 'Not provided'}</div>
+                <div><strong>Email:</strong> {intakeData.organizerEmail || 'Not provided'}</div>
+                <div><strong>State:</strong> {intakeData.entityState || 'Not provided'}</div>
               </div>
+            </div>
+          ) : (
+            <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg p-6 mb-8 text-center">
+              <h3 className="text-lg font-semibold text-white mb-4 font-montserrat">Session Details</h3>
+              <p className="text-white/70 font-lora">
+                Session details will be confirmed via email once payment is received.
+              </p>
             </div>
           )}
 

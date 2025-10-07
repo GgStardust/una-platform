@@ -3,8 +3,11 @@ import { useSearchParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { IntakeData } from '@/lib/types';
-import { intakeFormSchema, IntakeFormData } from '@/lib/validation';
+import { intakeFormSchemaLegacy } from '@/lib/validation';
 import { saveIntake, loadIntake, mapFormDataToIntake, mapIntakeToFormData } from '@/lib/supabase/intake';
+import { z } from 'zod';
+
+type IntakeFormData = z.infer<typeof intakeFormSchemaLegacy>;
 import IntakeGuard from '@/components/IntakeGuard';
 import OriginalIntake from './Intake';
 
@@ -29,7 +32,7 @@ export default function IntakeWithSupabase({ setIntakeData }: IntakeWithSupabase
     reset,
     formState: { errors, isValid }
   } = useForm<IntakeFormData>({
-    resolver: zodResolver(intakeFormSchema),
+    resolver: zodResolver(intakeFormSchemaLegacy),
     mode: 'onChange',
     defaultValues: {
       entityName: '',

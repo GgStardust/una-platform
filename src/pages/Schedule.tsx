@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { CheckCircle, Calendar, Clock, ArrowRight, AlertCircle } from 'lucide-react';
+import { CheckCircle, Calendar, Clock, ArrowRight } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
 
 export default function Schedule() {

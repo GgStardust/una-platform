@@ -289,13 +289,12 @@ export default function StatePage() {
               We don't have specific information for {stateCode?.toUpperCase()}.
               Check out our comprehensive guide for the top 10 states.
             </p>
-            <PremiumButton
-              as={Link}
+            <Link
               to="/blog/top-10-states-una-requirements"
-              variant="primary"
+              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#C49A6C] to-[#B8955A] text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-200"
             >
               View Top 10 States Guide
-            </PremiumButton>
+            </Link>
           </GlassCard>
         </div>
       </div>
