@@ -94,14 +94,21 @@ export default function Services() {
       </div>
 
       {/* Premium Pricing Introduction */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-[#1C1F3B] mb-4 font-montserrat">
-            Choose Your Formation Path
+            Professional UNA Formation Services
           </h2>
-          <p className="text-lg text-[#2A2A28] font-lora">
-            From free exploration to complete formation support, we have the right service for your UNA journey.
+          <p className="text-lg text-[#2A2A28] font-lora mb-6">
+            Specialized expertise for organizations that want their UNA established correctly from the start.
           </p>
+          <div className="bg-gradient-to-r from-[#C49A6C]/10 to-[#7A4CA0]/10 rounded-lg p-6 border border-[#C49A6C]/30 max-w-2xl mx-auto">
+            <p className="text-[#2A2A28] font-lora text-base">
+              <strong className="text-[#C49A6C]">Why invest in professional formation?</strong> Attorney fees for UNA work typically range from $5,000-$15,000.
+              DIY mistakes can cost even more to fix. Our services provide expert guidance at a fraction of attorney costs,
+              with the confidence that comes from specialized UNA expertise.
+            </p>
+          </div>
         </div>
       </div>
 
@@ -153,8 +160,8 @@ export default function Services() {
               <h3 className="text-xl font-semibold text-white font-montserrat">Strategy Session</h3>
             </div>
             <p className="text-white/90 mb-4 font-lora">
-              Get personalized guidance and strategic planning through our 1:1 consultation 
-              sessions tailored to your specific situation.
+              Expert 1:1 consultation with comprehensive strategic planning tailored to your organization's
+              unique needs, mission, and state requirements.
             </p>
             <ul className="text-sm text-white/90 mb-4 space-y-1 font-lora">
               <li className="flex items-center">
@@ -179,8 +186,8 @@ export default function Services() {
               </li>
             </ul>
             <div className="text-center mb-4">
-              <div className="text-3xl font-bold text-[#C49A6C]">$500</div>
-              <div className="text-sm text-white/90">90-minute session</div>
+              <div className="text-4xl font-bold text-[#C49A6C]">$1,000</div>
+              <div className="text-sm text-white/90">90-minute expert consultation</div>
             </div>
             <button
               onClick={() => handlePayment('STRATEGY_SESSION')}
@@ -217,8 +224,8 @@ export default function Services() {
               <h3 className="text-xl font-semibold text-white font-montserrat">Complete Formation Package</h3>
             </div>
             <p className="text-white/90 mb-4 font-lora">
-              Professional UNA formation with comprehensive documentation, guidance, and support
-              to ensure your structure is set up correctly from day one.
+              White-glove UNA formation service with comprehensive documentation, expert guidance, and dedicated support.
+              Your organization deserves to be established correctly from day one.
             </p>
             <ul className="text-sm text-white/90 mb-4 space-y-1 font-lora">
               <li className="flex items-center">
@@ -247,12 +254,12 @@ export default function Services() {
               </li>
             </ul>
             <div className="text-center mb-4">
-              <div className="text-4xl font-bold text-[#C49A6C]">$2,000</div>
-              <div className="text-sm text-white/90">Complete formation package</div>
-              <div className="mt-2 p-2 bg-green-500/20 border border-green-400/30 rounded-lg">
-                <div className="text-sm text-green-300 font-semibold">Strategy Session Credit</div>
+              <div className="text-5xl font-bold text-[#C49A6C] mb-2">$5,000</div>
+              <div className="text-base text-white/90 font-semibold">Complete Formation Package</div>
+              <div className="mt-3 p-3 bg-green-500/20 border border-green-400/30 rounded-lg">
+                <div className="text-sm text-green-300 font-semibold">Strategy Session Included</div>
                 <div className="text-sm text-green-200">
-                  Already completed Strategy Session? Pay only $1,500 more
+                  Already completed Strategy Session? Pay only $4,000 more
                 </div>
               </div>
             </div>
@@ -286,10 +293,10 @@ export default function Services() {
             <div className="inline-block bg-[#7A4CA0] text-white px-6 py-2 rounded-full font-bold text-sm mb-4">
               PREMIUM TIER
             </div>
-            <h3 className="text-3xl font-bold text-[#1C1F3B] mb-4 font-montserrat">Formation + Ongoing Support</h3>
+            <h3 className="text-3xl font-bold text-[#1C1F3B] mb-4 font-montserrat">Formation + Annual Partnership</h3>
             <p className="text-[#2A2A28] mb-6 text-lg font-lora max-w-3xl mx-auto">
-              Complete formation package with extended support for your first year. Perfect for organizations
-              that want ongoing guidance as they grow.
+              Our most comprehensive offering: complete formation service with a full year of dedicated advisory support.
+              For organizations that want a trusted partner as they establish and grow their UNA.
             </p>
 
             <div className="grid md:grid-cols-2 gap-6 mb-6">
@@ -339,8 +346,9 @@ export default function Services() {
             </div>
 
             <div className="mb-6">
-              <div className="text-5xl font-bold text-[#7A4CA0] mb-2 font-montserrat">$4,000</div>
-              <div className="text-lg text-[#2A2A28] font-lora">Complete formation + 12 months ongoing support</div>
+              <div className="text-6xl font-bold text-[#7A4CA0] mb-3 font-montserrat">$10,000</div>
+              <div className="text-xl text-[#2A2A28] font-lora font-semibold">Complete Formation + Annual Partnership</div>
+              <div class="text-base text-[#2A2A28]/70 font-lora mt-2">Your dedicated UNA advisor for the first year</div>
             </div>
 
             <button

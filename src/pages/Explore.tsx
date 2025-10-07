@@ -320,15 +320,18 @@ export default function Explore() {
                     to="/services"
                     className="btn-grad btn-primary px-8 py-4 text-center font-montserrat text-lg font-bold"
                   >
-                    Book Strategy Session ($500)
+                    Book Expert Strategy Session
                   </Link>
                   <Link
                     to="/services"
                     className="btn-grad btn-secondary px-8 py-4 text-center font-montserrat text-lg font-bold"
                   >
-                    View All Packages
+                    View Formation Packages
                   </Link>
                 </div>
+                <p className="text-center text-white/80 text-sm font-lora mt-4">
+                  Investment starts at $1,000 for 90-minute expert consultation
+                </p>
               </div>
             </div>
             
