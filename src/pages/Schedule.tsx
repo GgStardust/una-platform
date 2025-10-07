@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router-dom';
-import { Calendar, Clock } from 'lucide-react';
+import { Calendar, Clock, CheckCircle } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
 
 export default function Schedule() {
