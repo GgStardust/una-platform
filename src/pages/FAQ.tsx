@@ -162,7 +162,7 @@ export default function FAQ() {
             <p className="text-xl text-[#2A2A28] max-w-3xl mx-auto font-lora">
               Get answers to common questions about UNA formation, legal requirements, 
               and ongoing operations. Can't find what you're looking for? 
-              <Link to="/consultation" className="text-[#C49A6C] hover:text-[#A67C4A] font-medium ml-1">
+              <Link to="/services" className="text-[#C49A6C] hover:text-[#A67C4A] font-medium ml-1">
                 Schedule a consultation
               </Link>
               .
@@ -238,7 +238,7 @@ export default function FAQ() {
             <Link to="/explore" className="btn-grad btn-secondary px-6 py-3 rounded-lg font-semibold text-[#1C1F3B] bg-white hover:bg-gray-50 transition-colors">
               Explore Your Path
             </Link>
-            <Link to="/consultation" className="btn-grad btn-primary px-6 py-3 rounded-lg font-semibold text-white transition-colors">
+            <Link to="/services" className="btn-grad btn-primary px-6 py-3 rounded-lg font-semibold text-white transition-colors">
               Schedule Consultation
             </Link>
           </div>

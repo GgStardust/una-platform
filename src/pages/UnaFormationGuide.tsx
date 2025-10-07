@@ -105,15 +105,14 @@ const UnaFormationGuide: React.FC = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="/files/una-formation-guide.pdf"
-                download
+                href="/una-formation-guide"
                 className="inline-flex items-center gap-2 bg-gradient-to-r from-[#C49A6C] to-[#B8955A] text-white px-8 py-4 rounded-xl font-bold font-montserrat shadow-lg hover:shadow-xl transition-all duration-200 hover:transform hover:scale-105"
               >
                 <Download className="h-5 w-5" />
                 Download PDF Guide
               </a>
               <a
-                href="/consultation"
+                href="/services"
                 className="inline-flex items-center gap-2 border-2 border-[#C49A6C] text-[#C49A6C] px-8 py-4 rounded-xl font-bold font-montserrat hover:bg-[#C49A6C] hover:text-white transition-all duration-200"
               >
                 Get Professional Help

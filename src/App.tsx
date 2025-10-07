@@ -181,8 +181,8 @@ function App() {
                   >
                     FAQ
                   </NavLink>
-                  <NavLink 
-                    to="/success" 
+                  <NavLink
+                    to="/success-stories"
                     className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50"
                   >
                     Success Stories
@@ -291,8 +291,8 @@ function App() {
                   FAQ
                 </NavLink>
                 
-                <NavLink 
-                  to="/success" 
+                <NavLink
+                  to="/success-stories"
                   className="block px-3 py-3 rounded-md text-base font-medium text-navy-700 hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
@@ -343,7 +343,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/faq" element={<FAQ />} />
-          <Route path="/success" element={<Success />} />
+          <Route path="/success-stories" element={<Success />} />
           <Route path="/intake" element={
             <FormationGuard feature="formation">
               <Intake setIntakeData={setIntakeData} />
@@ -370,7 +370,7 @@ function App() {
           <Route path="/toolkit" element={<Toolkit />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/schedule" element={<Schedule />} />
-          <Route path="/success" element={<PaymentSuccess />} />
+          <Route path="/payment-success" element={<PaymentSuccess />} />
             <Route path="/una-formation-guide" element={<UnaFormationGuideLanding />} />
             <Route path="/una-formation-guide-full" element={<UnaFormationGuide />} />
           <Route path="/admin" element={
@@ -426,18 +426,17 @@ function App() {
           {/* Unified CTA Section */}
           <div className="border-t border-white/20 pt-8 mb-8">
             <div className="text-center">
-              <h3 className="text-h2 font-semibold font-montserrat mb-2">Ready to start your UNA journey?</h3>
+              <h3 className="text-h2 font-semibold font-montserrat mb-4">Ready for Professional UNA Formation?</h3>
+              <p className="text-white/90 font-lora mb-6 max-w-2xl mx-auto">
+                Get expert guidance and comprehensive support for your California UNA formation.
+              </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link to="/services" className="btn-grad btn-primary px-6 py-3">
-                  Book Strategy Session
+                <Link to="/explore" className="btn-grad btn-secondary px-8 py-3 font-bold">
+                  Take Free Assessment
                 </Link>
-                <a
-                  href="/una-formation-guide"
-                  className="inline-flex items-center gap-2 border-2 border-white text-white px-6 py-3 rounded-lg font-bold font-montserrat hover:bg-white hover:text-[#1C1F3B] transition-all duration-200"
-                >
-                  <ExternalLink className="h-5 w-5" />
-                  Download Free Guide
-                </a>
+                <Link to="/services" className="btn-grad btn-primary px-8 py-3 font-bold">
+                  View Formation Packages
+                </Link>
               </div>
             </div>
           </div>

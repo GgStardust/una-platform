@@ -298,16 +298,6 @@ export default function Explore() {
                 </div>
               </div>
               
-              {/* Download Guide Button */}
-              <div className="mb-8 text-center">
-                <Link
-                  to="/una-formation-guide"
-                  className="inline-flex items-center gap-2 bg-gradient-to-r from-[#3DB5B0] to-[#1E2A38] text-white px-8 py-4 rounded-xl font-bold font-montserrat shadow-lg hover:shadow-xl transition-all duration-200 hover:transform hover:scale-105"
-                >
-                  <ExternalLink className="h-5 w-5" />
-                  Download the UNA Formation Guide
-                </Link>
-              </div>
               
               {/* Next Steps */}
               <div className="mb-8">
@@ -328,17 +318,15 @@ export default function Explore() {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Link
                     to="/services"
-                    className="btn-grad btn-primary px-8 py-3 text-center font-montserrat"
+                    className="btn-grad btn-primary px-8 py-4 text-center font-montserrat text-lg font-bold"
                   >
-                    Book a Strategy Session
+                    Book Your Strategy Session ($250)
                   </Link>
                   <Link
-                    to="/toolkit"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-grad btn-secondary px-8 py-3 text-center font-montserrat"
+                    to="/services"
+                    className="btn-grad btn-secondary px-8 py-4 text-center font-montserrat text-lg font-bold"
                   >
-                    Explore DIY Toolkit
+                    View All Formation Packages
                   </Link>
                 </div>
               </div>

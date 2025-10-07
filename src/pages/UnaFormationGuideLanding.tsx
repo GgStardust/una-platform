@@ -55,7 +55,7 @@ const UnaFormationGuideLanding: React.FC = () => {
           <div className="max-w-4xl mx-auto">
             {/* Hero Section */}
             <div className="text-center mb-12">
-              <h1 className="text-5xl font-bold text-white font-montserrat mb-6">
+              <h1 className="text-5xl font-bold text-[#1C1F3B] font-montserrat mb-6">
                 UNA Formation Guide
               </h1>
               <p className="text-2xl text-white/90 font-lora mb-8">
@@ -67,16 +67,16 @@ const UnaFormationGuideLanding: React.FC = () => {
             <div className="grid lg:grid-cols-2 gap-12 items-start">
               {/* Left Column - Form */}
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
-                <h2 className="text-2xl font-bold text-white font-montserrat mb-6">
+                <h2 className="text-2xl font-bold text-[#1C1F3B] font-montserrat mb-6">
                   Get Your Free Guide
                 </h2>
-                <p className="text-white/90 font-lora mb-6">
+                <p className="text-[#1C1F3B] font-lora mb-6">
                   Enter your details below to instantly download our comprehensive UNA Formation Guide.
                 </p>
                 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
-                    <label htmlFor="name" className="block text-white font-medium font-montserrat mb-2">
+                    <label htmlFor="name" className="block text-[#1C1F3B] font-medium font-montserrat mb-2">
                       Full Name
                     </label>
                     <input
@@ -86,13 +86,13 @@ const UnaFormationGuideLanding: React.FC = () => {
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      className="w-full p-4 rounded-xl border border-white/30 bg-white/10 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-[#C49A6C] focus:border-transparent font-lora"
+                      className="w-full p-4 rounded-xl border border-white/30 bg-white/10 text-[#1C1F3B] placeholder-[#1C1F3B]/70 focus:outline-none focus:ring-2 focus:ring-[#C49A6C] focus:border-transparent font-lora"
                       placeholder="Enter your full name"
                     />
                   </div>
                   
                   <div>
-                    <label htmlFor="email" className="block text-white font-medium font-montserrat mb-2">
+                    <label htmlFor="email" className="block text-[#1C1F3B] font-medium font-montserrat mb-2">
                       Email Address
                     </label>
                     <input
@@ -102,7 +102,7 @@ const UnaFormationGuideLanding: React.FC = () => {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full p-4 rounded-xl border border-white/30 bg-white/10 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-[#C49A6C] focus:border-transparent font-lora"
+                      className="w-full p-4 rounded-xl border border-white/30 bg-white/10 text-[#1C1F3B] placeholder-[#1C1F3B]/70 focus:outline-none focus:ring-2 focus:ring-[#C49A6C] focus:border-transparent font-lora"
                       placeholder="Enter your email address"
                     />
                   </div>
@@ -136,31 +136,31 @@ const UnaFormationGuideLanding: React.FC = () => {
               {/* Right Column - Guide Preview */}
               <div className="space-y-8">
                 <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 shadow-2xl">
-                  <h3 className="text-xl font-bold text-white font-montserrat mb-4">
+                  <h3 className="text-xl font-bold text-[#1C1F3B] font-montserrat mb-4">
                     What's Inside the Guide
                   </h3>
                   <ul className="space-y-3">
-                    <li className="flex items-start gap-3 text-white/90 font-lora">
+                    <li className="flex items-start gap-3 text-[#1C1F3B] font-lora">
                       <span className="text-[#C49A6C] font-bold">✓</span>
                       <span>7 essential steps to UNA formation</span>
                     </li>
-                    <li className="flex items-start gap-3 text-white/90 font-lora">
+                    <li className="flex items-start gap-3 text-[#1C1F3B] font-lora">
                       <span className="text-[#C49A6C] font-bold">✓</span>
                       <span>State-specific requirements and filing instructions</span>
                     </li>
-                    <li className="flex items-start gap-3 text-white/90 font-lora">
+                    <li className="flex items-start gap-3 text-[#1C1F3B] font-lora">
                       <span className="text-[#C49A6C] font-bold">✓</span>
                       <span>Sample UNA agreements and bylaws</span>
                     </li>
-                    <li className="flex items-start gap-3 text-white/90 font-lora">
+                    <li className="flex items-start gap-3 text-[#1C1F3B] font-lora">
                       <span className="text-[#C49A6C] font-bold">✓</span>
                       <span>EIN application guidance</span>
                     </li>
-                    <li className="flex items-start gap-3 text-white/90 font-lora">
+                    <li className="flex items-start gap-3 text-[#1C1F3B] font-lora">
                       <span className="text-[#C49A6C] font-bold">✓</span>
                       <span>Banking and financial management tips</span>
                     </li>
-                    <li className="flex items-start gap-3 text-white/90 font-lora">
+                    <li className="flex items-start gap-3 text-[#1C1F3B] font-lora">
                       <span className="text-[#C49A6C] font-bold">✓</span>
                       <span>Recordkeeping best practices</span>
                     </li>
@@ -168,10 +168,10 @@ const UnaFormationGuideLanding: React.FC = () => {
                 </div>
 
                 <div className="bg-gradient-to-r from-[#2F7E7E]/20 to-[#7A4CA0]/20 rounded-xl p-6 border border-[#2F7E7E]/30">
-                  <h4 className="text-lg font-semibold text-white font-montserrat mb-3">
+                  <h4 className="text-lg font-semibold text-[#1C1F3B] font-montserrat mb-3">
                     Need More Help?
                   </h4>
-                  <p className="text-white/90 font-lora mb-4">
+                  <p className="text-[#1C1F3B] font-lora mb-4">
                     Our Strategy Sessions provide personalized guidance for your specific UNA formation needs.
                   </p>
                   <a
@@ -187,7 +187,7 @@ const UnaFormationGuideLanding: React.FC = () => {
 
             {/* Footer */}
             <div className="text-center mt-12 pt-8 border-t border-white/20">
-              <p className="text-white/70 font-lora">
+              <p className="text-[#1C1F3B] font-lora">
                 Prepared by UNA Guide | <a href="https://unaguide.com" className="text-[#C49A6C] hover:text-[#B8955A] transition-colors">unaguide.com</a>
               </p>
             </div>

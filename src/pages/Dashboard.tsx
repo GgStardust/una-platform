@@ -771,10 +771,10 @@ export default function Dashboard({ intakeData }: DashboardProps) {
               
               <div className="mt-6 flex justify-end space-x-3">
                 <Link
-                  to="/referrals"
+                  to="/services"
                   className="btn-secondary"
                 >
-                  View All Referrals
+                  View Services
                 </Link>
                 <button
                   onClick={() => setShowVerificationModal(false)}

@@ -271,7 +271,7 @@ export default function About() {
                 Services
               </Link>
               <Link
-                to="/success"
+                to="/success-stories"
                 className="text-gold-600 hover:text-gold-800 font-medium"
               >
                 Success Stories
