@@ -25,6 +25,7 @@ const Schedule = lazy(() => import('./pages/Schedule'));
 const AffiliateHub = lazy(() => import('./pages/AffiliateHub'));
 const UnaFormationGuide = lazy(() => import('./pages/UnaFormationGuide'));
 const UnaFormationGuideLanding = lazy(() => import('./pages/UnaFormationGuideLanding'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Lazy load components
 const AdminDashboard = lazy(() => import('./components/AdminDashboard'));
@@ -66,10 +67,13 @@ function App() {
     }
   }, [intakeData]);
 
-  // Track page views with Google Analytics
+  // Track page views with Google Analytics and scroll to top
   useEffect(() => {
     const currentPath = window.location.pathname;
     const currentTitle = document.title;
+    
+    // Scroll to top on page change
+    window.scrollTo(0, 0);
     
     // Track page view
     googleAnalyticsService.trackPageView(currentPath, currentTitle);
@@ -322,6 +326,7 @@ function App() {
               <AdminDashboard />
             </AdminAuth>
           } />
+          <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
       </main>
