@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Users, DollarSign, Award, Heart, BookOpen, Palette, Scissors, Car, PawPrint, PenTool } from 'lucide-react';
+import { GlassCard, GradientHeader, PremiumButton, SectionContainer } from '@/components/ui';
 
 interface SuccessStory {
   id: string;
@@ -162,6 +162,17 @@ const successStories: SuccessStory[] = [
     keyMetrics: ["Workshop funding success", "Cultural grant access", "Collaboration partnerships", "Residency opportunities"],
     quickImpact: "Broke free from commercial constraints by structuring creative practice for cultural recognition, securing sustainable funding through grants and residencies while maintaining artistic integrity.",
     fullStory: "screenwriter",
+    type: 'case-study'
+  },
+  {
+    id: 'legacy-preservation',
+    title: "Legacy Preservation Collective",
+    subtitle: "Art Collection & Historic Property Stewardship",
+    icon: <Heart className="h-8 w-8" />,
+    category: "Legacy & Cultural Heritage",
+    keyMetrics: ["$3M property preservation", "Art collection protection", "Family continuity", "Cultural legacy maintenance"],
+    quickImpact: "Transformed inheritance from liquidation to stewardship, preserving a lifetime of art and cultural heritage while maintaining family connection to a meaningful space.",
+    fullStory: "legacy-preservation",
     type: 'case-study'
   }
 ];
@@ -515,6 +526,39 @@ UNA provides a way to structure this creative practice. The UNA holds the worksh
 By viewing her writing as a creative endeavor, the author gains access to grants, residencies, and cultural funding that sustain her process. Book royalties or commercial studio contracts remain separate, but the developmental, collaborative, and cultural aspects are resourced within the UNA.
 
 For her, UNA is both philosophical and fiscal alignment. It validates writing as an art form that deserves recognition, and it creates the fiscal bridge that allows her to keep writing without waiting for commercial contracts. UNA turns a solitary practice into a supported creative path.`
+  },
+  {
+    id: 'legacy-preservation',
+    title: "Legacy Preservation Collective — Art Collection & Historic Property Stewardship",
+    subtitle: "Family Heritage & Cultural Asset Management",
+    icon: <Heart className="h-8 w-8" />,
+    category: "Legacy & Cultural Heritage",
+    businessType: "Family collective preserving historic property and art collection as cultural heritage",
+    challenge: "How to preserve a lifetime of art and cultural heritage while maintaining family connection to a meaningful space, avoiding the typical inheritance liquidation process.",
+    solution: "Formed UNA to create a stewardship structure that transforms inheritance from liquidation to preservation, allowing the family to collectively own and maintain the property and art collection.",
+    results: [
+      "Preserved $3M+ property and art collection as cultural heritage",
+      "Maintained family connection to meaningful space and memories",
+      "Created sustainable stewardship structure for future generations",
+      "Avoided typical inheritance liquidation and family conflict"
+    ],
+    keyTakeaways: [
+      "UNA transforms inheritance from liquidation to stewardship",
+      "Collective ownership preserves family connection to meaningful spaces",
+      "Cultural heritage can be protected through structured stewardship",
+      "Family legacies benefit from formal preservation frameworks"
+    ],
+    fullStory: `A family faced the common challenge of what to do with a beloved family home filled with decades of art collection and cultural significance. The traditional path would have been to sell the property, divide the proceeds, and disperse the art collection. But this family recognized that the real value wasn't just financial—it was the cultural heritage, the memories, and the ongoing connection to a space that held deep meaning.
+
+The challenge was finding a way to preserve this legacy while ensuring the family could maintain the property, care for the art collection, and pass it on to future generations. They needed a structure that would allow collective ownership and decision-making without the complexity and cost of traditional estate planning or corporate structures.
+
+Forming a UNA provided the perfect solution. It created a stewardship structure that transformed inheritance from a liquidation process into a preservation mission. The family could collectively own the property and art collection, make decisions together about maintenance and care, and ensure the cultural heritage would be preserved for future generations.
+
+The UNA structure allowed them to establish clear governance for property maintenance, art collection care, and family decision-making. It provided the legal framework to hold the assets collectively while maintaining the flexibility to adapt to changing family circumstances and needs.
+
+The results were transformative. Instead of losing a family legacy to the typical inheritance process, they created a sustainable stewardship structure that preserves cultural heritage while maintaining family connection to meaningful spaces. The UNA structure enabled them to honor the past while building a framework for the future.
+
+This approach demonstrates how UNA can serve as a vessel for preserving family legacies and cultural heritage. It shows how inheritance can be transformed from a process of division and loss into one of preservation and continuity, creating lasting value that extends far beyond financial considerations.`
   }
 ];
 
@@ -534,7 +578,8 @@ export default function Success() {
     { id: 'Housing', name: 'Housing', count: 1 },
     { id: 'Education & Service', name: 'Education & Service', count: 1 },
     { id: 'Mobile & Creative', name: 'Mobile & Creative', count: 1 },
-    { id: 'Animal Welfare & Education', name: 'Animal Welfare & Education', count: 1 }
+    { id: 'Animal Welfare & Education', name: 'Animal Welfare & Education', count: 1 },
+    { id: 'Legacy & Cultural Heritage', name: 'Legacy & Cultural Heritage', count: 1 }
   ];
 
   const filteredStories = successStories.filter(story => 
@@ -555,32 +600,24 @@ export default function Success() {
   };
 
   return (
-    <div className="min-h-screen bg-cream-50">
-      {/* Header */}
-      <div className="bg-white py-16">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl font-bold text-navy-900 mb-6">
-            Success Stories & Case Studies
-          </h1>
-          <p className="text-xl text-navy-600 max-w-3xl mx-auto">
-            Discover how UNAs are transforming diverse businesses, creative practices, and community initiatives. 
-            Get inspired by 12 real stories, then dive deeper into detailed case studies.
-          </p>
-        </div>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-[#1E2A38] via-[#2F7E7E] to-[#1C1F3B]">
+      <GradientHeader
+        title="Case Studies"
+        subtitle={`Discover how Unincorporated Nonprofit Associations (UNAs) are transforming creative practices, communities, and organizations. Explore living examples that demonstrate how sovereignty, structure, and purpose come together in real projects.`}
+      />
 
-      {/* Category Filter */}
-      <div className="bg-white border-b border-navy-200">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-wrap gap-2">
+      <SectionContainer padding="lg" background="transparent">
+        {/* Category Filter */}
+        <div className="mb-12">
+          <div className="flex flex-wrap gap-3 justify-center">
             {categories.map((category) => (
               <button
                 key={category.id}
                 onClick={() => setSelectedCategory(category.id)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
+                className={`px-4 py-2 rounded-full text-sm font-medium font-montserrat transition-all duration-200 ${
                   selectedCategory === category.id
-                    ? 'bg-gold-600 text-white'
-                    : 'bg-navy-200 text-navy-700 hover:bg-navy-300'
+                    ? 'bg-gradient-to-r from-[#C49A6C] to-[#B8955A] text-white shadow-lg'
+                    : 'bg-white/20 backdrop-blur text-white hover:bg-white/30 border border-white/20'
                 }`}
               >
                 {category.name} ({category.count})
@@ -588,25 +625,23 @@ export default function Success() {
             ))}
           </div>
         </div>
-      </div>
 
-      {/* Success Stories Grid */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        {/* Success Stories Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredStories.map((story) => (
-            <div key={story.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-200">
+            <GlassCard key={story.id} variant="solid" className="overflow-hidden hover:shadow-xl transition-shadow duration-200">
               {/* Header */}
-              <div className="p-6 border-b border-navy-200">
+              <div className="p-6 border-b border-[#1C1F3B]/10">
                 <div className="flex items-center space-x-3 mb-3">
-                  <div className="text-gold-600">
+                  <div className="text-[#C49A6C]">
                     {story.icon}
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-navy-900">{story.title}</h3>
-                    <p className="text-sm text-navy-600">{story.subtitle}</p>
+                    <h3 className="text-lg font-semibold text-[#1C1F3B] font-montserrat">{story.title}</h3>
+                    <p className="text-sm text-[#1C1F3B]/70 font-lora">{story.subtitle}</p>
                   </div>
                 </div>
-                <span className="inline-block px-2 py-1 text-sm font-medium bg-gold-100 text-gold-800 rounded-full">
+                <span className="inline-block px-3 py-1 text-xs font-medium bg-[#C49A6C]/20 text-[#C49A6C] rounded-full font-montserrat">
                   {story.category}
                 </span>
               </div>
@@ -614,11 +649,11 @@ export default function Success() {
               {/* Key Metrics */}
               <div className="p-6">
                 <div className="mb-4">
-                  <h4 className="text-sm font-medium text-navy-900 mb-2">Key Achievements</h4>
+                  <h4 className="text-sm font-medium text-[#1C1F3B] mb-2 font-montserrat">Key Achievements</h4>
                   <ul className="space-y-1">
                     {story.keyMetrics.map((metric, index) => (
-                      <li key={index} className="text-sm text-navy-600 flex items-center">
-                        <div className="w-1.5 h-1.5 bg-gold-500 rounded-full mr-2"></div>
+                      <li key={index} className="text-sm text-[#1C1F3B]/70 flex items-center font-lora">
+                        <div className="w-1.5 h-1.5 bg-[#C49A6C] rounded-full mr-2 flex-shrink-0"></div>
                         {metric}
                       </li>
                     ))}
@@ -627,44 +662,45 @@ export default function Success() {
 
                 {/* Quick Impact */}
                 <div className="mb-4">
-                  <h4 className="text-sm font-medium text-navy-900 mb-2">Quick Impact</h4>
-                  <p className="text-sm text-navy-600">{story.quickImpact}</p>
+                  <h4 className="text-sm font-medium text-[#1C1F3B] mb-2 font-montserrat">Quick Impact</h4>
+                  <p className="text-sm text-[#1C1F3B]/70 font-lora">{story.quickImpact}</p>
                 </div>
 
                 {/* Read Full Story Button */}
-                <button
+                <PremiumButton
                   onClick={() => openCaseStudy(story.id)}
-                  className="w-full bg-gold-600 text-white py-2 px-4 rounded-lg hover:bg-gold-700 transition-colors duration-200 flex items-center justify-center space-x-2"
+                  variant="primary"
+                  className="w-full"
                 >
-                  <BookOpen className="h-4 w-4" />
+                  <BookOpen className="h-4 w-4 mr-2" />
                   <span>Read the Full Story</span>
-                </button>
+                </PremiumButton>
               </div>
-            </div>
+            </GlassCard>
           ))}
         </div>
-      </div>
+      </SectionContainer>
 
 
       {/* Case Study Modal */}
       {isCaseStudyOpen && selectedCaseStudy && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+          <div className="bg-white/95 backdrop-blur rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
             {/* Header */}
-            <div className="p-6 border-b border-navy-200">
+            <div className="p-6 border-b border-[#1C1F3B]/10">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
-                  <div className="text-gold-600">
+                  <div className="text-[#C49A6C]">
                     {selectedCaseStudy.icon}
                   </div>
                   <div>
-                    <h2 className="text-2xl font-bold text-navy-900">{selectedCaseStudy.title}</h2>
-                    <p className="text-lg text-navy-600">{selectedCaseStudy.subtitle}</p>
+                    <h2 className="text-2xl font-bold text-[#1C1F3B] font-montserrat">{selectedCaseStudy.title}</h2>
+                    <p className="text-lg text-[#1C1F3B]/70 font-lora">{selectedCaseStudy.subtitle}</p>
                   </div>
                 </div>
                 <button
                   onClick={closeCaseStudy}
-                  className="text-navy-400 hover:text-navy-600"
+                  className="text-[#1C1F3B]/60 hover:text-[#1C1F3B] transition-colors"
                 >
                   <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -677,28 +713,28 @@ export default function Success() {
             <div className="p-6 space-y-6">
               {/* Business Overview */}
               <div>
-                <h3 className="text-lg font-semibold text-navy-900 mb-2">Business Overview</h3>
-                <p className="text-navy-600">{selectedCaseStudy.businessType}</p>
+                <h3 className="text-lg font-semibold text-[#1C1F3B] mb-2 font-montserrat">Business Overview</h3>
+                <p className="text-[#1C1F3B]/80 font-lora">{selectedCaseStudy.businessType}</p>
               </div>
 
               {/* Challenge */}
               <div>
-                <h3 className="text-lg font-semibold text-navy-900 mb-2">The Challenge</h3>
-                <p className="text-navy-600">{selectedCaseStudy.challenge}</p>
+                <h3 className="text-lg font-semibold text-[#1C1F3B] mb-2 font-montserrat">Context and Intention</h3>
+                <p className="text-[#1C1F3B]/80 font-lora">{selectedCaseStudy.challenge}</p>
               </div>
 
               {/* Solution */}
               <div>
-                <h3 className="text-lg font-semibold text-navy-900 mb-2">The UNA Solution</h3>
-                <p className="text-navy-600">{selectedCaseStudy.solution}</p>
+                <h3 className="text-lg font-semibold text-[#1C1F3B] mb-2 font-montserrat">The UNA Structure</h3>
+                <p className="text-[#1C1F3B]/80 font-lora">{selectedCaseStudy.solution}</p>
               </div>
 
               {/* Results */}
               <div>
-                <h3 className="text-lg font-semibold text-navy-900 mb-2">Results & Impact</h3>
+                <h3 className="text-lg font-semibold text-[#1C1F3B] mb-2 font-montserrat">Results & Impact</h3>
                 <ul className="space-y-2">
                   {selectedCaseStudy.results.map((result, index) => (
-                    <li key={index} className="text-navy-600 flex items-start">
+                    <li key={index} className="text-[#1C1F3B]/80 flex items-start font-lora">
                       <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-2 mt-2 flex-shrink-0"></div>
                       {result}
                     </li>
@@ -708,11 +744,11 @@ export default function Success() {
 
               {/* Key Takeaways */}
               <div>
-                <h3 className="text-lg font-semibold text-navy-900 mb-2">Key Takeaways</h3>
+                <h3 className="text-lg font-semibold text-[#1C1F3B] mb-2 font-montserrat">Principles in Practice</h3>
                 <ul className="space-y-2">
                   {selectedCaseStudy.keyTakeaways.map((takeaway, index) => (
-                    <li key={index} className="text-navy-600 flex items-start">
-                      <div className="w-1.5 h-1.5 bg-gold-500 rounded-full mr-2 mt-2 flex-shrink-0"></div>
+                    <li key={index} className="text-[#1C1F3B]/80 flex items-start font-lora">
+                      <div className="w-1.5 h-1.5 bg-[#C49A6C] rounded-full mr-2 mt-2 flex-shrink-0"></div>
                       {takeaway}
                     </li>
                   ))}
@@ -721,26 +757,26 @@ export default function Success() {
 
               {/* Full Story */}
               <div>
-                <h3 className="text-lg font-semibold text-navy-900 mb-2">The Full Story</h3>
-                <div className="text-navy-600 leading-relaxed whitespace-pre-line">
+                <h3 className="text-lg font-semibold text-[#1C1F3B] mb-2 font-montserrat">The Full Story</h3>
+                <div className="text-[#1C1F3B]/80 leading-relaxed whitespace-pre-line font-lora">
                   {selectedCaseStudy.fullStory}
                 </div>
               </div>
             </div>
 
             {/* Footer */}
-            <div className="p-6 border-t border-navy-200 bg-navy-50">
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-navy-500">
-                  Ready to start your own UNA journey?
+            <div className="p-6 border-t border-[#1C1F3B]/10 bg-[#1C1F3B]/5">
+              <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+                <span className="text-sm text-[#1C1F3B]/70 font-lora">
+                  Begin your own UNA journey and create the structure that supports your vision.
                 </span>
-                <Link
-                  to="/services"
+                <PremiumButton
+                  href="/services"
                   onClick={closeCaseStudy}
-                  className="bg-gold-600 text-white py-2 px-6 rounded-lg hover:bg-gold-700 transition-colors duration-200"
+                  variant="primary"
                 >
                   Book Strategy Session
-                </Link>
+                </PremiumButton>
               </div>
             </div>
           </div>

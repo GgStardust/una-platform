@@ -27,7 +27,9 @@ import {
   AffiliateProduct,
   AffiliateLink,
   AffiliateConversion,
-  AffiliatePayout
+  AffiliatePayout,
+  financialTools,
+  legalServices
 } from '@/lib/affiliate-system';
 import { 
   PaymentModule, 
@@ -135,7 +137,9 @@ export default function AdminDashboard() {
   
   // Get affiliate partners from the existing data
   const affiliatePartners = [
-    ...affiliateManager.getProducts().map(p => ({ id: p.partnerId, name: p.partnerId }))
+    ...financialTools.map(p => ({ id: p.id, name: p.name, category: p.category })),
+    ...legalServices.map(p => ({ id: p.id, name: p.name, category: p.category })),
+    ...affiliateManager.getProducts().map(p => ({ id: p.partnerId, name: p.partnerId, category: 'custom' }))
   ];
   
   // Form states
@@ -295,6 +299,73 @@ export default function AdminDashboard() {
       setAffiliatePayouts(affiliateManager.getPayouts());
     } catch (error) {
       console.error('Error loading affiliate data:', error);
+    }
+  };
+
+  // Auto-generate products and links from system affiliates
+  const generateAffiliateData = () => {
+    try {
+      // Generate products from financial tools
+      financialTools.forEach(partner => {
+        const existingProduct = affiliateManager.getProducts().find(p => p.partnerId === partner.id);
+        if (!existingProduct) {
+          affiliateManager.addProduct({
+            partnerId: partner.id,
+            name: partner.name,
+            description: partner.description,
+            url: partner.url,
+            slug: partner.slug,
+            category: partner.category,
+            commission: partner.commission,
+            featured: partner.status === 'active',
+            status: partner.status as 'active' | 'inactive' | 'coming-soon'
+          });
+        }
+      });
+
+      // Generate products from legal services
+      legalServices.forEach(partner => {
+        const existingProduct = affiliateManager.getProducts().find(p => p.partnerId === partner.id);
+        if (!existingProduct) {
+          affiliateManager.addProduct({
+            partnerId: partner.id,
+            name: partner.name,
+            description: partner.description,
+            url: partner.url,
+            slug: partner.slug,
+            category: partner.category,
+            commission: partner.commission,
+            featured: partner.status === 'active',
+            status: partner.status as 'active' | 'inactive' | 'coming-soon'
+          });
+        }
+      });
+
+      // Generate links for active products
+      affiliateManager.getProducts().forEach(product => {
+        if (product.status === 'active') {
+          const existingLink = affiliateManager.getLinks().find(l => l.productId === product.id);
+          if (!existingLink) {
+            affiliateManager.addLink({
+              productId: product.id,
+              partnerId: product.partnerId,
+              slug: product.slug,
+              destinationUrl: product.url,
+              utmSource: 'una-platform',
+              utmMedium: 'affiliate',
+              utmCampaign: `${product.slug}-campaign`,
+              status: 'active'
+            });
+          }
+        }
+      });
+
+      // Reload data
+      loadAffiliateData();
+      alert('Affiliate products and links generated successfully!');
+    } catch (error) {
+      console.error('Error generating affiliate data:', error);
+      alert('Error generating affiliate data. Check console for details.');
     }
   };
 
@@ -1215,6 +1286,32 @@ Facebook,Complete UNA Formation Guide,Master UNA formation from concept to compl
                       </button>
                     </div>
                     
+                    {/* System Affiliate Partners */}
+                    <div className="bg-white rounded-lg shadow-sm border border-navy-100">
+                      <div className="p-6">
+                        <h4 className="text-lg font-medium text-navy-900 mb-4">System Affiliate Partners</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                          {affiliatePartners.map(partner => (
+                            <div key={partner.id} className="border border-navy-200 rounded-lg p-4">
+                              <div className="flex justify-between items-start mb-2">
+                                <h5 className="font-medium text-navy-900">{partner.name}</h5>
+                                <span className={`px-2 py-1 rounded-full text-xs ${
+                                  partner.category === 'financial' ? 'bg-blue-100 text-blue-800' :
+                                  partner.category === 'legal' ? 'bg-green-100 text-green-800' :
+                                  partner.category === 'banking' ? 'bg-purple-100 text-purple-800' :
+                                  partner.category === 'tools' ? 'bg-orange-100 text-orange-800' :
+                                  'bg-gray-100 text-gray-800'
+                                }`}>
+                                  {partner.category}
+                                </span>
+                              </div>
+                              <p className="text-sm text-navy-600">ID: {partner.id}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                    
                     {/* Quick Add Partner Form */}
                     {showPartnerForm && (
                       <div className="bg-navy-50 rounded-lg p-6 border border-navy-200">
@@ -1314,12 +1411,20 @@ Facebook,Complete UNA Formation Guide,Master UNA formation from concept to compl
                   <div className="space-y-4">
                     <div className="flex justify-between items-center">
                       <h3 className="text-lg font-medium text-navy-900">Affiliate Products</h3>
-                      <button
-                        onClick={() => setShowProductForm(true)}
-                        className="px-4 py-2 bg-gold-600 text-white rounded-lg hover:bg-gold-700 transition-colors"
-                      >
-                        Add Product
-                      </button>
+                      <div className="flex space-x-2">
+                        <button
+                          onClick={generateAffiliateData}
+                          className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                        >
+                          Generate from Partners
+                        </button>
+                        <button
+                          onClick={() => setShowProductForm(true)}
+                          className="px-4 py-2 bg-gold-600 text-white rounded-lg hover:bg-gold-700 transition-colors"
+                        >
+                          Add Product
+                        </button>
+                      </div>
                     </div>
                     
                     {/* Products List */}
@@ -1534,12 +1639,20 @@ Facebook,Complete UNA Formation Guide,Master UNA formation from concept to compl
                   <div className="space-y-4">
                     <div className="flex justify-between items-center">
                       <h3 className="text-lg font-medium text-navy-900">Affiliate Links</h3>
-                      <button
-                        onClick={() => setShowLinkForm(true)}
-                        className="px-4 py-2 bg-gold-600 text-white rounded-lg hover:bg-gold-700 transition-colors"
-                      >
-                        Create Link
-                      </button>
+                      <div className="flex space-x-2">
+                        <button
+                          onClick={generateAffiliateData}
+                          className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                        >
+                          Generate from Partners
+                        </button>
+                        <button
+                          onClick={() => setShowLinkForm(true)}
+                          className="px-4 py-2 bg-gold-600 text-white rounded-lg hover:bg-gold-700 transition-colors"
+                        >
+                          Create Link
+                        </button>
+                      </div>
                     </div>
                     
                     {/* Links List */}

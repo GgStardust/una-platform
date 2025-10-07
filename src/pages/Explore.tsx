@@ -32,13 +32,13 @@ const COLLECTIVE_TYPES = [
   { 
     id: 'advocacy', 
     label: 'Advocacy Group', 
-    description: 'Work together to raise awareness, influence policy, or support a shared cause in your community.',
+    description: 'Work together to raise awareness and advance shared causes',
     icon: Target 
   },
   { 
     id: 'creative', 
     label: 'Creative Collective', 
-    description: 'Collaborate on arts, media, design, or cultural expression that benefits your members and the public.',
+    description: 'Collaborate on arts, design, or cultural expression with community impact.',
     icon: Palette 
   },
   { 
@@ -198,7 +198,7 @@ export default function Explore() {
     
     if (!readiness.hasEIN) actions.push('Apply for EIN (federal tax ID)');
     if (!readiness.hasBylaws) actions.push('Draft your UNA Agreement and bylaws');
-    if (!readiness.hasMembers) actions.push('Gather committed members (minimum 2 required)');
+    if (!readiness.hasMembers) actions.push('Gather at least two members to activate your UNA');
     if (answers.state) actions.push(`Complete state registration in ${answers.state}`);
     actions.push('Open a bank account in the UNA name');
     
@@ -273,9 +273,9 @@ export default function Explore() {
                       {answers.readiness.hasBylaws && <li className="text-navy-600 font-lora flex items-center"><span className="text-emerald-600 mr-2">✓</span>Purpose statement</li>}
                       {answers.readiness.hasBylaws && <li className="text-navy-600 font-lora flex items-center"><span className="text-emerald-600 mr-2">✓</span>UNA Agreement</li>}
                       {answers.readiness.hasEIN && <li className="text-navy-600 font-lora flex items-center"><span className="text-emerald-600 mr-2">✓</span>EIN (federal tax ID)</li>}
-                      {answers.readiness.needsBanking && <li className="text-navy-600 font-lora flex items-center"><span className="text-emerald-600 mr-2">✓</span>Bank account</li>}
-                      {!answers.readiness.hasMembers && !answers.readiness.hasBylaws && !answers.readiness.hasEIN && !answers.readiness.needsBanking && (
-                        <li className="text-navy-600 font-lora">Nothing yet - that's okay!</li>
+                      {answers.readiness.needsBanking === false && <li className="text-navy-600 font-lora flex items-center"><span className="text-emerald-600 mr-2">✓</span>Bank account</li>}
+                      {!answers.readiness.hasMembers && !answers.readiness.hasBylaws && !answers.readiness.hasEIN && answers.readiness.needsBanking !== false && (
+                        <li className="text-navy-600 font-lora">You're just getting started; every UNA begins here.</li>
                       )}
                     </ul>
             </div>
@@ -291,7 +291,7 @@ export default function Explore() {
                       {!answers.readiness.hasBylaws && <li className="text-navy-600 font-lora flex items-center"><span className="text-amber-600 mr-2">○</span>UNA Agreement</li>}
                       {!answers.readiness.hasEIN && <li className="text-navy-600 font-lora flex items-center"><span className="text-amber-600 mr-2">○</span>EIN (federal tax ID)</li>}
                       <li className="text-navy-600 font-lora flex items-center"><span className="text-amber-600 mr-2">○</span>State registration (if required)</li>
-                      {!answers.readiness.needsBanking && <li className="text-navy-600 font-lora flex items-center"><span className="text-amber-600 mr-2">○</span>Bank account</li>}
+                      {answers.readiness.needsBanking === true && <li className="text-navy-600 font-lora flex items-center"><span className="text-amber-600 mr-2">○</span>Bank account</li>}
                       <li className="text-navy-600 font-lora flex items-center"><span className="text-amber-600 mr-2">○</span>Recordkeeping system</li>
                     </ul>
               </div>
@@ -314,24 +314,42 @@ export default function Explore() {
                     ))}
                   </ol>
                 </div>
-                
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+
+                {/* Primary CTA: Get Your Toolkit */}
+                <div className="bg-gradient-to-r from-[#C49A6C]/20 to-[#2F7E7E]/20 rounded-xl p-8 mb-8 border-2 border-[#C49A6C]/40">
+                  <h3 className="text-2xl font-bold text-white font-montserrat mb-3 text-center">
+                    Ready to Build Your UNA?
+                  </h3>
+                  <p className="text-white/90 font-lora text-center mb-6">
+                    Get your personalized toolkit with banking, bookkeeping, and payment tools curated for your formation journey.
+                  </p>
+                  <div className="flex justify-center">
+                    <Link
+                      to="/toolkit"
+                      className="inline-flex items-center justify-center bg-gradient-to-r from-[#C49A6C] to-[#B8955A] text-white px-10 py-4 rounded-full text-lg font-bold hover:shadow-xl transition-all duration-200 font-montserrat"
+                      onClick={() => {
+                        localStorage.setItem('exploreData', JSON.stringify({
+                          state: answers.state,
+                          readiness: answers.readiness,
+                          timestamp: Date.now()
+                        }));
+                      }}
+                    >
+                      Get Your Personalized Toolkit
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Link>
+                  </div>
+                </div>
+
+                <div className="flex justify-center">
                   <Link
                     to="/services"
-                    className="btn-grad btn-primary px-8 py-4 text-center font-montserrat text-lg font-bold"
+                    className="inline-flex items-center justify-center bg-white/20 backdrop-blur-sm border-2 border-white/40 text-white px-10 py-3 rounded-full text-base font-semibold hover:bg-white/30 transition-all duration-200 font-montserrat"
                   >
-                    Book Expert Strategy Session
-                  </Link>
-                  <Link
-                    to="/services"
-                    className="btn-grad btn-secondary px-8 py-4 text-center font-montserrat text-lg font-bold"
-                  >
-                    View Formation Packages
+                    View Professional Services
+                    <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
                 </div>
-                <p className="text-center text-white/80 text-sm font-lora mt-4">
-                  Investment starts at $1,000 for 90-minute expert consultation
-                </p>
               </div>
             </div>
             
@@ -409,7 +427,7 @@ export default function Explore() {
                     {step.num}
                   </div>
                   <span className={`text-xs font-montserrat ${
-                    currentStep >= step.num ? 'text-[#C49A6C]' : 'text-white/60'
+                    currentStep >= step.num ? 'text-white font-semibold' : 'text-white/60'
                   }`}>
                     {step.label}
                   </span>
@@ -428,10 +446,11 @@ export default function Explore() {
           <div className="max-w-4xl mx-auto">
             {/* Step 1: Location & Readiness */}
             {currentStep === 1 && (
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 md:p-10 shadow-xl border border-white/20">
-                <h2 className="text-2xl md:text-3xl font-bold text-white font-montserrat mb-8">
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 md:p-10 shadow-xl border-2 border-[#C49A6C]/30">
+                <h2 className="text-2xl md:text-3xl font-bold text-white font-montserrat mb-2">
                   Location & Readiness
                 </h2>
+                <div className="h-1 w-20 bg-gradient-to-r from-[#C49A6C] to-transparent rounded-full mb-6"></div>
                 
                 {/* State Selection */}
                 <div className="mb-6">
@@ -479,14 +498,18 @@ export default function Explore() {
                       </button>
                     </div>
                     {answers.readiness.hasMembers === true && (
-                      <p className="text-sm text-green-600 font-lora mt-2">
-                        UNA law requires two or more people to form.
-                      </p>
+                      <div className="mt-3 p-3 bg-emerald-500/20 backdrop-blur rounded-lg border-l-4 border-emerald-400">
+                        <p className="text-sm text-white font-lora">
+                          ✓ UNA law requires two or more people to form.
+                        </p>
+                      </div>
                     )}
                     {answers.readiness.hasMembers === false && (
-                      <p className="text-sm text-red-600 font-lora mt-2">
-                        A UNA requires at least two people. You'll need to gather members before formalizing.
-                      </p>
+                      <div className="mt-3 p-3 bg-white/95 backdrop-blur rounded-lg border-l-4 border-[#C49A6C]">
+                        <p className="text-sm text-[#1C1F3B] font-lora">
+                          <span className="text-white font-semibold">Note:</span> A UNA requires at least two people. You can gather members to begin formalizing.
+                        </p>
+                      </div>
                     )}
         </div>
 
@@ -545,9 +568,11 @@ export default function Explore() {
             </button>
                     </div>
                     {answers.readiness.hasEIN === false && (
-                      <p className="text-sm text-red-600 font-lora mt-2">
-                        You'll need an EIN for banking and grant eligibility. We can help you apply.
-                      </p>
+                      <div className="mt-3 p-3 bg-white/95 backdrop-blur rounded-lg border-l-4 border-[#C49A6C]">
+                        <p className="text-sm text-[#1C1F3B] font-lora">
+                          <span className="text-white font-semibold">Tip:</span> An EIN enables banking and grant eligibility. We can help you apply.
+                        </p>
+                      </div>
           )}
         </div>
 
@@ -584,10 +609,11 @@ export default function Explore() {
 
             {/* Step 2: Collective Type */}
             {currentStep === 2 && (
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 md:p-10 shadow-xl border border-white/20">
-                <h2 className="text-2xl md:text-3xl font-bold text-white font-montserrat mb-8">
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 md:p-10 shadow-xl border-2 border-[#C49A6C]/30">
+                <h2 className="text-2xl md:text-3xl font-bold text-white font-montserrat mb-2">
                   Your Organization Type
                 </h2>
+                <div className="h-1 w-20 bg-gradient-to-r from-[#C49A6C] to-transparent rounded-full mb-6"></div>
                 
                 <div className="mb-6">
                   <label className="block text-white text-lg font-bold font-montserrat mb-6">
@@ -625,10 +651,11 @@ export default function Explore() {
 
             {/* Step 3: Formation Priorities */}
             {currentStep === 3 && (
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 md:p-10 shadow-xl border border-white/20">
-                <h2 className="text-2xl md:text-3xl font-bold text-white font-montserrat mb-8">
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 md:p-10 shadow-xl border-2 border-[#C49A6C]/30">
+                <h2 className="text-2xl md:text-3xl font-bold text-white font-montserrat mb-2">
                   Your Formation Goals
                 </h2>
+                <div className="h-1 w-20 bg-gradient-to-r from-[#C49A6C] to-transparent rounded-full mb-6"></div>
                 
                 <div className="mb-6">
                   <label className="block text-white text-lg font-bold font-montserrat mb-6">
@@ -683,11 +710,11 @@ export default function Explore() {
 
             {/* Validation Warnings */}
             {validationWarnings.length > 0 && (
-              <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
-                <h3 className="text-red-900 font-semibold font-montserrat mb-2">
-                  Please complete the following:
+              <div className="mt-4 p-4 bg-white/95 backdrop-blur rounded-lg border-l-4 border-[#C49A6C]">
+                <h3 className="text-[#1C1F3B] font-semibold font-montserrat mb-2">
+                  Select the options that apply to you:
                 </h3>
-                <ul className="text-red-800 font-lora space-y-1">
+                <ul className="text-[#1C1F3B]/80 font-lora space-y-1">
                   {validationWarnings.map((warning, index) => (
                     <li key={index}>• {warning}</li>
                   ))}

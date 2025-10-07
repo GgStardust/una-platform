@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useNavigate } from 'react-router-dom';
 import { intakeFormSchema, type IntakeFormData } from '@/lib/validation';
 import { CheckCircle, ArrowRight } from 'lucide-react';
 
 interface IntakeSimplifiedProps {
-  setIntakeData: (data: Partial<IntakeFormData>) => void;
+  setIntakeData: (data: any) => void;
 }
 
 const US_STATES = [
@@ -20,6 +21,7 @@ const US_STATES = [
 
 export default function IntakeSimplified({ setIntakeData }: IntakeSimplifiedProps) {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -35,13 +37,40 @@ export default function IntakeSimplified({ setIntakeData }: IntakeSimplifiedProp
     },
   });
 
+  const watchedValues = watch();
+
+  // Auto-save to localStorage
+  useEffect(() => {
+    const formData = watchedValues;
+    if (Object.keys(formData).some(key => formData[key as keyof IntakeFormData] !== '')) {
+      const dataToSave = {
+        ...formData,
+        updatedAt: new Date().toISOString()
+      };
+      localStorage.setItem('intake_simplified_draft', JSON.stringify(dataToSave));
+    }
+  }, [watchedValues]);
+
   const onSubmit = async (data: IntakeFormData) => {
     try {
+      // Save to localStorage
+      const completeData = {
+        ...data,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      };
+      localStorage.setItem('intake_simplified', JSON.stringify(completeData));
+      
+      // Clear draft
+      localStorage.removeItem('intake_simplified_draft');
+      
       setIntakeData(data);
       setIsSubmitted(true);
 
-      // TODO: Save to Supabase
-      console.log('Form submitted:', data);
+      // Redirect to confirmation page after a brief delay
+      setTimeout(() => {
+        navigate('/confirmation');
+      }, 2000);
     } catch (error) {
       console.error('Error submitting intake:', error);
     }
@@ -343,17 +372,41 @@ export default function IntakeSimplified({ setIntakeData }: IntakeSimplifiedProp
             </div>
           </div>
 
+          {/* Payment Instructions */}
+          <div className="mt-8 border-t border-white/20 pt-6">
+            <h3 className="text-lg font-semibold text-white mb-3 font-montserrat">Payment Instructions</h3>
+            <p className="text-sm text-white/90 mb-4 font-lora">
+              This process honors direct exchange without intermediaries.
+              Please send your payment after completing this form:
+            </p>
+            <ul className="text-sm text-white/80 space-y-2 font-lora">
+              <li>• Venmo: <strong className="text-[#C49A6C]">@gigistardust</strong></li>
+              <li>• Zelle: <strong className="text-[#C49A6C]">gigi@gigistardust.com</strong></li>
+              <li>• Bank transfer: available upon request</li>
+            </ul>
+            <p className="text-xs text-white/70 mt-3 font-lora italic">
+              Once payment is received, your booking will be finalized and a confirmation email sent.
+            </p>
+          </div>
+
           {/* Submit Button */}
           <div className="text-center pt-6">
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-12 py-4 bg-[#C49A6C] text-white text-lg font-bold rounded-lg hover:bg-[#A67C4A] transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
+              className="px-12 py-4 bg-gradient-to-r from-[#C49A6C] to-[#B8955A] text-white text-lg font-bold rounded-lg hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl font-montserrat"
             >
               {isSubmitting ? 'Submitting...' : 'Submit Intake Form'}
             </button>
             <p className="text-white/70 text-sm mt-4 font-lora">
               We'll review your information and reach out within 1-2 business days
+            </p>
+          </div>
+
+          {/* Optional Toggle */}
+          <div className="text-center mt-6">
+            <p className="text-sm text-white/70 font-lora">
+              Need full UNA formation support? <a href="/intake-full" className="text-[#C49A6C] hover:text-[#B8955A] underline font-montserrat">Use the extended form →</a>
             </p>
           </div>
         </form>

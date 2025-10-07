@@ -5,54 +5,48 @@ import SEOHead from '../components/SEOHead';
 
 export default function Schedule() {
   const [searchParams] = useSearchParams();
-  const [paymentVerified, setPaymentVerified] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const sessionId = searchParams.get('session_id');
+  const [isScheduled, setIsScheduled] = useState(false);
+  const packageType = searchParams.get('package') || 'strategy-session';
 
-  useEffect(() => {
-    // In a real implementation, you would verify the payment with Stripe
-    // For now, we'll check if session_id exists and is valid format
-    if (sessionId && sessionId.startsWith('cs_')) {
-      setPaymentVerified(true);
+  // Get package information
+  const getPackageInfo = (packageType: string) => {
+    switch (packageType) {
+      case 'strategy-session':
+        return {
+          name: 'Strategy Session',
+          price: '$1,000',
+          duration: '90 minutes',
+          format: 'Zoom or In-person'
+        };
+      case 'complete-formation':
+        return {
+          name: 'Complete Formation Package',
+          price: '$5,000',
+          duration: 'Multiple sessions',
+          format: 'Zoom or In-person'
+        };
+      case 'premium-partnership':
+        return {
+          name: 'Premium Partnership',
+          price: '$10,000',
+          duration: '12 months ongoing',
+          format: 'Zoom or In-person'
+        };
+      default:
+        return {
+          name: 'Strategy Session',
+          price: '$1,000',
+          duration: '90 minutes',
+          format: 'Zoom or In-person'
+        };
     }
-    setIsLoading(false);
-  }, [sessionId]);
+  };
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-[#1C1F3B] via-[#2F7E7E] to-[#7A4CA0] flex items-center justify-center">
-        <div className="text-center text-white">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
-          <p className="text-lg">Verifying your payment...</p>
-        </div>
-      </div>
-    );
-  }
+  const packageInfo = getPackageInfo(packageType);
 
-  if (!paymentVerified) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-[#1C1F3B] via-[#2F7E7E] to-[#7A4CA0] flex items-center justify-center">
-        <div className="max-w-md mx-auto px-4">
-          <div className="una-card p-8 text-center">
-            <AlertCircle className="h-16 w-16 text-red-400 mx-auto mb-4" />
-            <h1 className="text-2xl font-bold text-white mb-4 font-montserrat">
-              Payment Required
-            </h1>
-            <p className="text-white/90 mb-6 font-lora">
-              You need to complete a payment before scheduling a consultation.
-            </p>
-            <Link 
-              to="/services"
-              className="btn-grad btn-primary px-6 py-3"
-            >
-              View Services & Pay
-              <ArrowRight className="ml-2 h-4 w-4 inline" />
-            </Link>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const handleScheduleConfirmation = () => {
+    setIsScheduled(true);
+  };
 
   return (
     <>
@@ -84,13 +78,13 @@ export default function Schedule() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="text-center">
               <div className="flex items-center justify-center mb-4">
-                <CheckCircle className="h-8 w-8 text-green-400 mr-3" />
+                <Calendar className="h-8 w-8 text-[#C49A6C] mr-3" />
                 <h1 className="text-3xl font-bold text-white font-montserrat">
-                  Payment Confirmed!
+                  Schedule Your Session
                 </h1>
               </div>
               <p className="text-xl text-white/90 font-lora">
-                Thank you for your payment. Now let's schedule your consultation.
+                You're scheduling your {packageInfo.name} session. Select a date and time that works best for you.
               </p>
             </div>
           </div>
@@ -98,17 +92,22 @@ export default function Schedule() {
 
         {/* Main Content */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          {/* Success Message */}
-          <div className="bg-green-500/20 border border-green-400/30 rounded-lg p-6 mb-8">
-            <div className="flex items-center">
-              <CheckCircle className="h-6 w-6 text-green-400 mr-3" />
+
+          {/* Session Summary */}
+          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg p-6 mb-8">
+            <h3 className="text-lg font-semibold text-white mb-4 font-montserrat">Session Details</h3>
+            <div className="grid md:grid-cols-3 gap-4 text-sm">
               <div>
-                <h2 className="text-lg font-semibold text-white font-montserrat">
-                  Payment Successfully Processed
-                </h2>
-                <p className="text-white/90 font-lora">
-                  Your payment has been confirmed. You can now schedule your consultation.
-                </p>
+                <span className="text-white/70 font-lora">Service:</span>
+                <div className="text-white font-semibold font-montserrat">{packageInfo.name}</div>
+              </div>
+              <div>
+                <span className="text-white/70 font-lora">Duration:</span>
+                <div className="text-white font-semibold font-montserrat">{packageInfo.duration}</div>
+              </div>
+              <div>
+                <span className="text-white/70 font-lora">Format:</span>
+                <div className="text-white font-semibold font-montserrat">{packageInfo.format}</div>
               </div>
             </div>
           </div>
@@ -194,6 +193,36 @@ export default function Schedule() {
             </div>
           </div>
 
+          {/* Confirmation Modal */}
+          {isScheduled && (
+            <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 max-w-md w-full text-center">
+                <CheckCircle className="h-16 w-16 text-[#C49A6C] mx-auto mb-6" />
+                <h3 className="text-2xl font-bold text-white mb-4 font-montserrat">
+                  Session Scheduled!
+                </h3>
+                <p className="text-white/90 mb-6 font-lora">
+                  Your {packageInfo.name} session has been scheduled. Continue to the intake form to prepare for our meeting.
+                </p>
+                <div className="flex flex-col gap-3">
+                  <Link 
+                    to="/intake"
+                    className="bg-gradient-to-r from-[#C49A6C] to-[#B8955A] text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-200 font-montserrat"
+                  >
+                    Continue to Intake Form
+                    <ArrowRight className="ml-2 h-4 w-4 inline" />
+                  </Link>
+                  <button
+                    onClick={() => setIsScheduled(false)}
+                    className="text-white/70 hover:text-white text-sm font-lora underline"
+                  >
+                    Schedule Another Time
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Next Steps */}
           <div className="mt-12 text-center">
             <h3 className="text-xl font-semibold text-white mb-4 font-montserrat">
@@ -203,16 +232,16 @@ export default function Schedule() {
               Once you've scheduled your consultation, you can start filling out the intake form to prepare for our meeting.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link 
-                to={`/intake-form?payment_id=${sessionId}&booking_id=placeholder`}
-                className="btn-grad btn-primary px-6 py-3"
+              <button
+                onClick={handleScheduleConfirmation}
+                className="bg-gradient-to-r from-[#C49A6C] to-[#B8955A] text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-200 font-montserrat"
               >
-                Start Intake Form
+                I've Scheduled My Session
                 <ArrowRight className="ml-2 h-4 w-4 inline" />
-              </Link>
+              </button>
               <Link 
                 to="/contact" 
-                className="btn-grad btn-secondary px-6 py-3"
+                className="bg-white/10 backdrop-blur-sm border border-white/20 text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/20 transition-all duration-200 font-montserrat"
               >
                 Contact Support
                 <ArrowRight className="ml-2 h-4 w-4 inline" />

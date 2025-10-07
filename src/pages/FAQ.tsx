@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ChevronDown, ChevronUp, Target, Building2, Calculator, Shield, Users, HelpCircle } from 'lucide-react';
 import { useState } from 'react';
+import { GlassCard, GradientHeader, PremiumButton, SectionContainer } from '@/components/ui';
 
 const faqCategories = [
   {
@@ -31,7 +32,7 @@ const faqCategories = [
     questions: [
       {
         question: "How much does it cost to form a UNA?",
-        answer: "Our UNA formation services include: Consultation ($250), Document Creation & Guidance ($750), or both together for $1000. There are no ongoing fees or annual reports required."
+        answer: "Our UNA formation services include: Strategy Session ($1,000), Complete Formation Package ($5,000), or Premium Partnership with annual support ($10,000). There are no ongoing fees or annual reports required for the UNA itself."
       },
       {
         question: "Do I need an attorney to form a UNA?",
@@ -123,7 +124,7 @@ const faqCategories = [
     questions: [
       {
         question: "What services do you provide?",
-        answer: "We offer UNA consultation ($250), complete document creation and guidance ($750), and ongoing consultancy (pricing varies by engagement). We also provide direct referrals to CPAs and attorneys when needed."
+        answer: "We offer Strategy Sessions ($1,000), Complete Formation Package ($5,000), and Premium Partnership with annual support ($10,000). We also provide direct referrals to CPAs and attorneys when needed for specialized legal matters."
       },
       {
         question: "Do you provide ongoing support after formation?",
@@ -151,33 +152,28 @@ export default function FAQ() {
   };
 
   return (
-    <div className="min-h-screen bg-cream-50">
+    <div className="min-h-screen bg-gradient-to-br from-[#1E2A38] via-[#2F7E7E] to-[#1C1F3B]">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold text-[#1C1F3B] mb-4 font-montserrat">
-              Frequently Asked Questions
-            </h1>
-            <p className="text-xl text-[#2A2A28] max-w-3xl mx-auto font-lora">
-              Get answers to common questions about UNA formation, legal requirements, 
-              and ongoing operations. Can't find what you're looking for? 
-              <Link to="/services" className="text-[#C49A6C] hover:text-[#A67C4A] font-medium ml-1">
-                Schedule a consultation
-              </Link>
-              .
-            </p>
-          </div>
-        </div>
-      </div>
+      <GradientHeader
+        title="Frequently Asked Questions"
+        subtitle="Get answers to common questions about UNA formation, legal requirements, and ongoing operations."
+        primaryCta={{
+          text: "Explore Your Path",
+          href: "/explore"
+        }}
+        secondaryCta={{
+          text: "Schedule Consultation",
+          href: "/services"
+        }}
+      />
 
       {/* FAQ Categories */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <SectionContainer>
         <div className="grid gap-8">
           {faqCategories.map((category) => {
             const IconComponent = category.icon;
             return (
-              <div key={category.id} className="bg-white rounded-lg shadow-sm border border-navy-200 overflow-hidden">
+              <GlassCard key={category.id} className="overflow-hidden">
                 {/* Category Header */}
                 <div className="bg-gradient-to-r from-[#1C1F3B] to-[#2F7E7E] px-6 py-4">
                   <div className="flex items-center space-x-3">
@@ -187,32 +183,32 @@ export default function FAQ() {
                     <h2 className="text-xl font-semibold text-white font-montserrat">{category.title}</h2>
                   </div>
                 </div>
-                
+
                 {/* Questions */}
                 <div className="p-6">
                   <div className="space-y-4">
                     {category.questions.map((faq, index) => {
                       const questionId = `${category.id}-${index}`;
                       const isOpen = openQuestions.has(questionId);
-                      
+
                       return (
-                        <div key={questionId} className="border border-navy-200 rounded-lg">
+                        <div key={questionId} className="border border-white/20 rounded-lg bg-white/5 backdrop-blur-sm">
                           <button
                             onClick={() => toggleQuestion(questionId)}
-                            className="w-full px-4 py-4 text-left flex items-center justify-between hover:bg-navy-50 transition-colors"
+                            className="w-full px-4 py-4 text-left flex items-center justify-between hover:bg-white/10 transition-colors"
                           >
-                            <span className="font-medium text-[#1C1F3B] font-montserrat">{faq.question}</span>
+                            <span className="font-medium text-white font-montserrat">{faq.question}</span>
                             {isOpen ? (
-                              <ChevronUp className="h-5 w-5 text-[#2F7E7E]" />
+                              <ChevronUp className="h-5 w-5 text-[#3DB5B0]" />
                             ) : (
-                              <ChevronDown className="h-5 w-5 text-[#2F7E7E]" />
+                              <ChevronDown className="h-5 w-5 text-[#3DB5B0]" />
                             )}
                           </button>
-                          
+
                           {isOpen && (
                             <div className="px-4 pb-4">
-                              <div className="border-t border-[#2F7E7E]/20 pt-4">
-                                <p className="text-[#2A2A28] leading-relaxed font-lora">{faq.answer}</p>
+                              <div className="border-t border-white/20 pt-4">
+                                <p className="text-white/90 leading-relaxed font-lora">{faq.answer}</p>
                               </div>
                             </div>
                           )}
@@ -221,29 +217,33 @@ export default function FAQ() {
                     })}
                   </div>
                 </div>
-              </div>
+              </GlassCard>
             );
           })}
         </div>
 
         {/* Additional Help */}
-        <div className="mt-12 bg-gradient-to-r from-[#1C1F3B] to-[#2F7E7E] rounded-lg p-8 text-center text-white">
-          <h2 className="text-3xl font-bold mb-4 font-montserrat">
+        <GlassCard className="mt-12 p-8 text-center bg-gradient-to-r from-[#1C1F3B]/80 to-[#2F7E7E]/80">
+          <h2 className="text-3xl font-bold mb-4 font-montserrat text-white">
             Still Have Questions?
           </h2>
-          <p className="text-xl mb-8 opacity-90 font-lora">
+          <p className="text-xl mb-8 text-white/90 font-lora">
             Start your UNA formation journey and get personalized guidance every step of the way.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/explore" className="btn-grad btn-secondary px-6 py-3 rounded-lg font-semibold text-[#1C1F3B] bg-white hover:bg-gray-50 transition-colors">
-              Explore Your Path
+            <Link to="/explore">
+              <PremiumButton variant="secondary">
+                Explore Your Path
+              </PremiumButton>
             </Link>
-            <Link to="/services" className="btn-grad btn-primary px-6 py-3 rounded-lg font-semibold text-white transition-colors">
-              Schedule Consultation
+            <Link to="/services">
+              <PremiumButton variant="primary">
+                Schedule Consultation
+              </PremiumButton>
             </Link>
           </div>
-        </div>
-      </div>
+        </GlassCard>
+      </SectionContainer>
     </div>
   );
 } 

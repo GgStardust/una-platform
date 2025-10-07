@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Search, Calendar, User, ArrowRight, FileText } from 'lucide-react';
 import { getAllBlogPosts, BlogPost } from '@/lib/mdx-loader';
 import SEOHead from '../components/SEOHead';
+import { GlassCard, GradientHeader, PremiumButton, SectionContainer } from '@/components/ui';
 
 export default function Blog() {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
@@ -24,19 +25,21 @@ export default function Blog() {
   }, []);
 
   // Get unique categories from blog posts
-  const categories = ['all', ...Array.from(new Set(blogPosts.map(post => post.frontmatter.category)))];
+  const categories = ['all', ...Array.from(new Set(blogPosts.map(post => post.frontmatter?.category).filter(Boolean)))];
 
   // Filter posts based on search and category
   useEffect(() => {
     const filtered = blogPosts.filter(post => {
-      const matchesSearch = post.frontmatter.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           post.frontmatter.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           post.frontmatter.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
-      
+      if (!post?.frontmatter) return false;
+
+      const matchesSearch = post.frontmatter.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           post.frontmatter.description?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           post.frontmatter.tags?.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+
       const matchesCategory = selectedCategory === 'all' || post.frontmatter.category === selectedCategory;
-    
-    return matchesSearch && matchesCategory;
-  });
+
+      return matchesSearch && matchesCategory;
+    });
     setFilteredPosts(filtered);
   }, [blogPosts, searchTerm, selectedCategory]);
 
@@ -78,50 +81,44 @@ export default function Blog() {
           }))
         }}
       />
-    <div className="min-h-screen bg-cream-50">
+    <div className="min-h-screen bg-gradient-to-br from-[#1E2A38] via-[#2F7E7E] to-[#1C1F3B]">
       {/* Hero Section */}
-      <div className="una-gradient-hero">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 font-montserrat text-[#F4F1E8]">
-              <strong>UNA Formation</strong> Insights
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 text-[#F4F1E8] max-w-4xl mx-auto font-lora">
-              Expert <strong>formation guidance</strong> for <strong>Unincorporated Nonprofit Associations</strong> in all 50 states. 
-              Our <strong>research-based approach</strong> and <strong>business formation experience</strong> 
-              ensure your organization is structured correctly.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link 
-                to="/explore" 
-                className="bg-white text-navy-600 hover:bg-navy-100 font-semibold py-3 px-8 rounded-lg transition-colors duration-200"
-              >
-                Start Your Formation
-              </Link>
-              <Link 
-                to="/explore" 
-                className="border-2 border-white text-white hover:bg-white hover:text-navy-600 font-semibold py-3 px-8 rounded-lg transition-colors duration-200"
-              >
-                Explore Your Path
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
+      <GradientHeader
+        title={
+          <>
+            <strong>UNA Formation</strong> Insights
+          </>
+        }
+        subtitle={
+          <>
+            Expert <strong>formation guidance</strong> for <strong>Unincorporated Nonprofit Associations</strong> in all 50 states.
+            Our <strong>research-based approach</strong> and <strong>business formation experience</strong>
+            ensure your organization is structured correctly.
+          </>
+        }
+        primaryCTA={{
+          text: "Start Your Formation",
+          to: "/explore"
+        }}
+        secondaryCTA={{
+          text: "Explore Your Path",
+          to: "/explore"
+        }}
+      />
 
       {/* Search and Filter Section */}
-      <div className="bg-white border-b border-navy-200">
+      <div className="backdrop-blur-md bg-white/10 border-b border-white/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
             {/* Search Bar */}
             <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-[#2F7E7E]" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white/70" />
               <input
                 type="text"
                 placeholder="Search articles..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-[#2F7E7E]/30 rounded-lg focus:ring-2 focus:ring-[#C49A6C] focus:border-transparent text-base min-h-[44px]"
+                className="w-full pl-10 pr-4 py-3 border border-white/30 rounded-lg focus:ring-2 focus:ring-[#C49A6C] focus:border-transparent text-base min-h-[44px] bg-white/10 backdrop-blur-sm text-white placeholder-white/60"
               />
             </div>
 
@@ -129,15 +126,15 @@ export default function Blog() {
               <div className="flex flex-wrap gap-2">
               {categories.map(category => (
                 <button
-                  key={category}
-                    onClick={() => setSelectedCategory(category || 'all')}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  key={category || 'all'}
+                  onClick={() => setSelectedCategory(category || 'all')}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors capitalize ${
                     selectedCategory === category
                       ? 'bg-[#C49A6C] text-white'
-                      : 'bg-[#2F7E7E]/20 text-[#1C1F3B] hover:bg-[#2F7E7E]/30'
+                      : 'bg-white/20 text-white hover:bg-white/30 backdrop-blur-sm'
                   }`}
                 >
-                    {category}
+                  {category || 'all'}
                 </button>
               ))}
             </div>
@@ -147,22 +144,22 @@ export default function Blog() {
 
         {/* Featured Post Section */}
       {featuredPost && (
-          <div className="bg-gradient-to-br from-gold-50 to-cream-100 border-b border-navy-200">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="py-16">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold text-[#1C1F3B] mb-4 font-montserrat">
+                <h2 className="text-3xl font-bold text-white mb-4 font-montserrat">
                   Featured Article
                 </h2>
-                <p className="text-lg text-[#2A2A28] font-lora">
-                  Essential reading for anyone considering UNA formation in California
+                <p className="text-lg text-white/90 font-lora">
+                  Essential reading for anyone considering UNA formation
                 </p>
               </div>
-              
-          <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+
+          <GlassCard variant="solid" className="overflow-hidden">
             <div className="md:flex">
               <div className="md:w-2/3 p-8">
-                <div className="flex items-center space-x-2 text-base text-navy-500 mb-4">
-                  <span className="bg-gold-100 text-gold-800 px-2 py-1 rounded-full text-base font-medium">
+                <div className="flex items-center space-x-2 text-base text-[#1C1F3B]/70 mb-4">
+                  <span className="bg-[#C49A6C] text-white px-2 py-1 rounded-full text-base font-medium">
                     Featured
                   </span>
                   <span>•</span>
@@ -170,17 +167,17 @@ export default function Blog() {
                   <span>•</span>
                       <span>{featuredPost.frontmatter.readTime}</span>
                 </div>
-                
+
                 <h2 className="text-3xl font-bold text-[#1C1F3B] mb-4 font-montserrat">
                       {featuredPost.frontmatter.title}
                 </h2>
-                
-                <p className="text-lg text-[#2A2A28] mb-6 font-lora">
+
+                <p className="text-lg text-[#1C1F3B]/80 mb-6 font-lora">
                       {featuredPost.frontmatter.description}
                 </p>
-                
+
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4 text-base text-navy-500">
+                  <div className="flex items-center space-x-4 text-base text-[#1C1F3B]/70">
                     <span className="flex items-center">
                       <User className="h-4 w-4 mr-1" />
                           {featuredPost.frontmatter.author}
@@ -190,30 +187,30 @@ export default function Blog() {
                           {new Date(featuredPost.frontmatter.date).toLocaleDateString()}
                     </span>
                   </div>
-                  
-                  <Link
+
+                  <PremiumButton
                     to={`/blog/${featuredPost.slug}`}
-                    className="bg-gold-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-gold-700 transition-colors flex items-center"
+                    variant="primary"
                   >
                     Read Full Article
                     <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
+                  </PremiumButton>
                 </div>
               </div>
-              
-              <div className="md:w-1/3 bg-gradient-to-br from-gold-50 to-cream-100 p-8 flex items-center justify-center">
+
+              <div className="md:w-1/3 bg-gradient-to-br from-[#C49A6C]/20 to-[#2F7E7E]/20 p-8 flex items-center justify-center">
                 <div className="text-center">
-                  <FileText className="h-16 w-16 text-gold-600 mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold text-navy-900 mb-2">
+                  <FileText className="h-16 w-16 text-[#C49A6C] mx-auto mb-4" />
+                  <h3 className="text-lg font-semibold text-[#1C1F3B] mb-2">
                     Featured Article
                   </h3>
-                  <p className="text-navy-600 text-base">
+                  <p className="text-[#1C1F3B]/80 text-base">
                     Essential reading for anyone considering UNA formation in California
                   </p>
                     </div>
                 </div>
               </div>
-            </div>
+            </GlassCard>
           </div>
         </div>
       )}
@@ -222,26 +219,26 @@ export default function Blog() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredPosts.map(post => (
-              <article key={post.slug} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-              <div className="p-6">
-                <div className="flex items-center space-x-2 text-base text-navy-500 mb-4">
-                  <span className="bg-navy-100 text-navy-800 px-2 py-1 rounded-full text-base font-medium">
+              <GlassCard key={post.slug} variant="solid" className="overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col">
+              <div className="p-6 flex flex-col flex-grow">
+                <div className="flex items-center space-x-2 text-sm text-[#1C1F3B]/70 mb-4">
+                  <span className="bg-[#2F7E7E]/20 text-[#1C1F3B] px-2 py-1 rounded-full text-xs font-medium">
                       {post.frontmatter.category}
                   </span>
                   <span>•</span>
-                    <span>{post.frontmatter.readTime}</span>
+                    <span className="text-xs">{post.frontmatter.readTime}</span>
                 </div>
-                
+
                 <h3 className="text-xl font-bold text-[#1C1F3B] mb-3 line-clamp-2 font-montserrat">
                     {post.frontmatter.title}
                 </h3>
-                
-                <p className="text-[#2A2A28] mb-4 line-clamp-3 font-lora">
+
+                <p className="text-[#1C1F3B]/80 mb-6 line-clamp-3 font-lora flex-grow">
                     {post.frontmatter.description}
                 </p>
-                
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4 text-base text-navy-500">
+
+                <div className="mt-auto space-y-3">
+                  <div className="flex items-center space-x-4 text-sm text-[#1C1F3B]/70">
                     <span className="flex items-center">
                       <User className="h-4 w-4 mr-1" />
                         {post.frontmatter.author}
@@ -251,148 +248,21 @@ export default function Blog() {
                         {new Date(post.frontmatter.date).toLocaleDateString()}
                     </span>
                   </div>
-                  
+
                   <Link
                     to={`/blog/${post.slug}`}
-                    className="text-gold-600 hover:text-gold-800 font-medium text-sm flex items-center"
+                    className="text-[#C49A6C] hover:text-[#2F7E7E] font-semibold text-sm flex items-center font-montserrat"
                   >
                     Read More
                     <ArrowRight className="ml-1 h-4 w-4" />
                   </Link>
                 </div>
               </div>
-            </article>
+            </GlassCard>
           ))}
         </div>
       </div>
 
-      {/* Related Resources Section - SEO Internal Linking */}
-      <div className="bg-white border-t border-navy-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-[#1C1F3B] mb-4 font-montserrat">
-              Continue Your UNA Formation Journey
-            </h2>
-            <p className="text-lg text-[#2A2A28] max-w-2xl mx-auto font-lora">
-              Explore our comprehensive resources and services to ensure your UNA formation is done right.
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-gradient-to-br from-gold-50 to-cream-100 rounded-lg p-6">
-              <h3 className="text-lg font-semibold text-navy-900 mb-4">
-                Formation Services
-              </h3>
-              <div className="space-y-3">
-                <Link 
-                  to="/explore" 
-                  className="block p-3 bg-white rounded-lg border border-navy-200 hover:border-gold-300 hover:shadow-sm transition-all duration-200"
-                >
-                  <div className="font-medium text-gold-600 hover:text-gold-800">
-                    Explore Your Path
-                  </div>
-                  <div className="text-sm text-navy-600">
-                    Find your ideal formation approach
-                  </div>
-                </Link>
-                <Link 
-                  to="/intake" 
-                  className="block p-3 bg-white rounded-lg border border-navy-200 hover:border-gold-300 hover:shadow-sm transition-all duration-200"
-                >
-                  <div className="font-medium text-gold-600 hover:text-gold-800">
-                    Start Formation
-                  </div>
-                  <div className="text-sm text-navy-600">
-                    Begin your UNA formation process
-                  </div>
-                </Link>
-              </div>
-            </div>
-            
-            <div className="bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-lg p-6">
-              <h3 className="text-lg font-semibold text-[#1C1F3B] mb-4 font-montserrat">
-                Expert Guidance
-              </h3>
-              <div className="space-y-3">
-                <Link 
-                  to="/faq" 
-                  className="block p-3 bg-white rounded-lg border border-navy-200 hover:border-emerald-300 hover:shadow-sm transition-all duration-200"
-                >
-                  <div className="font-medium text-emerald-600 hover:text-emerald-800">
-                      FAQ & Support
-                  </div>
-                  <div className="text-sm text-[#2A2A28] font-lora">
-                      Get answers to common questions
-                  </div>
-                </Link>
-                <Link 
-                    to="/services" 
-                  className="block p-3 bg-white rounded-lg border border-[#2F7E7E]/30 hover:border-emerald-300 hover:shadow-sm transition-all duration-200"
-                >
-                  <div className="font-medium text-emerald-600 hover:text-emerald-800">
-                      Schedule Consultation
-                  </div>
-                  <div className="text-sm text-[#2A2A28] font-lora">
-                      Get personalized guidance
-                  </div>
-                </Link>
-                <Link 
-                    to="/services" 
-                  className="block p-3 bg-white rounded-lg border border-[#2F7E7E]/30 hover:border-emerald-300 hover:shadow-sm transition-all duration-200"
-                >
-                  <div className="font-medium text-emerald-600 hover:text-emerald-800">
-                      UNA Services & Toolkit
-                  </div>
-                  <div className="text-sm text-[#2A2A28] font-lora">
-                      Professional guidance and essential tools
-                  </div>
-                </Link>
-              </div>
-            </div>
-            
-              <div className="bg-gradient-to-br from-navy-50 to-navy-100 rounded-lg p-6">
-              <h3 className="text-lg font-semibold text-[#1C1F3B] mb-4 font-montserrat">
-                  Legal & Compliance
-              </h3>
-              <div className="space-y-3">
-                <Link 
-                    to="/services" 
-                    className="block p-3 bg-white rounded-lg border border-navy-200 hover:border-navy-300 hover:shadow-sm transition-all duration-200"
-                >
-                    <div className="font-medium text-navy-600 hover:text-navy-800">
-                      Pricing & Packages
-                  </div>
-                  <div className="text-sm text-[#2A2A28] font-lora">
-                      See our formation packages
-                  </div>
-                </Link>
-                <Link 
-                    to="/about" 
-                    className="block p-3 bg-white rounded-lg border border-[#2F7E7E]/30 hover:border-[#2F7E7E]/50 hover:shadow-sm transition-all duration-200"
-                >
-                    <div className="font-medium text-[#2F7E7E] hover:text-[#1C1F3B]">
-                      About Our Platform
-                  </div>
-                  <div className="text-sm text-[#2A2A28] font-lora">
-                      Learn about our expertise
-                  </div>
-                </Link>
-                <Link 
-                    to="/contact" 
-                    className="block p-3 bg-white rounded-lg border border-[#2F7E7E]/30 hover:border-[#2F7E7E]/50 hover:shadow-sm transition-all duration-200"
-                >
-                    <div className="font-medium text-[#2F7E7E] hover:text-[#1C1F3B]">
-                      Contact Us
-                  </div>
-                  <div className="text-sm text-[#2A2A28] font-lora">
-                      Get in touch for support
-                  </div>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
     </>
   );

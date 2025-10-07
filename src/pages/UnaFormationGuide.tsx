@@ -243,7 +243,7 @@ const UnaFormationGuide: React.FC = () => {
                   href="/services"
                   className="inline-flex items-center gap-2 bg-gradient-to-r from-[#C49A6C] to-[#B8955A] text-white px-6 py-3 rounded-lg font-bold font-montserrat hover:shadow-lg transition-all duration-200"
                 >
-                  Book Strategy Session ($250)
+                  Book Strategy Session
                   <ArrowRight className="h-4 w-4" />
                 </a>
                 <a
