@@ -239,8 +239,11 @@ export default function Toolkit() {
               {/* Premium Tier */}
               <div className="bg-gradient-to-br from-[#7A4CA0]/10 to-[#C49A6C]/10 rounded-lg p-6 border-2 border-[#7A4CA0]/40">
                 <h3 className="text-lg font-semibold text-[#1C1F3B] mb-3 font-montserrat">Premium Partnership</h3>
-                <div className="text-3xl font-bold text-[#7A4CA0] mb-1 font-montserrat">$10,000</div>
-                <p className="text-[#1C1F3B]/80 text-sm mb-4 font-lora">Formation + 12 months ongoing support</p>
+                <div className="text-2xl font-bold text-[#7A4CA0] mb-1 font-montserrat">Contact for Pricing</div>
+                <p className="text-[#1C1F3B]/80 text-sm mb-2 font-lora">Formation + 12 months ongoing support</p>
+                <p className="text-[#1C1F3B]/70 text-xs mb-4 font-lora italic">
+                  Pricing will be discussed and set based on your specific needs
+                </p>
                 <ul className="space-y-2 mb-6 text-sm text-[#1C1F3B]/80 font-lora">
                   <li className="flex items-start">
                     <span className="text-[#7A4CA0] mr-2">✓</span>
@@ -263,8 +266,8 @@ export default function Toolkit() {
                     Priority response time
                   </li>
                 </ul>
-                <Link to="/services" className="inline-flex items-center justify-center bg-gradient-to-r from-[#7A4CA0] to-[#5A3875] text-white px-6 py-3 rounded-full text-sm font-semibold hover:shadow-lg transition-all duration-200 w-full font-montserrat">
-                  Explore Options
+                <Link to="/contact" className="inline-flex items-center justify-center bg-gradient-to-r from-[#7A4CA0] to-[#5A3875] text-white px-6 py-3 rounded-full text-sm font-semibold hover:shadow-lg transition-all duration-200 w-full font-montserrat">
+                  Contact for More Information
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </div>
@@ -567,14 +570,17 @@ export default function Toolkit() {
                 <div className="bg-[#7A4CA0]/10 rounded-lg p-6 border border-[#7A4CA0]/30">
                   <h4 className="font-semibold text-[#1C1F3B] mb-2 font-montserrat">Formation Services</h4>
                   <p className="text-[#1C1F3B]/80 text-sm mb-4 font-lora">White-glove formation support from strategy session to complete setup.</p>
-                  <div className="text-lg font-semibold text-[#7A4CA0] font-montserrat mb-4">
-                    Starting at $1,000
+                  <div className="text-lg font-semibold text-[#7A4CA0] font-montserrat mb-2">
+                    Contact for Pricing
                   </div>
+                  <p className="text-[#1C1F3B]/70 text-xs mb-4 font-lora italic">
+                    Pricing will be discussed and set based on your specific needs
+                  </p>
                   <Link
-                    to="/services"
+                    to="/contact"
                     className="inline-flex items-center justify-center bg-gradient-to-r from-[#7A4CA0] to-[#5A3875] text-white px-6 py-3 rounded-full text-sm font-semibold hover:shadow-lg transition-all duration-200 w-full font-montserrat"
                   >
-                    Explore Options
+                    Contact for More Information
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </div>

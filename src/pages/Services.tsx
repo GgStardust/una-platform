@@ -304,21 +304,24 @@ export default function Services() {
             </div>
 
             <div className="mb-6">
-              <div className="text-6xl font-bold text-[#C49A6C] mb-2 font-montserrat">$10,000</div>
+              <div className="text-4xl font-bold text-[#C49A6C] mb-2 font-montserrat">Contact for Pricing</div>
               <div className="text-xl text-white font-semibold font-lora">Complete Formation + Annual Partnership</div>
               <div className="text-base text-white/80 font-lora mt-2">Your dedicated UNA advisor for the first year</div>
+              <div className="text-sm text-white/70 font-lora mt-3 italic">
+                Pricing will be discussed and set based on your specific needs and requirements
+              </div>
             </div>
 
             <Link
-              to="/schedule?package=premium-partnership"
+              to="/contact"
               className="inline-flex items-center justify-center px-10 py-4 text-lg rounded-full font-bold text-white transition-all duration-200 bg-gradient-to-r from-[#7A4CA0] to-[#C49A6C] hover:from-[#6B3F8F] hover:to-[#B88A5A] hover:shadow-xl font-montserrat"
             >
-              Schedule Premium Partnership
+              Contact for More Information
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
 
             <p className="mt-4 text-sm text-white/70 font-lora">
-              Contact us to discuss custom support packages beyond the first year
+              Ongoing fractional support provided upon request. Contact us to discuss custom support packages beyond the first year.
             </p>
           </div>
         </div>

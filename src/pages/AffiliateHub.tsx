@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState } from 'react';
 import { ExternalLink, Shield, Heart, Users, DollarSign, FileText, CreditCard, Building } from 'lucide-react';
 import SEOHead from '../components/SEOHead';

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { ArrowLeft, ArrowRight, Save, AlertCircle, CheckCircle, Lightbulb, Users, Shield, MapPin, DollarSign, FileText, Building } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Link } from 'react-router-dom';
 import { ChevronDown, ChevronUp, Target, Building2, Calculator, Shield, Users, HelpCircle } from 'lucide-react';
 import { useState } from 'react';

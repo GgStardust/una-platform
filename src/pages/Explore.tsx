@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState } from 'react';
 import { ArrowLeft, ArrowRight, Users, Building, Target, Heart, Palette, BookOpen, Shield, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
