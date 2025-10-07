@@ -228,24 +228,24 @@ export default function Explore() {
           description="Get personalized recommendations for your UNA formation based on your readiness and priorities."
         />
         
-        <div className="min-h-screen bg-gradient-to-br from-navy-600 via-navy-500 to-navy-700">
-          <div className="container mx-auto px-4 py-12">
+        <div className="min-h-screen bg-gradient-to-br from-[#1E2A38] via-[#2F7E7E] to-[#1C1F3B]">
+          <div className="container mx-auto px-4 py-16">
             {/* Results Header */}
-            <div className="text-center mb-16">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white font-montserrat mb-6 tracking-tight">
-                Your UNA Formation Assessment
+            <div className="text-center mb-12">
+              <h1 className="text-4xl md:text-5xl font-bold text-white font-montserrat mb-4">
+                Your Formation Path
               </h1>
-              <p className="text-xl md:text-2xl text-white/90 font-lora max-w-4xl mx-auto leading-relaxed">
-                Personalized recommendations based on your readiness and priorities
+              <p className="text-lg md:text-xl text-white/90 font-lora max-w-3xl mx-auto">
+                Here's what we recommend based on your readiness and goals
               </p>
             </div>
 
             {/* Results Card */}
-            <div className="bg-gradient-to-br from-[#1E2A38] to-[#3DB5B0] rounded-xl p-8 shadow-2xl max-w-4xl mx-auto">
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 md:p-10 shadow-xl border border-white/20 max-w-4xl mx-auto">
               {/* Readiness Summary */}
-              <div className="mb-8">
-                <h2 className="text-2xl md:text-3xl font-black text-white font-montserrat mb-6 tracking-tight">
-                  Readiness Summary
+              <div className="mb-10">
+                <h2 className="text-2xl md:text-3xl font-bold text-white font-montserrat mb-6">
+                  Where You Are Now
                 </h2>
                 <div className="space-y-4">
                   <p className="text-white/90 font-lora leading-relaxed">
@@ -258,12 +258,12 @@ export default function Explore() {
               </div>
               
               {/* Readiness Checklist */}
-              <div className="mb-8">
-                <h2 className="text-2xl md:text-3xl font-black text-white font-montserrat mb-6 tracking-tight">
-                  Readiness Checklist
+              <div className="mb-10">
+                <h2 className="text-2xl md:text-3xl font-bold text-white font-montserrat mb-6">
+                  Your Formation Checklist
                 </h2>
                 <div className="grid md:grid-cols-2 gap-6">
-                  <div className="bg-white border border-gray-200 rounded-lg p-6">
+                  <div className="bg-white/95 backdrop-blur rounded-xl p-6 shadow-lg">
                     <h3 className="text-xl font-semibold text-navy-600 font-montserrat mb-4 flex items-center">
                       <span className="text-emerald-600 mr-2">✓</span>
                       Ready
@@ -280,10 +280,10 @@ export default function Explore() {
                     </ul>
             </div>
 
-                  <div className="bg-white border border-gray-200 rounded-lg p-6">
+                  <div className="bg-white/95 backdrop-blur rounded-xl p-6 shadow-lg">
                     <h3 className="text-xl font-semibold text-navy-600 font-montserrat mb-4 flex items-center">
                       <span className="text-amber-600 mr-2">○</span>
-                      Still to Prepare
+                      Next Steps
                     </h3>
                     <ul className="space-y-2">
                       {!answers.readiness.hasMembers && <li className="text-navy-600 font-lora flex items-center"><span className="text-amber-600 mr-2">○</span>2+ members</li>}
@@ -300,15 +300,15 @@ export default function Explore() {
               
               
               {/* Next Steps */}
-              <div className="mb-8">
-                <h2 className="text-2xl md:text-3xl font-black text-white font-montserrat mb-6 tracking-tight">
-                  Your Next Steps
+              <div className="mb-10">
+                <h2 className="text-2xl md:text-3xl font-bold text-white font-montserrat mb-6">
+                  Recommended Actions
                 </h2>
-                <div className="bg-white border border-gray-200 rounded-lg p-6 mb-6">
+                <div className="bg-white/95 backdrop-blur rounded-xl p-6 mb-8 shadow-lg">
                   <ol className="space-y-3">
                     {getActionList().map((action, index) => (
                       <li key={index} className="text-navy-600 font-lora flex items-start">
-                        <span className="text-secondary-teal-600 font-bold mr-3 mt-0.5">{index + 1}.</span>
+                        <span className="bg-[#C49A6C] text-white font-bold rounded-full w-6 h-6 flex items-center justify-center mr-3 mt-0.5 text-sm flex-shrink-0">{index + 1}</span>
                         <span>{action}</span>
                       </li>
                     ))}
@@ -375,37 +375,50 @@ export default function Explore() {
         description="Take our comprehensive assessment to get personalized recommendations for your UNA formation journey."
       />
       
-      <div className="min-h-screen bg-gradient-to-br from-navy-600 via-navy-500 to-navy-700">
-        <div className="container mx-auto px-4 py-12">
+      <div className="min-h-screen bg-gradient-to-br from-[#1E2A38] via-[#2F7E7E] to-[#1C1F3B]">
+        <div className="container mx-auto px-4 py-16">
         {/* Header */}
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white font-montserrat mb-6 tracking-tight">
-              UNA Formation Assessment
+          <div className="text-center mb-12">
+            <h1 className="text-4xl md:text-5xl font-bold text-white font-montserrat mb-4">
+              Explore Your UNA Path
             </h1>
-            <p className="text-xl md:text-2xl text-white/90 font-lora max-w-3xl mx-auto leading-relaxed">
-              Get personalized recommendations for your UNA formation journey
+            <p className="text-lg md:text-xl text-white/90 font-lora max-w-2xl mx-auto mb-2">
+              Free assessment to understand your readiness and get personalized guidance
+            </p>
+            <p className="text-sm text-white/70 font-lora italic">
+              Takes 3-5 minutes • No email required
             </p>
           </div>
           
           {/* Progress Bar */}
-          <div className="max-w-2xl mx-auto mb-8">
-            <div className="flex items-center justify-between mb-4">
-              {[1, 2, 3].map((step) => (
-                <div
-                  key={step}
-                  className={`w-8 h-8 rounded-full flex items-center justify-center font-montserrat font-semibold ${
-                    currentStep >= step
-                      ? 'bg-gradient-to-r from-[#3DB5B0] to-[#1E2A38] text-white'
-                      : 'bg-white/20 text-white/80'
-                  }`}
-                >
-                  {step}
+          <div className="max-w-3xl mx-auto mb-10">
+            <div className="flex items-center justify-between mb-3">
+              {[
+                { num: 1, label: 'Readiness' },
+                { num: 2, label: 'Type' },
+                { num: 3, label: 'Priorities' }
+              ].map((step) => (
+                <div key={step.num} className="flex flex-col items-center">
+                  <div
+                    className={`w-10 h-10 rounded-full flex items-center justify-center font-montserrat font-bold mb-1 transition-all ${
+                      currentStep >= step.num
+                        ? 'bg-[#C49A6C] text-white shadow-lg'
+                        : 'bg-white/20 text-white/60'
+                    }`}
+                  >
+                    {step.num}
+                  </div>
+                  <span className={`text-xs font-montserrat ${
+                    currentStep >= step.num ? 'text-[#C49A6C]' : 'text-white/60'
+                  }`}>
+                    {step.label}
+                  </span>
                 </div>
               ))}
             </div>
-            <div className="w-full bg-white/20 rounded-full h-2">
+            <div className="w-full bg-white/10 rounded-full h-1.5">
               <div
-                className="bg-gradient-to-r from-[#3DB5B0] to-[#1E2A38] h-2 rounded-full transition-all duration-300"
+                className="bg-[#C49A6C] h-1.5 rounded-full transition-all duration-500"
                 style={{ width: `${(currentStep / 3) * 100}%` }}
               />
             </div>
@@ -415,9 +428,9 @@ export default function Explore() {
           <div className="max-w-4xl mx-auto">
             {/* Step 1: Location & Readiness */}
             {currentStep === 1 && (
-              <div className="bg-gradient-to-br from-[#1E2A38] to-[#3DB5B0] rounded-xl p-8 shadow-2xl">
-                <h2 className="text-2xl md:text-3xl font-black text-white font-montserrat mb-8 tracking-tight">
-                  Step 1: Location & Readiness
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 md:p-10 shadow-xl border border-white/20">
+                <h2 className="text-2xl md:text-3xl font-bold text-white font-montserrat mb-8">
+                  Location & Readiness
                 </h2>
                 
                 {/* State Selection */}
