@@ -1,13 +1,40 @@
 import { z } from 'zod';
 
+// Simplified intake schema - focused on essentials for document preparation
 export const intakeFormSchema = z.object({
+  // Entity Basics (5 fields)
+  entityName: z.string().min(2, 'Entity name must be at least 2 characters'),
+  entityPurpose: z.string().min(20, 'Please describe your purpose in at least 20 characters'),
+  entityState: z.string().min(2, 'State is required'),
+  entityStartDate: z.string().min(1, 'Intended start date is required'),
+  numberOfMembers: z.string().min(1, 'Number of founding members is required'),
+
+  // Primary Contact (4 fields)
+  organizerName: z.string().min(2, 'Primary contact name is required'),
+  organizerEmail: z.string().email('Valid email is required'),
+  organizerPhone: z.string().min(10, 'Phone number must be at least 10 digits'),
+  organizerAddress: z.string().min(5, 'Primary address is required'),
+
+  // Formation Details (3 fields)
+  needsEIN: z.boolean(),
+  needsBanking: z.boolean(),
+  leadershipStructure: z.string().min(10, 'Please briefly describe your leadership structure'),
+
+  // Optional Information (3 fields)
+  additionalNotes: z.string().optional(),
+  specialRequirements: z.string().optional(),
+  taxExemptIntent: z.boolean().optional(),
+});
+
+// Legacy schema for backward compatibility (can be removed after migration)
+export const intakeFormSchemaLegacy = z.object({
   // Entity Information
   entityName: z.string().min(2, 'Entity name must be at least 2 characters'),
   entityPurpose: z.string().min(10, 'Entity purpose must be at least 10 characters'),
   entityActivities: z.string().min(10, 'Entity activities must be at least 10 characters'),
   entityStartDate: z.string().min(1, 'Start date is required'),
   entityState: z.string().min(2, 'State is required'),
-  
+
   // Organizer Information
   organizerName: z.string().min(2, 'Organizer name must be at least 2 characters'),
   organizerEmail: z.string().email('Valid email is required'),
@@ -17,42 +44,42 @@ export const intakeFormSchema = z.object({
   organizerCity: z.string().min(2, 'City is required'),
   organizerState: z.string().min(2, 'State is required'),
   organizerZip: z.string().min(5, 'ZIP code must be at least 5 characters'),
-  
+
   // Mailing Address
   mailingAddress: z.string().min(5, 'Mailing address must be at least 5 characters'),
   mailingCity: z.string().min(2, 'Mailing city is required'),
   mailingState: z.string().min(2, 'Mailing state is required'),
   mailingZip: z.string().min(5, 'Mailing ZIP code must be at least 5 characters'),
   mailingCountry: z.string().min(2, 'Country is required'),
-  
+
   // EIN & Tax Information
   needsEIN: z.boolean(),
   einPurpose: z.string().optional(),
   taxExemptIntent: z.boolean(),
   fiscalSponsorship: z.boolean(),
-  
+
   // Property & Financial Plans
   propertyPlans: z.string().optional(),
   grantPlans: z.string().optional(),
   fundraisingPlans: z.string().optional(),
-  
+
   // Governance & Leadership
   leadershipStructure: z.string().min(5, 'Leadership structure must be at least 5 characters'),
   familyLeadership: z.boolean(),
   successionPlanning: z.string().optional(),
   conflictOfInterest: z.boolean(),
-  
+
   // Insignia
   hasInsignia: z.boolean(),
   insigniaDescription: z.string().optional(),
   emblemStyle: z.string().optional(),
   emblemColors: z.string().optional(),
-  
+
   // Compliance & Legal
   interstateActivity: z.boolean(),
   statesOfOperation: z.string().optional(),
   complianceNotes: z.string().optional(),
-  
+
   // Signatures
   organizerSignature: z.string().min(1, 'Organizer signature is required'),
   organizerSignatureDate: z.string().min(1, 'Signature date is required'),
