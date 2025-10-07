@@ -116,6 +116,25 @@
     min-width: 44px;
   }
   
+  /* Enhanced touch feedback */
+  button:active, a:active, .btn-grad:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+  }
+  
+  /* Better scrolling on mobile */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Prevent text selection on buttons and interactive elements */
+  button, .btn-grad, a, .clickable {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
   /* Form elements mobile optimization */
   input[type="text"], 
   input[type="email"], 
@@ -224,11 +243,43 @@
     will-change: transform;
   }
   
+  /* GPU acceleration for smooth animations */
+  .btn-grad, .una-card, .glass-card {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+  
+  /* Optimize images for mobile */
+  img {
+    max-width: 100%;
+    height: auto;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
+  }
+  
+  /* Better focus states for mobile */
+  input:focus, textarea:focus, select:focus {
+    outline: 2px solid #C49A6C;
+    outline-offset: 2px;
+  }
+  
   /* Reduce motion for users who prefer it */
   @media (prefers-reduced-motion: reduce) {
     .btn-grad, .una-card, a, button {
       transition: none;
       transform: none !important;
+    }
+  }
+  
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    .una-card-light {
+      background: rgba(28, 31, 59, 0.95);
+      color: #F4F1E8;
     }
   }
 }

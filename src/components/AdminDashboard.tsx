@@ -15,8 +15,10 @@ import {
   FileText
 } from 'lucide-react';
 import { getAllBlogPosts } from '@/lib/mdx-loader';
+import { getAllBlogs, deleteBlog, type Blog } from '@/lib/supabase/blogs';
 import { emailTemplates } from '@/lib/emailTemplates';
 import EmailModal from './EmailModal';
+import BlogEditor from './BlogEditor';
 
 import { analyticsService } from '@/lib/analytics';
 import { VerificationManager } from '@/lib/verification';
@@ -207,7 +209,10 @@ export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState<'overview' | 'users' | 'verification' | 'affiliates' | 'payments' | 'analytics' | 'emails' | 'settings' | 'environment' | 'explore-formation' | 'blog' | 'leads'>('overview');
   
   // Blog posts state
-  const [blogPosts, setBlogPosts] = useState<any[]>([]);
+  const [blogPosts, setBlogPosts] = useState<Blog[]>([]);
+  const [showBlogEditor, setShowBlogEditor] = useState(false);
+  const [editingBlog, setEditingBlog] = useState<Blog | undefined>(undefined);
+  const [blogsLoading, setBlogsLoading] = useState(false);
   
   // Leads state
   const [leads, setLeads] = useState<any[]>([]);
@@ -221,13 +226,47 @@ export default function AdminDashboard() {
     loadBlogPosts();
   }, []);
 
-  const loadBlogPosts = () => {
+  const loadBlogPosts = async () => {
+    setBlogsLoading(true);
     try {
-      const posts = getAllBlogPosts();
-      setBlogPosts(posts);
+      const { data, error } = await getAllBlogs();
+      if (error) {
+        console.error('Error loading blogs:', error);
+      } else {
+        setBlogPosts(data || []);
+      }
     } catch (error) {
       console.error('Error loading blog posts:', error);
+    } finally {
+      setBlogsLoading(false);
     }
+  };
+
+  const handleCreateBlog = () => {
+    setEditingBlog(undefined);
+    setShowBlogEditor(true);
+  };
+
+  const handleEditBlog = (blog: Blog) => {
+    setEditingBlog(blog);
+    setShowBlogEditor(true);
+  };
+
+  const handleDeleteBlog = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this blog post?')) {
+      return;
+    }
+
+    const { success, error } = await deleteBlog(id);
+    if (success) {
+      loadBlogPosts();
+    } else {
+      alert(`Failed to delete blog: ${error}`);
+    }
+  };
+
+  const handleBlogSaved = () => {
+    loadBlogPosts();
   };
 
   const loadAdminData = async () => {
