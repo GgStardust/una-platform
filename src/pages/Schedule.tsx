@@ -28,7 +28,7 @@ export default function Schedule() {
       case 'premium-partnership':
         return {
           name: 'Premium Partnership',
-          price: '$10,000',
+          price: 'Contact for Pricing',
           duration: '12 months ongoing',
           format: 'Zoom or In-person'
         };

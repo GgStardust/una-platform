@@ -12,8 +12,7 @@ const FAQ = lazy(() => import('./pages/FAQ'));
 const About = lazy(() => import('./pages/About'));
 const Explore = lazy(() => import('./pages/Explore'));
 const Success = lazy(() => import('./pages/Success'));
-const IntakeSimplified = lazy(() => import('./pages/IntakeSimplified'));
-const IntakeWithSupabase = lazy(() => import('./pages/IntakeWithSupabase'));
+const Intake = lazy(() => import('./pages/Intake'));
 const Confirmation = lazy(() => import('./pages/Confirmation'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const SignIn = lazy(() => import('./pages/SignIn'));
@@ -336,14 +335,7 @@ function App() {
           <Route path="/explore" element={<Explore />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/success-stories" element={<Success />} />
-          <Route path="/intake" element={
-            <FormationGuard feature="formation">
-              <IntakeSimplified setIntakeData={setIntakeData} />
-            </FormationGuard>
-          } />
-          <Route path="/intake-form" element={
-            <IntakeWithSupabase setIntakeData={setIntakeData} />
-          } />
+          <Route path="/intake" element={<Intake setIntakeData={setIntakeData} />} />
           <Route path="/confirmation" element={<Confirmation />} />
           <Route path="/dashboard" element={
             <FormationGuard feature="formation">

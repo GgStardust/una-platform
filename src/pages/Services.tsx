@@ -176,10 +176,10 @@ export default function Services() {
               </div>
             </div>
             <Link
-              to="/schedule?package=strategy-session"
+              to="/intake?package=strategy-session"
               className="w-full inline-flex items-center justify-center py-3 px-6 rounded-full font-semibold text-white transition-all duration-200 bg-gradient-to-r from-[#C49A6C] to-[#A67C4A] hover:from-[#B88A5A] hover:to-[#956B3F] hover:shadow-lg font-montserrat"
             >
-              Schedule Strategy Session
+              Start Strategy Session
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </div>
@@ -236,16 +236,16 @@ export default function Services() {
               </div>
             </div>
             <Link
-              to="/schedule?package=complete-formation"
+              to="/intake?package=complete-formation"
               className="w-full inline-flex items-center justify-center py-3 px-6 rounded-full font-semibold text-white transition-all duration-200 bg-gradient-to-r from-[#2F7E7E] to-[#7A4CA0] hover:from-[#1F6B6B] hover:to-[#6B3F8F] hover:shadow-lg font-montserrat"
             >
-              Schedule Complete Formation
+              Start Complete Formation
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </div>
         </div>
 
-        {/* Premium Tier - $10,000 with Ongoing Support */}
+        {/* Premium Tier - Contact for Pricing */}
         <div className="mt-12 bg-white/10 backdrop-blur-sm border-2 border-[#7A4CA0] rounded-2xl p-8">
           <div className="text-center">
             <div className="inline-block bg-gradient-to-r from-[#7A4CA0] to-[#C49A6C] text-white px-6 py-2 rounded-full font-bold text-sm mb-4">
@@ -399,10 +399,10 @@ export default function Services() {
 
           <div className="mt-8 text-center">
             <Link
-              to="/schedule?package=strategy-session"
+              to="/intake?package=strategy-session"
               className="inline-flex items-center justify-center px-8 py-3 rounded-full font-semibold text-white transition-all duration-200 bg-gradient-to-r from-[#C49A6C] to-[#2F7E7E] hover:from-[#B88A5A] hover:to-[#246666] hover:shadow-lg font-montserrat"
             >
-              Schedule Your Strategy Session
+              Start Your Strategy Session
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </div>
