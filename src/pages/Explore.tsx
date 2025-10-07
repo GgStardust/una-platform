@@ -584,9 +584,9 @@ export default function Explore() {
 
             {/* Step 2: Collective Type */}
             {currentStep === 2 && (
-              <div className="bg-gradient-to-br from-[#1E2A38] to-[#3DB5B0] rounded-xl p-8 shadow-2xl">
-                <h2 className="text-2xl md:text-3xl font-black text-white font-montserrat mb-8 tracking-tight">
-                  Step 2: Collective Type
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 md:p-10 shadow-xl border border-white/20">
+                <h2 className="text-2xl md:text-3xl font-bold text-white font-montserrat mb-8">
+                  Your Organization Type
                 </h2>
                 
                 <div className="mb-6">
@@ -601,17 +601,17 @@ export default function Explore() {
                         <button
                           key={type.id}
                           onClick={() => handleCollectiveTypeToggle(type.id)}
-                          className={`p-6 rounded-xl border-2 transition-all duration-200 font-montserrat text-left shadow-lg ${
+                          className={`p-6 rounded-xl border-2 transition-all duration-300 font-montserrat text-left ${
                             answers.collectiveTypes.includes(type.id)
-                              ? 'border-[#3DB5B0] bg-gradient-to-r from-[#1E2A38] to-[#3DB5B0] shadow-xl transform scale-105'
-                              : 'border-[#1E2A38] bg-gradient-to-r from-[#1E2A38] to-[#3DB5B0] hover:from-[#2A2F4A] hover:to-[#4AC5C0] hover:shadow-xl hover:transform hover:scale-105 active:from-[#0F1220] active:to-[#2A9B96]'
+                              ? 'border-[#C49A6C] bg-white/20 shadow-lg'
+                              : 'border-white/30 bg-white/5 hover:bg-white/10 hover:border-white/50'
                           }`}
                         >
                           <div className="flex items-start space-x-3">
                             <Icon className="h-6 w-6 text-white mt-1 flex-shrink-0" />
                             <div className="flex-1">
-                              <div className="text-white font-black text-xl mb-2">{type.label}</div>
-                              <div className="text-white/80 text-base font-lora leading-relaxed">{type.description}</div>
+                              <div className="text-white font-bold text-lg mb-2">{type.label}</div>
+                              <div className="text-white/90 text-sm font-lora leading-relaxed">{type.description}</div>
                             </div>
         </div>
                         </button>
@@ -625,9 +625,9 @@ export default function Explore() {
 
             {/* Step 3: Formation Priorities */}
             {currentStep === 3 && (
-              <div className="bg-gradient-to-br from-[#1E2A38] to-[#3DB5B0] rounded-xl p-8 shadow-2xl">
-                <h2 className="text-2xl md:text-3xl font-black text-white font-montserrat mb-8 tracking-tight">
-                  Step 3: Why You're Forming a UNA
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 md:p-10 shadow-xl border border-white/20">
+                <h2 className="text-2xl md:text-3xl font-bold text-white font-montserrat mb-8">
+                  Your Formation Goals
                 </h2>
                 
                 <div className="mb-6">
@@ -638,26 +638,26 @@ export default function Explore() {
                   <div className="space-y-6">
                     {Object.entries(PRIORITY_CATEGORIES).map(([category, priorities]) => (
                       <div key={category}>
-                        <h3 className="text-xl font-black text-white font-montserrat mb-4 tracking-tight">
+                        <h3 className="text-lg font-semibold text-white font-montserrat mb-3">
                           {category}
                         </h3>
                         <div className="space-y-2">
                           {priorities.map((priority) => (
                             <label
                               key={priority}
-                              className={`flex items-center space-x-3 p-3 rounded-lg cursor-pointer transition-all duration-200 ${
+                              className={`flex items-center space-x-3 p-4 rounded-lg cursor-pointer transition-all duration-300 border-2 ${
                                 answers.priorities.includes(priority)
-                                  ? 'bg-gradient-to-r from-[#3DB5B0]/20 to-[#1E2A38]/20 border border-[#3DB5B0]'
-                                  : 'hover:bg-white/10'
+                                  ? 'bg-white/20 border-[#C49A6C] shadow-lg'
+                                  : 'bg-white/5 border-white/20 hover:bg-white/10 hover:border-white/40'
                               }`}
                             >
                               <input
                                 type="checkbox"
                                 checked={answers.priorities.includes(priority)}
                                 onChange={() => handlePriorityToggle(priority)}
-                                className="h-5 w-5 text-[#3DB5B0] focus:ring-[#3DB5B0] border-gray-300 rounded min-h-[44px] min-w-[44px]"
+                                className="h-5 w-5 text-[#C49A6C] focus:ring-[#C49A6C] border-gray-300 rounded"
                               />
-                              <span className="text-white font-lora font-bold text-base">{priority}</span>
+                              <span className="text-white font-lora text-base">{priority}</span>
                             </label>
             ))}
           </div>
