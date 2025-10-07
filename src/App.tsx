@@ -26,6 +26,7 @@ const AffiliateHub = lazy(() => import('./pages/AffiliateHub'));
 const UnaFormationGuide = lazy(() => import('./pages/UnaFormationGuide'));
 const UnaFormationGuideLanding = lazy(() => import('./pages/UnaFormationGuideLanding'));
 const NotFound = lazy(() => import('./pages/NotFound'));
+const AdminTest = lazy(() => import('./pages/AdminTest'));
 
 // Lazy load components
 const AdminDashboard = lazy(() => import('./components/AdminDashboard'));
@@ -326,6 +327,8 @@ function App() {
               <AdminDashboard />
             </AdminAuth>
           } />
+          <Route path="/admin-test" element={<AdminTest />} />
+          <Route path="/admin-direct" element={<AdminDashboard />} />
           <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
