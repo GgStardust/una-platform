@@ -20,6 +20,14 @@ export default function AdminAuth({ children }: AdminAuthProps) {
       return;
     }
 
+    // If no admin emails are configured, allow access (for development)
+    if (FLAGS.ADMIN_ALLOWED_EMAILS.length === 0) {
+      console.warn('No admin emails configured - allowing access for development');
+      setIsAuthenticated(true);
+      setIsLoading(false);
+      return;
+    }
+
     // Check for existing session
     const session = localStorage.getItem('admin_session');
     if (session) {
@@ -97,6 +105,14 @@ export default function AdminAuth({ children }: AdminAuthProps) {
         <div className="text-center mb-8">
           <h1 className="text-2xl font-bold text-navy-900 mb-2">Admin Access Required</h1>
           <p className="text-navy-600">Please enter your authorized email and password to continue</p>
+          {FLAGS.ADMIN_ALLOWED_EMAILS.length === 0 && (
+            <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-md">
+              <p className="text-sm text-yellow-700">
+                <strong>Configuration Issue:</strong> No admin emails configured. 
+                Set VITE_ADMIN_ALLOWED_EMAILS in your environment variables.
+              </p>
+            </div>
+          )}
         </div>
 
         <form onSubmit={handleLogin} className="space-y-6">
