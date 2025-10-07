@@ -129,92 +129,71 @@ function App() {
                 Home
               </NavLink>
               
-              <NavLink 
-                to="/explore" 
-                className="px-3 py-2 rounded-md text-sm font-medium text-[#F4F1E8] hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors"
+              <NavLink
+                to="/explore"
+                className={({ isActive }) =>
+                  `px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                    isActive
+                      ? 'text-[#C49A6C] bg-[#C49A6C]/20'
+                      : 'text-[#F4F1E8] hover:text-[#C49A6C]'
+                  }`
+                }
               >
-                Start
+                Explore
               </NavLink>
-              
-              {/* Services Dropdown */}
-              <div className="relative group">
-                <button className="px-3 py-2 rounded-md text-sm font-medium text-[#F4F1E8] hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors">
-                  Services
-                  <svg className="ml-1 h-4 w-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-md shadow-lg border border-navy-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                  <NavLink 
-                    to="/toolkit" 
-                    className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50 rounded-t-md"
-                  >
-                    UNA Formation Toolkit
-                  </NavLink>
-                  <NavLink 
-                    to="/services" 
-                    className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50 rounded-b-md"
-                  >
-                    Consulting Services
-                  </NavLink>
-                </div>
-              </div>
-              
-              {/* Learn Dropdown */}
-              <div className="relative group">
-                <button className="px-3 py-2 rounded-md text-sm font-medium text-[#F4F1E8] hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors">
-                  Learn
-                  <svg className="ml-1 h-4 w-4 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-md shadow-lg border border-navy-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                  <NavLink 
-                    to="/blog" 
-                    className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50 rounded-t-md"
-                  >
-                    Blog
-                  </NavLink>
-                  <NavLink 
-                    to="/faq" 
-                    className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50"
-                  >
-                    FAQ
-                  </NavLink>
-                  <NavLink
-                    to="/success-stories"
-                    className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50"
-                  >
-                    Success Stories
-                  </NavLink>
-                  <NavLink 
-                    to="/about" 
-                    className="block px-4 py-2 text-sm text-navy-700 hover:bg-navy-50 rounded-b-md"
-                  >
-                    About
-                  </NavLink>
-                </div>
-              </div>
-              
-              <NavLink 
-                to="/admin" 
-                className="px-3 py-2 rounded-md text-sm font-medium text-[#F4F1E8] hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors"
+
+              <NavLink
+                to="/services"
+                className={({ isActive }) =>
+                  `px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                    isActive
+                      ? 'text-[#C49A6C] bg-[#C49A6C]/20'
+                      : 'text-[#F4F1E8] hover:text-[#C49A6C]'
+                  }`
+                }
               >
-                Admin
+                Services
               </NavLink>
-              
-              {/* Desktop Help Button */}
-              <button
-                onClick={() => {
-                  window.open(
-                    'mailto:gigi@gigistardust.com?subject=UNA Formation Help&body=Hi Gigi,%0D%0A%0D%0AI need help with UNA formation.%0D%0A%0D%0APlease let me know when you might be available for a conversation.%0D%0A%0D%0AThank you!',
-                    '_blank'
-                  );
-                }}
-                className="px-4 py-2 bg-gradient-to-r from-[#C49A6C] to-[#A67C4A] text-white text-sm font-medium rounded-md hover:from-[#A67C4A] hover:to-[#8B6B3A] transition-all duration-200 ml-4 shadow-md hover:shadow-lg transform hover:scale-105"
+
+              <NavLink
+                to="/blog"
+                className={({ isActive }) =>
+                  `px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                    isActive
+                      ? 'text-[#C49A6C] bg-[#C49A6C]/20'
+                      : 'text-[#F4F1E8] hover:text-[#C49A6C]'
+                  }`
+                }
               >
-                Get Help
-              </button>
+                Blog
+              </NavLink>
+
+              <NavLink
+                to="/faq"
+                className={({ isActive }) =>
+                  `px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                    isActive
+                      ? 'text-[#C49A6C] bg-[#C49A6C]/20'
+                      : 'text-[#F4F1E8] hover:text-[#C49A6C]'
+                  }`
+                }
+              >
+                FAQ
+              </NavLink>
+
+              <NavLink
+                to="/contact"
+                className={({ isActive }) =>
+                  `px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                    isActive
+                      ? 'text-[#C49A6C] bg-[#C49A6C]/20'
+                      : 'text-[#F4F1E8] hover:text-[#C49A6C]'
+                  }`
+                }
+              >
+                Contact
+              </NavLink>
+
             </div>
 
             {/* Mobile menu button */}
@@ -251,83 +230,75 @@ function App() {
                   Home
                 </NavLink>
                 
-                <NavLink 
-                  to="/explore" 
-                  className="block px-3 py-3 rounded-md text-base font-medium text-navy-700 hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors"
+                <NavLink
+                  to="/explore"
+                  className={({ isActive }) =>
+                    `block px-3 py-3 rounded-md text-base font-medium transition-colors ${
+                      isActive
+                        ? 'text-[#C49A6C] bg-[#C49A6C]/20'
+                        : 'text-navy-700 hover:text-[#C49A6C]'
+                    }`
+                  }
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  Start
+                  Explore
                 </NavLink>
-                
-                <NavLink 
-                  to="/toolkit" 
-                  className="block px-3 py-3 rounded-md text-base font-medium text-navy-700 hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors"
+
+                <NavLink
+                  to="/services"
+                  className={({ isActive }) =>
+                    `block px-3 py-3 rounded-md text-base font-medium transition-colors ${
+                      isActive
+                        ? 'text-[#C49A6C] bg-[#C49A6C]/20'
+                        : 'text-navy-700 hover:text-[#C49A6C]'
+                    }`
+                  }
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  UNA Formation Toolkit
+                  Services
                 </NavLink>
-                
-                <NavLink 
-                  to="/services" 
-                  className="block px-3 py-3 rounded-md text-base font-medium text-navy-700 hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Consulting Services
-                </NavLink>
-                
-                <NavLink 
-                  to="/blog" 
-                  className="block px-3 py-3 rounded-md text-base font-medium text-navy-700 hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors"
+
+                <NavLink
+                  to="/blog"
+                  className={({ isActive }) =>
+                    `block px-3 py-3 rounded-md text-base font-medium transition-colors ${
+                      isActive
+                        ? 'text-[#C49A6C] bg-[#C49A6C]/20'
+                        : 'text-navy-700 hover:text-[#C49A6C]'
+                    }`
+                  }
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Blog
                 </NavLink>
-                
-                <NavLink 
-                  to="/faq" 
-                  className="block px-3 py-3 rounded-md text-base font-medium text-navy-700 hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors"
+
+                <NavLink
+                  to="/faq"
+                  className={({ isActive }) =>
+                    `block px-3 py-3 rounded-md text-base font-medium transition-colors ${
+                      isActive
+                        ? 'text-[#C49A6C] bg-[#C49A6C]/20'
+                        : 'text-navy-700 hover:text-[#C49A6C]'
+                    }`
+                  }
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   FAQ
                 </NavLink>
-                
+
                 <NavLink
-                  to="/success-stories"
-                  className="block px-3 py-3 rounded-md text-base font-medium text-navy-700 hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors"
+                  to="/contact"
+                  className={({ isActive }) =>
+                    `block px-3 py-3 rounded-md text-base font-medium transition-colors ${
+                      isActive
+                        ? 'text-[#C49A6C] bg-[#C49A6C]/20'
+                        : 'text-navy-700 hover:text-[#C49A6C]'
+                    }`
+                  }
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  Success Stories
+                  Contact
                 </NavLink>
-                
-                <NavLink 
-                  to="/about" 
-                  className="block px-3 py-3 rounded-md text-base font-medium text-navy-700 hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  About
-                </NavLink>
-                
-                <NavLink 
-                  to="/admin" 
-                  className="block px-3 py-3 rounded-md text-base font-medium text-navy-700 hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10 transition-colors"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Admin
-                </NavLink>
-                
-                {/* Mobile Help Button */}
-                <button
-                  onClick={() => {
-                    window.open(
-                      'mailto:gigi@gigistardust.com?subject=UNA Formation Help&body=Hi Gigi,%0D%0A%0D%0AI need help with UNA formation.%0D%0A%0D%0APlease let me know when you might be available for a conversation.%0D%0A%0D%0AThank you!',
-                      '_blank'
-                    );
-                    setIsMobileMenuOpen(false);
-                  }}
-                  className="w-full mt-4 px-4 py-3 bg-gradient-to-r from-[#C49A6C] to-[#A67C4A] text-white text-base font-medium rounded-md hover:from-[#A67C4A] hover:to-[#8B6B3A] transition-all duration-200 shadow-md"
-                >
-                  Get Help
-                </button>
               </div>
             </div>
           )}
