@@ -11,20 +11,39 @@ const VITE_PORT = 5173;
 app.use(express.json());
 app.use(express.static('dist'));
 
-// Import API routes
-const createCheckoutSession = require('./api/create-checkout-session.js');
-const webhook = require('./api/webhook.js');
+// Import API routes (only if Stripe is configured)
+let createCheckoutSession, webhook;
+try {
+  if (process.env.STRIPE_SECRET_KEY && process.env.STRIPE_SECRET_KEY !== 'sk_test_placeholder_key_for_development') {
+    createCheckoutSession = require('./api/create-checkout-session.js');
+    webhook = require('./api/webhook.js');
+  }
+} catch (error) {
+  console.log('Stripe API routes not loaded - missing or invalid Stripe configuration');
+}
 
-// API Routes
-app.post('/api/create-checkout-session', (req, res) => {
-  const handler = createCheckoutSession.default || createCheckoutSession;
-  return handler(req, res);
-});
+// API Routes (only if Stripe is configured)
+if (createCheckoutSession) {
+  app.post('/api/create-checkout-session', (req, res) => {
+    const handler = createCheckoutSession.default || createCheckoutSession;
+    return handler(req, res);
+  });
+} else {
+  app.post('/api/create-checkout-session', (req, res) => {
+    res.status(503).json({ error: 'Payment processing not configured' });
+  });
+}
 
-app.post('/api/webhook', (req, res) => {
-  const handler = webhook.default || webhook;
-  return handler(req, res);
-});
+if (webhook) {
+  app.post('/api/webhook', (req, res) => {
+    const handler = webhook.default || webhook;
+    return handler(req, res);
+  });
+} else {
+  app.post('/api/webhook', (req, res) => {
+    res.status(503).json({ error: 'Webhook processing not configured' });
+  });
+}
 
 // Proxy all other requests to Vite dev server
 app.use('/', createProxyMiddleware({
