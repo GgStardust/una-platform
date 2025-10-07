@@ -1,4 +1,3 @@
-import React from 'react';
 import { FLAGS } from '@/lib/flags';
 
 export default function AdminTest() {

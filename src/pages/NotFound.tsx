@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Home, Mail, ArrowLeft } from 'lucide-react';
+import { Home, Mail } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
 
 export default function NotFound() {
