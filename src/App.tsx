@@ -29,7 +29,6 @@ const UnaFormationGuideLanding = lazy(() => import('./pages/UnaFormationGuideLan
 // Lazy load components
 const AdminDashboard = lazy(() => import('./components/AdminDashboard'));
 const AdminAuth = lazy(() => import('./components/AdminAuth'));
-const FormationGuard = lazy(() => import('./components/FormationGuard'));
 
 function App() {
   const [intakeData, setIntakeData] = useState<IntakeData | null>(null);
@@ -180,7 +179,7 @@ function App() {
 
               {/* Primary CTA Button */}
               <Link
-                to="/toolkit"
+                to="/explore"
                 className="ml-4 bg-gradient-to-r from-[#C49A6C] to-[#B8955A] text-white px-6 py-2 rounded-lg font-semibold text-sm hover:shadow-lg hover:scale-105 transition-all duration-200 font-montserrat"
               >
                 Start Your UNA
@@ -278,26 +277,11 @@ function App() {
                   About
                 </NavLink>
 
-                {intakeData && (
-                  <NavLink
-                    to="/dashboard"
-                    className={({ isActive }) =>
-                      `block px-3 py-3 rounded-md text-base font-medium transition-colors ${
-                        isActive
-                          ? 'text-[#C49A6C] bg-[#C49A6C]/20'
-                          : 'text-navy-700 hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10'
-                      }`
-                    }
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Dashboard
-                  </NavLink>
-                )}
 
                 {/* Mobile CTA Button */}
                 <div className="pt-2 border-t border-[#C49A6C]/20">
                   <Link
-                    to="/toolkit"
+                    to="/explore"
                     className="block w-full bg-gradient-to-r from-[#C49A6C] to-[#B8955A] text-white px-4 py-3 rounded-lg font-semibold text-center hover:shadow-lg transition-all duration-200 font-montserrat"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
