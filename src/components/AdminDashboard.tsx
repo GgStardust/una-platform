@@ -3269,101 +3269,112 @@ Facebook,Complete UNA Formation Guide,Master UNA formation from concept to compl
         {activeTab === 'blog' && (
           <div className="space-y-6">
             <div className="bg-white rounded-lg shadow-sm border border-navy-100">
-              <div className="p-6 border-b border-navy-100">
-                <h3 className="text-lg font-medium text-navy-900">Blog Management</h3>
-                <p className="text-sm text-navy-600 mt-1">Manage MDX blog posts and content</p>
+              <div className="p-6 border-b border-navy-100 flex items-center justify-between">
+                <div>
+                  <h3 className="text-lg font-medium text-navy-900">Blog Management</h3>
+                  <p className="text-sm text-navy-600 mt-1">Create, edit, and manage blog posts with SEO optimization</p>
+                </div>
+                <button
+                  onClick={handleCreateBlog}
+                  className="px-4 py-2 bg-[#C49A6C] text-white rounded-lg hover:bg-[#B88A5A] transition-colors flex items-center gap-2"
+                >
+                  <FileText className="h-4 w-4" />
+                  New Blog Post
+                </button>
               </div>
               <div className="p-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  {/* Import MDX */}
-                  <div className="border border-navy-200 rounded-lg p-4">
-                    <h4 className="font-medium text-navy-900 mb-3">Import MDX Post</h4>
-                    <div className="space-y-3">
-                      <input
-                        type="file"
-                        accept=".mdx,.md"
-                        onChange={(e) => {
-                          const file = e.target.files?.[0];
-                          if (file) {
-                            const reader = new FileReader();
-                            reader.onload = (event) => {
-                              const content = event.target?.result as string;
-                              // Here you would process the MDX content
-                              console.log('MDX content:', content);
-                              alert('MDX import functionality would be implemented here');
-                            };
-                            reader.readAsText(file);
-                          }
-                        }}
-                        className="w-full p-2 border border-navy-300 rounded-lg"
-                      />
-                      <button className="w-full px-4 py-2 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors">
-                        Import Post
-                      </button>
-                    </div>
+                {blogsLoading ? (
+                  <div className="text-center py-8 text-navy-500">
+                    Loading blogs...
                   </div>
-
-                  {/* Export MDX */}
-                  <div className="border border-navy-200 rounded-lg p-4">
-                    <h4 className="font-medium text-navy-900 mb-3">Export Blog Posts</h4>
-                    <div className="space-y-3">
-                      <select className="w-full p-2 border border-navy-300 rounded-lg">
-                        <option value="">Select post to export</option>
-                        {blogPosts.map((post) => (
-                          <option key={post.slug} value={post.slug}>
-                            {post.frontmatter.title}
-                          </option>
-                        ))}
-                      </select>
-                      <button 
-                        onClick={() => alert('MDX export functionality would be implemented here')}
-                        className="w-full px-4 py-2 bg-gold-600 text-white rounded-lg hover:bg-gold-700 transition-colors"
-                      >
-                        Export as MDX
-                      </button>
-                    </div>
+                ) : blogPosts.length === 0 ? (
+                  <div className="text-center py-12 text-navy-500">
+                    <FileText className="h-12 w-12 mx-auto mb-3 text-navy-300" />
+                    <p className="text-lg font-medium mb-2">No blog posts yet</p>
+                    <p className="text-sm mb-4">Create your first blog post to get started</p>
+                    <button
+                      onClick={handleCreateBlog}
+                      className="px-6 py-2 bg-[#C49A6C] text-white rounded-lg hover:bg-[#B88A5A] transition-colors"
+                    >
+                      Create First Post
+                    </button>
                   </div>
-                </div>
-
-                {/* Blog Posts List */}
-                <div className="mt-6">
-                  <h4 className="font-medium text-navy-900 mb-3">Current Blog Posts ({blogPosts.length})</h4>
+                ) : (
                   <div className="space-y-3">
                     {blogPosts.map((post) => (
-                      <div key={post.slug} className="flex items-center justify-between p-3 border border-navy-200 rounded-lg">
-                        <div>
-                          <h5 className="font-medium text-navy-900">{post.frontmatter.title}</h5>
-                          <p className="text-sm text-navy-600">{post.frontmatter.description}</p>
-                          <p className="text-xs text-navy-500 mt-1">
-                            Published: {post.frontmatter.date} | Tags: {post.frontmatter.tags?.join(', ') || 'None'}
-                          </p>
+                      <div key={post.id} className="flex items-start justify-between p-4 border border-navy-200 rounded-lg hover:border-[#C49A6C] transition-colors">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-3 mb-2">
+                            <h5 className="font-medium text-navy-900 text-lg">{post.title}</h5>
+                            {post.published ? (
+                              <span className="px-2 py-1 text-xs font-medium bg-green-100 text-green-700 rounded-full">
+                                Published
+                              </span>
+                            ) : (
+                              <span className="px-2 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded-full">
+                                Draft
+                              </span>
+                            )}
+                          </div>
+                          {post.excerpt && (
+                            <p className="text-sm text-navy-600 mb-2">{post.excerpt}</p>
+                          )}
+                          <div className="flex items-center gap-4 text-xs text-navy-500">
+                            <span>Slug: /{post.slug}</span>
+                            {post.author && <span>By: {post.author}</span>}
+                            {post.created_at && (
+                              <span>Created: {new Date(post.created_at).toLocaleDateString()}</span>
+                            )}
+                          </div>
+                          {post.tags && post.tags.length > 0 && (
+                            <div className="flex flex-wrap gap-2 mt-2">
+                              {post.tags.map((tag) => (
+                                <span
+                                  key={tag}
+                                  className="px-2 py-1 text-xs bg-[#C49A6C]/10 text-[#C49A6C] rounded-full"
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                          )}
                         </div>
-                        <div className="flex space-x-2">
-                          <button 
-                            onClick={() => alert(`Edit functionality for ${post.slug} would be implemented here`)}
-                            className="px-3 py-1 text-sm bg-navy-600 text-white rounded hover:bg-navy-700"
+                        <div className="flex space-x-2 ml-4">
+                          <button
+                            onClick={() => window.open(`/blog/${post.slug}`, '_blank')}
+                            className="px-3 py-1.5 text-sm border border-navy-300 text-navy-700 rounded hover:bg-navy-50 transition-colors"
+                          >
+                            View
+                          </button>
+                          <button
+                            onClick={() => handleEditBlog(post)}
+                            className="px-3 py-1.5 text-sm bg-[#C49A6C] text-white rounded hover:bg-[#B88A5A] transition-colors"
                           >
                             Edit
                           </button>
-                          <button 
-                            onClick={() => alert(`Export functionality for ${post.slug} would be implemented here`)}
-                            className="px-3 py-1 text-sm bg-gold-600 text-white rounded hover:bg-gold-700"
+                          <button
+                            onClick={() => post.id && handleDeleteBlog(post.id)}
+                            className="px-3 py-1.5 text-sm bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
                           >
-                            Export
+                            Delete
                           </button>
                         </div>
                       </div>
                     ))}
-                    {blogPosts.length === 0 && (
-                      <div className="text-center py-8 text-navy-500">
-                        No blog posts found. Check your MDX loader configuration.
-                      </div>
-                    )}
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>
+        )}
+
+        {/* Blog Editor Modal */}
+        {showBlogEditor && (
+          <BlogEditor
+            blog={editingBlog}
+            onClose={() => setShowBlogEditor(false)}
+            onSave={handleBlogSaved}
+          />
         )}
       </div>
 
