@@ -14,7 +14,6 @@ const Explore = lazy(() => import('./pages/Explore'));
 const Success = lazy(() => import('./pages/Success'));
 const Intake = lazy(() => import('./pages/Intake'));
 const Confirmation = lazy(() => import('./pages/Confirmation'));
-const Dashboard = lazy(() => import('./pages/Dashboard'));
 const SignIn = lazy(() => import('./pages/SignIn'));
 const SignUp = lazy(() => import('./pages/SignUp'));
 const BlogIndex = lazy(() => import('./pages/BlogIndex'));
@@ -178,20 +177,6 @@ function App() {
                 About
               </NavLink>
 
-              {intakeData && (
-                <NavLink
-                  to="/dashboard"
-                  className={({ isActive }) =>
-                    `px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                      isActive
-                        ? 'text-[#C49A6C] bg-[#C49A6C]/20'
-                        : 'text-[#F4F1E8] hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10'
-                    }`
-                  }
-                >
-                  Dashboard
-                </NavLink>
-              )}
 
               {/* Primary CTA Button */}
               <Link
@@ -337,11 +322,6 @@ function App() {
           <Route path="/success-stories" element={<Success />} />
           <Route path="/intake" element={<Intake setIntakeData={setIntakeData} />} />
           <Route path="/confirmation" element={<Confirmation />} />
-          <Route path="/dashboard" element={
-            <FormationGuard feature="formation">
-              <Dashboard intakeData={intakeData} />
-            </FormationGuard>
-          } />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/blog" element={<BlogIndex />} />

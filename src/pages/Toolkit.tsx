@@ -195,7 +195,7 @@ export default function Toolkit() {
                   </li>
                 </ul>
                 <Link to="/services" className="inline-flex items-center justify-center bg-gradient-to-r from-[#C49A6C] to-[#B8955A] text-white px-6 py-3 rounded-full text-sm font-semibold hover:shadow-lg transition-all duration-200 w-full font-montserrat">
-                  Explore Options
+                  Schedule Strategy Session
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </div>
@@ -231,7 +231,7 @@ export default function Toolkit() {
                   </li>
                 </ul>
                 <Link to="/services" className="inline-flex items-center justify-center bg-gradient-to-r from-[#2F7E7E] to-[#246666] text-white px-6 py-3 rounded-full text-sm font-semibold hover:shadow-lg transition-all duration-200 w-full font-montserrat">
-                  Explore Options
+                  Schedule Complete Formation
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </div>

@@ -1,11 +1,9 @@
-import { useState } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
-import { CheckCircle, Calendar, Clock, ArrowRight } from 'lucide-react';
+import { useSearchParams } from 'react-router-dom';
+import { Calendar, Clock } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
 
 export default function Schedule() {
   const [searchParams] = useSearchParams();
-  const [isScheduled, setIsScheduled] = useState(false);
   const packageType = searchParams.get('package') || 'strategy-session';
 
   // Get package information
@@ -44,9 +42,6 @@ export default function Schedule() {
 
   const packageInfo = getPackageInfo(packageType);
 
-  const handleScheduleConfirmation = () => {
-    setIsScheduled(true);
-  };
 
   return (
     <>
@@ -193,61 +188,7 @@ export default function Schedule() {
             </div>
           </div>
 
-          {/* Confirmation Modal */}
-          {isScheduled && (
-            <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 max-w-md w-full text-center">
-                <CheckCircle className="h-16 w-16 text-[#C49A6C] mx-auto mb-6" />
-                <h3 className="text-2xl font-bold text-white mb-4 font-montserrat">
-                  Session Scheduled!
-                </h3>
-                <p className="text-white/90 mb-6 font-lora">
-                  Your {packageInfo.name} session has been scheduled. Continue to the intake form to prepare for our meeting.
-                </p>
-                <div className="flex flex-col gap-3">
-                  <Link 
-                    to="/intake"
-                    className="bg-gradient-to-r from-[#C49A6C] to-[#B8955A] text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-200 font-montserrat"
-                  >
-                    Continue to Intake Form
-                    <ArrowRight className="ml-2 h-4 w-4 inline" />
-                  </Link>
-                  <button
-                    onClick={() => setIsScheduled(false)}
-                    className="text-white/70 hover:text-white text-sm font-lora underline"
-                  >
-                    Schedule Another Time
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
 
-          {/* Next Steps */}
-          <div className="mt-12 text-center">
-            <h3 className="text-xl font-semibold text-white mb-4 font-montserrat">
-              After Scheduling
-            </h3>
-            <p className="text-white/90 mb-6 font-lora">
-              Once you've scheduled your consultation, you can start filling out the intake form to prepare for our meeting.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button
-                onClick={handleScheduleConfirmation}
-                className="bg-gradient-to-r from-[#C49A6C] to-[#B8955A] text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-200 font-montserrat"
-              >
-                I've Scheduled My Session
-                <ArrowRight className="ml-2 h-4 w-4 inline" />
-              </button>
-              <Link 
-                to="/contact" 
-                className="bg-white/10 backdrop-blur-sm border border-white/20 text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/20 transition-all duration-200 font-montserrat"
-              >
-                Contact Support
-                <ArrowRight className="ml-2 h-4 w-4 inline" />
-              </Link>
-            </div>
-          </div>
         </div>
       </div>
     </>

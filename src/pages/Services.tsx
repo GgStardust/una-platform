@@ -184,7 +184,7 @@ export default function Services() {
             </Link>
           </div>
 
-          {/* Complete Formation Package - $1,000 */}
+          {/* Complete Formation Package - $5,000 */}
           <div className="bg-white/10 backdrop-blur-sm border-4 border-[#C49A6C] rounded-2xl p-6 relative">
             <div className="absolute top-0 right-0 bg-[#C49A6C] text-white px-4 py-1 rounded-bl-lg font-bold text-sm">
               BEST VALUE
