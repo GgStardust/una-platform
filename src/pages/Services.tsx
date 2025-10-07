@@ -79,12 +79,16 @@ export default function Services() {
       <div className="una-gradient-hero py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl font-bold text-white mb-6 font-montserrat">
-            <strong className="text-[#C49A6C]">UNA Formation Guidance</strong> & Strategy
+            Professional <strong className="text-[#C49A6C]">UNA Formation</strong> Services
           </h1>
-          <p className="text-xl text-white font-lora">
-            Get clear guidance for your <strong className="text-[#C49A6C]">Unincorporated Nonprofit Association</strong> 
-            formation journey. Our <strong className="text-[#C49A6C]">expert guidance approach</strong> helps you understand 
-            your options and prepare personalized documents.
+          <p className="text-xl text-white font-lora mb-4">
+            Expert support for your <strong className="text-[#C49A6C]">Unincorporated Nonprofit Association</strong>
+            formation. We provide document preparation, strategic guidance, and administrative support
+            for UNA formation nationwide.
+          </p>
+          <p className="text-sm text-white/80 font-lora italic">
+            We provide educational information and document preparation services. This is not legal advice.
+            For specific legal questions, consult a licensed attorney in your state.
           </p>
         </div>
       </div>
@@ -175,8 +179,8 @@ export default function Services() {
               </li>
             </ul>
             <div className="text-center mb-4">
-              <div className="text-2xl font-bold text-[#C49A6C]">$250</div>
-              <div className="text-sm text-white/90">One-time session</div>
+              <div className="text-3xl font-bold text-[#C49A6C]">$500</div>
+              <div className="text-sm text-white/90">90-minute session</div>
             </div>
             <button
               onClick={() => handlePayment('STRATEGY_SESSION')}
@@ -243,12 +247,12 @@ export default function Services() {
               </li>
             </ul>
             <div className="text-center mb-4">
-              <div className="text-3xl font-bold text-[#C49A6C]">$1,000</div>
-              <div className="text-sm text-white/90">One-time investment</div>
+              <div className="text-4xl font-bold text-[#C49A6C]">$2,000</div>
+              <div className="text-sm text-white/90">Complete formation package</div>
               <div className="mt-2 p-2 bg-green-500/20 border border-green-400/30 rounded-lg">
                 <div className="text-sm text-green-300 font-semibold">Strategy Session Credit</div>
                 <div className="text-sm text-green-200">
-                  Already completed Strategy Session? Pay only $750 more
+                  Already completed Strategy Session? Pay only $1,500 more
                 </div>
               </div>
             </div>
@@ -335,8 +339,8 @@ export default function Services() {
             </div>
 
             <div className="mb-6">
-              <div className="text-4xl font-bold text-[#7A4CA0] mb-2 font-montserrat">$2,000</div>
-              <div className="text-lg text-[#2A2A28] font-lora">Complete formation + 1 year support</div>
+              <div className="text-5xl font-bold text-[#7A4CA0] mb-2 font-montserrat">$4,000</div>
+              <div className="text-lg text-[#2A2A28] font-lora">Complete formation + 12 months ongoing support</div>
             </div>
 
             <button

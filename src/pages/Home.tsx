@@ -8,15 +8,15 @@ export default function Home() {
   return (
     <>
       <SEOHead
-        title="UNA Formation Done Right"
-        description="California UNA formation with legal guidance. Do it right the first time with our comprehensive formation platform. Professional UNA formation services in California with legal compliance guaranteed."
+        title="Professional UNA Formation Services"
+        description="Expert UNA formation support with comprehensive document preparation. Do it right the first time with our professional formation services. Nationwide Unincorporated Nonprofit Association formation."
         keywords={[
-          'UNA formation California',
+          'UNA formation services',
           'Unincorporated Nonprofit Association formation',
-          'California UNA formation services',
           'professional UNA formation',
-          'legal guidance UNA formation',
-          'UNA formation requirements California'
+          'UNA document preparation',
+          'UNA formation support',
+          'UNA formation requirements'
         ]}
         ogType="website"
         schema={{
@@ -42,15 +42,18 @@ export default function Home() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
         <div className="text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-[#1C1F3B] mb-6 font-montserrat">
-            <span className="text-[#C49A6C]">UNA Formation Guidance</span>
+            Professional <span className="text-[#C49A6C]">UNA Formation</span>
             <br />
-            Clarity-First Strategy & Resources
+            Done Right, Nationwide
           </h1>
-          <p className="text-xl text-[#1C1F3B] mb-8 max-w-3xl mx-auto font-lora">
-            Get clear guidance for your UNA formation journey with 
-            <strong> sovereignty-aligned expertise</strong>. Explore your path, access curated resources, 
-            and get personalized strategy sessions to establish your 
-            <strong> Unincorporated Nonprofit Association</strong> with confidence.
+          <p className="text-xl text-[#1C1F3B] mb-4 max-w-3xl mx-auto font-lora">
+            Expert support for your <strong>Unincorporated Nonprofit Association</strong> formation.
+            We provide document preparation, strategic guidance, and comprehensive support
+            to establish your UNA with confidence.
+          </p>
+          <p className="text-sm text-[#1C1F3B]/70 mb-8 max-w-2xl mx-auto font-lora italic">
+            Educational information and document preparation services. Not legal advice.
+            Consult a licensed attorney for specific legal questions.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/explore" className="btn-grad btn-primary text-lg px-8 py-4">
@@ -111,12 +114,12 @@ export default function Home() {
             What is a <strong className="text-[#C49A6C]">UNA (Unincorporated Nonprofit Association)</strong>?
           </h2>
           <p className="text-lg text-white mb-8 font-lora">
-            A <strong className="text-[#C49A6C]">UNA</strong> is a flexible legal structure that allows mission-driven groups to operate 
-            collectively without the formal requirements of incorporation. <strong className="text-[#C49A6C]">UNA formation</strong> 
-             provides unique advantages for community organizations, activist groups, 
-            mutual aid networks, and other collectives that want legal recognition while maintaining their 
-            grassroots nature. Our <strong className="text-[#C49A6C]">UNA formation</strong> expertise ensures you get the 
-            <strong className="text-[#C49A6C]">legal guidance</strong> needed for proper structure.
+            A <strong className="text-[#C49A6C]">UNA</strong> is a flexible legal structure that allows mission-driven groups to operate
+            collectively without the formal requirements of incorporation. <strong className="text-[#C49A6C]">UNA formation</strong>
+            provides unique advantages for community organizations, activist groups,
+            mutual aid networks, and other collectives that want legal recognition while maintaining their
+            grassroots nature. Our <strong className="text-[#C49A6C]">professional formation services</strong> ensure you establish
+            your UNA correctly from the start.
           </p>
           <div className="grid md:grid-cols-2 gap-6 text-left">
             <div>

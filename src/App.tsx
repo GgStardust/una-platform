@@ -441,10 +441,14 @@ function App() {
             </div>
           </div>
           
-          {/* Copyright */}
+          {/* Copyright & Disclaimer */}
           <div className="border-t border-white/20 pt-6 text-center">
-            <p className="text-white/70 font-lora">
+            <p className="text-white/70 font-lora mb-3">
               © 2024 UNA Platform. All rights reserved. | Prepared by UNA Guide | unaguide.com
+            </p>
+            <p className="text-white/60 text-sm font-lora italic max-w-3xl mx-auto">
+              We provide educational information, document preparation, and administrative support services.
+              This is not legal advice or representation. For specific legal questions, consult a licensed attorney in your state.
             </p>
           </div>
         </div>

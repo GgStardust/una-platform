@@ -320,13 +320,13 @@ export default function Explore() {
                     to="/services"
                     className="btn-grad btn-primary px-8 py-4 text-center font-montserrat text-lg font-bold"
                   >
-                    Book Your Strategy Session ($250)
+                    Book Strategy Session ($500)
                   </Link>
                   <Link
                     to="/services"
                     className="btn-grad btn-secondary px-8 py-4 text-center font-montserrat text-lg font-bold"
                   >
-                    View All Formation Packages
+                    View All Packages
                   </Link>
                 </div>
               </div>
