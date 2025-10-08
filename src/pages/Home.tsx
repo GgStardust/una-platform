@@ -6,30 +6,29 @@ export default function Home() {
   return (
     <>
       <SEOHead
-        title="Unincorporated Association Formation | Nonprofit Formation Legal Assistance"
-        description="Expert unincorporated association formation services with legal assistance. Professional UNA formation for nonprofits nationwide. Get your nonprofit tax exemption with comprehensive legal guidance."
+        title="Unincorporated Association Formation | Professional UNA Formation Services"
+        description="Professional unincorporated association formation services. Expert UNA formation support with comprehensive administrative guidance. State-specific UNA requirements and tax exemption guidance."
         keywords={[
           'unincorporated association formation',
-          'nonprofit formation',
           'UNA formation',
-          'nonprofit tax exemption',
-          'legal assistance',
-          'nonprofit legal assistance',
-          '501(c)(3) application',
+          'UNA formation services',
+          'unincorporated association',
+          'UNA requirements',
+          'UNA structure',
           'California UNA',
-          'nonprofit formation legal assistance',
-          'state-specific UNA requirements'
+          'state-specific UNA requirements',
+          'UNA tax exemption'
         ]}
         ogType="website"
         schema={{
           "@context": "https://schema.org",
           "@type": "WebPage",
           "name": "Unincorporated Association Formation | UNA Platform",
-          "description": "Professional unincorporated association formation services with legal assistance for nonprofits. Nationwide UNA formation with state-specific requirements and 501(c)(3) application support.",
+          "description": "Professional unincorporated association formation services. Nationwide UNA formation with state-specific requirements guidance.",
           "mainEntity": {
             "@type": "Service",
             "name": "Unincorporated Association Formation Services",
-            "description": "Professional UNA formation with legal assistance, nonprofit tax exemption support, and state-specific requirements guidance",
+            "description": "Professional UNA formation with administrative support, tax exemption guidance, and state-specific requirements",
             "provider": {
               "@type": "Organization",
               "name": "UNA Platform"
@@ -48,12 +47,12 @@ export default function Home() {
               Unincorporated Association Formation
             </span>
             <br />
-            Expert Legal Assistance for Nonprofit Formation
+            Expert UNA Formation Services Done Right
           </h1>
           <p className="text-xl text-white/90 mb-4 max-w-3xl mx-auto font-lora">
-            Professional <strong>unincorporated association formation</strong> services with comprehensive legal assistance.
-            Get expert guidance for <strong>nonprofit tax exemption</strong>, state-specific UNA requirements, and <strong>501(c)(3) applications</strong>.
-            Nationwide support for your nonprofit formation journey.
+            Professional <strong>unincorporated association formation</strong> services with comprehensive administrative support.
+            Get expert guidance for <strong>UNA structure</strong>, state-specific requirements, and <strong>tax exemption</strong>.
+            Nationwide UNA formation done right the first time.
           </p>
           <p className="text-sm text-white/70 mb-8 max-w-2xl mx-auto font-lora italic">
             This site provides educational information and document preparation services. For legal representation, consult a licensed attorney in your state.
@@ -208,7 +207,7 @@ export default function Home() {
           A UNA is a living container for what you value most.
           Form yours with structure, clarity, and sovereignty.
         </p>
-        <Link to="/toolkit" className="inline-flex items-center bg-gradient-to-r from-[#2F7E7E] to-[#246666] text-white px-8 py-4 rounded-xl font-bold font-montserrat hover:shadow-lg transition-all duration-200 hover:transform hover:scale-105">
+        <Link to="/explore" className="inline-flex items-center bg-gradient-to-r from-[#2F7E7E] to-[#246666] text-white px-8 py-4 rounded-xl font-bold font-montserrat hover:shadow-lg transition-all duration-200 hover:transform hover:scale-105">
           Start Your UNA Journey
           <svg className="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

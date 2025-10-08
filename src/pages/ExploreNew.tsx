@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowRight, CheckCircle, TrendingUp, Shield, Lock, DollarSign } from 'lucide-react';
+import { ArrowRight, CheckCircle, TrendingUp, Shield, Lock, Target, Mail } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
 import { GradientHeader } from '@/components/ui';
+import { submitQuizResults } from '../lib/supabase/quiz';
 
 const US_STATES = [
   'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware',
@@ -15,48 +16,54 @@ const US_STATES = [
 ];
 
 interface QuizAnswers {
-  primaryGoal: string;
+  primaryGoals: string[]; // Changed to array
   memberCount: string;
   annualBudget: string;
-  privacyPreference: string;
+  privacyPreferences: string[]; // Changed to array
   state: string;
+  email: string; // Added email
 }
 
 export default function ExploreNew() {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<QuizAnswers>({
-    primaryGoal: '',
+    primaryGoals: [],
     memberCount: '',
     annualBudget: '',
-    privacyPreference: '',
-    state: ''
+    privacyPreferences: [],
+    state: '',
+    email: ''
   });
   const [showResults, setShowResults] = useState(false);
 
   const questions = [
     {
-      id: 'primaryGoal',
-      question: "What's your primary goal for forming an organization?",
+      id: 'primaryGoals',
+      question: "What matters most in how you organize together?",
+      subtitle: "Select all that apply",
+      multiSelect: true,
       options: [
-        { value: 'community', label: 'Community Building', icon: Shield, score: 10 },
-        { value: 'tax', label: 'Tax Exemption', icon: DollarSign, score: 7 },
-        { value: 'legal', label: 'Legal Protection', icon: Shield, score: 9 },
-        { value: 'privacy', label: 'Privacy & Sovereignty', icon: Lock, score: 10 }
+        { value: 'purpose', label: 'Our shared purpose and vision', icon: Target, score: 10 },
+        { value: 'sovereignty', label: 'Protecting our autonomy', icon: Shield, score: 10 },
+        { value: 'clarity', label: 'Legal clarity without bureaucracy', icon: CheckCircle, score: 9 },
+        { value: 'legacy', label: 'Building something that lasts', icon: TrendingUp, score: 10 }
       ]
     },
     {
       id: 'memberCount',
-      question: "How many founding members do you have?",
+      question: "Where are you in your journey?",
       options: [
-        { value: 'small', label: 'Less than 3', score: 8 },
-        { value: 'medium', label: '3-7 members', score: 10 },
-        { value: 'large', label: '8+ members', score: 10 }
+        { value: 'exploring', label: 'Just beginning to explore', score: 8 },
+        { value: 'ready', label: 'Clear on purpose, ready for next steps', score: 10 },
+        { value: 'operating', label: 'Already operating, need legal recognition', score: 10 },
+        { value: 'alternative', label: 'Tried other structures, seeking alternatives', score: 9 }
       ]
     },
     {
       id: 'annualBudget',
-      question: "What's your expected annual budget?",
+      question: "Expected annual gross receipts?",
+      description: "This determines your EIN and state filing requirements.",
       options: [
         { value: 'micro', label: 'Under $50,000', score: 10 },
         { value: 'small', label: '$50,000 - $250,000', score: 9 },
@@ -64,24 +71,52 @@ export default function ExploreNew() {
       ]
     },
     {
-      id: 'privacyPreference',
-      question: "How important is privacy to your organization?",
+      id: 'privacyPreferences',
+      question: "What do you value most about staying unincorporated?",
+      subtitle: "Select all that apply",
+      multiSelect: true,
       options: [
-        { value: 'critical', label: 'Critical - want to stay private', score: 10 },
-        { value: 'important', label: 'Important - some privacy preferred', score: 8 },
-        { value: 'neutral', label: 'Not a priority - transparency is fine', score: 5 }
+        { value: 'privacy', label: 'Privacy - no public disclosure required', icon: Lock, score: 10 },
+        { value: 'flexibility', label: 'Flexibility - no board meetings required', icon: Shield, score: 10 },
+        { value: 'speed', label: 'Speed - formation in weeks', score: 8 },
+        { value: 'sovereignty', label: 'Sovereignty - organizational autonomy', icon: Shield, score: 10 }
       ]
     },
     {
       id: 'state',
-      question: "Which state will you operate in?",
+      question: "Which state will be your home?",
       isDropdown: true,
       options: US_STATES.map(state => ({ value: state.toLowerCase(), label: state, score: 10 }))
+    },
+    {
+      id: 'email',
+      question: "Want to stay connected?",
+      description: "Optional: Receive your personalized UNA readiness report via email, plus occasional updates on formation best practices. You can skip this and continue to see your results.",
+      isEmail: true,
+      optional: true
     }
   ];
 
   const handleAnswer = (questionId: string, value: string) => {
-    setAnswers(prev => ({ ...prev, [questionId]: value }));
+    const question = questions[currentStep];
+
+    if (question.multiSelect) {
+      // Handle multi-select
+      setAnswers(prev => {
+        const currentValues = prev[questionId as keyof QuizAnswers] as string[];
+        const isSelected = currentValues.includes(value);
+
+        return {
+          ...prev,
+          [questionId]: isSelected
+            ? currentValues.filter(v => v !== value)
+            : [...currentValues, value]
+        };
+      });
+    } else {
+      // Handle single select
+      setAnswers(prev => ({ ...prev, [questionId]: value }));
+    }
   };
 
   const handleNext = () => {
@@ -98,24 +133,67 @@ export default function ExploreNew() {
     }
   };
 
-  const calculateResults = () => {
+  const calculateResults = async () => {
     // Calculate readiness score based on answers
     let score = 0;
+    let totalPossible = 0;
+
     questions.forEach(question => {
-      const answer = answers[question.id as keyof QuizAnswers];
-      const option = question.options.find(opt => opt.value === answer);
-      if (option && 'score' in option) {
-        score += option.score;
+      if (question.multiSelect) {
+        const selectedValues = answers[question.id as keyof QuizAnswers] as string[];
+        selectedValues.forEach(value => {
+          const option = question.options?.find(opt => opt.value === value);
+          if (option && 'score' in option) {
+            score += option.score;
+            totalPossible += 10; // Assume max score is 10
+          }
+        });
+      } else if (!question.isEmail && !question.isDropdown) {
+        const answer = answers[question.id as keyof QuizAnswers];
+        const option = question.options?.find(opt => opt.value === answer);
+        if (option && 'score' in option) {
+          score += option.score;
+          totalPossible += 10;
+        }
+      } else if (question.isDropdown) {
+        totalPossible += 10;
+        score += 10; // Full points for state selection
       }
     });
 
-    // Store results
+    const percentageScore = Math.round((score / totalPossible) * 100);
+
+    // Determine recommendation
+    let recommendation = '';
+    if (percentageScore >= 85) {
+      recommendation = 'EXCELLENT FIT';
+    } else if (percentageScore >= 70) {
+      recommendation = 'GREAT FIT';
+    } else if (percentageScore >= 50) {
+      recommendation = 'GOOD FIT';
+    } else {
+      recommendation = 'POSSIBLE FIT';
+    }
+
+    // Store results locally
     const results = {
-      score: Math.round((score / 50) * 100),
+      score: percentageScore,
       answers,
       timestamp: Date.now()
     };
     localStorage.setItem('unaReadinessResults', JSON.stringify(results));
+
+    // Submit to Supabase
+    await submitQuizResults({
+      email: answers.email,
+      primary_goal: answers.primaryGoals.join(', '),
+      journey_stage: answers.memberCount,
+      annual_budget: answers.annualBudget,
+      privacy_preference: answers.privacyPreferences.join(', '),
+      state: answers.state,
+      score: percentageScore,
+      recommendation
+    });
 
     setShowResults(true);
   };
@@ -127,7 +205,13 @@ export default function ExploreNew() {
   };
 
   const currentQuestion = questions[currentStep];
-  const isAnswered = answers[currentQuestion.id as keyof QuizAnswers] !== '';
+  const isAnswered = currentQuestion.isEmail && currentQuestion.optional
+    ? true // Email is optional, always allow next
+    : currentQuestion.isEmail
+      ? answers.email !== '' && answers.email.includes('@')
+      : currentQuestion.multiSelect
+        ? (answers[currentQuestion.id as keyof QuizAnswers] as string[]).length > 0
+        : answers[currentQuestion.id as keyof QuizAnswers] !== '';
   const progress = ((currentStep + 1) / questions.length) * 100;
 
   if (showResults) {
@@ -155,175 +239,134 @@ export default function ExploreNew() {
       <>
         <SEOHead
           title="Is a UNA Right For You? - UNA Readiness Assessment"
-          description="Take our quick 5-question assessment to discover if a UNA is the right fit for your organization. Get instant results and personalized recommendations."
+          description="Take our quick 6-question assessment to discover if a UNA is the right fit for your organization. Get instant results and personalized recommendations."
           keywords={[
             'UNA assessment',
-            'nonprofit formation',
             'unincorporated association',
-            'nonprofit readiness',
-            'UNA formation legal assistance'
+            'UNA formation support'
           ]}
         />
 
         <div className="min-h-screen bg-gradient-to-br from-[#1E2A38] via-[#2F7E7E] to-[#1C1F3B]">
           <GradientHeader
             title="Your UNA Readiness Results"
-            subtitle="Based on your answers, here's how well a UNA fits your organization"
+            subtitle="Based on your answers"
           />
 
-          <div className="max-w-4xl mx-auto px-4 py-12">
+          <div className="max-w-3xl mx-auto px-4 py-6 md:py-12">
             {/* Score Display */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 text-center mb-8">
-              <div className="mb-6">
-                <div className="text-6xl font-bold text-white mb-2">{score}%</div>
-                <div className={`text-2xl font-semibold ${recommendationClass}`}>
-                  {recommendation}
-                </div>
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-white/20 text-center mb-6">
+              <div className="text-5xl md:text-6xl font-bold text-white mb-2">{score}%</div>
+              <div className={`text-xl md:text-2xl font-semibold ${recommendationClass} mb-4`}>
+                {recommendation}
               </div>
-
-              <div className="w-full bg-white/20 rounded-full h-4 mb-6">
+              <div className="w-full bg-white/20 rounded-full h-3 md:h-4 mb-4">
                 <div
-                  className="bg-gradient-to-r from-[#C49A6C] to-[#2F7E7E] h-4 rounded-full transition-all duration-1000"
+                  className="bg-gradient-to-r from-[#C49A6C] to-[#2F7E7E] h-3 md:h-4 rounded-full transition-all duration-1000"
                   style={{ width: `${score}%` }}
                 />
               </div>
-
-              <p className="text-white/90 text-lg font-lora">
-                Based on your answers, a UNA is {score >= 85 ? 'an excellent' : score >= 70 ? 'a great' : 'a good'} match for your organization's needs.
+              <p className="text-white/90 text-base md:text-lg font-lora">
+                A UNA is {score >= 85 ? 'an excellent' : score >= 70 ? 'a great' : 'a good'} match for your needs.
               </p>
             </div>
 
-            {/* Why UNA Is Right */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 mb-8">
-              <h3 className="text-2xl font-bold text-white mb-6 font-montserrat">
-                Why a UNA Is Right For You:
+            {/* Why UNA Is Right - Simplified */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-white/20 mb-6">
+              <h3 className="text-xl md:text-2xl font-bold text-white mb-4 font-montserrat">
+                Why a UNA Works For You:
               </h3>
 
-              <div className="space-y-4">
-                {answers.primaryGoal === 'privacy' && (
+              <div className="space-y-3">
+                {answers.primaryGoals.includes('sovereignty') && (
                   <div className="flex items-start gap-3">
-                    <CheckCircle className="h-6 w-6 text-[#C49A6C] flex-shrink-0 mt-1" />
-                    <p className="text-white/90 font-lora">
-                      <strong className="text-white">Maximum Privacy:</strong> UNAs don't require public disclosure of members or finances, protecting your sovereignty.
+                    <CheckCircle className="h-5 w-5 text-[#C49A6C] flex-shrink-0 mt-0.5" />
+                    <p className="text-white/90 font-lora text-sm md:text-base">
+                      <strong className="text-white">Autonomy:</strong> Maintain sovereignty without corporate oversight
+                    </p>
+                  </div>
+                )}
+
+                {answers.privacyPreferences.includes('privacy') && (
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="h-5 w-5 text-[#C49A6C] flex-shrink-0 mt-0.5" />
+                    <p className="text-white/90 font-lora text-sm md:text-base">
+                      <strong className="text-white">Privacy:</strong> No public disclosure of members or finances
                     </p>
                   </div>
                 )}
 
                 {answers.annualBudget === 'micro' && (
                   <div className="flex items-start gap-3">
-                    <CheckCircle className="h-6 w-6 text-[#C49A6C] flex-shrink-0 mt-1" />
-                    <p className="text-white/90 font-lora">
-                      <strong className="text-white">Cost Effective:</strong> UNA formation costs $1,000-$5,000 vs $5,000-$15,000 for 501(c)(3) incorporation.
+                    <CheckCircle className="h-5 w-5 text-[#C49A6C] flex-shrink-0 mt-0.5" />
+                    <p className="text-white/90 font-lora text-sm md:text-base">
+                      <strong className="text-white">Cost Effective:</strong> $1,000-$5,000 vs $5,000-$15,000 for 501(c)(3)
                     </p>
                   </div>
                 )}
 
-                {(answers.memberCount === 'small' || answers.memberCount === 'medium') && (
+                {answers.privacyPreferences.includes('flexibility') && (
                   <div className="flex items-start gap-3">
-                    <CheckCircle className="h-6 w-6 text-[#C49A6C] flex-shrink-0 mt-1" />
-                    <p className="text-white/90 font-lora">
-                      <strong className="text-white">Simple Governance:</strong> No board meetings, complex bylaws, or corporate formalities required.
+                    <CheckCircle className="h-5 w-5 text-[#C49A6C] flex-shrink-0 mt-0.5" />
+                    <p className="text-white/90 font-lora text-sm md:text-base">
+                      <strong className="text-white">Simple:</strong> No board meetings or complex bylaws
                     </p>
                   </div>
                 )}
 
-                {answers.primaryGoal === 'legal' && (
+                {answers.privacyPreferences.includes('speed') && (
                   <div className="flex items-start gap-3">
-                    <CheckCircle className="h-6 w-6 text-[#C49A6C] flex-shrink-0 mt-1" />
-                    <p className="text-white/90 font-lora">
-                      <strong className="text-white">Legal Protection:</strong> Members get liability protection without losing organizational autonomy.
+                    <CheckCircle className="h-5 w-5 text-[#C49A6C] flex-shrink-0 mt-0.5" />
+                    <p className="text-white/90 font-lora text-sm md:text-base">
+                      <strong className="text-white">Fast:</strong> Formation in weeks, not months
                     </p>
                   </div>
                 )}
-
-                <div className="flex items-start gap-3">
-                  <CheckCircle className="h-6 w-6 text-[#C49A6C] flex-shrink-0 mt-1" />
-                  <p className="text-white/90 font-lora">
-                    <strong className="text-white">Fast Formation:</strong> Get up and running in weeks, not months.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* UNA vs 501(c)(3) Comparison */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 mb-8">
-              <h3 className="text-2xl font-bold text-white mb-6 font-montserrat">
-                UNA vs 501(c)(3) Comparison
-              </h3>
-
-              <div className="overflow-x-auto">
-                <table className="w-full text-left">
-                  <thead>
-                    <tr className="border-b border-white/20">
-                      <th className="pb-3 text-white font-montserrat">Feature</th>
-                      <th className="pb-3 text-[#C49A6C] font-montserrat">UNA</th>
-                      <th className="pb-3 text-white/60 font-montserrat">501(c)(3)</th>
-                    </tr>
-                  </thead>
-                  <tbody className="font-lora">
-                    <tr className="border-b border-white/10">
-                      <td className="py-3 text-white/90">Formation Time</td>
-                      <td className="py-3 text-[#C49A6C]">2-4 weeks</td>
-                      <td className="py-3 text-white/60">3-12 months</td>
-                    </tr>
-                    <tr className="border-b border-white/10">
-                      <td className="py-3 text-white/90">Formation Cost</td>
-                      <td className="py-3 text-[#C49A6C]">$1,000-$5,000</td>
-                      <td className="py-3 text-white/60">$5,000-$15,000</td>
-                    </tr>
-                    <tr className="border-b border-white/10">
-                      <td className="py-3 text-white/90">Annual Reports</td>
-                      <td className="py-3 text-[#C49A6C]">Minimal/None</td>
-                      <td className="py-3 text-white/60">Form 990 Required</td>
-                    </tr>
-                    <tr className="border-b border-white/10">
-                      <td className="py-3 text-white/90">Privacy</td>
-                      <td className="py-3 text-[#C49A6C]">High</td>
-                      <td className="py-3 text-white/60">Low (Public 990s)</td>
-                    </tr>
-                    <tr className="border-b border-white/10">
-                      <td className="py-3 text-white/90">Tax Exemption</td>
-                      <td className="py-3 text-[#C49A6C]">Available</td>
-                      <td className="py-3 text-white/60">Available</td>
-                    </tr>
-                    <tr>
-                      <td className="py-3 text-white/90">Governance</td>
-                      <td className="py-3 text-[#C49A6C]">Flexible</td>
-                      <td className="py-3 text-white/60">Rigid (Board req.)</td>
-                    </tr>
-                  </tbody>
-                </table>
               </div>
             </div>
 
             {/* Next Steps CTAs */}
-            <div className="space-y-4">
+            <div className="space-y-3">
+              {answers.email ? (
+                <>
+                  <button
+                    onClick={() => {
+                      // Pass email to intake form
+                      navigate('/intake', { state: { email: answers.email, quizResults: answers } });
+                    }}
+                    className="w-full px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-[#C49A6C] to-[#B8955A] text-white rounded-xl font-semibold hover:shadow-xl transition-all duration-200 font-montserrat text-base md:text-lg flex items-center justify-center gap-2"
+                  >
+                    Continue to Intake Form
+                    <ArrowRight className="h-4 w-4 md:h-5 md:w-5" />
+                  </button>
+                  <p className="text-white/60 text-xs text-center font-lora">
+                    We'll send your results to {answers.email}
+                  </p>
+                </>
+              ) : (
+                <div className="bg-white/5 border border-white/20 rounded-xl p-4 mb-3">
+                  <p className="text-white/80 text-sm font-lora text-center mb-2">
+                    💡 <strong className="text-white">Next Step:</strong> Take your time reviewing these results.
+                  </p>
+                  <p className="text-white/60 text-xs font-lora text-center">
+                    When you're ready to move forward, you can start the intake process or explore our services below.
+                  </p>
+                </div>
+              )}
+
               <button
                 onClick={() => navigate('/services')}
-                className="w-full px-8 py-4 bg-gradient-to-r from-[#C49A6C] to-[#B8955A] text-white rounded-xl font-semibold hover:shadow-xl transition-all duration-200 font-montserrat text-lg flex items-center justify-center gap-3"
+                className="w-full px-6 py-3 md:px-8 md:py-4 border-2 border-white/30 text-white rounded-xl font-semibold hover:bg-white/10 transition-all duration-200 font-montserrat text-base md:text-lg"
               >
-                Start Your UNA Formation
-                <ArrowRight className="h-5 w-5" />
+                View Services & Pricing
               </button>
 
               <button
-                onClick={() => navigate('/blog')}
-                className="w-full px-8 py-4 border-2 border-white/30 text-white rounded-xl font-semibold hover:bg-white/10 transition-all duration-200 font-montserrat"
+                onClick={() => navigate('/faq')}
+                className="w-full px-6 py-3 md:px-8 md:py-4 border-2 border-white/30 text-white rounded-xl font-semibold hover:bg-white/10 transition-all duration-200 font-montserrat text-base md:text-lg"
               >
                 Learn More About UNAs
               </button>
-
-              <div className="text-center pt-4">
-                <p className="text-white/70 text-sm font-lora mb-3">
-                  Want a custom formation checklist for {answers.state}?
-                </p>
-                <button
-                  onClick={() => navigate('/intake?package=strategy-session')}
-                  className="text-[#C49A6C] hover:text-[#B8955A] font-semibold underline font-montserrat"
-                >
-                  Get Your Free PDF Guide
-                </button>
-              </div>
             </div>
           </div>
         </div>
@@ -335,13 +378,11 @@ export default function ExploreNew() {
     <>
       <SEOHead
         title="Is a UNA Right For You? - Free Assessment | UNA Platform"
-        description="Not sure if a UNA is right for your organization? Take our quick 5-question assessment to get instant, personalized results and recommendations for nonprofit formation."
+        description="Take our quick 6-question assessment to discover if a UNA is the right fit for your organization."
         keywords={[
           'UNA assessment',
-          'nonprofit formation',
           'unincorporated association',
           'is a UNA right for me',
-          'nonprofit formation legal assistance',
           'UNA requirements'
         ]}
       />
@@ -349,17 +390,17 @@ export default function ExploreNew() {
       <div className="min-h-screen bg-gradient-to-br from-[#1E2A38] via-[#2F7E7E] to-[#1C1F3B]">
         <GradientHeader
           title="Is a UNA Right For You?"
-          subtitle="Quick 5-question assessment • Get instant results • Free personalized recommendations"
+          subtitle="6-question assessment • Instant results"
         />
 
-        <div className="max-w-3xl mx-auto px-4 py-12">
+        <div className="max-w-2xl mx-auto px-4 py-6 md:py-12">
           {/* Progress Bar */}
-          <div className="mb-8">
+          <div className="mb-6 md:mb-8">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-white/70 text-sm font-montserrat">
+              <span className="text-white/70 text-xs md:text-sm font-montserrat">
                 Question {currentStep + 1} of {questions.length}
               </span>
-              <span className="text-white/70 text-sm font-montserrat">
+              <span className="text-white/70 text-xs md:text-sm font-montserrat">
                 {Math.round(progress)}% Complete
               </span>
             </div>
@@ -372,45 +413,78 @@ export default function ExploreNew() {
           </div>
 
           {/* Question Card */}
-          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20 mb-6">
-            <h2 className="text-2xl font-bold text-white mb-6 font-montserrat">
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-white/20 mb-4 md:mb-6">
+            <h2 className="text-xl md:text-2xl font-bold text-white mb-2 font-montserrat">
               {currentQuestion.question}
             </h2>
+            {'subtitle' in currentQuestion && (
+              <p className="text-white/60 text-xs md:text-sm font-lora mb-4">
+                {currentQuestion.subtitle}
+              </p>
+            )}
+            {'description' in currentQuestion && (
+              <p className="text-white/70 text-xs md:text-sm font-lora mb-4 italic">
+                {currentQuestion.description}
+              </p>
+            )}
 
-            {currentQuestion.isDropdown ? (
+            {currentQuestion.isEmail ? (
+              <div>
+                <div className="relative">
+                  <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-white/50" />
+                  <input
+                    type="email"
+                    value={answers.email}
+                    onChange={(e) => handleAnswer('email', e.target.value)}
+                    placeholder="your@email.com (optional)"
+                    className="w-full pl-12 pr-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder-white/40 font-lora focus:outline-none focus:ring-2 focus:ring-[#C49A6C] text-sm md:text-base"
+                  />
+                </div>
+                {currentQuestion.optional && (
+                  <p className="text-white/50 text-xs mt-2 font-lora italic">
+                    Skip this step if you prefer to just see your results now
+                  </p>
+                )}
+              </div>
+            ) : currentQuestion.isDropdown ? (
               <select
-                value={answers[currentQuestion.id as keyof QuizAnswers]}
+                value={answers[currentQuestion.id as keyof QuizAnswers] as string}
                 onChange={(e) => handleAnswer(currentQuestion.id, e.target.value)}
-                className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white font-lora focus:outline-none focus:ring-2 focus:ring-[#C49A6C]"
+                className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white font-lora focus:outline-none focus:ring-2 focus:ring-[#C49A6C] text-sm md:text-base"
               >
                 <option value="" className="bg-[#1E2A38] text-white">Select your state...</option>
-                {currentQuestion.options.map((option) => (
+                {currentQuestion.options?.map((option) => (
                   <option key={option.value} value={option.value} className="bg-[#1E2A38] text-white">
                     {option.label}
                   </option>
                 ))}
               </select>
             ) : (
-              <div className="space-y-3">
-                {currentQuestion.options.map((option) => {
+              <div className="space-y-2 md:space-y-3">
+                {currentQuestion.options?.map((option) => {
                   const Icon = 'icon' in option ? option.icon : null;
-                  const isSelected = answers[currentQuestion.id as keyof QuizAnswers] === option.value;
+                  const isSelected = currentQuestion.multiSelect
+                    ? (answers[currentQuestion.id as keyof QuizAnswers] as string[]).includes(option.value)
+                    : answers[currentQuestion.id as keyof QuizAnswers] === option.value;
 
                   return (
                     <button
                       key={option.value}
                       onClick={() => handleAnswer(currentQuestion.id, option.value)}
-                      className={`w-full p-4 rounded-lg border-2 transition-all duration-200 text-left ${
+                      className={`w-full p-3 md:p-4 rounded-lg border-2 transition-all duration-200 text-left ${
                         isSelected
                           ? 'border-[#C49A6C] bg-[#C49A6C]/20'
                           : 'border-white/30 bg-white/5 hover:border-white/50'
                       }`}
                     >
-                      <div className="flex items-center gap-3">
-                        {Icon && <Icon className={`h-5 w-5 ${isSelected ? 'text-[#C49A6C]' : 'text-white/70'}`} />}
-                        <span className={`font-semibold ${isSelected ? 'text-white' : 'text-white/90'} font-montserrat`}>
+                      <div className="flex items-center gap-2 md:gap-3">
+                        {Icon && <Icon className={`h-4 w-4 md:h-5 md:w-5 flex-shrink-0 ${isSelected ? 'text-[#C49A6C]' : 'text-white/70'}`} />}
+                        <span className={`font-semibold text-sm md:text-base ${isSelected ? 'text-white' : 'text-white/90'} font-montserrat`}>
                           {option.label}
                         </span>
+                        {currentQuestion.multiSelect && isSelected && (
+                          <CheckCircle className="h-4 w-4 md:h-5 md:w-5 ml-auto text-[#C49A6C]" />
+                        )}
                       </div>
                     </button>
                   );
@@ -420,11 +494,11 @@ export default function ExploreNew() {
           </div>
 
           {/* Navigation Buttons */}
-          <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center justify-between gap-3 md:gap-4">
             {currentStep > 0 ? (
               <button
                 onClick={handleBack}
-                className="px-6 py-3 border-2 border-white/30 text-white rounded-lg font-semibold hover:bg-white/10 transition-all duration-200 font-montserrat"
+                className="px-4 md:px-6 py-2 md:py-3 border-2 border-white/30 text-white rounded-lg font-semibold hover:bg-white/10 transition-all duration-200 font-montserrat text-sm md:text-base"
               >
                 Back
               </button>
@@ -435,14 +509,14 @@ export default function ExploreNew() {
             <button
               onClick={handleNext}
               disabled={!isAnswered}
-              className={`px-8 py-3 rounded-lg font-semibold transition-all duration-200 font-montserrat flex items-center gap-2 ${
+              className={`px-6 md:px-8 py-2 md:py-3 rounded-lg font-semibold transition-all duration-200 font-montserrat flex items-center gap-2 text-sm md:text-base ${
                 isAnswered
                   ? 'bg-gradient-to-r from-[#C49A6C] to-[#B8955A] text-white hover:shadow-lg'
                   : 'bg-white/10 text-white/40 cursor-not-allowed'
               }`}
             >
               {currentStep === questions.length - 1 ? 'See Results' : 'Next'}
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className="h-3 w-3 md:h-4 md:w-4" />
             </button>
           </div>
         </div>

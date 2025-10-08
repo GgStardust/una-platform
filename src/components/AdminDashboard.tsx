@@ -41,6 +41,7 @@ import {
 } from '@/lib/payment-module';
 import { exploreFormationExportService } from '@/lib/explore-formation-export';
 import { getLeads } from '@/lib/supabase/leads';
+import { getAllQuizSubmissions, type QuizSubmission } from '@/lib/supabase/quiz';
 
 interface AdminStats {
   totalUsers: number;
@@ -206,7 +207,7 @@ export default function AdminDashboard() {
   const [paymentSettings, setPaymentSettings] = useState<PaymentSettings>(defaultPaymentSettings);
   const paymentModule = PaymentModule.getInstance();
   
-  const [activeTab, setActiveTab] = useState<'overview' | 'users' | 'verification' | 'affiliates' | 'payments' | 'analytics' | 'emails' | 'settings' | 'environment' | 'explore-formation' | 'blog' | 'leads'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'users' | 'verification' | 'affiliates' | 'payments' | 'analytics' | 'emails' | 'settings' | 'environment' | 'explore-formation' | 'blog' | 'leads' | 'quiz-submissions'>('overview');
   
   // Blog posts state
   const [blogPosts, setBlogPosts] = useState<Blog[]>([]);
@@ -218,12 +219,17 @@ export default function AdminDashboard() {
   const [leads, setLeads] = useState<any[]>([]);
   const [leadsLoading, setLeadsLoading] = useState(false);
 
+  // Quiz submissions state
+  const [quizSubmissions, setQuizSubmissions] = useState<QuizSubmission[]>([]);
+  const [quizLoading, setQuizLoading] = useState(false);
+
   useEffect(() => {
     loadAdminData();
     loadAnalyticsData();
     refreshVerificationFlags();
     loadAffiliateData();
     loadBlogPosts();
+    loadQuizSubmissions();
   }, []);
 
   const loadBlogPosts = async () => {
@@ -314,6 +320,22 @@ export default function AdminDashboard() {
       console.error('Error loading leads:', error);
     } finally {
       setLeadsLoading(false);
+    }
+  };
+
+  const loadQuizSubmissions = async () => {
+    setQuizLoading(true);
+    try {
+      const { data, error } = await getAllQuizSubmissions();
+      if (error) {
+        console.error('Error loading quiz submissions:', error);
+      } else {
+        setQuizSubmissions(data || []);
+      }
+    } catch (error) {
+      console.error('Error loading quiz submissions:', error);
+    } finally {
+      setQuizLoading(false);
     }
   };
 
@@ -806,6 +828,7 @@ Facebook,Complete UNA Formation Guide,Master UNA formation from concept to compl
               { id: 'overview', label: 'Overview', icon: TrendingUp },
               { id: 'users', label: 'Users', icon: Users },
               { id: 'leads', label: 'Leads', icon: Mail },
+              { id: 'quiz-submissions', label: 'Quiz Submissions', icon: CheckCircle },
               { id: 'verification', label: 'Verification', icon: AlertCircle },
               { id: 'affiliates', label: 'Affiliates', icon: Users },
               { id: 'payments', label: 'Payments', icon: CreditCard },
@@ -1116,6 +1139,104 @@ Facebook,Complete UNA Formation Guide,Master UNA formation from concept to compl
                 </tbody>
               </table>
             </div>
+          </div>
+        )}
+
+        {/* Quiz Submissions Tab */}
+        {activeTab === 'quiz-submissions' && (
+          <div className="bg-white rounded-lg shadow-sm border border-navy-100">
+            <div className="p-6 border-b border-navy-100">
+              <div className="flex justify-between items-center">
+                <div>
+                  <h2 className="text-xl font-semibold text-navy-900">Explore Quiz Submissions</h2>
+                  <p className="text-navy-600 mt-1">Track UNA readiness assessments from the Explore page</p>
+                </div>
+                <button
+                  onClick={loadQuizSubmissions}
+                  disabled={quizLoading}
+                  className="btn-grad btn-primary px-4 py-2 text-sm"
+                >
+                  {quizLoading ? 'Loading...' : 'Refresh'}
+                </button>
+              </div>
+            </div>
+
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="bg-navy-50">
+                  <tr>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-navy-500 uppercase tracking-wider">Email</th>                    <th className="px-6 py-3 text-left text-xs font-medium text-navy-500 uppercase tracking-wider">Date</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-navy-500 uppercase tracking-wider">Score</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-navy-500 uppercase tracking-wider">Recommendation</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-navy-500 uppercase tracking-wider">State</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-navy-500 uppercase tracking-wider">Primary Goal</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-navy-500 uppercase tracking-wider">Journey Stage</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-navy-500 uppercase tracking-wider">Budget</th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-navy-200">
+                  {quizLoading ? (
+                    <tr>
+                      <td colSpan={7} className="px-6 py-4 text-center text-navy-500">
+                        Loading quiz submissions...
+                      </td>
+                    </tr>
+                  ) : quizSubmissions.length === 0 ? (
+                    <tr>
+                      <td colSpan={7} className="px-6 py-4 text-center text-navy-500">
+                        No quiz submissions yet
+                      </td>
+                    </tr>
+                  ) : (
+                    quizSubmissions.map((submission) => (
+                      <tr key={submission.id} className="hover:bg-navy-50">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-navy-900 font-medium">
+                          {submission.email || 'N/A'}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-navy-600">
+                          {new Date(submission.created_at!).toLocaleDateString()}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-navy-900">
+                          {submission.score}%
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm">
+                          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                            submission.recommendation === 'EXCELLENT FIT' ? 'bg-green-100 text-green-800' :
+                            submission.recommendation === 'GREAT FIT' ? 'bg-blue-100 text-blue-800' :
+                            submission.recommendation === 'GOOD FIT' ? 'bg-yellow-100 text-yellow-800' :
+                            'bg-orange-100 text-orange-800'
+                          }`}>
+                            {submission.recommendation}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-navy-600 capitalize">
+                          {submission.state}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-navy-600 capitalize">
+                          {submission.primary_goal.replace(/_/g, ' ')}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-navy-600 capitalize">
+                          {submission.journey_stage.replace(/_/g, ' ')}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-navy-600 capitalize">
+                          {submission.annual_budget}
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
+
+            {quizSubmissions.length > 0 && (
+              <div className="px-6 py-4 bg-navy-50 border-t border-navy-100">
+                <div className="text-sm text-navy-600">
+                  <strong>Total Submissions:</strong> {quizSubmissions.length}
+                  <span className="mx-4">|</span>
+                  <strong>Excellent/Great Fit:</strong> {quizSubmissions.filter(s => s.score >= 70).length}
+                </div>
+              </div>
+            )}
           </div>
         )}
 

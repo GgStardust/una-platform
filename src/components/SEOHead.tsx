@@ -28,7 +28,7 @@ export default function SEOHead({
     'sovereign legal structure',
     'collective formation California',
     'UNA formation requirements California',
-    'legal guidance UNA formation'
+    'administrative support UNA formation'
   ];
   
   const allKeywords = [...defaultKeywords, ...keywords];
@@ -121,7 +121,7 @@ export default function SEOHead({
         "@context": "https://schema.org",
         "@type": "LegalService",
         "name": "UNA Formation Platform",
-        "description": "Professional UNA formation services in California with legal guidance and compliance guaranteed.",
+        "description": "Professional UNA formation services in California with administrative support and compliance guaranteed.",
         "url": "https://unaplatform.com",
         "logo": "https://unaplatform.com/logo.png",
         "address": {
@@ -141,7 +141,7 @@ export default function SEOHead({
               "itemOffered": {
                 "@type": "Service",
                 "name": "Complete UNA Formation Package",
-                "description": "Professional UNA formation with legal guidance and compliance guaranteed"
+                "description": "Professional UNA formation with administrative support and compliance guaranteed"
               }
             }
           ]

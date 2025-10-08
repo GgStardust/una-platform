@@ -13,16 +13,16 @@ export default function Services() {
   return (
     <>
       <SEOHead
-        title="Unincorporated Association Formation Services | Legal Assistance"
-        description="Professional unincorporated association formation services with expert legal assistance. Get nonprofit tax exemption guidance, state-specific UNA requirements, and complete formation support."
+        title="Unincorporated Association Formation Services | Professional UNA Formation"
+        description="Professional unincorporated association formation services with expert administrative support. Get UNA structure guidance, state-specific UNA requirements, and complete formation assistance."
         keywords={[
           'unincorporated association formation',
-          'legal assistance',
-          'nonprofit formation',
+          'UNA formation services',
           'UNA formation',
-          'nonprofit legal assistance',
-          '501(c)(3) application',
-          'nonprofit tax exemption',
+          'UNA structure',
+          'UNA requirements',
+          'unincorporated association',
+          'UNA tax exemption',
           'California UNA',
           'state-specific UNA requirements'
         ]}
@@ -77,9 +77,9 @@ export default function Services() {
             <span className="bg-gradient-to-r from-[#C49A6C] via-[#B8955A] to-[#2F7E7E] bg-clip-text text-transparent font-bold">Unincorporated Association Formation</span> Services
           </h1>
           <p className="text-xl text-white/90 font-lora mb-4">
-            Expert legal assistance for <strong className="text-white font-semibold">nonprofit formation</strong> as an alternative to 501(c)(3).
+            Expert <strong className="text-white font-semibold">UNA formation services</strong> for groups seeking sovereignty and legal clarity.
             Get professional support for <strong>unincorporated association formation</strong>, state-specific UNA requirements,
-            and nonprofit tax exemption guidance nationwide.
+            and tax exemption guidance nationwide.
           </p>
           <p className="text-sm text-white/70 font-lora italic">
             We provide educational information and document preparation services. For legal representation or state-specific advice, contact a licensed attorney.

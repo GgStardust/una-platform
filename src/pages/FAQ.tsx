@@ -37,7 +37,7 @@ const faqCategories = [
       },
       {
         question: "Do I need an attorney to form a UNA?",
-        answer: "While you can form a UNA without an attorney, our platform provides comprehensive legal guidance. However, if you have complex legal needs (landholding, 501(c)(3) status, etc.), we recommend consulting with legal professionals."
+        answer: "While you can form a UNA without an attorney, our platform provides comprehensive formation support and administrative guidance. For complex legal matters (landholding, 501(c)(3) status, etc.), we can connect you with qualified legal professionals."
       },
       {
         question: "How long does it take to form a UNA?",
