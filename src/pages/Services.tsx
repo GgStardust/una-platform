@@ -1,8 +1,14 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Users, Shield, FileText, Target } from 'lucide-react';
+import { ArrowRight, Users, Shield, FileText, Target, ChevronDown, ChevronUp } from 'lucide-react';
+import { useState } from 'react';
 import SEOHead from '../components/SEOHead';
 
 export default function Services() {
+  const [expandedService, setExpandedService] = useState<string | null>(null);
+
+  const toggleExpanded = (serviceId: string) => {
+    setExpandedService(expandedService === serviceId ? null : serviceId);
+  };
 
   return (
     <>
@@ -102,61 +108,94 @@ export default function Services() {
           {/* Free Path Exploration */}
           <div className="bg-white/5 backdrop-blur-sm border border-white/5 rounded-xl p-6 md:p-8 hover:bg-white/8 transition-all duration-300">
             <div className="mb-6">
-              <h3 className="text-xl md:text-2xl font-light text-white font-montserrat mb-4">Free Path Exploration</h3>
-              <p className="text-white/70 text-sm md:text-base font-lora leading-relaxed mb-6">
-                Start your UNA formation journey with our guided assessment to understand 
-                your options and get personalized strategic insights.
+              <h3 className="text-xl md:text-2xl font-light text-white font-montserrat mb-3">Free Path Exploration</h3>
+              <p className="text-white/70 text-sm md:text-base font-lora leading-relaxed mb-4">
+                Guided assessment to understand your UNA formation options and get personalized strategic insights.
               </p>
+              <div className="text-[#C49A6C] text-sm font-medium font-montserrat mb-4">Free • 15 minutes</div>
             </div>
             
-            <div className="space-y-3 mb-8">
-              <div className="text-white/60 text-sm font-lora">• 3-step guided assessment</div>
-              <div className="text-white/60 text-sm font-lora">• Mission and impact analysis</div>
-              <div className="text-white/60 text-sm font-lora">• Strategic insights and recommendations</div>
-              <div className="text-white/60 text-sm font-lora">• Resource and next steps guidance</div>
+            <div className="flex items-center justify-between">
+              <Link 
+                to="/explore" 
+                className="inline-flex items-center text-[#C49A6C] hover:text-[#B8955A] transition-colors duration-200 font-medium text-sm font-montserrat group"
+              >
+                Start Free Exploration
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
+              </Link>
+              
+              <button
+                onClick={() => toggleExpanded('free')}
+                className="text-white/60 hover:text-white/80 transition-colors duration-200"
+              >
+                {expandedService === 'free' ? (
+                  <ChevronUp className="h-5 w-5" />
+                ) : (
+                  <ChevronDown className="h-5 w-5" />
+                )}
+              </button>
             </div>
             
-            <Link 
-              to="/explore" 
-              className="inline-flex items-center text-[#C49A6C] hover:text-[#B8955A] transition-colors duration-200 font-medium text-sm font-montserrat group"
-            >
-              Start Free Exploration
-              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
-            </Link>
+            {expandedService === 'free' && (
+              <div className="mt-6 pt-6 border-t border-white/10">
+                <div className="space-y-3 mb-6">
+                  <div className="text-white/60 text-sm font-lora">• 3-step guided assessment</div>
+                  <div className="text-white/60 text-sm font-lora">• Mission and impact analysis</div>
+                  <div className="text-white/60 text-sm font-lora">• Strategic insights and recommendations</div>
+                  <div className="text-white/60 text-sm font-lora">• Resource and next steps guidance</div>
+                </div>
+                <p className="text-white/50 text-xs font-lora italic">
+                  Perfect for groups just starting their UNA formation journey or wanting to understand their options before committing to paid services.
+                </p>
+              </div>
+            )}
           </div>
 
           {/* Strategy Session */}
           <div className="bg-white/5 backdrop-blur-sm border border-white/5 rounded-xl p-6 md:p-8 hover:bg-white/8 transition-all duration-300">
             <div className="mb-6">
-              <h3 className="text-xl md:text-2xl font-light text-white font-montserrat mb-4">Strategy Session</h3>
-              <p className="text-white/70 text-sm md:text-base font-lora leading-relaxed mb-6">
+              <h3 className="text-xl md:text-2xl font-light text-white font-montserrat mb-3">Strategy Session</h3>
+              <p className="text-white/70 text-sm md:text-base font-lora leading-relaxed mb-4">
                 Expert one-on-one consultation with strategic planning tailored to your organization's mission, goals, and state requirements.
               </p>
+              <div className="text-[#C49A6C] text-sm font-medium font-montserrat mb-4">$1,000 • 90 minutes</div>
             </div>
             
-            <div className="space-y-3 mb-8">
-              <div className="text-white/60 text-sm font-lora">• 60-90 minute personalized session</div>
-              <div className="text-white/60 text-sm font-lora">• Strategic summary and roadmap</div>
-              <div className="text-white/60 text-sm font-lora">• Mission and vision clarity</div>
-              <div className="text-white/60 text-sm font-lora">• State-specific requirements review</div>
-              <div className="text-white/60 text-sm font-lora">• Follow-up resources</div>
+            <div className="flex items-center justify-between">
+              <Link
+                to="/intake?package=strategy-session"
+                className="inline-flex items-center text-[#C49A6C] hover:text-[#B8955A] transition-colors duration-200 font-medium text-sm font-montserrat group"
+              >
+                Start Strategy Session
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
+              </Link>
+              
+              <button
+                onClick={() => toggleExpanded('strategy')}
+                className="text-white/60 hover:text-white/80 transition-colors duration-200"
+              >
+                {expandedService === 'strategy' ? (
+                  <ChevronUp className="h-5 w-5" />
+                ) : (
+                  <ChevronDown className="h-5 w-5" />
+                )}
+              </button>
             </div>
             
-            <div className="mb-6">
-              <div className="text-2xl md:text-3xl font-light text-[#C49A6C] font-montserrat mb-2">$1,000</div>
-              <div className="text-white/60 text-sm font-lora">90-minute expert consultation</div>
-              <div className="text-white/50 text-xs font-lora mt-2 italic">
-                Once scheduled, you'll complete a short intake form so we can tailor your consultation to your goals.
+            {expandedService === 'strategy' && (
+              <div className="mt-6 pt-6 border-t border-white/10">
+                <div className="space-y-3 mb-6">
+                  <div className="text-white/60 text-sm font-lora">• 60-90 minute personalized session</div>
+                  <div className="text-white/60 text-sm font-lora">• Strategic summary and roadmap</div>
+                  <div className="text-white/60 text-sm font-lora">• Mission and vision clarity</div>
+                  <div className="text-white/60 text-sm font-lora">• State-specific requirements review</div>
+                  <div className="text-white/60 text-sm font-lora">• Follow-up resources</div>
+                </div>
+                <p className="text-white/50 text-xs font-lora italic">
+                  Once scheduled, you'll complete a short intake form so we can tailor your consultation to your goals.
+                </p>
               </div>
-            </div>
-            
-            <Link
-              to="/intake?package=strategy-session"
-              className="inline-flex items-center text-[#C49A6C] hover:text-[#B8955A] transition-colors duration-200 font-medium text-sm font-montserrat group"
-            >
-              Start Strategy Session
-              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
-            </Link>
+            )}
           </div>
 
           {/* Complete Formation Package */}
@@ -166,40 +205,55 @@ export default function Services() {
             </div>
             
             <div className="mb-6">
-              <h3 className="text-xl md:text-2xl font-light text-white font-montserrat mb-4">Complete Formation Package</h3>
-              <p className="text-white/70 text-sm md:text-base font-lora leading-relaxed mb-6">
+              <h3 className="text-xl md:text-2xl font-light text-white font-montserrat mb-3">Complete Formation Package</h3>
+              <p className="text-white/70 text-sm md:text-base font-lora leading-relaxed mb-4">
                 White-glove UNA formation service with comprehensive documentation, expert guidance, and dedicated support.
-                Your organization deserves formation that reflects its purpose and integrity from day one.
               </p>
+              <div className="text-[#C49A6C] text-sm font-medium font-montserrat mb-4">$5,000 • Includes Strategy Session</div>
             </div>
             
-            <div className="space-y-3 mb-8">
-              <div className="text-white/60 text-sm font-lora">• Everything in Strategy Session</div>
-              <div className="text-white/60 text-sm font-lora">• Professional document preparation</div>
-              <div className="text-white/60 text-sm font-lora">• EIN application assistance</div>
-              <div className="text-white/60 text-sm font-lora">• Banking setup guidance</div>
-              <div className="text-white/60 text-sm font-lora">• 30-day email support</div>
-              <div className="text-white/60 text-sm font-lora">• Compliance checklist</div>
+            <div className="flex items-center justify-between">
+              <Link
+                to="/intake?package=complete-formation"
+                className="inline-flex items-center text-[#C49A6C] hover:text-[#B8955A] transition-colors duration-200 font-medium text-sm font-montserrat group"
+              >
+                Start Complete Formation
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
+              </Link>
+              
+              <button
+                onClick={() => toggleExpanded('complete')}
+                className="text-white/60 hover:text-white/80 transition-colors duration-200"
+              >
+                {expandedService === 'complete' ? (
+                  <ChevronUp className="h-5 w-5" />
+                ) : (
+                  <ChevronDown className="h-5 w-5" />
+                )}
+              </button>
             </div>
             
-            <div className="mb-6">
-              <div className="text-2xl md:text-3xl font-light text-[#C49A6C] font-montserrat mb-2">$5,000</div>
-              <div className="text-white/60 text-sm font-lora">Complete Formation Package</div>
-              <div className="mt-3 p-3 bg-[#C49A6C]/10 border border-[#C49A6C]/20 rounded-lg">
-                <div className="text-[#C49A6C] text-sm font-medium font-lora">Strategy Session Included</div>
-                <div className="text-white/60 text-xs font-lora mt-1">
-                  Already completed Strategy Session? Pay only $4,000 more
+            {expandedService === 'complete' && (
+              <div className="mt-6 pt-6 border-t border-white/10">
+                <div className="space-y-3 mb-6">
+                  <div className="text-white/60 text-sm font-lora">• Everything in Strategy Session</div>
+                  <div className="text-white/60 text-sm font-lora">• Professional document preparation</div>
+                  <div className="text-white/60 text-sm font-lora">• EIN application assistance</div>
+                  <div className="text-white/60 text-sm font-lora">• Banking setup guidance</div>
+                  <div className="text-white/60 text-sm font-lora">• 30-day email support</div>
+                  <div className="text-white/60 text-sm font-lora">• Compliance checklist</div>
                 </div>
+                <div className="p-3 bg-[#C49A6C]/10 border border-[#C49A6C]/20 rounded-lg mb-4">
+                  <div className="text-[#C49A6C] text-sm font-medium font-lora">Strategy Session Included</div>
+                  <div className="text-white/60 text-xs font-lora mt-1">
+                    Already completed Strategy Session? Pay only $4,000 more
+                  </div>
+                </div>
+                <p className="text-white/50 text-xs font-lora italic">
+                  Your organization deserves formation that reflects its purpose and integrity from day one.
+                </p>
               </div>
-            </div>
-            
-            <Link
-              to="/intake?package=complete-formation"
-              className="inline-flex items-center text-[#C49A6C] hover:text-[#B8955A] transition-colors duration-200 font-medium text-sm font-montserrat group"
-            >
-              Start Complete Formation
-              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
-            </Link>
+            )}
           </div>
         </div>
 
@@ -210,42 +264,13 @@ export default function Services() {
               PREMIUM TIER
             </div>
             <h3 className="text-2xl md:text-3xl font-light text-white mb-4 font-montserrat">Formation + Annual Partnership</h3>
-            <p className="text-white/70 mb-8 text-base md:text-lg font-lora max-w-3xl mx-auto leading-relaxed">
-              Our most comprehensive offering: complete formation service with a full year of dedicated advisory support.
-              For organizations that want a trusted partner as they establish and grow their UNA.
+            <p className="text-white/70 mb-6 text-base md:text-lg font-lora max-w-2xl mx-auto leading-relaxed">
+              Complete formation service with a full year of dedicated advisory support for organizations that want a trusted partner.
             </p>
+            <div className="text-[#7A4CA0] text-sm font-medium font-montserrat mb-8">Contact for Pricing • Annual Partnership</div>
+          </div>
 
-            <div className="grid md:grid-cols-2 gap-8 md:gap-12 mb-8">
-              <div className="text-left">
-                <h4 className="font-light text-white mb-4 font-montserrat text-lg">Everything in Complete Package, Plus:</h4>
-                <div className="space-y-3 text-white/60 font-lora">
-                  <div>• Quarterly compliance check-ins (4 sessions)</div>
-                  <div>• 12 months of email and Slack support</div>
-                  <div>• Document amendments included</div>
-                  <div>• Priority response time (24hr)</div>
-                </div>
-              </div>
-
-              <div className="text-left">
-                <h4 className="font-light text-white mb-4 font-montserrat text-lg">Perfect For:</h4>
-                <div className="space-y-3 text-white/60 font-lora">
-                  <div>• Organizations expecting significant growth</div>
-                  <div>• Groups with complex governance needs</div>
-                  <div>• Collectives pursuing grants or major funding</div>
-                  <div>• Teams seeking ongoing clarity and continuity</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="mb-8">
-              <div className="text-2xl md:text-3xl font-light text-[#C49A6C] mb-2 font-montserrat">Contact for Pricing</div>
-              <div className="text-white/70 text-base md:text-lg font-lora mb-2">Complete Formation + Annual Partnership</div>
-              <div className="text-white/60 text-sm font-lora mb-4">Your dedicated UNA advisor for the first year</div>
-              <div className="text-white/50 text-sm font-lora italic">
-                Pricing will be discussed and set based on your specific needs and requirements
-              </div>
-            </div>
-
+          <div className="flex items-center justify-center">
             <Link
               to="/contact"
               className="inline-flex items-center text-[#7A4CA0] hover:text-[#6B3F8F] transition-colors duration-200 font-medium text-sm font-montserrat group"
@@ -253,10 +278,6 @@ export default function Services() {
               Contact for More Information
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
             </Link>
-
-            <p className="mt-6 text-sm text-white/60 font-lora">
-              Ongoing fractional support provided upon request. Contact us to discuss custom support packages beyond the first year.
-            </p>
           </div>
         </div>
       </div>
