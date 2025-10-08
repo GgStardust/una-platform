@@ -1,10 +1,39 @@
 import { Link } from 'react-router-dom';
-import { ExternalLink, Building, CreditCard, FileText, BookOpen, AlertCircle } from 'lucide-react';
+import { ExternalLink, Building, CreditCard, FileText, BookOpen, AlertCircle, Search, Filter } from 'lucide-react';
+import { useState } from 'react';
 import SEOHead from '../components/SEOHead';
 import AffiliateLink from '../components/AffiliateLink';
 import { GradientHeader, SectionContainer, GlassCard } from '@/components/ui';
+import { getAllAffiliatePartners, getAllBankRecommendations, getAffiliatePartnersByCategory } from '@/lib/affiliate-system';
 
 export default function Resources() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  
+  // Get all affiliates from backend
+  const allAffiliates = getAllAffiliatePartners();
+  const allBanks = getAllBankRecommendations();
+  
+  // Filter affiliates based on search and category
+  const filteredAffiliates = allAffiliates.filter(affiliate => {
+    const matchesSearch = searchTerm === '' || 
+      affiliate.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      affiliate.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      affiliate.bestFor.toLowerCase().includes(searchTerm.toLowerCase());
+    
+    const matchesCategory = selectedCategory === 'all' || affiliate.category === selectedCategory;
+    
+    return matchesSearch && matchesCategory;
+  });
+  
+  const categories = [
+    { id: 'all', name: 'All Resources', count: allAffiliates.length },
+    { id: 'financial', name: 'Financial Tools', count: getAffiliatePartnersByCategory('financial').length },
+    { id: 'legal', name: 'Legal Services', count: getAffiliatePartnersByCategory('legal').length },
+    { id: 'tools', name: 'Business Tools', count: getAffiliatePartnersByCategory('tools').length },
+    { id: 'insurance', name: 'Insurance', count: getAffiliatePartnersByCategory('insurance').length }
+  ];
+
   return (
     <>
       <SEOHead
@@ -41,221 +70,149 @@ export default function Resources() {
               </div>
             </GlassCard>
 
-            {/* Banking Services */}
+            {/* Search and Filter */}
+            <GlassCard variant="outline" className="bg-white/10 backdrop-blur-sm">
+              <div className="flex flex-col md:flex-row gap-4 mb-6">
+                <div className="relative flex-grow">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-white/60" />
+                  <input
+                    type="text"
+                    placeholder="Search resources..."
+                    className="w-full pl-10 pr-4 py-2 rounded-lg bg-white/5 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#C49A6C]"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+                </div>
+                <div className="relative">
+                  <Filter className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-white/60" />
+                  <select
+                    className="w-full md:w-auto pl-10 pr-8 py-2 rounded-lg bg-white/5 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-[#C49A6C] appearance-none"
+                    value={selectedCategory}
+                    onChange={(e) => setSelectedCategory(e.target.value)}
+                  >
+                    {categories.map(category => (
+                      <option key={category.id} value={category.id} className="bg-[#1E2A38] text-white">
+                        {category.name} ({category.count})
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              <p className="text-white/70 text-sm text-center">
+                Showing {filteredAffiliates.length} of {allAffiliates.length} resources.
+              </p>
+            </GlassCard>
+
+            {/* All Resources Grid */}
             <div>
               <div className="flex items-center gap-3 mb-6">
                 <div className="bg-gradient-to-r from-[#C49A6C] to-[#2F7E7E] rounded-full p-3">
                   <Building className="h-6 w-6 text-white" />
                 </div>
-                <h2 className="text-3xl font-bold text-white font-montserrat">Banking Services</h2>
+                <h2 className="text-3xl font-bold text-white font-montserrat">All Resources</h2>
               </div>
 
-              <div className="grid md:grid-cols-3 gap-6">
-                <GlassCard variant="outline">
-                  <h3 className="text-xl font-semibold text-white mb-3 font-montserrat">Bluevine</h3>
-                  <p className="text-white/80 mb-4 font-lora text-sm">
-                    Business checking account with no monthly fees. Great for UNAs with regular transaction volume.
-                  </p>
-                  <ul className="text-white/70 text-sm space-y-2 mb-4 font-lora">
-                    <li>• No monthly fees</li>
-                    <li>• Free ACH transfers</li>
-                    <li>• Mobile deposit</li>
-                    <li>• 2.0% APY on balances</li>
-                  </ul>
-                  <AffiliateLink partnerId="bluevine" />
-                </GlassCard>
-
-                <GlassCard variant="outline">
-                  <h3 className="text-xl font-semibold text-white mb-3 font-montserrat">Novo</h3>
-                  <p className="text-white/80 mb-4 font-lora text-sm">
-                    Simple, modern banking designed for small businesses and nonprofits. Integrates with accounting software.
-                  </p>
-                  <ul className="text-white/70 text-sm space-y-2 mb-4 font-lora">
-                    <li>• $0 monthly fees</li>
-                    <li>• Free business debit card</li>
-                    <li>• Integrates with QuickBooks</li>
-                    <li>• Invoice tools included</li>
-                  </ul>
-                  <AffiliateLink partnerId="novo" />
-                </GlassCard>
-
-                <GlassCard variant="outline">
-                  <h3 className="text-xl font-semibold text-white mb-3 font-montserrat">Wise Business</h3>
-                  <p className="text-white/80 mb-4 font-lora text-sm">
-                    Perfect for UNAs with international members or transactions. Multi-currency accounts with low fees.
-                  </p>
-                  <ul className="text-white/70 text-sm space-y-2 mb-4 font-lora">
-                    <li>• Multi-currency accounts</li>
-                    <li>• Low international fees</li>
-                    <li>• Real exchange rates</li>
-                    <li>• Business debit card</li>
-                  </ul>
-                  <AffiliateLink partnerId="wise" />
-                </GlassCard>
-              </div>
-            </div>
-
-            {/* Accounting & Financial Tools */}
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="bg-gradient-to-r from-[#C49A6C] to-[#2F7E7E] rounded-full p-3">
-                  <CreditCard className="h-6 w-6 text-white" />
+              {filteredAffiliates.length > 0 ? (
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {filteredAffiliates.map(affiliate => (
+                    <GlassCard key={affiliate.id} variant="outline">
+                      <div className="flex items-center justify-between mb-3">
+                        <h3 className="text-xl font-semibold text-white font-montserrat">{affiliate.name}</h3>
+                        <span className="bg-white/10 px-2 py-1 rounded-full text-xs text-white/70 font-lora">
+                          {affiliate.category}
+                        </span>
+                      </div>
+                      <p className="text-white/80 mb-4 font-lora text-sm">
+                        {affiliate.description}
+                      </p>
+                      <div className="mb-4">
+                        <p className="text-white/90 text-sm font-medium font-montserrat mb-2">Key Features:</p>
+                        <ul className="text-white/70 text-sm space-y-1 font-lora">
+                          {affiliate.features.slice(0, 3).map((feature, index) => (
+                            <li key={index}>• {feature}</li>
+                          ))}
+                          {affiliate.features.length > 3 && (
+                            <li className="text-white/50 text-xs">+ {affiliate.features.length - 3} more features</li>
+                          )}
+                        </ul>
+                      </div>
+                      <div className="mb-4">
+                        <p className="text-white/90 text-sm font-medium font-montserrat mb-1">Best For:</p>
+                        <p className="text-white/70 text-sm font-lora">{affiliate.bestFor}</p>
+                      </div>
+                      <AffiliateLink partnerId={affiliate.id} />
+                    </GlassCard>
+                  ))}
                 </div>
-                <h2 className="text-3xl font-bold text-white font-montserrat">Accounting & Payments</h2>
-              </div>
-
-              <div className="grid md:grid-cols-3 gap-6">
-                <GlassCard variant="outline">
-                  <h3 className="text-xl font-semibold text-white mb-3 font-montserrat">Wave</h3>
-                  <p className="text-white/80 mb-4 font-lora text-sm">
-                    Free accounting software perfect for UNAs. Track income, expenses, and generate financial reports.
+              ) : (
+                <GlassCard variant="outline" className="text-center py-12">
+                  <p className="text-white/70 font-lora">
+                    No resources found matching your criteria. Try adjusting your search or filter.
                   </p>
-                  <ul className="text-white/70 text-sm space-y-2 mb-4 font-lora">
-                    <li>• 100% free accounting</li>
-                    <li>• Unlimited invoicing</li>
-                    <li>• Receipt scanning</li>
-                    <li>• Financial reports</li>
-                  </ul>
-                  <AffiliateLink partnerId="wave" />
                 </GlassCard>
-
-                <GlassCard variant="outline">
-                  <h3 className="text-xl font-semibold text-white mb-3 font-montserrat">Stripe</h3>
-                  <p className="text-white/80 mb-4 font-lora text-sm">
-                    Accept donations and payments online. Simple integration with your website or payment links.
-                  </p>
-                  <ul className="text-white/70 text-sm space-y-2 mb-4 font-lora">
-                    <li>• 2.9% + $0.30 per transaction</li>
-                    <li>• Recurring donations</li>
-                    <li>• Donation forms</li>
-                    <li>• No monthly fees</li>
-                  </ul>
-                  <AffiliateLink partnerId="stripe" />
-                </GlassCard>
-
-                <GlassCard variant="outline">
-                  <h3 className="text-xl font-semibold text-white mb-3 font-montserrat">Square</h3>
-                  <p className="text-white/80 mb-4 font-lora text-sm">
-                    Accept in-person payments at events. Free point-of-sale app with simple hardware options.
-                  </p>
-                  <ul className="text-white/70 text-sm space-y-2 mb-4 font-lora">
-                    <li>• Free POS software</li>
-                    <li>• 2.6% + $0.10 per tap/swipe</li>
-                    <li>• Inventory management</li>
-                    <li>• Event ticketing</li>
-                  </ul>
-                  <AffiliateLink partnerId="square" />
-                </GlassCard>
-              </div>
+              )}
             </div>
 
-            {/* Legal & Compliance Services */}
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="bg-gradient-to-r from-[#C49A6C] to-[#2F7E7E] rounded-full p-3">
-                  <FileText className="h-6 w-6 text-white" />
+            {/* Banking Services (from bankRecommendations) */}
+            {allBanks.length > 0 && (
+              <div>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="bg-gradient-to-r from-[#C49A6C] to-[#2F7E7E] rounded-full p-3">
+                    <Building className="h-6 w-6 text-white" />
+                  </div>
+                  <h2 className="text-3xl font-bold text-white font-montserrat">Banking Services</h2>
                 </div>
-                <h2 className="text-3xl font-bold text-white font-montserrat">Legal Services</h2>
-              </div>
 
-              <div className="grid md:grid-cols-3 gap-6">
-                <GlassCard variant="outline">
-                  <h3 className="text-xl font-semibold text-white mb-3 font-montserrat">LegalZoom</h3>
-                  <p className="text-white/80 mb-4 font-lora text-sm">
-                    Legal document templates and attorney consultations for ongoing compliance needs.
-                  </p>
-                  <ul className="text-white/70 text-sm space-y-2 mb-4 font-lora">
-                    <li>• Legal document templates</li>
-                    <li>• Attorney consultations</li>
-                    <li>• Business agreements</li>
-                    <li>• Trademark services</li>
-                  </ul>
-                  <AffiliateLink partnerId="legalzoom" />
-                </GlassCard>
-
-                <GlassCard variant="outline">
-                  <h3 className="text-xl font-semibold text-white mb-3 font-montserrat">Rocket Lawyer</h3>
-                  <p className="text-white/80 mb-4 font-lora text-sm">
-                    On-demand legal help with document templates and attorney consultations via subscription.
-                  </p>
-                  <ul className="text-white/70 text-sm space-y-2 mb-4 font-lora">
-                    <li>• Unlimited legal docs</li>
-                    <li>• Attorney consultations</li>
-                    <li>• Contract review</li>
-                    <li>• $39.99/month</li>
-                  </ul>
-                  <AffiliateLink partnerId="rocket-lawyer" />
-                </GlassCard>
-
-                <GlassCard variant="outline">
-                  <h3 className="text-xl font-semibold text-white mb-3 font-montserrat">Northwest RA</h3>
-                  <p className="text-white/80 mb-4 font-lora text-sm">
-                    Registered agent services for states requiring a physical address for legal documents.
-                  </p>
-                  <ul className="text-white/70 text-sm space-y-2 mb-4 font-lora">
-                    <li>• Registered agent service</li>
-                    <li>• Mail forwarding</li>
-                    <li>• Compliance alerts</li>
-                    <li>• All 50 states</li>
-                  </ul>
-                  <AffiliateLink partnerId="northwest-ra" />
-                </GlassCard>
-              </div>
-            </div>
-
-            {/* Organizational Tools */}
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="bg-gradient-to-r from-[#C49A6C] to-[#2F7E7E] rounded-full p-3">
-                  <BookOpen className="h-6 w-6 text-white" />
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {allBanks.map(bank => (
+                    <GlassCard key={bank.id} variant="outline">
+                      <div className="flex items-center justify-between mb-3">
+                        <h3 className="text-xl font-semibold text-white font-montserrat">{bank.name}</h3>
+                        <span className="bg-white/10 px-2 py-1 rounded-full text-xs text-white/70 font-lora">
+                          {bank.type.replace('-', ' ')}
+                        </span>
+                      </div>
+                      <p className="text-white/80 mb-4 font-lora text-sm">
+                        {bank.mission}
+                      </p>
+                      <div className="mb-4">
+                        <p className="text-white/90 text-sm font-medium font-montserrat mb-2">Key Features:</p>
+                        <ul className="text-white/70 text-sm space-y-1 font-lora">
+                          {bank.features.slice(0, 3).map((feature, index) => (
+                            <li key={index}>• {feature}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="mb-4">
+                        <p className="text-white/90 text-sm font-medium font-montserrat mb-1">Notes:</p>
+                        <p className="text-white/70 text-sm font-lora">{bank.notes}</p>
+                      </div>
+                      {bank.affiliateLink ? (
+                        <a
+                          href={bank.affiliateLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center text-[#C49A6C] hover:text-[#B8955A] transition-colors duration-200 font-medium text-sm font-montserrat"
+                        >
+                          Learn More
+                          <ExternalLink className="ml-2 h-4 w-4" />
+                        </a>
+                      ) : (
+                        <a
+                          href={bank.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center text-[#C49A6C] hover:text-[#B8955A] transition-colors duration-200 font-medium text-sm font-montserrat"
+                        >
+                          Visit Website
+                          <ExternalLink className="ml-2 h-4 w-4" />
+                        </a>
+                      )}
+                    </GlassCard>
+                  ))}
                 </div>
-                <h2 className="text-3xl font-bold text-white font-montserrat">Organizational Tools</h2>
               </div>
-
-              <div className="grid md:grid-cols-3 gap-6">
-                <GlassCard variant="outline">
-                  <h3 className="text-xl font-semibold text-white mb-3 font-montserrat">Google Workspace</h3>
-                  <p className="text-white/80 mb-4 font-lora text-sm">
-                    Professional email and collaboration tools. Nonprofit discount available.
-                  </p>
-                  <ul className="text-white/70 text-sm space-y-2 mb-4 font-lora">
-                    <li>• Custom email domain</li>
-                    <li>• 30GB-2TB storage</li>
-                    <li>• Google Meet & Calendar</li>
-                    <li>• Nonprofit discount</li>
-                  </ul>
-                  <AffiliateLink partnerId="google-workspace" />
-                </GlassCard>
-
-                <GlassCard variant="outline">
-                  <h3 className="text-xl font-semibold text-white mb-3 font-montserrat">Notion</h3>
-                  <p className="text-white/80 mb-4 font-lora text-sm">
-                    All-in-one workspace for documentation, project management, and team collaboration.
-                  </p>
-                  <ul className="text-white/70 text-sm space-y-2 mb-4 font-lora">
-                    <li>• Unlimited pages</li>
-                    <li>• Team collaboration</li>
-                    <li>• Database & wikis</li>
-                    <li>• Free for small teams</li>
-                  </ul>
-                  <AffiliateLink partnerId="notion" />
-                </GlassCard>
-
-                <GlassCard variant="outline">
-                  <h3 className="text-xl font-semibold text-white mb-3 font-montserrat">Calendly</h3>
-                  <p className="text-white/80 mb-4 font-lora text-sm">
-                    Scheduling tool for member meetings, consultations, and events. Integrates with calendars.
-                  </p>
-                  <ul className="text-white/70 text-sm space-y-2 mb-4 font-lora">
-                    <li>• Automated scheduling</li>
-                    <li>• Calendar sync</li>
-                    <li>• Team scheduling</li>
-                    <li>• Payment integration</li>
-                  </ul>
-                  <AffiliateLink partnerId="calendly" />
-                </GlassCard>
-              </div>
-            </div>
+            )}
 
             {/* Need Help Choosing? CTA */}
             <GlassCard variant="solid" className="bg-gradient-to-r from-[#C49A6C]/20 to-[#2F7E7E]/20 border-[#C49A6C]/30 text-center">

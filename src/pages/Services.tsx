@@ -13,18 +13,14 @@ export default function Services() {
   return (
     <>
       <SEOHead
-        title="Unincorporated Association Formation Services | Professional UNA Formation"
-        description="Professional unincorporated association formation services with expert administrative support. Get UNA structure guidance, state-specific UNA requirements, and complete formation assistance."
+        title="UNA Formation Guidance & Strategy Sessions"
+        description="Get personalized UNA formation guidance through our strategy sessions and explore your path with our free assessment. Expert guidance and document preparation."
         keywords={[
-          'unincorporated association formation',
-          'UNA formation services',
-          'UNA formation',
-          'UNA structure',
-          'UNA requirements',
-          'unincorporated association',
-          'UNA tax exemption',
-          'California UNA',
-          'state-specific UNA requirements'
+          'UNA formation guidance',
+          'UNA strategy session',
+          'UNA formation consultation',
+          'UNA formation planning',
+          'UNA document preparation'
         ]}
         ogType="service"
         schema={{
@@ -74,12 +70,12 @@ export default function Services() {
       <div className="py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl font-bold text-white mb-6 font-montserrat">
-            <span className="bg-gradient-to-r from-[#C49A6C] via-[#B8955A] to-[#2F7E7E] bg-clip-text text-transparent font-bold">Unincorporated Association Formation</span> Services
+            Professional <span className="bg-gradient-to-r from-[#C49A6C] via-[#B8955A] to-[#2F7E7E] bg-clip-text text-transparent font-bold">UNA Formation</span> Services
           </h1>
           <p className="text-xl text-white/90 font-lora mb-4">
-            Expert <strong className="text-white font-semibold">UNA formation services</strong> for groups seeking sovereignty and legal clarity.
-            Get professional support for <strong>unincorporated association formation</strong>, state-specific UNA requirements,
-            and tax exemption guidance nationwide.
+            Expert support for your <strong className="text-white font-semibold">Unincorporated Nonprofit Association</strong>
+            formation. We provide document preparation, strategic guidance, and administrative support
+            for UNA formation nationwide.
           </p>
           <p className="text-sm text-white/70 font-lora italic">
             We provide educational information and document preparation services. For legal representation or state-specific advice, contact a licensed attorney.

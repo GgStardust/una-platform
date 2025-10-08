@@ -133,18 +133,6 @@ export const bankRecommendations: BankRecommendation[] = [
     affiliateLink: 'https://relayfi.com/ref/una-platform',
     notes: 'Affiliate partner - excellent for UNAs needing financial management'
   },
-  {
-    id: 'novo',
-    name: 'Novo',
-    type: 'online-bank',
-    mission: 'Business banking for entrepreneurs',
-    unaFriendly: true,
-    requirements: ['EIN letter', 'UNA Agreement', 'LP/UNA-128 confirmation'],
-    features: ['Entrepreneur-focused', 'Free checking', 'Integrations', 'Mobile-first'],
-    affiliateStatus: 'partner',
-    affiliateLink: 'https://novo.co/ref/una-platform',
-    notes: 'Affiliate partner - great for entrepreneurial UNAs'
-  }
 ];
 
 // Financial tools and services
@@ -510,21 +498,6 @@ export const financialTools: AffiliatePartner[] = [
     slug: 'cnote'
   },
   {
-    id: 'bluevine',
-    name: 'BlueVine',
-    category: 'financial',
-    description: 'Online business banking solutions',
-    url: 'https://bluevine.com',
-    affiliateId: 'BLUEVINE_UNA_PLATFORM',
-    commission: '25%',
-    features: ['Business checking', 'Invoice factoring', 'Line of credit', 'Fast setup', 'Online banking'],
-    pros: ['Fast setup', 'Invoice factoring', 'Line of credit', 'Good rates', 'Online-first'],
-    cons: ['Limited branches', 'Technical requirements', 'Credit requirements'],
-    bestFor: 'UNAs that need quick business banking with factoring options',
-    status: 'active',
-    slug: 'bluevine'
-  },
-  {
     id: 'novo',
     name: 'Novo',
     category: 'financial',
@@ -538,21 +511,6 @@ export const financialTools: AffiliatePartner[] = [
     bestFor: 'UNAs that want simple business banking with minimal fees',
     status: 'active',
     slug: 'novo'
-  },
-  {
-    id: 'wise',
-    name: 'Wise',
-    category: 'financial',
-    description: 'International money transfers and multi-currency accounts',
-    url: 'https://wise.com',
-    affiliateId: 'WISE_UNA_PLATFORM',
-    commission: '15%',
-    features: ['International transfers', 'Multi-currency accounts', 'Low fees', 'Fast transfers', 'Mobile app'],
-    pros: ['Low fees', 'Fast transfers', 'Multi-currency', 'Good rates', 'Global reach'],
-    cons: ['Transfer limits', 'Verification required', 'Limited customer service'],
-    bestFor: 'UNAs that need international transfers and multi-currency accounts',
-    status: 'active',
-    slug: 'wise'
   },
 ];
 
@@ -672,6 +630,26 @@ export function getBankRecommendations(unaNeeds: {
     if (b.affiliateStatus === 'partner' && a.affiliateStatus !== 'partner') return 1;
     return 0;
   });
+}
+
+// Get all affiliate partners from all categories
+export function getAllAffiliatePartners(): AffiliatePartner[] {
+  return [...financialTools, ...legalServices];
+}
+
+// Get all bank recommendations
+export function getAllBankRecommendations(): BankRecommendation[] {
+  return bankRecommendations;
+}
+
+// Get affiliate partners by category
+export function getAffiliatePartnersByCategory(category: AffiliatePartner['category']): AffiliatePartner[] {
+  return getAllAffiliatePartners().filter(partner => partner.category === category);
+}
+
+// Get active affiliate partners only
+export function getActiveAffiliatePartners(): AffiliatePartner[] {
+  return getAllAffiliatePartners().filter(partner => partner.status === 'active');
 }
 
 // Get affiliate disclosure text

@@ -12,7 +12,7 @@ const Home = lazy(() => import('./pages/Home'));
 const Services = lazy(() => import('./pages/Services'));
 const FAQ = lazy(() => import('./pages/FAQ'));
 const About = lazy(() => import('./pages/About'));
-const Explore = lazy(() => import('./pages/ExploreNew'));
+const Explore = lazy(() => import('./pages/Explore'));
 const Success = lazy(() => import('./pages/Success'));
 const Intake = lazy(() => import('./pages/Intake'));
 const Confirmation = lazy(() => import('./pages/Confirmation'));
