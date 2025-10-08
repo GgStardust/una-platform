@@ -12,7 +12,7 @@ const Home = lazy(() => import('./pages/Home'));
 const Services = lazy(() => import('./pages/Services'));
 const FAQ = lazy(() => import('./pages/FAQ'));
 const About = lazy(() => import('./pages/About'));
-const Explore = lazy(() => import('./pages/Explore'));
+const Explore = lazy(() => import('./pages/ExploreNew'));
 const Success = lazy(() => import('./pages/Success'));
 const Intake = lazy(() => import('./pages/Intake'));
 const Confirmation = lazy(() => import('./pages/Confirmation'));
@@ -21,7 +21,7 @@ const SignUp = lazy(() => import('./pages/SignUp'));
 const BlogIndex = lazy(() => import('./pages/BlogIndex'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
 const StatePage = lazy(() => import('./pages/StatePage'));
-const Toolkit = lazy(() => import('./pages/Toolkit'));
+const Resources = lazy(() => import('./pages/Resources'));
 const Contact = lazy(() => import('./pages/Contact'));
 const Schedule = lazy(() => import('./pages/Schedule'));
 const AffiliateHub = lazy(() => import('./pages/AffiliateHub'));
@@ -119,19 +119,6 @@ function App() {
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-6">
               <NavLink
-                to="/toolkit"
-                className={({ isActive }) =>
-                  `px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                    isActive
-                      ? 'text-[#C49A6C] bg-[#C49A6C]/20'
-                      : 'text-[#F4F1E8] hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10'
-                  }`
-                }
-              >
-                Toolkit
-              </NavLink>
-
-              <NavLink
                 to="/services"
                 className={({ isActive }) =>
                   `px-3 py-2 rounded-md text-sm font-medium transition-colors ${
@@ -227,20 +214,6 @@ function App() {
                   </button>
                 </div>
                 <NavLink
-                  to="/toolkit"
-                  className={({ isActive }) =>
-                    `block px-3 py-3 rounded-md text-base font-medium transition-colors ${
-                      isActive
-                        ? 'text-[#C49A6C] bg-[#C49A6C]/20'
-                        : 'text-navy-700 hover:text-[#3DB5B0] hover:bg-[#C49A6C]/10'
-                    }`
-                  }
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Toolkit
-                </NavLink>
-
-                <NavLink
                   to="/services"
                   className={({ isActive }) =>
                     `block px-3 py-3 rounded-md text-base font-medium transition-colors ${
@@ -330,7 +303,8 @@ function App() {
           <Route path="/blog" element={<BlogIndex />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/states/:stateCode" element={<StatePage />} />
-          <Route path="/toolkit" element={<Toolkit />} />
+          <Route path="/resources" element={<Resources />} />
+          <Route path="/toolkit" element={<Resources />} /> {/* Redirect old toolkit URL */}
           <Route path="/contact" element={<Contact />} />
           <Route path="/schedule" element={<Schedule />} />
           <Route path="/affiliate-hub" element={<AffiliateHub />} />
@@ -367,8 +341,8 @@ function App() {
                 <NavLink to="/success-stories" className="block text-white/70 hover:text-white transition-colors font-lora text-sm">
                   Living Examples
                 </NavLink>
-                <NavLink to="/toolkit" className="block text-white/70 hover:text-white transition-colors font-lora text-sm">
-                  Toolkit
+                <NavLink to="/resources" className="block text-white/70 hover:text-white transition-colors font-lora text-sm">
+                  Recommended Tools
                 </NavLink>
                 <NavLink to="/faq" className="block text-white/70 hover:text-white transition-colors font-lora text-sm">
                   FAQ

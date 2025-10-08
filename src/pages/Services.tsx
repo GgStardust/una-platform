@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Users, Shield, FileText, Target, ChevronDown, ChevronUp, BookOpen, Clock } from 'lucide-react';
+import { ArrowRight, Users, Shield, FileText, Target, ChevronDown, ChevronUp, BookOpen, Clock, Building2 } from 'lucide-react';
 import { useState } from 'react';
 import SEOHead from '../components/SEOHead';
 
@@ -83,7 +83,7 @@ export default function Services() {
         </div>
       </div>
 
-      {/* Premium Pricing Introduction */}
+      {/* Services Introduction */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-white mb-4 font-montserrat">
@@ -92,13 +92,6 @@ export default function Services() {
           <p className="text-lg text-white/90 font-lora mb-6">
             Specialized expertise for organizations that choose to establish their UNA with clarity and confidence.
           </p>
-          <div className="bg-white/10 backdrop-blur-sm border border-[#C49A6C]/40 rounded-lg p-6 max-w-2xl mx-auto">
-            <p className="text-white/90 font-lora text-base">
-              <strong className="text-white font-semibold">Why invest in professional formation?</strong> Attorney fees for UNA work typically range from $5,000–$15,000.
-              Our services deliver the same precision and assurance at a fraction of the cost,
-              with the confidence that comes from specialized UNA expertise.
-            </p>
-          </div>
         </div>
       </div>
 
@@ -106,21 +99,18 @@ export default function Services() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         <div className="grid md:grid-cols-3 gap-8 md:gap-12">
           {/* Free Path Exploration */}
-          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 md:p-8 hover:bg-white/8 transition-all duration-300">
+          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-8 text-center hover:bg-white/15 transition-all duration-300">
             <div className="mb-6">
-              <div className="flex items-center mb-4">
-                <div className="bg-gradient-to-r from-[#C49A6C] to-[#2F7E7E] rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center mr-4">
-                  <BookOpen className="h-5 w-5 md:h-6 md:w-6 text-white" />
-                </div>
-                <h3 className="text-xl md:text-2xl font-light text-white font-montserrat">Free Path Exploration</h3>
+              <div className="bg-gradient-to-br from-[#C49A6C] to-[#2F7E7E] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+                <BookOpen className="h-8 w-8 text-white" />
               </div>
-              <p className="text-white/70 text-sm md:text-base font-lora leading-relaxed mb-4">
+              <h3 className="text-xl font-semibold text-white mb-3 font-montserrat">Free Path Exploration</h3>
+              <p className="text-white/80 font-lora mb-4">
                 Guided assessment to understand your UNA formation options and get personalized strategic insights.
               </p>
-              <div className="text-[#C49A6C] text-sm font-medium font-montserrat mb-4">Free • 15 minutes</div>
             </div>
             
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-center space-x-4">
               <Link 
                 to="/explore" 
                 className="inline-flex items-center text-[#C49A6C] hover:text-[#B8955A] transition-colors duration-200 font-medium text-sm font-montserrat group"
@@ -143,6 +133,7 @@ export default function Services() {
             
             {expandedService === 'free' && (
               <div className="mt-6 pt-6 border-t border-white/10">
+                <div className="text-[#C49A6C] text-sm font-medium font-montserrat mb-4">Free • 15 minutes</div>
                 <div className="space-y-3 mb-6">
                   <div className="text-white/60 text-sm font-lora">• 3-step guided assessment</div>
                   <div className="text-white/60 text-sm font-lora">• Mission and impact analysis</div>
@@ -157,21 +148,18 @@ export default function Services() {
           </div>
 
           {/* Strategy Session */}
-          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 md:p-8 hover:bg-white/8 transition-all duration-300">
+          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-8 text-center hover:bg-white/15 transition-all duration-300">
             <div className="mb-6">
-              <div className="flex items-center mb-4">
-                <div className="bg-gradient-to-r from-[#2F7E7E] to-[#7A4CA0] rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center mr-4">
-                  <Clock className="h-5 w-5 md:h-6 md:w-6 text-white" />
-                </div>
-                <h3 className="text-xl md:text-2xl font-light text-white font-montserrat">Strategy Session</h3>
+              <div className="bg-gradient-to-br from-[#2F7E7E] to-[#D4AF37] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+                <Clock className="h-8 w-8 text-white" />
               </div>
-              <p className="text-white/70 text-sm md:text-base font-lora leading-relaxed mb-4">
+              <h3 className="text-xl font-semibold text-white mb-3 font-montserrat">Strategy Session</h3>
+              <p className="text-white/80 font-lora mb-4">
                 Expert one-on-one consultation with strategic planning tailored to your organization's mission, goals, and state requirements.
               </p>
-              <div className="text-[#C49A6C] text-sm font-medium font-montserrat mb-4">$1,000 • 90 minutes</div>
             </div>
             
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-center space-x-4">
               <Link
                 to="/intake?package=strategy-session"
                 className="inline-flex items-center text-[#C49A6C] hover:text-[#B8955A] transition-colors duration-200 font-medium text-sm font-montserrat group"
@@ -194,12 +182,13 @@ export default function Services() {
             
             {expandedService === 'strategy' && (
               <div className="mt-6 pt-6 border-t border-white/10">
+                <div className="text-[#C49A6C] text-sm font-medium font-montserrat mb-4">$1,000 • 90 minutes</div>
                 <div className="space-y-3 mb-6">
-                  <div className="text-white/60 text-sm font-lora">• 60-90 minute personalized session</div>
-                  <div className="text-white/60 text-sm font-lora">• Strategic summary and roadmap</div>
-                  <div className="text-white/60 text-sm font-lora">• Mission and vision clarity</div>
-                  <div className="text-white/60 text-sm font-lora">• State-specific requirements review</div>
-                  <div className="text-white/60 text-sm font-lora">• Follow-up resources</div>
+                  <div className="text-white/60 text-sm font-lora">• Pre-session preparation with personalized insights</div>
+                  <div className="text-white/60 text-sm font-lora">• Strategic discussion on mission, vision, and governance</div>
+                  <div className="text-white/60 text-sm font-lora">• Actionable roadmap with timeline and priorities</div>
+                  <div className="text-white/60 text-sm font-lora">• Resource connections and specialized guidance</div>
+                  <div className="text-white/60 text-sm font-lora">• Follow-up resources and next steps</div>
                 </div>
                 <p className="text-white/50 text-xs font-lora italic">
                   Once scheduled, you'll complete a short intake form so we can tailor your consultation to your goals.
@@ -209,26 +198,23 @@ export default function Services() {
           </div>
 
           {/* Complete Formation Package */}
-          <div className="bg-white/8 backdrop-blur-sm border border-white/10 rounded-xl p-6 md:p-8 hover:bg-white/12 transition-all duration-300">
+          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-8 text-center hover:bg-white/15 transition-all duration-300">
             <div className="mb-6">
-              <div className="flex items-center mb-4">
-                <div className="bg-gradient-to-r from-[#7A4CA0] to-[#C49A6C] rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center mr-4">
-                  <FileText className="h-5 w-5 md:h-6 md:w-6 text-white" />
-                </div>
-                <h3 className="text-xl md:text-2xl font-light text-white font-montserrat">Complete Formation Package</h3>
+              <div className="bg-gradient-to-br from-[#D4AF37] to-[#C49A6C] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+                <Building2 className="h-8 w-8 text-white" />
               </div>
-              <p className="text-white/70 text-sm md:text-base font-lora leading-relaxed mb-4">
+              <h3 className="text-xl font-semibold text-white mb-3 font-montserrat">Formation Package</h3>
+              <p className="text-white/80 font-lora mb-4">
                 White-glove UNA formation service with comprehensive documentation, expert guidance, and dedicated support.
               </p>
-              <div className="text-[#C49A6C] text-sm font-medium font-montserrat mb-4">$5,000 • Includes Strategy Session</div>
             </div>
             
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-center space-x-4">
               <Link
                 to="/intake?package=complete-formation"
                 className="inline-flex items-center text-[#C49A6C] hover:text-[#B8955A] transition-colors duration-200 font-medium text-sm font-montserrat group"
               >
-                Start Complete Formation
+                Start Formation Package
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
               </Link>
               
@@ -246,6 +232,7 @@ export default function Services() {
             
             {expandedService === 'complete' && (
               <div className="mt-6 pt-6 border-t border-white/10">
+                <div className="text-[#C49A6C] text-sm font-medium font-montserrat mb-4">$5,000 • Includes Strategy Session</div>
                 <div className="space-y-3 mb-6">
                   <div className="text-white/60 text-sm font-lora">• Everything in Strategy Session</div>
                   <div className="text-white/60 text-sm font-lora">• Professional document preparation</div>
@@ -273,15 +260,15 @@ export default function Services() {
           <div className="text-center mb-8">
             <h3 className="text-2xl md:text-3xl font-light text-white mb-4 font-montserrat">Formation + Annual Partnership</h3>
             <p className="text-white/70 mb-6 text-base md:text-lg font-lora max-w-2xl mx-auto leading-relaxed">
-              Complete formation service with a full year of dedicated advisory support for organizations that want a trusted partner.
+              Build on your completed formation with a full year of dedicated advisory and structural support. Quarterly sessions, priority guidance, and continuous alignment keep your UNA lawful, adaptive, and strong through its first full cycle of operation.
             </p>
-            <div className="text-[#7A4CA0] text-sm font-medium font-montserrat mb-8">Contact for Pricing • Annual Partnership</div>
+            <div className="text-[#D4AF37] text-sm font-medium font-montserrat mb-8">Contact for Pricing • Annual Partnership</div>
           </div>
 
           <div className="flex items-center justify-center">
             <Link
               to="/contact"
-              className="inline-flex items-center text-[#7A4CA0] hover:text-[#6B3F8F] transition-colors duration-200 font-medium text-sm font-montserrat group"
+              className="inline-flex items-center text-[#D4AF37] hover:text-[#B8941F] transition-colors duration-200 font-medium text-sm font-montserrat group"
             >
               Contact for More Information
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
@@ -290,87 +277,6 @@ export default function Services() {
         </div>
       </div>
 
-      {/* What's Included in Strategy Session */}
-      <div className="py-8 md:py-16">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 md:mb-4 font-montserrat">
-              What's Included in a Strategy Session
-            </h2>
-            <p className="text-sm md:text-lg text-white/90 font-lora max-w-2xl mx-auto">
-              A comprehensive 90-minute consultation designed to set your UNA up for success
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-4 md:gap-6">
-            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 md:p-6 hover:bg-white/15 transition-all duration-200">
-              <div className="flex items-start">
-                <div className="bg-gradient-to-br from-[#C49A6C] to-[#2F7E7E] rounded-lg w-10 h-10 md:w-12 md:h-12 flex items-center justify-center mr-3 md:mr-4 flex-shrink-0">
-                  <Target className="h-5 w-5 md:h-6 md:w-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-base md:text-lg font-semibold text-white mb-1 md:mb-2 font-montserrat">Pre-Session Preparation</h3>
-                  <p className="text-white/80 text-xs md:text-sm font-lora">
-                    We review your Explore results and prepare personalized insights aligned with your organization's purpose and goals.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 md:p-6 hover:bg-white/15 transition-all duration-200">
-              <div className="flex items-start">
-                <div className="bg-gradient-to-br from-[#2F7E7E] to-[#7A4CA0] rounded-lg w-10 h-10 md:w-12 md:h-12 flex items-center justify-center mr-3 md:mr-4 flex-shrink-0">
-                  <Users className="h-5 w-5 md:h-6 md:w-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-base md:text-lg font-semibold text-white mb-1 md:mb-2 font-montserrat">Strategic Discussion</h3>
-                  <p className="text-white/80 text-xs md:text-sm font-lora">
-                    Deep dive into your mission, vision, governance structure, and formation strategy with personalized expert guidance.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 md:p-6 hover:bg-white/15 transition-all duration-200">
-              <div className="flex items-start">
-                <div className="bg-gradient-to-br from-[#7A4CA0] to-[#C49A6C] rounded-lg w-10 h-10 md:w-12 md:h-12 flex items-center justify-center mr-3 md:mr-4 flex-shrink-0">
-                  <FileText className="h-5 w-5 md:h-6 md:w-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-base md:text-lg font-semibold text-white mb-1 md:mb-2 font-montserrat">Actionable Roadmap</h3>
-                  <p className="text-white/80 text-xs md:text-sm font-lora">
-                    Receive a clear, step-by-step roadmap with timeline and priorities for your UNA formation journey.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-4 md:p-6 hover:bg-white/15 transition-all duration-200">
-              <div className="flex items-start">
-                <div className="bg-gradient-to-br from-[#C49A6C] to-[#7A4CA0] rounded-lg w-10 h-10 md:w-12 md:h-12 flex items-center justify-center mr-3 md:mr-4 flex-shrink-0">
-                  <Shield className="h-5 w-5 md:h-6 md:w-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-base md:text-lg font-semibold text-white mb-1 md:mb-2 font-montserrat">Resource Connections</h3>
-                  <p className="text-white/80 text-xs md:text-sm font-lora">
-                    Access our curated network of UNA formation resources, tools, and specialized service providers.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-6 md:mt-8 text-center">
-            <Link
-              to="/intake?package=strategy-session"
-              className="inline-flex items-center justify-center px-6 md:px-8 py-2 md:py-3 rounded-full font-semibold text-white transition-all duration-200 bg-gradient-to-r from-[#C49A6C] to-[#2F7E7E] hover:from-[#B88A5A] hover:to-[#246666] hover:shadow-lg font-montserrat text-sm md:text-base"
-            >
-              Start Your Strategy Session
-              <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
-            </Link>
-          </div>
-        </div>
-      </div>
 
       {/* Why Choose Our Guidance */}
       <div className="py-16">
@@ -396,7 +302,7 @@ export default function Services() {
             </div>
 
             <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-8 text-center hover:bg-white/15 transition-all duration-200">
-              <div className="bg-gradient-to-br from-[#2F7E7E] to-[#7A4CA0] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+              <div className="bg-gradient-to-br from-[#2F7E7E] to-[#D4AF37] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
                 <FileText className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold text-white mb-3 font-montserrat">Complete Documentation</h3>
@@ -406,7 +312,7 @@ export default function Services() {
             </div>
 
             <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-8 text-center hover:bg-white/15 transition-all duration-200">
-              <div className="bg-gradient-to-br from-[#7A4CA0] to-[#C49A6C] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+              <div className="bg-gradient-to-br from-[#D4AF37] to-[#C49A6C] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
                 <Users className="h-8 w-8 text-white" />
               </div>
               <h3 className="text-xl font-semibold text-white mb-3 font-montserrat">Ongoing Support</h3>

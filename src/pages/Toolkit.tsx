@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, Sparkles, ChevronDown, ChevronUp } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
 import AffiliateLink from '../components/AffiliateLink';
 import Symbol from '../components/Symbol';
@@ -21,6 +21,11 @@ interface ExploreData {
 export default function Toolkit() {
   const [exploreData, setExploreData] = useState<ExploreData | null>(null);
   const [isPersonalized, setIsPersonalized] = useState(false);
+  const [expandedStep, setExpandedStep] = useState<string | null>(null);
+
+  const toggleExpanded = (stepId: string) => {
+    setExpandedStep(expandedStep === stepId ? null : stepId);
+  };
 
   useEffect(() => {
     // Check for Explore assessment data
@@ -71,20 +76,6 @@ export default function Toolkit() {
         <SectionContainer>
           <div className="max-w-6xl mx-auto space-y-8">
 
-            {/* Personalized Banner */}
-            {isPersonalized && exploreData && (
-              <div className="bg-gradient-to-r from-[#C49A6C]/30 to-[#2F7E7E]/30 backdrop-blur-sm rounded-xl p-6 border-2 border-[#C49A6C]/50">
-                <div className="flex items-center justify-center gap-3 mb-3">
-                  <Sparkles className="h-6 w-6 text-[#C49A6C]" />
-                  <h3 className="text-2xl font-bold text-white font-montserrat">Your Personalized Formation Toolkit</h3>
-                  <Sparkles className="h-6 w-6 text-[#C49A6C]" />
-                </div>
-                <p className="text-white/90 text-center font-lora">
-                  Based on your assessment, this toolkit curates the most relevant tools for your UNA in <strong className="text-white font-semibold">{exploreData.state}</strong>.
-                  {exploreData.readiness.needsBanking && " Banking solutions are prioritized since you indicated you need an account."}
-                </p>
-              </div>
-            )}
 
             {/* No Assessment Banner */}
             {!isPersonalized && (
@@ -110,7 +101,7 @@ export default function Toolkit() {
               <span className="px-4 py-2 bg-white/20 backdrop-blur-sm border border-white/30 text-white rounded-full text-base font-medium font-montserrat">
                 Legal Research + Business Experience
               </span>
-              <span className="px-4 py-2 bg-[#7A4CA0]/20 backdrop-blur-sm border border-[#7A4CA0]/30 text-white rounded-full text-base font-medium font-montserrat">
+              <span className="px-4 py-2 bg-[#D4AF37]/20 backdrop-blur-sm border border-[#D4AF37]/30 text-white rounded-full text-base font-medium font-montserrat">
                 No Attorney Required for Basic Formation
               </span>
             </div>
@@ -123,12 +114,25 @@ export default function Toolkit() {
             </p>
           </div>
           <GlassCard variant="solid">
-            <div className="flex items-center space-x-3 mb-6">
-              <div className="p-3 bg-gradient-to-r from-[#C49A6C] to-[#2F7E7E] rounded-lg">
-                <Symbol name="orb" size={24} className="text-white" />
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center space-x-3">
+                <div className="p-3 bg-gradient-to-r from-[#C49A6C] to-[#2F7E7E] rounded-lg">
+                  <Symbol name="orb" size={24} className="text-white" />
+                </div>
+                <h2 className="text-2xl font-semibold text-[#1C1F3B] font-montserrat">Step 1: Find Your UNA Formation Path</h2>
               </div>
-              <h2 className="text-2xl font-semibold text-[#1C1F3B] font-montserrat">Step 1: Find Your UNA Formation Path</h2>
+              <button
+                onClick={() => toggleExpanded('step1')}
+                className="text-[#1C1F3B]/60 hover:text-[#1C1F3B]/80 transition-colors duration-200"
+              >
+                {expandedStep === 'step1' ? (
+                  <ChevronUp className="h-6 w-6" />
+                ) : (
+                  <ChevronDown className="h-6 w-6" />
+                )}
+              </button>
             </div>
+            
             <p className="text-[#1C1F3B]/80 mb-6 font-lora">
               Begin with your free assessment to clarify your state's requirements and receive personalized guidance for your UNA formation journey.
             </p>
@@ -160,12 +164,25 @@ export default function Toolkit() {
             </p>
           </div>
           <GlassCard variant="solid">
-            <div className="flex items-center space-x-3 mb-6">
-              <div className="p-3 bg-gradient-to-r from-[#2F7E7E] to-[#7A4CA0] rounded-lg">
-                <Symbol name="triangle" size={24} className="text-white" />
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center space-x-3">
+                <div className="p-3 bg-gradient-to-r from-[#2F7E7E] to-[#D4AF37] rounded-lg">
+                  <Symbol name="triangle" size={24} className="text-white" />
+                </div>
+                <h2 className="text-2xl font-semibold text-[#1C1F3B] font-montserrat">Step 2: Get Professional Guidance</h2>
               </div>
-              <h2 className="text-2xl font-semibold text-[#1C1F3B] font-montserrat">Step 2: Get Professional Guidance</h2>
+              <button
+                onClick={() => toggleExpanded('step2')}
+                className="text-[#1C1F3B]/60 hover:text-[#1C1F3B]/80 transition-colors duration-200"
+              >
+                {expandedStep === 'step2' ? (
+                  <ChevronUp className="h-6 w-6" />
+                ) : (
+                  <ChevronDown className="h-6 w-6" />
+                )}
+              </button>
             </div>
+            
             <p className="text-[#1C1F3B]/80 mb-6 font-lora">
               Access personalized consulting and document preparation services based on your state's specific requirements and your UNA's needs.
             </p>
@@ -174,104 +191,125 @@ export default function Toolkit() {
               {/* Strategy Session */}
               <div className="bg-gradient-to-br from-[#C49A6C]/10 to-[#2F7E7E]/10 rounded-lg p-6 border-2 border-[#C49A6C]/30">
                 <h3 className="text-lg font-semibold text-[#1C1F3B] mb-3 font-montserrat">Strategy Session</h3>
-                <div className="text-3xl font-bold text-[#C49A6C] mb-3 font-montserrat">$1,000</div>
-                <p className="text-[#1C1F3B]/80 text-sm mb-4 font-lora">90-minute expert consultation on your UNA formation path</p>
-                <ul className="space-y-2 mb-6 text-sm text-[#1C1F3B]/80 font-lora">
-                  <li className="flex items-start">
-                    <span className="text-[#C49A6C] mr-2">✓</span>
-                    60-90 minute personalized session
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-[#C49A6C] mr-2">✓</span>
-                    Strategic summary and roadmap
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-[#C49A6C] mr-2">✓</span>
-                    State-specific requirements review
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-[#C49A6C] mr-2">✓</span>
-                    Follow-up resources
-                  </li>
-                </ul>
-                <Link to="/services" className="inline-flex items-center justify-center bg-gradient-to-r from-[#C49A6C] to-[#B8955A] text-white px-6 py-3 rounded-full text-sm font-semibold hover:shadow-lg transition-all duration-200 w-full font-montserrat">
-                  Schedule Strategy Session
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </div>
-
-              {/* Complete Formation Package */}
-              <div className="bg-gradient-to-br from-[#2F7E7E]/10 to-[#7A4CA0]/10 rounded-lg p-6 border-2 border-[#2F7E7E]/40 relative">
-                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                  <span className="bg-gradient-to-r from-[#2F7E7E] to-[#7A4CA0] text-white px-4 py-1 rounded-full text-xs font-bold font-montserrat">BEST VALUE</span>
-                </div>
-                <h3 className="text-lg font-semibold text-[#1C1F3B] mb-3 font-montserrat">Complete Formation</h3>
-                <div className="text-3xl font-bold text-[#2F7E7E] mb-1 font-montserrat">$5,000</div>
-                <p className="text-[#1C1F3B]/80 text-sm mb-4 font-lora">White-glove formation service with full documentation</p>
-                <ul className="space-y-2 mb-6 text-sm text-[#1C1F3B]/80 font-lora">
-                  <li className="flex items-start">
-                    <span className="text-[#2F7E7E] mr-2">✓</span>
-                    Everything in Strategy Session
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-[#2F7E7E] mr-2">✓</span>
-                    Professional document prep
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-[#2F7E7E] mr-2">✓</span>
-                    EIN application assistance
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-[#2F7E7E] mr-2">✓</span>
-                    Banking setup guidance
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-[#2F7E7E] mr-2">✓</span>
-                    30-day email support
-                  </li>
-                </ul>
-                <Link to="/services" className="inline-flex items-center justify-center bg-gradient-to-r from-[#2F7E7E] to-[#246666] text-white px-6 py-3 rounded-full text-sm font-semibold hover:shadow-lg transition-all duration-200 w-full font-montserrat">
-                  Schedule Complete Formation
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </div>
-
-              {/* Premium Tier */}
-              <div className="bg-gradient-to-br from-[#7A4CA0]/10 to-[#C49A6C]/10 rounded-lg p-6 border-2 border-[#7A4CA0]/40">
-                <h3 className="text-lg font-semibold text-[#1C1F3B] mb-3 font-montserrat">Premium Partnership</h3>
-                <div className="text-2xl font-bold text-[#7A4CA0] mb-1 font-montserrat">Contact for Pricing</div>
-                <p className="text-[#1C1F3B]/80 text-sm mb-2 font-lora">Formation + 12 months ongoing support</p>
-                <p className="text-[#1C1F3B]/70 text-xs mb-4 font-lora italic">
-                  Pricing will be discussed and set based on your specific needs
+                <p className="text-[#1C1F3B]/80 text-sm mb-4 font-lora">
+                  <strong>What you get:</strong> 90-minute expert consultation with personalized formation guidance, strategic roadmap, and state-specific requirements review.
                 </p>
-                <ul className="space-y-2 mb-6 text-sm text-[#1C1F3B]/80 font-lora">
-                  <li className="flex items-start">
-                    <span className="text-[#7A4CA0] mr-2">✓</span>
-                    Everything in Complete Package
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-[#7A4CA0] mr-2">✓</span>
-                    Quarterly compliance check-ins
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-[#7A4CA0] mr-2">✓</span>
-                    12 months email/Slack support
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-[#7A4CA0] mr-2">✓</span>
-                    Document amendments included
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-[#7A4CA0] mr-2">✓</span>
-                    Priority response time
-                  </li>
-                </ul>
-                <Link to="/contact" className="inline-flex items-center justify-center bg-gradient-to-r from-[#7A4CA0] to-[#5A3875] text-white px-6 py-3 rounded-full text-sm font-semibold hover:shadow-lg transition-all duration-200 w-full font-montserrat">
-                  Contact for More Information
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
+                <p className="text-[#1C1F3B]/70 text-xs mb-4 font-lora">
+                  <strong>Who it's for:</strong> Groups who want expert guidance before starting their UNA formation
+                </p>
+              </div>
+
+              {/* Formation Package */}
+              <div className="bg-gradient-to-br from-[#2F7E7E]/10 to-[#D4AF37]/10 rounded-lg p-6 border-2 border-[#2F7E7E]/40">
+                <h3 className="text-lg font-semibold text-[#1C1F3B] mb-3 font-montserrat">Formation Package</h3>
+                <p className="text-[#1C1F3B]/80 text-sm mb-4 font-lora">
+                  <strong>What you get:</strong> Complete UNA formation with essential UNA Agreement, professional document preparation, EIN application assistance, banking setup guidance, and 30-day support.
+                </p>
+                <p className="text-[#1C1F3B]/70 text-xs mb-4 font-lora">
+                  <strong>Who it's for:</strong> Organizations that want full formation support with all essential legal documents
+                </p>
+              </div>
+
+              {/* Formation + Annual Partnership */}
+              <div className="bg-gradient-to-br from-[#D4AF37]/10 to-[#C49A6C]/10 rounded-lg p-6 border-2 border-[#D4AF37]/40">
+                <h3 className="text-lg font-semibold text-[#1C1F3B] mb-3 font-montserrat">Formation + Annual Partnership</h3>
+                <p className="text-[#1C1F3B]/80 text-sm mb-4 font-lora">
+                  <strong>What you get:</strong> Complete formation service (including essential UNA Agreement) plus 12 months of ongoing advisory support with quarterly check-ins, priority guidance, and document amendments.
+                </p>
+                <p className="text-[#1C1F3B]/70 text-xs mb-4 font-lora">
+                  <strong>Who it's for:</strong> Organizations planning long-term growth who want a trusted formation partner
+                </p>
               </div>
             </div>
+
+            {/* Unified CTA */}
+            <div className="mt-8 text-center">
+              <Link
+                to="/services"
+                className="inline-flex items-center justify-center bg-gradient-to-r from-[#C49A6C] to-[#2F7E7E] text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-lg transition-all duration-200 font-montserrat"
+              >
+                View All Services & Pricing
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </div>
+
+            {expandedStep === 'step2' && (
+              <div className="mt-8 pt-6 border-t border-[#1C1F3B]/10">
+                <div className="grid md:grid-cols-3 gap-6">
+                  <div className="space-y-3">
+                    <h4 className="font-semibold text-[#1C1F3B] font-montserrat">Strategy Session Includes:</h4>
+                    <ul className="space-y-2 text-sm text-[#1C1F3B]/80 font-lora">
+                      <li className="flex items-start">
+                        <span className="text-[#C49A6C] mr-2">✓</span>
+                        60-90 minute personalized session
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#C49A6C] mr-2">✓</span>
+                        Strategic summary and roadmap
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#C49A6C] mr-2">✓</span>
+                        State-specific requirements review
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#C49A6C] mr-2">✓</span>
+                        Follow-up resources
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="space-y-3">
+                    <h4 className="font-semibold text-[#1C1F3B] font-montserrat">Formation Package Includes:</h4>
+                    <ul className="space-y-2 text-sm text-[#1C1F3B]/80 font-lora">
+                      <li className="flex items-start">
+                        <span className="text-[#2F7E7E] mr-2">✓</span>
+                        Everything in Strategy Session
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#2F7E7E] mr-2">✓</span>
+                        Professional document prep
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#2F7E7E] mr-2">✓</span>
+                        EIN application assistance
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#2F7E7E] mr-2">✓</span>
+                        Banking setup guidance
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#2F7E7E] mr-2">✓</span>
+                        30-day email support
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="space-y-3">
+                    <h4 className="font-semibold text-[#1C1F3B] font-montserrat">Annual Partnership Includes:</h4>
+                    <ul className="space-y-2 text-sm text-[#1C1F3B]/80 font-lora">
+                      <li className="flex items-start">
+                        <span className="text-[#D4AF37] mr-2">✓</span>
+                        Everything in Formation Package
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#D4AF37] mr-2">✓</span>
+                        Quarterly compliance check-ins
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#D4AF37] mr-2">✓</span>
+                        12 months email/Slack support
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#D4AF37] mr-2">✓</span>
+                        Document amendments included
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-[#D4AF37] mr-2">✓</span>
+                        Priority response time
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            )}
           </GlassCard>
 
           {/* Step 3: Build Your Infrastructure */}
@@ -281,17 +319,45 @@ export default function Toolkit() {
             </p>
           </div>
           <GlassCard variant="solid">
-            <div className="flex items-center space-x-3 mb-6">
-              <div className="p-3 bg-gradient-to-r from-[#7A4CA0] to-[#2F7E7E] rounded-lg">
-                <Symbol name="triangle" size={24} className="text-white" />
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center space-x-3">
+                <div className="p-3 bg-gradient-to-r from-[#D4AF37] to-[#2F7E7E] rounded-lg">
+                  <Symbol name="triangle" size={24} className="text-white" />
+                </div>
+                <h2 className="text-2xl font-semibold text-[#1C1F3B] font-montserrat">Step 3: Build Your Infrastructure</h2>
               </div>
-              <h2 className="text-2xl font-semibold text-[#1C1F3B] font-montserrat">Step 3: Build Your Infrastructure</h2>
+              <button
+                onClick={() => toggleExpanded('step3')}
+                className="text-[#1C1F3B]/60 hover:text-[#1C1F3B]/80 transition-colors duration-200"
+              >
+                {expandedStep === 'step3' ? (
+                  <ChevronUp className="h-6 w-6" />
+                ) : (
+                  <ChevronDown className="h-6 w-6" />
+                )}
+              </button>
             </div>
+            
             <p className="text-[#1C1F3B]/80 mb-8 font-lora text-lg">
               Set up the essential tools and services your UNA needs to operate effectively. Each UNA operates best with a dedicated bank account and supporting infrastructure.
             </p>
 
-            {/* 1. Financial - Banking */}
+            {!expandedStep || expandedStep !== 'step3' ? (
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="bg-[#2F7E7E]/10 rounded-lg p-6 border border-[#2F7E7E]/30">
+                  <h3 className="font-semibold text-[#1C1F3B] mb-2 font-montserrat">Essential Banking</h3>
+                  <p className="text-[#1C1F3B]/80 text-sm mb-4 font-lora">Bluevine, Novo, and Wise for UNA-friendly banking solutions</p>
+                  <div className="text-sm text-[#1C1F3B]/70 font-lora">Starting at $0/month</div>
+                </div>
+                <div className="bg-[#D4AF37]/10 rounded-lg p-6 border border-[#D4AF37]/30">
+                  <h3 className="font-semibold text-[#1C1F3B] mb-2 font-montserrat">Business Tools</h3>
+                  <p className="text-[#1C1F3B]/80 text-sm mb-4 font-lora">Wave, Stripe, Google Workspace, and Notion for operations</p>
+                  <div className="text-sm text-[#1C1F3B]/70 font-lora">Free to $40/month</div>
+                </div>
+              </div>
+            ) : (
+              <>
+                {/* 1. Financial - Banking */}
             <div className="mb-10">
               <h3 className="text-xl font-bold text-[#1C1F3B] mb-4 font-montserrat flex items-center">
                 <span className="bg-[#2F7E7E] text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm font-bold">1</span>
@@ -342,7 +408,7 @@ export default function Toolkit() {
             {/* 2. Accounting - Bookkeeping & Payment Processing */}
             <div className="mb-10">
               <h3 className="text-xl font-bold text-[#1C1F3B] mb-4 font-montserrat flex items-center">
-                <span className="bg-[#7A4CA0] text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm font-bold">2</span>
+                <span className="bg-[#D4AF37] text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm font-bold">2</span>
                 Accounting: Bookkeeping & Payment Processing
               </h3>
               <p className="text-[#1C1F3B]/70 mb-6 font-lora">
@@ -352,7 +418,7 @@ export default function Toolkit() {
               <div className="overflow-x-auto mb-6">
                 <table className="w-full border-collapse bg-white/50 rounded-lg overflow-hidden">
                   <thead>
-                    <tr className="bg-[#7A4CA0]/20">
+                    <tr className="bg-[#D4AF37]/20">
                       <th className="p-4 text-left font-semibold text-[#1C1F3B] font-montserrat">Service</th>
                       <th className="p-4 text-left font-semibold text-[#1C1F3B] font-montserrat">Best For</th>
                       <th className="p-4 text-left font-semibold text-[#1C1F3B] font-montserrat">Cost</th>
@@ -489,6 +555,8 @@ export default function Toolkit() {
                 Some listed tools are affiliate partners that align with UNA Platform values. Your use supports platform development at no additional cost.
               </p>
             </div>
+              </>
+            )}
           </GlassCard>
 
           {/* Step 4: Growth & Community Resources */}
@@ -498,20 +566,48 @@ export default function Toolkit() {
             </p>
           </div>
           <GlassCard variant="solid">
-            <div className="flex items-center space-x-3 mb-6">
-              <div className="p-3 bg-gradient-to-r from-[#7A4CA0] to-[#C49A6C] rounded-lg">
-                <Symbol name="constellation" size={24} className="text-white" />
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center space-x-3">
+                <div className="p-3 bg-gradient-to-r from-[#D4AF37] to-[#C49A6C] rounded-lg">
+                  <Symbol name="constellation" size={24} className="text-white" />
+                </div>
+                <h2 className="text-2xl font-semibold text-[#1C1F3B] font-montserrat">Step 4: Growth & Community Resources</h2>
               </div>
-              <h2 className="text-2xl font-semibold text-[#1C1F3B] font-montserrat">Step 4: Growth & Community Resources</h2>
+              <button
+                onClick={() => toggleExpanded('step4')}
+                className="text-[#1C1F3B]/60 hover:text-[#1C1F3B]/80 transition-colors duration-200"
+              >
+                {expandedStep === 'step4' ? (
+                  <ChevronUp className="h-6 w-6" />
+                ) : (
+                  <ChevronDown className="h-6 w-6" />
+                )}
+              </button>
             </div>
+            
             <p className="text-[#1C1F3B]/80 mb-8 font-lora text-lg">
               Connect with community, access ongoing education, and engage professional support as your UNA evolves.
             </p>
 
-            {/* Community & Education */}
+            {!expandedStep || expandedStep !== 'step4' ? (
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="bg-[#D4AF37]/10 rounded-lg p-6 border border-[#D4AF37]/30">
+                  <h3 className="font-semibold text-[#1C1F3B] mb-2 font-montserrat">Learning & Development</h3>
+                  <p className="text-[#1C1F3B]/80 text-sm mb-4 font-lora">Coursera, Udemy, and LinkedIn Learning for business skills</p>
+                  <div className="text-sm text-[#1C1F3B]/70 font-lora">Free to $59/month</div>
+                </div>
+                <div className="bg-[#C49A6C]/10 rounded-lg p-6 border border-[#C49A6C]/30">
+                  <h3 className="font-semibold text-[#1C1F3B] mb-2 font-montserrat">Professional Support</h3>
+                  <p className="text-[#1C1F3B]/80 text-sm mb-4 font-lora">Ongoing guidance and custom solutions for your UNA</p>
+                  <div className="text-sm text-[#1C1F3B]/70 font-lora">Contact for pricing</div>
+                </div>
+              </div>
+            ) : (
+              <>
+                {/* Community & Education */}
             <div className="mb-10">
               <h3 className="text-xl font-bold text-[#1C1F3B] mb-4 font-montserrat flex items-center">
-                <span className="bg-[#7A4CA0] text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm font-bold">1</span>
+                <span className="bg-[#D4AF37] text-white rounded-full w-8 h-8 flex items-center justify-center mr-3 text-sm font-bold">1</span>
                 Community & Education
               </h3>
               <p className="text-[#1C1F3B]/70 mb-6 font-lora">
@@ -521,7 +617,7 @@ export default function Toolkit() {
               <div className="overflow-x-auto mb-6">
                 <table className="w-full border-collapse bg-white/50 rounded-lg overflow-hidden">
                   <thead>
-                    <tr className="bg-[#7A4CA0]/20">
+                    <tr className="bg-[#D4AF37]/20">
                       <th className="p-4 text-left font-semibold text-[#1C1F3B] font-montserrat">Resource</th>
                       <th className="p-4 text-left font-semibold text-[#1C1F3B] font-montserrat">Best For</th>
                       <th className="p-4 text-left font-semibold text-[#1C1F3B] font-montserrat">Cost</th>
@@ -567,10 +663,10 @@ export default function Toolkit() {
               </p>
 
               <div className="grid md:grid-cols-2 gap-6">
-                <div className="bg-[#7A4CA0]/10 rounded-lg p-6 border border-[#7A4CA0]/30">
+                <div className="bg-[#D4AF37]/10 rounded-lg p-6 border border-[#D4AF37]/30">
                   <h4 className="font-semibold text-[#1C1F3B] mb-2 font-montserrat">Formation Services</h4>
                   <p className="text-[#1C1F3B]/80 text-sm mb-4 font-lora">White-glove formation support from strategy session to complete setup.</p>
-                  <div className="text-lg font-semibold text-[#7A4CA0] font-montserrat mb-2">
+                  <div className="text-lg font-semibold text-[#D4AF37] font-montserrat mb-2">
                     Contact for Pricing
                   </div>
                   <p className="text-[#1C1F3B]/70 text-xs mb-4 font-lora italic">
@@ -578,7 +674,7 @@ export default function Toolkit() {
                   </p>
                   <Link
                     to="/contact"
-                    className="inline-flex items-center justify-center bg-gradient-to-r from-[#7A4CA0] to-[#5A3875] text-white px-6 py-3 rounded-full text-sm font-semibold hover:shadow-lg transition-all duration-200 w-full font-montserrat"
+                    className="inline-flex items-center justify-center bg-gradient-to-r from-[#D4AF37] to-[#B8941F] text-white px-6 py-3 rounded-full text-sm font-semibold hover:shadow-lg transition-all duration-200 w-full font-montserrat"
                   >
                     Contact for More Information
                     <ArrowRight className="ml-2 h-4 w-4" />
@@ -599,6 +695,8 @@ export default function Toolkit() {
                 </div>
               </div>
             </div>
+              </>
+            )}
           </GlassCard>
 
           </div>
