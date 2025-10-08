@@ -96,43 +96,32 @@ export default function Services() {
         </div>
       </div>
 
-      {/* Services Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-8">
-        <div className="grid md:grid-cols-3 gap-4 md:gap-8">
+      {/* Services - Minimalist Layout */}
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+        <div className="space-y-16">
           {/* Free Path Exploration */}
-          <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 md:p-6">
-            <div className="flex items-center mb-3 md:mb-4">
-              <div className="bg-gradient-to-r from-[#C49A6C] to-[#2F7E7E] rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center mr-3">
-                <BookOpen className="h-5 w-5 md:h-6 md:w-6 text-white" />
+          <div className="border-b border-white/10 pb-12">
+            <div className="flex items-start justify-between mb-6">
+              <div>
+                <h3 className="text-2xl md:text-3xl font-light text-white font-montserrat mb-3">Free Path Exploration</h3>
+                <p className="text-white/80 text-lg font-lora leading-relaxed max-w-2xl">
+                  Start your UNA formation journey with our guided assessment to understand 
+                  your options and get personalized strategic insights.
+                </p>
               </div>
-              <h3 className="text-lg md:text-xl font-semibold text-white font-montserrat">Free Path Exploration</h3>
+              <Link 
+                to="/explore" 
+                className="text-[#C49A6C] hover:text-[#B8955A] transition-colors duration-200 font-medium text-sm uppercase tracking-wide font-montserrat"
+              >
+                Start Free →
+              </Link>
             </div>
-            <p className="text-white/90 mb-3 md:mb-4 font-lora text-sm md:text-base">
-              Start your UNA formation journey with our guided assessment to understand 
-              your options and get personalized strategic insights.
-            </p>
-            <ul className="text-xs md:text-sm text-white/90 mb-3 md:mb-4 space-y-1 font-lora">
-              <li className="flex items-center">
-                <Check className="h-3 w-3 md:h-4 md:w-4 text-[#C49A6C] mr-2 flex-shrink-0" />
-                3-step guided assessment
-              </li>
-              <li className="flex items-center">
-                <Check className="h-3 w-3 md:h-4 md:w-4 text-[#C49A6C] mr-2 flex-shrink-0" />
-                Mission and impact analysis
-              </li>
-              <li className="flex items-center">
-                <Check className="h-3 w-3 md:h-4 md:w-4 text-[#C49A6C] mr-2 flex-shrink-0" />
-                Strategic insights and recommendations
-              </li>
-              <li className="flex items-center">
-                <Check className="h-3 w-3 md:h-4 md:w-4 text-[#C49A6C] mr-2 flex-shrink-0" />
-                Resource and next steps guidance
-              </li>
-            </ul>
-            <Link to="/explore" className="btn-grad btn-primary text-xs md:text-sm px-4 md:px-6 py-2 md:py-3 w-full text-center">
-              Start Free Exploration
-              <ArrowRight className="ml-2 h-3 w-3 md:h-4 md:w-4 inline" />
-            </Link>
+            <div className="grid md:grid-cols-2 gap-6 text-white/70 font-lora">
+              <div>3-step guided assessment</div>
+              <div>Mission and impact analysis</div>
+              <div>Strategic insights and recommendations</div>
+              <div>Resource and next steps guidance</div>
+            </div>
           </div>
 
           {/* Strategy Session - Payment Enabled */}
