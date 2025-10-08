@@ -413,7 +413,7 @@ export default function ExploreNew() {
           </div>
 
           {/* Question Card */}
-          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-white/20 mb-4 md:mb-6">
+          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 md:p-6 border border-white/20 mb-4 md:mb-6">
             <h2 className="text-xl md:text-2xl font-bold text-white mb-2 font-montserrat">
               {currentQuestion.question}
             </h2>
