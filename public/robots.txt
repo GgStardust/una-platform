@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.unaguide.com/sitemap.xml
+
+# Disallow admin and private areas
+Disallow: /admin
+Disallow: /admin-test
+Disallow: /admin-direct
+
+# Allow all other content
+Allow: /blog/
+Allow: /services/
+Allow: /toolkit/
+Allow: /explore/
+Allow: /contact/
+Allow: /schedule/
