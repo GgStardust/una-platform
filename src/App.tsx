@@ -2,6 +2,7 @@ import { Routes, Route, NavLink, Link } from 'react-router-dom';
 import { useState, useEffect, Suspense, lazy } from 'react';
 import { Menu, X } from 'lucide-react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
+import { Analytics } from '@vercel/analytics/react';
 import { IntakeData } from '@/lib/types';
 import { googleAnalyticsService } from '@/lib/analytics';
 import LoadingSpinner from './components/LoadingSpinner';
@@ -402,7 +403,8 @@ function App() {
         </div>
       </footer>
       
-      {/* Vercel Speed Insights */}
+      {/* Vercel Analytics & Speed Insights */}
+      <Analytics />
       <SpeedInsights />
     </div>
   );
