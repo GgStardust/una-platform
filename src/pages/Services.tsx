@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Users, Shield, FileText, Target, ChevronDown, ChevronUp } from 'lucide-react';
+import { ArrowRight, Users, Shield, FileText, Target, ChevronDown, ChevronUp, BookOpen, Clock } from 'lucide-react';
 import { useState } from 'react';
 import SEOHead from '../components/SEOHead';
 
@@ -106,9 +106,14 @@ export default function Services() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         <div className="grid md:grid-cols-3 gap-8 md:gap-12">
           {/* Free Path Exploration */}
-          <div className="bg-white/5 backdrop-blur-sm border border-white/5 rounded-xl p-6 md:p-8 hover:bg-white/8 transition-all duration-300">
+          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 md:p-8 hover:bg-white/8 transition-all duration-300">
             <div className="mb-6">
-              <h3 className="text-xl md:text-2xl font-light text-white font-montserrat mb-3">Free Path Exploration</h3>
+              <div className="flex items-center mb-4">
+                <div className="bg-gradient-to-r from-[#C49A6C] to-[#2F7E7E] rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center mr-4">
+                  <BookOpen className="h-5 w-5 md:h-6 md:w-6 text-white" />
+                </div>
+                <h3 className="text-xl md:text-2xl font-light text-white font-montserrat">Free Path Exploration</h3>
+              </div>
               <p className="text-white/70 text-sm md:text-base font-lora leading-relaxed mb-4">
                 Guided assessment to understand your UNA formation options and get personalized strategic insights.
               </p>
@@ -152,9 +157,14 @@ export default function Services() {
           </div>
 
           {/* Strategy Session */}
-          <div className="bg-white/5 backdrop-blur-sm border border-white/5 rounded-xl p-6 md:p-8 hover:bg-white/8 transition-all duration-300">
+          <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-6 md:p-8 hover:bg-white/8 transition-all duration-300">
             <div className="mb-6">
-              <h3 className="text-xl md:text-2xl font-light text-white font-montserrat mb-3">Strategy Session</h3>
+              <div className="flex items-center mb-4">
+                <div className="bg-gradient-to-r from-[#2F7E7E] to-[#7A4CA0] rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center mr-4">
+                  <Clock className="h-5 w-5 md:h-6 md:w-6 text-white" />
+                </div>
+                <h3 className="text-xl md:text-2xl font-light text-white font-montserrat">Strategy Session</h3>
+              </div>
               <p className="text-white/70 text-sm md:text-base font-lora leading-relaxed mb-4">
                 Expert one-on-one consultation with strategic planning tailored to your organization's mission, goals, and state requirements.
               </p>
@@ -199,13 +209,14 @@ export default function Services() {
           </div>
 
           {/* Complete Formation Package */}
-          <div className="bg-white/8 backdrop-blur-sm border border-white/10 rounded-xl p-6 md:p-8 hover:bg-white/12 transition-all duration-300 relative">
-            <div className="absolute top-4 right-4 bg-[#C49A6C]/20 text-[#C49A6C] px-3 py-1 rounded-full font-medium text-xs font-montserrat">
-              BEST VALUE
-            </div>
-            
+          <div className="bg-white/8 backdrop-blur-sm border border-white/10 rounded-xl p-6 md:p-8 hover:bg-white/12 transition-all duration-300">
             <div className="mb-6">
-              <h3 className="text-xl md:text-2xl font-light text-white font-montserrat mb-3">Complete Formation Package</h3>
+              <div className="flex items-center mb-4">
+                <div className="bg-gradient-to-r from-[#7A4CA0] to-[#C49A6C] rounded-full w-10 h-10 md:w-12 md:h-12 flex items-center justify-center mr-4">
+                  <FileText className="h-5 w-5 md:h-6 md:w-6 text-white" />
+                </div>
+                <h3 className="text-xl md:text-2xl font-light text-white font-montserrat">Complete Formation Package</h3>
+              </div>
               <p className="text-white/70 text-sm md:text-base font-lora leading-relaxed mb-4">
                 White-glove UNA formation service with comprehensive documentation, expert guidance, and dedicated support.
               </p>
@@ -257,12 +268,9 @@ export default function Services() {
           </div>
         </div>
 
-        {/* Premium Tier - Contact for Pricing */}
+        {/* Annual Partnership - Contact for Pricing */}
         <div className="mt-16 md:mt-20 bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-8 md:p-12">
           <div className="text-center mb-8">
-            <div className="inline-block bg-[#7A4CA0]/20 text-[#7A4CA0] px-4 py-1 rounded-full font-medium text-xs font-montserrat mb-4">
-              PREMIUM TIER
-            </div>
             <h3 className="text-2xl md:text-3xl font-light text-white mb-4 font-montserrat">Formation + Annual Partnership</h3>
             <p className="text-white/70 mb-6 text-base md:text-lg font-lora max-w-2xl mx-auto leading-relaxed">
               Complete formation service with a full year of dedicated advisory support for organizations that want a trusted partner.
