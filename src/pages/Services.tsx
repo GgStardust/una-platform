@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Users, Shield, FileText, Target, ChevronDown, ChevronUp, BookOpen, Clock, Building2 } from 'lucide-react';
+import { ArrowRight, Users, FileText, Target, ChevronDown, ChevronUp, BookOpen, Clock, Building2 } from 'lucide-react';
 import { useState } from 'react';
 import SEOHead from '../components/SEOHead';
 

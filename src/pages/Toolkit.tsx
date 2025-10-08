@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { ArrowRight, Sparkles, ChevronDown, ChevronUp } from 'lucide-react';
+import { ArrowRight, ChevronDown, ChevronUp } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
 import AffiliateLink from '../components/AffiliateLink';
 import Symbol from '../components/Symbol';
@@ -19,7 +19,7 @@ interface ExploreData {
 }
 
 export default function Toolkit() {
-  const [exploreData, setExploreData] = useState<ExploreData | null>(null);
+  const [, setExploreData] = useState<ExploreData | null>(null);
   const [isPersonalized, setIsPersonalized] = useState(false);
   const [expandedStep, setExpandedStep] = useState<string | null>(null);
 

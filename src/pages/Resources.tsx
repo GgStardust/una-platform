@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ExternalLink, Building, CreditCard, FileText, BookOpen, AlertCircle, Search, Filter } from 'lucide-react';
+import { ExternalLink, Building, AlertCircle, Search, Filter } from 'lucide-react';
 import { useState } from 'react';
 import SEOHead from '../components/SEOHead';
 import AffiliateLink from '../components/AffiliateLink';
@@ -71,7 +71,7 @@ export default function Resources() {
             </GlassCard>
 
             {/* Search and Filter */}
-            <GlassCard variant="outline" className="bg-white/10 backdrop-blur-sm">
+            <GlassCard variant="default" className="bg-white/10 backdrop-blur-sm">
               <div className="flex flex-col md:flex-row gap-4 mb-6">
                 <div className="relative flex-grow">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-white/60" />
@@ -115,7 +115,7 @@ export default function Resources() {
               {filteredAffiliates.length > 0 ? (
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {filteredAffiliates.map(affiliate => (
-                    <GlassCard key={affiliate.id} variant="outline">
+                    <GlassCard key={affiliate.id} variant="default">
                       <div className="flex items-center justify-between mb-3">
                         <h3 className="text-xl font-semibold text-white font-montserrat">{affiliate.name}</h3>
                         <span className="bg-white/10 px-2 py-1 rounded-full text-xs text-white/70 font-lora">
@@ -145,7 +145,7 @@ export default function Resources() {
                   ))}
                 </div>
               ) : (
-                <GlassCard variant="outline" className="text-center py-12">
+                <GlassCard variant="default" className="text-center py-12">
                   <p className="text-white/70 font-lora">
                     No resources found matching your criteria. Try adjusting your search or filter.
                   </p>
@@ -165,7 +165,7 @@ export default function Resources() {
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {allBanks.map(bank => (
-                    <GlassCard key={bank.id} variant="outline">
+                    <GlassCard key={bank.id} variant="default">
                       <div className="flex items-center justify-between mb-3">
                         <h3 className="text-xl font-semibold text-white font-montserrat">{bank.name}</h3>
                         <span className="bg-white/10 px-2 py-1 rounded-full text-xs text-white/70 font-lora">

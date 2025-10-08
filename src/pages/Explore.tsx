@@ -253,9 +253,9 @@ export default function ExploreNew() {
             subtitle="Based on your answers"
           />
 
-          <div className="max-w-3xl mx-auto px-4 py-6 md:py-12">
+          <div className="max-w-3xl mx-auto px-3 md:px-4 py-3 md:py-6">
             {/* Score Display */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-white/20 text-center mb-6">
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl md:rounded-2xl p-4 md:p-6 border border-white/20 text-center mb-4 md:mb-5">
               <div className="text-5xl md:text-6xl font-bold text-white mb-2">{score}%</div>
               <div className={`text-xl md:text-2xl font-semibold ${recommendationClass} mb-4`}>
                 {recommendation}
@@ -272,12 +272,12 @@ export default function ExploreNew() {
             </div>
 
             {/* Why UNA Is Right - Simplified */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-white/20 mb-6">
-              <h3 className="text-xl md:text-2xl font-bold text-white mb-4 font-montserrat">
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl md:rounded-2xl p-4 md:p-6 border border-white/20 mb-4 md:mb-5">
+              <h3 className="text-lg md:text-xl font-bold text-white mb-3 font-montserrat">
                 Why a UNA Works For You:
               </h3>
 
-              <div className="space-y-3">
+              <div className="space-y-2 md:space-y-2.5">
                 {answers.primaryGoals.includes('sovereignty') && (
                   <div className="flex items-start gap-3">
                     <CheckCircle className="h-5 w-5 text-[#C49A6C] flex-shrink-0 mt-0.5" />
@@ -326,7 +326,7 @@ export default function ExploreNew() {
             </div>
 
             {/* Next Steps CTAs */}
-            <div className="space-y-3">
+            <div className="space-y-2 md:space-y-2.5">
               {answers.email ? (
                 <>
                   <button
@@ -334,36 +334,36 @@ export default function ExploreNew() {
                       // Pass email to intake form
                       navigate('/intake', { state: { email: answers.email, quizResults: answers } });
                     }}
-                    className="w-full px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-[#C49A6C] to-[#B8955A] text-white rounded-xl font-semibold hover:shadow-xl transition-all duration-200 font-montserrat text-base md:text-lg flex items-center justify-center gap-2"
+                    className="w-full px-5 py-2.5 md:px-8 md:py-3.5 bg-gradient-to-r from-[#C49A6C] to-[#B8955A] text-white rounded-xl font-semibold hover:shadow-xl transition-all duration-200 font-montserrat text-sm md:text-base flex items-center justify-center gap-2"
                   >
                     Continue to Intake Form
-                    <ArrowRight className="h-4 w-4 md:h-5 md:w-5" />
+                    <ArrowRight className="h-4 w-4" />
                   </button>
                   <p className="text-white/60 text-xs text-center font-lora">
                     We'll send your results to {answers.email}
                   </p>
                 </>
               ) : (
-                <div className="bg-white/5 border border-white/20 rounded-xl p-4 mb-3">
-                  <p className="text-white/80 text-sm font-lora text-center mb-2">
+                <div className="bg-white/5 border border-white/20 rounded-lg p-3 mb-2">
+                  <p className="text-white/80 text-xs md:text-sm font-lora text-center mb-1.5">
                     💡 <strong className="text-white">Next Step:</strong> Take your time reviewing these results.
                   </p>
                   <p className="text-white/60 text-xs font-lora text-center">
-                    When you're ready to move forward, you can start the intake process or explore our services below.
+                    When you're ready, explore our services below.
                   </p>
                 </div>
               )}
 
               <button
                 onClick={() => navigate('/services')}
-                className="w-full px-6 py-3 md:px-8 md:py-4 border-2 border-white/30 text-white rounded-xl font-semibold hover:bg-white/10 transition-all duration-200 font-montserrat text-base md:text-lg"
+                className="w-full px-5 py-2.5 md:px-8 md:py-3.5 border-2 border-white/30 text-white rounded-xl font-semibold hover:bg-white/10 transition-all duration-200 font-montserrat text-sm md:text-base"
               >
                 View Services & Pricing
               </button>
 
               <button
                 onClick={() => navigate('/faq')}
-                className="w-full px-6 py-3 md:px-8 md:py-4 border-2 border-white/30 text-white rounded-xl font-semibold hover:bg-white/10 transition-all duration-200 font-montserrat text-base md:text-lg"
+                className="w-full px-5 py-2.5 md:px-8 md:py-3.5 border-2 border-white/30 text-white rounded-xl font-semibold hover:bg-white/10 transition-all duration-200 font-montserrat text-sm md:text-base"
               >
                 Learn More About UNAs
               </button>
@@ -393,37 +393,37 @@ export default function ExploreNew() {
           subtitle="6-question assessment • Instant results"
         />
 
-        <div className="max-w-2xl mx-auto px-4 py-6 md:py-12">
+        <div className="max-w-2xl mx-auto px-3 md:px-4 py-2 md:py-4">
           {/* Progress Bar */}
-          <div className="mb-6 md:mb-8">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-white/70 text-xs md:text-sm font-montserrat">
+          <div className="mb-3 md:mb-4">
+            <div className="flex items-center justify-between mb-1.5">
+              <span className="text-white/70 text-xs font-montserrat">
                 Question {currentStep + 1} of {questions.length}
               </span>
-              <span className="text-white/70 text-xs md:text-sm font-montserrat">
-                {Math.round(progress)}% Complete
+              <span className="text-white/70 text-xs font-montserrat">
+                {Math.round(progress)}%
               </span>
             </div>
-            <div className="w-full bg-white/20 rounded-full h-2">
+            <div className="w-full bg-white/20 rounded-full h-1.5 md:h-2">
               <div
-                className="bg-gradient-to-r from-[#C49A6C] to-[#2F7E7E] h-2 rounded-full transition-all duration-300"
+                className="bg-gradient-to-r from-[#C49A6C] to-[#2F7E7E] h-1.5 md:h-2 rounded-full transition-all duration-300"
                 style={{ width: `${progress}%` }}
               />
             </div>
           </div>
 
           {/* Question Card */}
-          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 md:p-6 border border-white/20 mb-4 md:mb-6">
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl md:rounded-2xl p-3 md:p-5 border border-white/20 mb-2 md:mb-4">
             <h2 className="text-xl md:text-2xl font-bold text-white mb-2 font-montserrat">
               {currentQuestion.question}
             </h2>
             {'subtitle' in currentQuestion && (
-              <p className="text-white/60 text-xs md:text-sm font-lora mb-4">
+              <p className="text-white/60 text-xs md:text-sm font-lora mb-2 md:mb-3">
                 {currentQuestion.subtitle}
               </p>
             )}
             {'description' in currentQuestion && (
-              <p className="text-white/70 text-xs md:text-sm font-lora mb-4 italic">
+              <p className="text-white/70 text-xs md:text-sm font-lora mb-2 md:mb-3 italic">
                 {currentQuestion.description}
               </p>
             )}
@@ -437,7 +437,7 @@ export default function ExploreNew() {
                     value={answers.email}
                     onChange={(e) => handleAnswer('email', e.target.value)}
                     placeholder="your@email.com (optional)"
-                    className="w-full pl-12 pr-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder-white/40 font-lora focus:outline-none focus:ring-2 focus:ring-[#C49A6C] text-sm md:text-base"
+                    className="w-full pl-10 md:pl-12 pr-3 md:pr-4 py-2.5 md:py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder-white/40 font-lora focus:outline-none focus:ring-2 focus:ring-[#C49A6C] text-sm"
                   />
                 </div>
                 {currentQuestion.optional && (
@@ -450,7 +450,7 @@ export default function ExploreNew() {
               <select
                 value={answers[currentQuestion.id as keyof QuizAnswers] as string}
                 onChange={(e) => handleAnswer(currentQuestion.id, e.target.value)}
-                className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white font-lora focus:outline-none focus:ring-2 focus:ring-[#C49A6C] text-sm md:text-base"
+                className="w-full px-3 md:px-4 py-2.5 md:py-3 bg-white/10 border border-white/30 rounded-lg text-white font-lora focus:outline-none focus:ring-2 focus:ring-[#C49A6C] text-sm"
               >
                 <option value="" className="bg-[#1E2A38] text-white">Select your state...</option>
                 {currentQuestion.options?.map((option) => (
@@ -460,7 +460,7 @@ export default function ExploreNew() {
                 ))}
               </select>
             ) : (
-              <div className="space-y-2 md:space-y-3">
+              <div className="space-y-1.5 md:space-y-2">
                 {currentQuestion.options?.map((option) => {
                   const Icon = 'icon' in option ? option.icon : null;
                   const isSelected = currentQuestion.multiSelect
@@ -471,19 +471,19 @@ export default function ExploreNew() {
                     <button
                       key={option.value}
                       onClick={() => handleAnswer(currentQuestion.id, option.value)}
-                      className={`w-full p-3 md:p-4 rounded-lg border-2 transition-all duration-200 text-left ${
+                      className={`w-full p-2.5 md:p-3 rounded-lg border-2 transition-all duration-200 text-left ${
                         isSelected
                           ? 'border-[#C49A6C] bg-[#C49A6C]/20'
                           : 'border-white/30 bg-white/5 hover:border-white/50'
                       }`}
                     >
-                      <div className="flex items-center gap-2 md:gap-3">
-                        {Icon && <Icon className={`h-4 w-4 md:h-5 md:w-5 flex-shrink-0 ${isSelected ? 'text-[#C49A6C]' : 'text-white/70'}`} />}
-                        <span className={`font-semibold text-sm md:text-base ${isSelected ? 'text-white' : 'text-white/90'} font-montserrat`}>
+                      <div className="flex items-center gap-2">
+                        {Icon && <Icon className={`h-4 w-4 flex-shrink-0 ${isSelected ? 'text-[#C49A6C]' : 'text-white/70'}`} />}
+                        <span className={`font-semibold text-sm ${isSelected ? 'text-white' : 'text-white/90'} font-montserrat`}>
                           {option.label}
                         </span>
                         {currentQuestion.multiSelect && isSelected && (
-                          <CheckCircle className="h-4 w-4 md:h-5 md:w-5 ml-auto text-[#C49A6C]" />
+                          <CheckCircle className="h-4 w-4 ml-auto text-[#C49A6C]" />
                         )}
                       </div>
                     </button>
@@ -494,11 +494,11 @@ export default function ExploreNew() {
           </div>
 
           {/* Navigation Buttons */}
-          <div className="flex items-center justify-between gap-3 md:gap-4">
+          <div className="flex items-center justify-between gap-2 md:gap-3">
             {currentStep > 0 ? (
               <button
                 onClick={handleBack}
-                className="px-4 md:px-6 py-2 md:py-3 border-2 border-white/30 text-white rounded-lg font-semibold hover:bg-white/10 transition-all duration-200 font-montserrat text-sm md:text-base"
+                className="px-4 md:px-6 py-2 md:py-2.5 border-2 border-white/30 text-white rounded-lg font-semibold hover:bg-white/10 transition-all duration-200 font-montserrat text-sm"
               >
                 Back
               </button>
@@ -509,14 +509,14 @@ export default function ExploreNew() {
             <button
               onClick={handleNext}
               disabled={!isAnswered}
-              className={`px-6 md:px-8 py-2 md:py-3 rounded-lg font-semibold transition-all duration-200 font-montserrat flex items-center gap-2 text-sm md:text-base ${
+              className={`px-5 md:px-8 py-2 md:py-2.5 rounded-lg font-semibold transition-all duration-200 font-montserrat flex items-center gap-1.5 md:gap-2 text-sm ${
                 isAnswered
                   ? 'bg-gradient-to-r from-[#C49A6C] to-[#B8955A] text-white hover:shadow-lg'
                   : 'bg-white/10 text-white/40 cursor-not-allowed'
               }`}
             >
               {currentStep === questions.length - 1 ? 'See Results' : 'Next'}
-              <ArrowRight className="h-3 w-3 md:h-4 md:w-4" />
+              <ArrowRight className="h-3.5 w-3.5 md:h-4 md:w-4" />
             </button>
           </div>
         </div>
