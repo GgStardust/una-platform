@@ -58,12 +58,12 @@ export default function Resources() {
           <div className="max-w-6xl mx-auto space-y-12">
 
             {/* Affiliate Disclosure */}
-            <GlassCard variant="solid" className="bg-blue-50 border-blue-200">
+            <GlassCard variant="solid" className="bg-blue-500/10 backdrop-blur-sm border-blue-400/20">
               <div className="flex items-start gap-3">
-                <AlertCircle className="h-5 w-5 text-blue-600 flex-shrink-0 mt-1" />
+                <AlertCircle className="h-5 w-5 text-blue-300 flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="font-semibold text-blue-900 mb-1 font-montserrat">Affiliate Disclosure</h3>
-                  <p className="text-sm text-blue-800 font-lora">
+                  <h3 className="font-semibold text-white mb-1 font-montserrat">Affiliate Disclosure</h3>
+                  <p className="text-sm text-white/80 font-lora">
                     Some of the tools and services listed below are affiliate partners. This means we may earn a commission when you sign up, at no extra cost to you. We only recommend products we genuinely believe will benefit your UNA, and your support helps us maintain this free educational platform.
                   </p>
                 </div>
@@ -215,16 +215,16 @@ export default function Resources() {
             )}
 
             {/* Need Help Choosing? CTA */}
-            <GlassCard variant="solid" className="bg-gradient-to-r from-[#C49A6C]/20 to-[#2F7E7E]/20 border-[#C49A6C]/30 text-center">
+            <GlassCard variant="solid" className="bg-gradient-to-r from-[#C49A6C]/80 to-[#2F7E7E]/80 backdrop-blur-md border-[#C49A6C]/50 text-center">
               <h3 className="text-2xl font-bold text-white mb-3 font-montserrat">
                 Need Help Choosing the Right Tools?
               </h3>
-              <p className="text-white/90 mb-6 font-lora max-w-2xl mx-auto">
+              <p className="text-white/95 mb-6 font-lora max-w-2xl mx-auto">
                 Every UNA has unique needs. Our Strategy Session includes personalized recommendations for banking, accounting, legal, and organizational tools based on your specific situation.
               </p>
               <Link
                 to="/services"
-                className="inline-flex items-center justify-center px-8 py-3 bg-gradient-to-r from-[#C49A6C] to-[#B8955A] text-white rounded-full font-semibold hover:shadow-lg transition-all duration-200 font-montserrat"
+                className="inline-flex items-center justify-center px-8 py-3 bg-white text-[#1E2A38] rounded-full font-semibold hover:shadow-lg transition-all duration-200 font-montserrat hover:bg-white/90"
               >
                 Book a Strategy Session
                 <ExternalLink className="ml-2 h-4 w-4" />
