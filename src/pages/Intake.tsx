@@ -55,8 +55,6 @@ export default function IntakeSimplified({ setIntakeData }: IntakeSimplifiedProp
 
   const onSubmit = async (data: IntakeFormData) => {
     try {
-      console.log('Form submitted with data:', data);
-      
       // Save to localStorage
       const completeData = {
         ...data,
@@ -64,19 +62,16 @@ export default function IntakeSimplified({ setIntakeData }: IntakeSimplifiedProp
         updatedAt: new Date().toISOString()
       };
       localStorage.setItem('intake_simplified', JSON.stringify(completeData));
-      
-      console.log('Data saved to localStorage:', completeData);
-      
+
       // Clear draft
       localStorage.removeItem('intake_simplified_draft');
-      
+
       setIntakeData(data);
       setIsSubmitted(true);
 
       // Redirect to schedule page with package parameter after a brief delay
       setTimeout(() => {
         const scheduleUrl = packageType ? `/schedule?package=${packageType}` : '/schedule';
-        console.log('Redirecting to schedule page:', scheduleUrl);
         navigate(scheduleUrl);
       }, 2000);
     } catch (error) {

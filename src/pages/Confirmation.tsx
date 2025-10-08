@@ -9,18 +9,14 @@ export default function Confirmation() {
   useEffect(() => {
     // Load intake data from localStorage
     const savedData = localStorage.getItem('intake_simplified');
-    console.log('Confirmation page - savedData from localStorage:', savedData);
-    
+
     if (savedData) {
       try {
         const parsedData = JSON.parse(savedData);
-        console.log('Confirmation page - parsed data:', parsedData);
         setIntakeData(parsedData);
       } catch (error) {
         console.error('Error parsing intake data:', error);
       }
-    } else {
-      console.log('No intake data found in localStorage');
     }
   }, []);
 

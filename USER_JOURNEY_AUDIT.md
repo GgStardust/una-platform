@@ -19,8 +19,9 @@ HOME → EXPLORE → INTAKE → SERVICES → SCHEDULE
    - "Start Your UNA Journey" button (bottom) → `/explore` ✅ **(FIXED - was `/toolkit`)**
 
 2. **Explore Quiz** (`/explore`)
+   - File: `src/pages/Explore.tsx`
    - 6 questions (2 with multiple selection)
-   - Collects: primaryGoals[], memberCount, annualBudget, privacyPreferences[], state, email
+   - Collects: primaryGoals[], memberCount, annualBudget, privacyPreferences[], state, email (optional)
    - Results page CTAs:
      - Primary: "Continue to Intake Form" → `/intake` (with email + quiz data passed) ✅
      - Secondary: "View Services & Pricing" → `/services` ✅
