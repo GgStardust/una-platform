@@ -6,29 +6,33 @@ export default function Home() {
   return (
     <>
       <SEOHead
-        title="Professional UNA Formation Services"
-        description="Expert UNA formation support with comprehensive document preparation. Do it right the first time with our professional formation services. Nationwide Unincorporated Nonprofit Association formation."
+        title="Unincorporated Association Formation | Nonprofit Formation Legal Assistance"
+        description="Expert unincorporated association formation services with legal assistance. Professional UNA formation for nonprofits nationwide. Get your nonprofit tax exemption with comprehensive legal guidance."
         keywords={[
-          'UNA formation services',
-          'Unincorporated Nonprofit Association formation',
-          'professional UNA formation',
-          'UNA document preparation',
-          'UNA formation support',
-          'UNA formation requirements'
+          'unincorporated association formation',
+          'nonprofit formation',
+          'UNA formation',
+          'nonprofit tax exemption',
+          'legal assistance',
+          'nonprofit legal assistance',
+          '501(c)(3) application',
+          'California UNA',
+          'nonprofit formation legal assistance',
+          'state-specific UNA requirements'
         ]}
         ogType="website"
         schema={{
           "@context": "https://schema.org",
           "@type": "WebPage",
-          "name": "UNA Formation Done Right",
-          "description": "UNA formation with legal guidance. Do it right the first time with our comprehensive formation platform.",
+          "name": "Unincorporated Association Formation | UNA Platform",
+          "description": "Professional unincorporated association formation services with legal assistance for nonprofits. Nationwide UNA formation with state-specific requirements and 501(c)(3) application support.",
           "mainEntity": {
             "@type": "Service",
-            "name": "UNA Formation Services",
-            "description": "Professional UNA formation with legal guidance and compliance guaranteed",
+            "name": "Unincorporated Association Formation Services",
+            "description": "Professional UNA formation with legal assistance, nonprofit tax exemption support, and state-specific requirements guidance",
             "provider": {
               "@type": "Organization",
-              "name": "UNA Formation Platform"
+              "name": "UNA Platform"
             },
             "areaServed": "United States",
             "serviceType": "Legal Services"
@@ -40,15 +44,16 @@ export default function Home() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12">
         <div className="text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 font-montserrat">
-            From Vision to Formation:
-            <br />
             <span className="bg-gradient-to-r from-[#C49A6C] via-[#B8955A] to-[#2F7E7E] bg-clip-text text-transparent">
-              Your UNA, Done Right
+              Unincorporated Association Formation
             </span>
+            <br />
+            Expert Legal Assistance for Nonprofit Formation
           </h1>
           <p className="text-xl text-white/90 mb-4 max-w-3xl mx-auto font-lora">
-            Professional support for forming your <strong>Unincorporated Nonprofit Association (UNA)</strong>. 
-            We offer document preparation, strategic guidance, and complete assistance so you can create your UNA with clarity and confidence.
+            Professional <strong>unincorporated association formation</strong> services with comprehensive legal assistance.
+            Get expert guidance for <strong>nonprofit tax exemption</strong>, state-specific UNA requirements, and <strong>501(c)(3) applications</strong>.
+            Nationwide support for your nonprofit formation journey.
           </p>
           <p className="text-sm text-white/70 mb-8 max-w-2xl mx-auto font-lora italic">
             This site provides educational information and document preparation services. For legal representation, consult a licensed attorney in your state.
