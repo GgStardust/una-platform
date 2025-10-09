@@ -13,7 +13,7 @@ const faqCategories = [
     questions: [
       {
         question: "What is a UNA?",
-        answer: "An Unincorporated Nonprofit Association (UNA) is a flexible legal structure that allows mission-driven groups to operate collectively without the formal requirements of incorporation. It's perfect for community organizations, activist groups, mutual aid networks, and other collectives."
+        answer: "An Unincorporated Association (UNA) is a flexible legal structure that allows groups to operate collectively without the formal requirements of incorporation. It's perfect for community organizations, activist groups, mutual aid networks, and other collectives."
       },
       {
         question: "What are the key benefits of UNA structure?",

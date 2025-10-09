@@ -124,7 +124,7 @@ export default function Home() {
             </ResponsiveText>
 
             <ResponsiveText variant="bodyLarge" font="lora" className="text-white mb-8">
-              A <strong className="text-white font-semibold">UNA</strong> (Unincorporated Nonprofit Association) is a simple, lawful structure for collective governance. It allows groups to operate together with legal recognition while maintaining autonomy, authenticity, and shared purpose.
+              A <strong className="text-white font-semibold">UNA</strong> (Unincorporated Association) is a simple, lawful structure for collective governance. It allows groups to operate together with legal recognition while maintaining autonomy, authenticity, and shared purpose.
               Forming a UNA turns vision into structure, translating personal intention into collective action through cooperative intelligence.
               UNAs are recognized in many states as protected, member-driven entities that uphold sovereignty, flexibility, and continuity.
             </ResponsiveText>

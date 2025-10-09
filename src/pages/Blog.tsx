@@ -50,7 +50,7 @@ export default function Blog() {
     <>
       <SEOHead
         title="UNA Formation Insights & Expert Guidance - Nationwide"
-        description="Expert guidance on Unincorporated Nonprofit Association formation, legal compliance, and operational excellence nationwide. Read our comprehensive blog for UNA formation insights."
+        description="Expert guidance on Unincorporated Association formation, legal compliance, and operational excellence nationwide. Read our comprehensive blog for UNA formation insights."
         keywords={[
           'UNA formation blog',
           'UNA formation insights',
@@ -92,7 +92,7 @@ export default function Blog() {
         }
         subtitle={
           <>
-            Expert <strong>formation guidance</strong> for <strong>Unincorporated Nonprofit Associations</strong> nationwide.
+            Expert <strong>formation guidance</strong> for <strong>Unincorporated Associations</strong> nationwide.
             Our <strong>research-based approach</strong> and <strong>business formation experience</strong>
             ensure your organization is structured correctly.
           </>

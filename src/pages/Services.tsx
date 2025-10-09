@@ -75,7 +75,7 @@ export default function Services() {
           </ResponsiveText>
 
           <ResponsiveText variant="h4" font="lora" className="text-white/90 mb-4">
-            Expert support for your <strong className="text-white font-semibold">Unincorporated Nonprofit Association</strong>
+            Expert support for your <strong className="text-white font-semibold">Unincorporated Association</strong>
             formation. We provide document preparation, strategic guidance, and administrative support
             for UNA formation nationwide.
           </ResponsiveText>
