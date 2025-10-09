@@ -49,8 +49,8 @@ export default function Blog() {
   return (
     <>
       <SEOHead
-        title="UNA Formation Insights & Expert Guidance - All 50 States"
-        description="Expert guidance on Unincorporated Nonprofit Association formation, legal compliance, and operational excellence for all 50 states. Read our comprehensive blog for UNA formation insights."
+        title="UNA Formation Insights & Expert Guidance - Nationwide"
+        description="Expert guidance on Unincorporated Nonprofit Association formation, legal compliance, and operational excellence nationwide. Read our comprehensive blog for UNA formation insights."
         keywords={[
           'UNA formation blog',
           'UNA formation insights',
@@ -92,7 +92,7 @@ export default function Blog() {
         }
         subtitle={
           <>
-            Expert <strong>formation guidance</strong> for <strong>Unincorporated Nonprofit Associations</strong> in all 50 states.
+            Expert <strong>formation guidance</strong> for <strong>Unincorporated Nonprofit Associations</strong> nationwide.
             Our <strong>research-based approach</strong> and <strong>business formation experience</strong>
             ensure your organization is structured correctly.
           </>
@@ -206,7 +206,7 @@ export default function Blog() {
                     Featured Article
                   </h3>
                   <p className="text-[#1C1F3B]/80 text-base">
-                    Essential reading for anyone considering UNA formation in California
+                    Essential reading for anyone considering UNA formation
                   </p>
                     </div>
                 </div>

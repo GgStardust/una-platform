@@ -58,14 +58,14 @@ export default function Resources() {
           <div className="max-w-6xl mx-auto space-y-12">
 
             {/* Affiliate Disclosure */}
-            <GlassCard variant="solid" className="bg-blue-500/10 backdrop-blur-sm border-blue-400/20">
+            <GlassCard variant="solid" className="bg-gradient-to-r from-[#C49A6C]/80 to-[#2F7E7E]/80 backdrop-blur-md border-[#C49A6C]/50 text-center">
               <div className="flex items-start gap-3">
-                <AlertCircle className="h-5 w-5 text-blue-300 flex-shrink-0 mt-1" />
+                <AlertCircle className="h-5 w-5 text-white flex-shrink-0 mt-1" />
                 <div>
                   <ResponsiveText variant="body" weight="semibold" font="montserrat" className="text-white mb-1">
                     Affiliate Disclosure
                   </ResponsiveText>
-                  <ResponsiveText variant="caption" font="lora" className="text-white/80">
+                  <ResponsiveText variant="caption" font="lora" className="text-white/95">
                     Some of the tools and services listed below are affiliate partners. This means we may earn a commission when you sign up, at no extra cost to you. We only recommend products we genuinely believe will benefit your UNA, and your support helps us maintain this free educational platform.
                   </ResponsiveText>
                 </div>

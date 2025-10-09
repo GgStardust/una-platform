@@ -33,7 +33,7 @@ const faqCategories = [
     questions: [
       {
         question: "How much does it cost to form a UNA?",
-        answer: "Our UNA formation services include: Strategy Session ($1,000) and Complete Formation Package ($5,000). We also offer Premium Partnership with annual advisory support (contact for pricing). There are no ongoing fees or annual reports required for the UNA itself."
+        answer: "Our UNA formation services include: Strategy Session ($1,000) and Formation Package (contact for pricing). We also offer Formation + Annual Partnership with annual advisory support (contact for pricing). There are no ongoing fees or annual reports required for the UNA itself."
       },
       {
         question: "Do I need an attorney to form a UNA?",
@@ -125,7 +125,7 @@ const faqCategories = [
     questions: [
       {
         question: "What services do you provide?",
-        answer: "We offer Strategy Sessions ($1,000), Complete Formation Package ($5,000), and Premium Partnership with annual advisory support (contact for pricing). We also provide direct referrals to CPAs and attorneys when needed for specialized legal matters."
+        answer: "We offer Strategy Sessions ($1,000), Formation Package (contact for pricing), and Formation + Annual Partnership with annual advisory support (contact for pricing). We also provide direct referrals to CPAs and attorneys when needed for specialized legal matters."
       },
       {
         question: "Do you provide ongoing support after formation?",
