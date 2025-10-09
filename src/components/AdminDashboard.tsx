@@ -31,6 +31,7 @@ import {
   AffiliateLink,
   AffiliateConversion,
   AffiliatePayout,
+  AffiliateApplication,
   financialTools,
   legalServices
 } from '@/lib/affiliate-system';
@@ -118,7 +119,7 @@ export default function AdminDashboard() {
   const [verificationFilter, setVerificationFilter] = useState<'all' | 'active' | 'resolved'>('all');
   
   // Affiliate system state
-  const [affiliateTab, setAffiliateTab] = useState<'partners' | 'products' | 'links' | 'conversions' | 'analytics' | 'payouts' | 'settings' | 'social-export'>('partners');
+  const [affiliateTab, setAffiliateTab] = useState<'partners' | 'products' | 'links' | 'conversions' | 'analytics' | 'payouts' | 'settings' | 'social-export' | 'applications'>('partners');
   const [affiliateSettings, setAffiliateSettings] = useState<AffiliateSettings>(defaultAffiliateSettings);
   const [showPartnerForm, setShowPartnerForm] = useState(false);
   const [newPartner, setNewPartner] = useState({
@@ -138,6 +139,22 @@ export default function AdminDashboard() {
   const [affiliateLinks, setAffiliateLinks] = useState<AffiliateLink[]>([]);
   const [affiliateConversions, setAffiliateConversions] = useState<AffiliateConversion[]>([]);
   const [affiliatePayouts, setAffiliatePayouts] = useState<AffiliatePayout[]>([]);
+  const [affiliateApplications, setAffiliateApplications] = useState<AffiliateApplication[]>([]);
+  const [showApplicationForm, setShowApplicationForm] = useState(false);
+  const [newApplication, setNewApplication] = useState({
+    partnerName: '',
+    category: 'tools' as const,
+    applicationUrl: '',
+    status: 'not-applied' as const,
+    commissionRate: '',
+    requirements: [] as string[],
+    contactEmail: '',
+    contactPhone: '',
+    notes: '',
+    priority: 'medium' as const,
+    estimatedMonthlyRevenue: 0
+  });
+  const [applicationFilter, setApplicationFilter] = useState<'all' | 'not-applied' | 'applied' | 'approved' | 'rejected' | 'pending-review'>('all');
   
   // Get affiliate partners from the existing data
   const affiliatePartners = [
@@ -359,6 +376,7 @@ export default function AdminDashboard() {
       setAffiliateLinks(affiliateManager.getLinks());
       setAffiliateConversions(affiliateManager.getConversions());
       setAffiliatePayouts(affiliateManager.getPayouts());
+      setAffiliateApplications(affiliateManager.getApplications());
     } catch (error) {
       console.error('Error loading affiliate data:', error);
     }
@@ -1417,6 +1435,7 @@ Facebook,Complete UNA Formation Guide,Master UNA formation from concept to compl
                       { id: 'conversions', label: 'Conversions' },
                       { id: 'analytics', label: 'Analytics' },
                       { id: 'payouts', label: 'Payouts' },
+                      { id: 'applications', label: 'Applications' },
                       { id: 'settings', label: 'Settings' }
                     ].map(tab => (
                       <button
@@ -2611,6 +2630,392 @@ Facebook,Complete UNA Formation Guide,Master UNA formation from concept to compl
                               className="flex-1 px-4 py-2 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors"
                             >
                               Cancel
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Applications Tab */}
+                {affiliateTab === 'applications' && (
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center">
+                      <h3 className="text-lg font-medium text-navy-900">Affiliate Applications</h3>
+                      <div className="flex space-x-3">
+                        <select
+                          value={applicationFilter}
+                          onChange={(e) => setApplicationFilter(e.target.value as any)}
+                          className="px-3 py-2 border border-navy-200 rounded-lg text-sm"
+                        >
+                          <option value="all">All Applications</option>
+                          <option value="not-applied">Not Applied</option>
+                          <option value="applied">Applied</option>
+                          <option value="approved">Approved</option>
+                          <option value="rejected">Rejected</option>
+                          <option value="pending-review">Pending Review</option>
+                        </select>
+                        <button
+                          onClick={() => setShowApplicationForm(true)}
+                          className="px-4 py-2 bg-gold-600 text-white rounded-lg hover:bg-gold-700 transition-colors"
+                        >
+                          Add Application
+                        </button>
+                        <button
+                          onClick={() => {
+                            const csv = affiliateManager.exportApplicationsCSV();
+                            const blob = new Blob([csv], { type: 'text/csv' });
+                            const url = window.URL.createObjectURL(blob);
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = 'affiliate-applications.csv';
+                            a.click();
+                            window.URL.revokeObjectURL(url);
+                          }}
+                          className="px-4 py-2 bg-navy-600 text-white rounded-lg hover:bg-navy-700 transition-colors"
+                        >
+                          Export CSV
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Application Stats */}
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                      {(() => {
+                        const stats = affiliateManager.getApplicationStats();
+                        return (
+                          <>
+                            <div className="bg-white p-4 rounded-lg shadow-sm border border-navy-100">
+                              <div className="text-2xl font-bold text-navy-900">{stats.total}</div>
+                              <div className="text-sm text-navy-600">Total Applications</div>
+                            </div>
+                            <div className="bg-white p-4 rounded-lg shadow-sm border border-navy-100">
+                              <div className="text-2xl font-bold text-emerald-600">{stats.byStatus.approved || 0}</div>
+                              <div className="text-sm text-navy-600">Approved</div>
+                            </div>
+                            <div className="bg-white p-4 rounded-lg shadow-sm border border-navy-100">
+                              <div className="text-2xl font-bold text-yellow-600">{stats.byStatus.applied || 0}</div>
+                              <div className="text-sm text-navy-600">Applied</div>
+                            </div>
+                            <div className="bg-white p-4 rounded-lg shadow-sm border border-navy-100">
+                              <div className="text-2xl font-bold text-gold-600">${stats.totalEstimatedRevenue.toFixed(0)}</div>
+                              <div className="text-sm text-navy-600">Est. Monthly Revenue</div>
+                            </div>
+                          </>
+                        );
+                      })()}
+                    </div>
+                    
+                    {/* Applications List */}
+                    <div className="bg-white rounded-lg shadow-sm border border-navy-100">
+                      <div className="p-6">
+                        {(() => {
+                          const filteredApplications = applicationFilter === 'all' 
+                            ? affiliateApplications 
+                            : affiliateApplications.filter(app => app.status === applicationFilter);
+                          
+                          return filteredApplications.length > 0 ? (
+                            <div className="space-y-4">
+                              {filteredApplications.map(application => (
+                                <div key={application.id} className="border border-navy-200 rounded-lg p-4">
+                                  <div className="flex justify-between items-start">
+                                    <div className="flex-1">
+                                      <div className="flex items-center space-x-3">
+                                        <h4 className="font-medium text-navy-900">{application.partnerName}</h4>
+                                        <span className={`px-2 py-1 rounded-full text-xs ${
+                                          application.status === 'approved' ? 'bg-emerald-100 text-emerald-800' :
+                                          application.status === 'applied' ? 'bg-blue-100 text-blue-800' :
+                                          application.status === 'pending-review' ? 'bg-yellow-100 text-yellow-800' :
+                                          application.status === 'rejected' ? 'bg-red-100 text-red-800' :
+                                          'bg-gray-100 text-gray-800'
+                                        }`}>
+                                          {application.status.replace('-', ' ')}
+                                        </span>
+                                        <span className={`px-2 py-1 rounded-full text-xs ${
+                                          application.priority === 'high' ? 'bg-red-100 text-red-800' :
+                                          application.priority === 'medium' ? 'bg-yellow-100 text-yellow-800' :
+                                          'bg-green-100 text-green-800'
+                                        }`}>
+                                          {application.priority} priority
+                                        </span>
+                                      </div>
+                                      <p className="text-sm text-navy-600 mt-1 capitalize">{application.category}</p>
+                                      <div className="flex items-center space-x-4 mt-2 text-sm text-navy-500">
+                                        <span>Commission: {application.commissionRate}</span>
+                                        {application.estimatedMonthlyRevenue && (
+                                          <span>Est. Revenue: ${application.estimatedMonthlyRevenue}/month</span>
+                                        )}
+                                        {application.applicationDate && (
+                                          <span>Applied: {new Date(application.applicationDate).toLocaleDateString()}</span>
+                                        )}
+                                        {application.approvalDate && (
+                                          <span>Approved: {new Date(application.approvalDate).toLocaleDateString()}</span>
+                                        )}
+                                      </div>
+                                      {application.requirements.length > 0 && (
+                                        <div className="mt-2">
+                                          <p className="text-sm font-medium text-navy-700">Requirements:</p>
+                                          <ul className="text-sm text-navy-600 mt-1 list-disc list-inside">
+                                            {application.requirements.map((req, index) => (
+                                              <li key={index}>{req}</li>
+                                            ))}
+                                          </ul>
+                                        </div>
+                                      )}
+                                      {application.contactEmail && (
+                                        <p className="text-sm text-navy-600 mt-2">
+                                          Contact: {application.contactEmail}
+                                        </p>
+                                      )}
+                                      {application.notes && (
+                                        <p className="text-sm text-navy-600 mt-2">{application.notes}</p>
+                                      )}
+                                      {application.rejectionReason && (
+                                        <p className="text-sm text-red-600 mt-2">
+                                          Rejection reason: {application.rejectionReason}
+                                        </p>
+                                      )}
+                                    </div>
+                                    <div className="flex flex-col space-y-2">
+                                      <a
+                                        href={application.applicationUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="px-3 py-1 text-sm bg-navy-600 text-white rounded hover:bg-navy-700 text-center"
+                                      >
+                                        Apply
+                                      </a>
+                                      <div className="flex space-x-1">
+                                        <button
+                                          onClick={() => {
+                                            const newStatus = application.status === 'not-applied' ? 'applied' : 
+                                                           application.status === 'applied' ? 'approved' : 
+                                                           application.status === 'approved' ? 'rejected' : 'not-applied';
+                                            affiliateManager.updateApplicationStatus(application.id, newStatus as any, {
+                                              applicationDate: newStatus === 'applied' ? new Date().toISOString() : undefined,
+                                              approvalDate: newStatus === 'approved' ? new Date().toISOString() : undefined
+                                            });
+                                            loadAffiliateData();
+                                          }}
+                                          className="px-2 py-1 text-xs bg-emerald-600 text-white rounded hover:bg-emerald-700"
+                                        >
+                                          {application.status === 'not-applied' ? 'Mark Applied' :
+                                           application.status === 'applied' ? 'Mark Approved' :
+                                           application.status === 'approved' ? 'Mark Rejected' : 'Reset'}
+                                        </button>
+                                        <button
+                                          onClick={() => {
+                                            if (confirm('Are you sure you want to delete this application?')) {
+                                              affiliateManager.deleteApplication(application.id);
+                                              loadAffiliateData();
+                                            }
+                                          }}
+                                          className="px-2 py-1 text-xs bg-red-600 text-white rounded hover:bg-red-700"
+                                        >
+                                          Delete
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          ) : (
+                            <div className="text-center py-8 text-navy-500">
+                              No applications found. Add your first application to get started.
+                            </div>
+                          );
+                        })()}
+                      </div>
+                    </div>
+
+                    {/* Add/Edit Application Form */}
+                    {showApplicationForm && (
+                      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                        <div className="bg-white rounded-lg p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+                          <h3 className="text-lg font-medium text-navy-900 mb-4">Add New Application</h3>
+                          <div className="space-y-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <div>
+                                <label className="block text-sm font-medium text-navy-700 mb-1">Partner Name</label>
+                                <input
+                                  type="text"
+                                  value={newApplication.partnerName}
+                                  onChange={(e) => setNewApplication({...newApplication, partnerName: e.target.value})}
+                                  className="w-full px-3 py-2 border border-navy-200 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-gold-500"
+                                  placeholder="e.g., Shopify"
+                                />
+                              </div>
+                              <div>
+                                <label className="block text-sm font-medium text-navy-700 mb-1">Category</label>
+                                <select
+                                  value={newApplication.category}
+                                  onChange={(e) => setNewApplication({...newApplication, category: e.target.value as any})}
+                                  className="w-full px-3 py-2 border border-navy-200 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-gold-500"
+                                >
+                                  <option value="banking">Banking</option>
+                                  <option value="legal">Legal</option>
+                                  <option value="financial">Financial</option>
+                                  <option value="tools">Tools</option>
+                                  <option value="insurance">Insurance</option>
+                                  <option value="other">Other</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div>
+                              <label className="block text-sm font-medium text-navy-700 mb-1">Application URL</label>
+                              <input
+                                type="url"
+                                value={newApplication.applicationUrl}
+                                onChange={(e) => setNewApplication({...newApplication, applicationUrl: e.target.value})}
+                                className="w-full px-3 py-2 border border-navy-200 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-gold-500"
+                                placeholder="https://partners.example.com"
+                              />
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <div>
+                                <label className="block text-sm font-medium text-navy-700 mb-1">Status</label>
+                                <select
+                                  value={newApplication.status}
+                                  onChange={(e) => setNewApplication({...newApplication, status: e.target.value as any})}
+                                  className="w-full px-3 py-2 border border-navy-200 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-gold-500"
+                                >
+                                  <option value="not-applied">Not Applied</option>
+                                  <option value="applied">Applied</option>
+                                  <option value="approved">Approved</option>
+                                  <option value="rejected">Rejected</option>
+                                  <option value="pending-review">Pending Review</option>
+                                </select>
+                              </div>
+                              <div>
+                                <label className="block text-sm font-medium text-navy-700 mb-1">Priority</label>
+                                <select
+                                  value={newApplication.priority}
+                                  onChange={(e) => setNewApplication({...newApplication, priority: e.target.value as any})}
+                                  className="w-full px-3 py-2 border border-navy-200 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-gold-500"
+                                >
+                                  <option value="low">Low</option>
+                                  <option value="medium">Medium</option>
+                                  <option value="high">High</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <div>
+                                <label className="block text-sm font-medium text-navy-700 mb-1">Commission Rate</label>
+                                <input
+                                  type="text"
+                                  value={newApplication.commissionRate}
+                                  onChange={(e) => setNewApplication({...newApplication, commissionRate: e.target.value})}
+                                  className="w-full px-3 py-2 border border-navy-200 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-gold-500"
+                                  placeholder="e.g., 20% recurring"
+                                />
+                              </div>
+                              <div>
+                                <label className="block text-sm font-medium text-navy-700 mb-1">Est. Monthly Revenue</label>
+                                <input
+                                  type="number"
+                                  value={newApplication.estimatedMonthlyRevenue}
+                                  onChange={(e) => setNewApplication({...newApplication, estimatedMonthlyRevenue: Number(e.target.value)})}
+                                  className="w-full px-3 py-2 border border-navy-200 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-gold-500"
+                                  placeholder="0"
+                                />
+                              </div>
+                            </div>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <div>
+                                <label className="block text-sm font-medium text-navy-700 mb-1">Contact Email</label>
+                                <input
+                                  type="email"
+                                  value={newApplication.contactEmail}
+                                  onChange={(e) => setNewApplication({...newApplication, contactEmail: e.target.value})}
+                                  className="w-full px-3 py-2 border border-navy-200 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-gold-500"
+                                  placeholder="partners@example.com"
+                                />
+                              </div>
+                              <div>
+                                <label className="block text-sm font-medium text-navy-700 mb-1">Contact Phone</label>
+                                <input
+                                  type="tel"
+                                  value={newApplication.contactPhone}
+                                  onChange={(e) => setNewApplication({...newApplication, contactPhone: e.target.value})}
+                                  className="w-full px-3 py-2 border border-navy-200 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-gold-500"
+                                  placeholder="+1 (555) 123-4567"
+                                />
+                              </div>
+                            </div>
+                            <div>
+                              <label className="block text-sm font-medium text-navy-700 mb-1">Requirements (one per line)</label>
+                              <textarea
+                                value={newApplication.requirements.join('\n')}
+                                onChange={(e) => setNewApplication({...newApplication, requirements: e.target.value.split('\n').filter(r => r.trim())})}
+                                className="w-full px-3 py-2 border border-navy-200 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-gold-500"
+                                rows={3}
+                                placeholder="Website with 1000+ monthly visitors&#10;Relevant content&#10;Active social media presence"
+                              />
+                            </div>
+                            <div>
+                              <label className="block text-sm font-medium text-navy-700 mb-1">Notes</label>
+                              <textarea
+                                value={newApplication.notes}
+                                onChange={(e) => setNewApplication({...newApplication, notes: e.target.value})}
+                                className="w-full px-3 py-2 border border-navy-200 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-gold-500"
+                                rows={3}
+                                placeholder="Additional notes about this application..."
+                              />
+                            </div>
+                          </div>
+                          <div className="flex justify-end space-x-3 mt-6">
+                            <button
+                              onClick={() => {
+                                setNewApplication({
+                                  partnerName: '',
+                                  category: 'tools',
+                                  applicationUrl: '',
+                                  status: 'not-applied',
+                                  commissionRate: '',
+                                  requirements: [],
+                                  contactEmail: '',
+                                  contactPhone: '',
+                                  notes: '',
+                                  priority: 'medium',
+                                  estimatedMonthlyRevenue: 0
+                                });
+                                setShowApplicationForm(false);
+                              }}
+                              className="px-4 py-2 text-navy-600 border border-navy-200 rounded-lg hover:bg-navy-50"
+                            >
+                              Cancel
+                            </button>
+                            <button
+                              onClick={() => {
+                                try {
+                                  affiliateManager.addApplication(newApplication);
+                                  loadAffiliateData();
+                                  setNewApplication({
+                                    partnerName: '',
+                                    category: 'tools',
+                                    applicationUrl: '',
+                                    status: 'not-applied',
+                                    commissionRate: '',
+                                    requirements: [],
+                                    contactEmail: '',
+                                    contactPhone: '',
+                                    notes: '',
+                                    priority: 'medium',
+                                    estimatedMonthlyRevenue: 0
+                                  });
+                                  setShowApplicationForm(false);
+                                  alert('Application added successfully!');
+                                } catch (error) {
+                                  console.error('Error adding application:', error);
+                                  alert('Error adding application. Please try again.');
+                                }
+                              }}
+                              className="px-4 py-2 bg-gold-600 text-white rounded-lg hover:bg-gold-700"
+                            >
+                              Add Application
                             </button>
                           </div>
                         </div>

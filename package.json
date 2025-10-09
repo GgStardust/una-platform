@@ -12,6 +12,8 @@
     "setup:env": "./scripts/setup-env.sh",
     "setup:webhooks": "./scripts/setup-stripe-webhooks.sh",
     "seed": "ts-node scripts/seed.ts",
+    "import-blog": "tsx scripts/import-blog.ts",
+    "import-blog-auto": "tsx scripts/import-blog-auto.ts",
     "stripe:test": "stripe trigger checkout.session.completed",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
@@ -59,6 +61,7 @@
     "tailwindcss": "^3.4.17",
     "terser": "^5.44.0",
     "ts-node": "^10.9.2",
+    "tsx": "^4.20.6",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.39.1",
     "vite": "^7.1.2"

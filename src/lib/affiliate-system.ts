@@ -747,6 +747,26 @@ export interface AffiliatePayout {
   transactionRef?: string;
 }
 
+export interface AffiliateApplication {
+  id: string;
+  partnerName: string;
+  category: 'banking' | 'legal' | 'financial' | 'tools' | 'insurance' | 'other';
+  applicationUrl: string;
+  status: 'not-applied' | 'applied' | 'approved' | 'rejected' | 'pending-review';
+  commissionRate: string;
+  requirements: string[];
+  applicationDate?: string;
+  approvalDate?: string;
+  rejectionReason?: string;
+  contactEmail?: string;
+  contactPhone?: string;
+  notes?: string;
+  priority: 'low' | 'medium' | 'high';
+  estimatedMonthlyRevenue?: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface AffiliateSettings {
   disclosureText: string;
   defaultUtmSource: string;
@@ -928,6 +948,487 @@ export const mockPayouts: AffiliatePayout[] = [
   }
 ];
 
+export const mockApplications: AffiliateApplication[] = [
+  // Financial Tools Applications
+  {
+    id: 'app_quickbooks',
+    partnerName: 'QuickBooks',
+    category: 'financial',
+    applicationUrl: 'https://quickbooks.intuit.com/partners/',
+    status: 'not-applied',
+    commissionRate: '30% first year',
+    requirements: ['Accounting expertise', 'Client testimonials', 'Professional website', 'Business license'],
+    contactEmail: 'partners@intuit.com',
+    contactPhone: '1-800-446-8848',
+    notes: 'High-value accounting software partnership. Perfect for UNA clients needing financial management.',
+    priority: 'high',
+    estimatedMonthlyRevenue: 800,
+    createdAt: '2024-09-01T00:00:00Z',
+    updatedAt: '2024-09-01T00:00:00Z'
+  },
+  {
+    id: 'app_freshbooks',
+    partnerName: 'FreshBooks',
+    category: 'financial',
+    applicationUrl: 'https://www.freshbooks.com/partners',
+    status: 'not-applied',
+    commissionRate: '25% first year',
+    requirements: ['Small business focus', 'Service-based clients', 'Professional website'],
+    contactEmail: 'partners@freshbooks.com',
+    notes: 'Invoicing software partnership. Good fit for service-based UNAs.',
+    priority: 'medium',
+    estimatedMonthlyRevenue: 400,
+    createdAt: '2024-09-01T00:00:00Z',
+    updatedAt: '2024-09-01T00:00:00Z'
+  },
+  {
+    id: 'app_wave',
+    partnerName: 'Wave',
+    category: 'financial',
+    applicationUrl: 'https://waveapps.com/partners',
+    status: 'not-applied',
+    commissionRate: '15% first year',
+    requirements: ['Small business focus', 'Free software advocacy', 'Content creation'],
+    contactEmail: 'partners@waveapps.com',
+    notes: 'Free accounting software. Good for budget-conscious UNAs.',
+    priority: 'low',
+    estimatedMonthlyRevenue: 200,
+    createdAt: '2024-09-01T00:00:00Z',
+    updatedAt: '2024-09-01T00:00:00Z'
+  },
+  {
+    id: 'app_xero',
+    partnerName: 'Xero',
+    category: 'financial',
+    applicationUrl: 'https://xero.com/partners',
+    status: 'not-applied',
+    commissionRate: '20%',
+    requirements: ['Accounting expertise', 'Client base', 'Professional certification'],
+    contactEmail: 'partners@xero.com',
+    notes: 'Cloud accounting platform. Good for UNAs needing professional accounting.',
+    priority: 'high',
+    estimatedMonthlyRevenue: 600,
+    createdAt: '2024-09-01T00:00:00Z',
+    updatedAt: '2024-09-01T00:00:00Z'
+  },
+  {
+    id: 'app_bench',
+    partnerName: 'Bench',
+    category: 'financial',
+    applicationUrl: 'https://bench.co/partners',
+    status: 'not-applied',
+    commissionRate: '25%',
+    requirements: ['Professional bookkeeping service', 'Client referrals', 'Business partnerships'],
+    contactEmail: 'partners@bench.co',
+    notes: 'Done-for-you bookkeeping service. Premium offering for established UNAs.',
+    priority: 'medium',
+    estimatedMonthlyRevenue: 500,
+    createdAt: '2024-09-01T00:00:00Z',
+    updatedAt: '2024-09-01T00:00:00Z'
+  },
+
+  // Legal Services Applications
+  {
+    id: 'app_legalzoom',
+    partnerName: 'LegalZoom',
+    category: 'legal',
+    applicationUrl: 'https://www.legalzoom.com/partners',
+    status: 'not-applied',
+    commissionRate: '15% first year',
+    requirements: ['Legal expertise', 'Business formation focus', 'Professional website'],
+    contactEmail: 'partners@legalzoom.com',
+    contactPhone: '1-800-773-0888',
+    notes: 'Legal services partnership. Perfect complement to UNA formation services.',
+    priority: 'high',
+    estimatedMonthlyRevenue: 1200,
+    createdAt: '2024-09-01T00:00:00Z',
+    updatedAt: '2024-09-01T00:00:00Z'
+  },
+  {
+    id: 'app_rocket_lawyer',
+    partnerName: 'Rocket Lawyer',
+    category: 'legal',
+    applicationUrl: 'https://www.rocketlawyer.com/partners',
+    status: 'not-applied',
+    commissionRate: '20% first year',
+    requirements: ['Legal expertise', 'Document creation focus', 'Client testimonials'],
+    contactEmail: 'partners@rocketlawyer.com',
+    notes: 'Legal document services. Good for ongoing legal needs.',
+    priority: 'medium',
+    estimatedMonthlyRevenue: 600,
+    createdAt: '2024-09-01T00:00:00Z',
+    updatedAt: '2024-09-01T00:00:00Z'
+  },
+  {
+    id: 'app_incfile',
+    partnerName: 'Incfile',
+    category: 'legal',
+    applicationUrl: 'https://www.incfile.com/partners',
+    status: 'not-applied',
+    commissionRate: '25%',
+    requirements: ['Business formation expertise', 'Registered agent services', 'Compliance focus'],
+    contactEmail: 'partners@incfile.com',
+    notes: 'Business formation services. Good for clients who need LLC/Corp formation.',
+    priority: 'medium',
+    estimatedMonthlyRevenue: 400,
+    createdAt: '2024-09-01T00:00:00Z',
+    updatedAt: '2024-09-01T00:00:00Z'
+  },
+  {
+    id: 'app_zenbusiness',
+    partnerName: 'ZenBusiness',
+    category: 'legal',
+    applicationUrl: 'https://www.zenbusiness.com/partners',
+    status: 'not-applied',
+    commissionRate: '22%',
+    requirements: ['Business formation expertise', 'Compliance services', 'Client base'],
+    contactEmail: 'partners@zenbusiness.com',
+    notes: 'Business formation and compliance services. Good for comprehensive business support.',
+    priority: 'low',
+    estimatedMonthlyRevenue: 300,
+    createdAt: '2024-09-01T00:00:00Z',
+    updatedAt: '2024-09-01T00:00:00Z'
+  },
+  {
+    id: 'app_northwest',
+    partnerName: 'Northwest Registered Agent',
+    category: 'legal',
+    applicationUrl: 'https://www.northwestregisteredagent.com/partners',
+    status: 'not-applied',
+    commissionRate: '20%',
+    requirements: ['Privacy-focused services', 'Registered agent expertise', 'Compliance knowledge'],
+    contactEmail: 'partners@northwestregisteredagent.com',
+    notes: 'Privacy-focused registered agent services. Good for privacy-conscious UNAs.',
+    priority: 'low',
+    estimatedMonthlyRevenue: 250,
+    createdAt: '2024-09-01T00:00:00Z',
+    updatedAt: '2024-09-01T00:00:00Z'
+  },
+
+  // Tools Applications
+  {
+    id: 'app_notion',
+    partnerName: 'Notion',
+    category: 'tools',
+    applicationUrl: 'https://www.notion.so/partners',
+    status: 'not-applied',
+    commissionRate: '20% first year',
+    requirements: ['Productivity expertise', 'Team collaboration focus', 'Content creation'],
+    contactEmail: 'partners@notion.so',
+    notes: 'Productivity tools partnership. Great for UNA project management.',
+    priority: 'high',
+    estimatedMonthlyRevenue: 300,
+    createdAt: '2024-09-01T00:00:00Z',
+    updatedAt: '2024-09-01T00:00:00Z'
+  },
+  {
+    id: 'app_airtable',
+    partnerName: 'Airtable',
+    category: 'tools',
+    applicationUrl: 'https://airtable.com/partners',
+    status: 'not-applied',
+    commissionRate: '20% first year',
+    requirements: ['Database expertise', 'Project management focus', 'Client testimonials'],
+    contactEmail: 'partners@airtable.com',
+    notes: 'Database/project management partnership. Good for complex UNA operations.',
+    priority: 'medium',
+    estimatedMonthlyRevenue: 400,
+    createdAt: '2024-09-01T00:00:00Z',
+    updatedAt: '2024-09-01T00:00:00Z'
+  },
+  {
+    id: 'app_monday',
+    partnerName: 'Monday.com',
+    category: 'tools',
+    applicationUrl: 'https://monday.com/partners',
+    status: 'not-applied',
+    commissionRate: '25%',
+    requirements: ['Project management expertise', 'Team collaboration focus', 'Visual workflow design'],
+    contactEmail: 'partners@monday.com',
+    notes: 'Visual project management platform. Good for team-based UNAs.',
+    priority: 'medium',
+    estimatedMonthlyRevenue: 350,
+    createdAt: '2024-09-01T00:00:00Z',
+    updatedAt: '2024-09-01T00:00:00Z'
+  },
+  {
+    id: 'app_asana',
+    partnerName: 'Asana',
+    category: 'tools',
+    applicationUrl: 'https://asana.com/partners',
+    status: 'not-applied',
+    commissionRate: '20%',
+    requirements: ['Project management expertise', 'Team collaboration', 'Workflow optimization'],
+    contactEmail: 'partners@asana.com',
+    notes: 'Project management platform. Good for organized UNA operations.',
+    priority: 'high',
+    estimatedMonthlyRevenue: 450,
+    createdAt: '2024-09-01T00:00:00Z',
+    updatedAt: '2024-09-01T00:00:00Z'
+  },
+  {
+    id: 'app_trello',
+    partnerName: 'Trello',
+    category: 'tools',
+    applicationUrl: 'https://trello.com/partners',
+    status: 'not-applied',
+    commissionRate: '15%',
+    requirements: ['Simple project management', 'Visual workflow design', 'Small team focus'],
+    contactEmail: 'partners@trello.com',
+    notes: 'Simple visual project management. Good for small UNAs.',
+    priority: 'low',
+    estimatedMonthlyRevenue: 150,
+    createdAt: '2024-09-01T00:00:00Z',
+    updatedAt: '2024-09-01T00:00:00Z'
+  },
+  {
+    id: 'app_digitalocean',
+    partnerName: 'DigitalOcean',
+    category: 'tools',
+    applicationUrl: 'https://digitalocean.com/partners',
+    status: 'not-applied',
+    commissionRate: '25%',
+    requirements: ['Technical expertise', 'Cloud infrastructure knowledge', 'Developer audience'],
+    contactEmail: 'partners@digitalocean.com',
+    notes: 'Cloud hosting platform. Good for tech-savvy UNAs.',
+    priority: 'low',
+    estimatedMonthlyRevenue: 200,
+    createdAt: '2024-09-01T00:00:00Z',
+    updatedAt: '2024-09-01T00:00:00Z'
+  },
+  {
+    id: 'app_fastmail',
+    partnerName: 'Fastmail',
+    category: 'tools',
+    applicationUrl: 'https://fastmail.com/partners',
+    status: 'not-applied',
+    commissionRate: '20%',
+    requirements: ['Email expertise', 'Privacy focus', 'Custom domain services'],
+    contactEmail: 'partners@fastmail.com',
+    notes: 'Privacy-focused email service. Good for privacy-conscious UNAs.',
+    priority: 'low',
+    estimatedMonthlyRevenue: 100,
+    createdAt: '2024-09-01T00:00:00Z',
+    updatedAt: '2024-09-01T00:00:00Z'
+  },
+
+  // Insurance Applications
+  {
+    id: 'app_zion_healthshare',
+    partnerName: 'Zion HealthShare',
+    category: 'insurance',
+    applicationUrl: 'https://zionhealthshare.com/partners',
+    status: 'not-applied',
+    commissionRate: '15%',
+    requirements: ['Healthcare alternatives expertise', 'Community-focused approach', 'Faith-based options'],
+    contactEmail: 'partners@zionhealthshare.com',
+    notes: 'Medical cost sharing service. Good for UNAs seeking healthcare alternatives.',
+    priority: 'medium',
+    estimatedMonthlyRevenue: 300,
+    createdAt: '2024-09-01T00:00:00Z',
+    updatedAt: '2024-09-01T00:00:00Z'
+  },
+  {
+    id: 'app_sedera',
+    partnerName: 'Sedera',
+    category: 'insurance',
+    applicationUrl: 'https://sedera.com/partners',
+    status: 'not-applied',
+    commissionRate: '15%',
+    requirements: ['Healthcare alternatives expertise', 'Modern health solutions', 'Telemedicine focus'],
+    contactEmail: 'partners@sedera.com',
+    notes: 'Modern medical cost sharing with telemedicine. Good for tech-forward UNAs.',
+    priority: 'medium',
+    estimatedMonthlyRevenue: 350,
+    createdAt: '2024-09-01T00:00:00Z',
+    updatedAt: '2024-09-01T00:00:00Z'
+  },
+  {
+    id: 'app_next_insurance',
+    partnerName: 'Next Insurance',
+    category: 'insurance',
+    applicationUrl: 'https://nextinsurance.com/partners',
+    status: 'not-applied',
+    commissionRate: '20%',
+    requirements: ['Business insurance expertise', 'Liability coverage knowledge', 'Fast quote process'],
+    contactEmail: 'partners@nextinsurance.com',
+    notes: 'Business liability coverage partnership. Good for UNA protection.',
+    priority: 'high',
+    estimatedMonthlyRevenue: 500,
+    createdAt: '2024-09-01T00:00:00Z',
+    updatedAt: '2024-09-01T00:00:00Z'
+  },
+  {
+    id: 'app_hiscox',
+    partnerName: 'Hiscox',
+    category: 'insurance',
+    applicationUrl: 'https://hiscox.com/partners',
+    status: 'not-applied',
+    commissionRate: '15%',
+    requirements: ['Comprehensive business coverage', 'Professional liability expertise', 'Customizable policies'],
+    contactEmail: 'partners@hiscox.com',
+    notes: 'Comprehensive business insurance. Good for established UNAs needing full coverage.',
+    priority: 'low',
+    estimatedMonthlyRevenue: 400,
+    createdAt: '2024-09-01T00:00:00Z',
+    updatedAt: '2024-09-01T00:00:00Z'
+  },
+
+  // Additional Tools Applications
+  {
+    id: 'app_mighty_networks',
+    partnerName: 'Mighty Networks',
+    category: 'tools',
+    applicationUrl: 'https://mightybell.com/partners',
+    status: 'not-applied',
+    commissionRate: '30%',
+    requirements: ['Community building expertise', 'Course creation', 'Event hosting'],
+    contactEmail: 'partners@mightybell.com',
+    notes: 'Community platform partnership. Perfect for mission-driven UNAs.',
+    priority: 'high',
+    estimatedMonthlyRevenue: 600,
+    createdAt: '2024-09-01T00:00:00Z',
+    updatedAt: '2024-09-01T00:00:00Z'
+  },
+  {
+    id: 'app_podia',
+    partnerName: 'Podia',
+    category: 'tools',
+    applicationUrl: 'https://podia.com/partners',
+    status: 'not-applied',
+    commissionRate: '30%',
+    requirements: ['Course creation expertise', 'Digital product sales', 'Membership management'],
+    contactEmail: 'partners@podia.com',
+    notes: 'Course/membership platform partnership. Good for educational UNAs.',
+    priority: 'high',
+    estimatedMonthlyRevenue: 700,
+    createdAt: '2024-09-01T00:00:00Z',
+    updatedAt: '2024-09-01T00:00:00Z'
+  },
+  {
+    id: 'app_thinkific',
+    partnerName: 'Thinkific',
+    category: 'tools',
+    applicationUrl: 'https://thinkific.com/partners',
+    status: 'not-applied',
+    commissionRate: '30%',
+    requirements: ['Online course expertise', 'Student management', 'Assessment creation'],
+    contactEmail: 'partners@thinkific.com',
+    notes: 'Online course platform. Good for UNAs creating educational content.',
+    priority: 'medium',
+    estimatedMonthlyRevenue: 500,
+    createdAt: '2024-09-01T00:00:00Z',
+    updatedAt: '2024-09-01T00:00:00Z'
+  },
+  {
+    id: 'app_learnworlds',
+    partnerName: 'LearnWorlds',
+    category: 'tools',
+    applicationUrl: 'https://learnworlds.com/partners',
+    status: 'not-applied',
+    commissionRate: '25%',
+    requirements: ['Social learning expertise', 'Assessment capabilities', 'White-label options'],
+    contactEmail: 'partners@learnworlds.com',
+    notes: 'Social learning platform with assessments. Good for interactive UNAs.',
+    priority: 'medium',
+    estimatedMonthlyRevenue: 450,
+    createdAt: '2024-09-01T00:00:00Z',
+    updatedAt: '2024-09-01T00:00:00Z'
+  },
+  {
+    id: 'app_ghost',
+    partnerName: 'Ghost',
+    category: 'tools',
+    applicationUrl: 'https://ghost.org/partners',
+    status: 'not-applied',
+    commissionRate: '20%',
+    requirements: ['Open source advocacy', 'Publishing expertise', 'Membership management'],
+    contactEmail: 'partners@ghost.org',
+    notes: 'Open-source publishing platform. Good for developer-friendly UNAs.',
+    priority: 'low',
+    estimatedMonthlyRevenue: 200,
+    createdAt: '2024-09-01T00:00:00Z',
+    updatedAt: '2024-09-01T00:00:00Z'
+  },
+
+  // Banking Applications
+  {
+    id: 'app_bluevine',
+    partnerName: 'BlueVine',
+    category: 'banking',
+    applicationUrl: 'https://bluevine.com/partners',
+    status: 'not-applied',
+    commissionRate: '15%',
+    requirements: ['Small business banking expertise', 'Invoice factoring knowledge', 'Online banking focus'],
+    contactEmail: 'partners@bluevine.com',
+    notes: 'Business banking partnership. Great for UNA financial needs.',
+    priority: 'high',
+    estimatedMonthlyRevenue: 400,
+    createdAt: '2024-09-01T00:00:00Z',
+    updatedAt: '2024-09-01T00:00:00Z'
+  },
+  {
+    id: 'app_novo',
+    partnerName: 'Novo',
+    category: 'banking',
+    applicationUrl: 'https://novo.com/partners',
+    status: 'not-applied',
+    commissionRate: '20%',
+    requirements: ['Startup banking expertise', 'Fee-light approach', 'Mobile banking focus'],
+    contactEmail: 'partners@novo.com',
+    notes: 'Startup banking partnership. Good for new UNAs.',
+    priority: 'high',
+    estimatedMonthlyRevenue: 300,
+    createdAt: '2024-09-01T00:00:00Z',
+    updatedAt: '2024-09-01T00:00:00Z'
+  },
+  {
+    id: 'app_wise',
+    partnerName: 'Wise',
+    category: 'banking',
+    applicationUrl: 'https://wise.com/partners',
+    status: 'not-applied',
+    commissionRate: '15%',
+    requirements: ['International banking expertise', 'Multi-currency knowledge', 'Global business focus'],
+    contactEmail: 'partners@wise.com',
+    notes: 'International money transfer service. Good for UNAs with global operations.',
+    priority: 'medium',
+    estimatedMonthlyRevenue: 250,
+    createdAt: '2024-09-01T00:00:00Z',
+    updatedAt: '2024-09-01T00:00:00Z'
+  },
+  {
+    id: 'app_mercury',
+    partnerName: 'Mercury',
+    category: 'banking',
+    applicationUrl: 'https://mercury.com/partners',
+    status: 'not-applied',
+    commissionRate: '20%',
+    requirements: ['Tech startup expertise', 'API integration knowledge', 'Modern banking focus'],
+    contactEmail: 'partners@mercury.com',
+    notes: 'Tech-focused banking platform. Good for tech-savvy UNAs.',
+    priority: 'medium',
+    estimatedMonthlyRevenue: 350,
+    createdAt: '2024-09-01T00:00:00Z',
+    updatedAt: '2024-09-01T00:00:00Z'
+  },
+  {
+    id: 'app_relay',
+    partnerName: 'Relay',
+    category: 'banking',
+    applicationUrl: 'https://relayfi.com/partners',
+    status: 'not-applied',
+    commissionRate: '20%',
+    requirements: ['Financial management expertise', 'Multi-account management', 'Team banking focus'],
+    contactEmail: 'partners@relayfi.com',
+    notes: 'Business banking with financial management tools. Good for complex UNA operations.',
+    priority: 'medium',
+    estimatedMonthlyRevenue: 400,
+    createdAt: '2024-09-01T00:00:00Z',
+    updatedAt: '2024-09-01T00:00:00Z'
+  }
+];
+
 // Affiliate Management Class
 export class AffiliateManager {
   private static instance: AffiliateManager;
@@ -936,6 +1437,7 @@ export class AffiliateManager {
   private clickEvents: ClickEvent[];
   private conversions: AffiliateConversion[];
   private payouts: AffiliatePayout[];
+  private applications: AffiliateApplication[];
 
   private constructor() {
     this.products = [...mockAffiliateProducts];
@@ -943,6 +1445,7 @@ export class AffiliateManager {
     this.clickEvents = [...mockClickEvents];
     this.conversions = [...mockConversions];
     this.payouts = [...mockPayouts];
+    this.applications = [...mockApplications];
     this.loadFromStorage();
   }
 
@@ -1194,6 +1697,113 @@ export class AffiliateManager {
     };
   }
 
+  // Applications Management
+  getApplications(): AffiliateApplication[] {
+    return [...this.applications];
+  }
+
+  getApplicationById(id: string): AffiliateApplication | undefined {
+    return this.applications.find(a => a.id === id);
+  }
+
+  getApplicationsByStatus(status: AffiliateApplication['status']): AffiliateApplication[] {
+    return this.applications.filter(a => a.status === status);
+  }
+
+  getApplicationsByCategory(category: AffiliateApplication['category']): AffiliateApplication[] {
+    return this.applications.filter(a => a.category === category);
+  }
+
+  addApplication(application: Omit<AffiliateApplication, 'id' | 'createdAt' | 'updatedAt'>): AffiliateApplication {
+    const newApplication: AffiliateApplication = {
+      ...application,
+      id: `app_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    };
+    
+    this.applications.push(newApplication);
+    this.saveToStorage();
+    return newApplication;
+  }
+
+  updateApplication(id: string, updates: Partial<AffiliateApplication>): AffiliateApplication | null {
+    const index = this.applications.findIndex(a => a.id === id);
+    if (index === -1) return null;
+    
+    this.applications[index] = { 
+      ...this.applications[index], 
+      ...updates, 
+      updatedAt: new Date().toISOString() 
+    };
+    this.saveToStorage();
+    return this.applications[index];
+  }
+
+  updateApplicationStatus(id: string, status: AffiliateApplication['status'], additionalData?: {
+    approvalDate?: string;
+    rejectionReason?: string;
+    applicationDate?: string;
+  }): AffiliateApplication | null {
+    const application = this.applications.find(a => a.id === id);
+    if (!application) return null;
+    
+    const updates: Partial<AffiliateApplication> = { status };
+    
+    if (status === 'approved' && additionalData?.approvalDate) {
+      updates.approvalDate = additionalData.approvalDate;
+    }
+    
+    if (status === 'rejected' && additionalData?.rejectionReason) {
+      updates.rejectionReason = additionalData.rejectionReason;
+    }
+    
+    if (status === 'applied' && additionalData?.applicationDate) {
+      updates.applicationDate = additionalData.applicationDate;
+    }
+    
+    return this.updateApplication(id, updates);
+  }
+
+  deleteApplication(id: string): boolean {
+    const index = this.applications.findIndex(a => a.id === id);
+    if (index === -1) return false;
+    
+    this.applications.splice(index, 1);
+    this.saveToStorage();
+    return true;
+  }
+
+  getApplicationStats() {
+    const total = this.applications.length;
+    const byStatus = this.applications.reduce((acc, app) => {
+      acc[app.status] = (acc[app.status] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
+    
+    const byCategory = this.applications.reduce((acc, app) => {
+      acc[app.category] = (acc[app.category] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
+    
+    const byPriority = this.applications.reduce((acc, app) => {
+      acc[app.priority] = (acc[app.priority] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
+    
+    const totalEstimatedRevenue = this.applications
+      .filter(app => app.estimatedMonthlyRevenue)
+      .reduce((sum, app) => sum + (app.estimatedMonthlyRevenue || 0), 0);
+    
+    return {
+      total,
+      byStatus,
+      byCategory,
+      byPriority,
+      totalEstimatedRevenue
+    };
+  }
+
   // Export Functions
   exportAnalyticsCSV(partnerId?: string, days: number = 30): string {
     const analytics = this.getAnalytics(partnerId, days);
@@ -1205,6 +1815,22 @@ export class AffiliateManager {
       ['Total Payouts', `$${analytics.totalPayouts.toFixed(2)}`],
       ['Conversion Rate', `${analytics.conversionRate.toFixed(2)}%`]
     ];
+    
+    return [headers, ...rows].map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
+  }
+
+  exportApplicationsCSV(): string {
+    const headers = ['Partner Name', 'Category', 'Status', 'Commission Rate', 'Priority', 'Application Date', 'Contact Email', 'Notes'];
+    const rows = this.applications.map(app => [
+      app.partnerName,
+      app.category,
+      app.status,
+      app.commissionRate,
+      app.priority,
+      app.applicationDate ? new Date(app.applicationDate).toLocaleDateString() : '',
+      app.contactEmail || '',
+      app.notes || ''
+    ]);
     
     return [headers, ...rows].map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
   }
@@ -1254,6 +1880,11 @@ export class AffiliateManager {
       if (storedPayouts) {
         this.payouts = JSON.parse(storedPayouts);
       }
+      
+      const storedApplications = localStorage.getItem('affiliate-applications');
+      if (storedApplications) {
+        this.applications = JSON.parse(storedApplications);
+      }
     } catch (error) {
       console.error('Error loading affiliate data from storage:', error);
     }
@@ -1266,6 +1897,7 @@ export class AffiliateManager {
       localStorage.setItem('affiliate-clicks', JSON.stringify(this.clickEvents));
       localStorage.setItem('affiliate-conversions', JSON.stringify(this.conversions));
       localStorage.setItem('affiliate-payouts', JSON.stringify(this.payouts));
+      localStorage.setItem('affiliate-applications', JSON.stringify(this.applications));
     } catch (error) {
       console.error('Error saving affiliate data to storage:', error);
     }
