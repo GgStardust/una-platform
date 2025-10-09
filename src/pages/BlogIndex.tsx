@@ -89,7 +89,7 @@ export default function BlogIndex() {
             UNA Formation Blog
           </ResponsiveText>
           <ResponsiveText variant="bodyLarge" className="text-navy-700 max-w-2xl mx-auto block">
-            Expert guidance on Unincorporated Nonprofit Association formation,
+            Expert guidance on Unincorporated Association formation,
             state requirements, and best practices for your organization.
           </ResponsiveText>
         </div>

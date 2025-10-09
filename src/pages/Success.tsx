@@ -603,7 +603,7 @@ export default function Success() {
     <div className="min-h-screen bg-gradient-to-br from-[#1E2A38] via-[#2F7E7E] to-[#1C1F3B]">
       <GradientHeader
         title="Case Studies"
-        subtitle={`Discover how Unincorporated Nonprofit Associations (UNAs) are transforming creative practices, communities, and organizations. Explore living examples that demonstrate how sovereignty, structure, and purpose come together in real projects.`}
+        subtitle={`Discover how Unincorporated Associations (UNAs) are transforming creative practices, communities, and organizations. Explore living examples that demonstrate how sovereignty, structure, and purpose come together in real projects.`}
       />
 
       <SectionContainer padding="lg" background="transparent">

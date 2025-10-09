@@ -45,7 +45,7 @@ const UnaFormationGuide: React.FC = () => {
       title: "Check State Requirements",
       description: "Some states require UNA registration; others do not. Filing usually involves a short form and small fee ($25–$100).",
       icon: Scale,
-      action: "Visit your Secretary of State's website and search for \"Unincorporated Nonprofit Association\" or \"Nonprofit filings.\""
+      action: "Visit your Secretary of State's website and search for \"Unincorporated Association\" or \"Nonprofit filings.\""
     },
     {
       number: 6,
@@ -82,7 +82,7 @@ const UnaFormationGuide: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-[#1C1F3B] via-[#2F7E7E] to-[#1C1F3B]">
       <SEOHead 
         title="UNA Formation Guide - Complete Step-by-Step Instructions"
-        description="Everything you need to know to form your Unincorporated Nonprofit Association. Free comprehensive guide with state-specific requirements and legal templates."
+        description="Everything you need to know to form your Unincorporated Association. Free comprehensive guide with state-specific requirements and legal templates."
         keywords={[
           'UNA formation',
           'nonprofit association',
@@ -101,7 +101,7 @@ const UnaFormationGuide: React.FC = () => {
               UNA Formation Guide
             </h1>
             <p className="text-xl md:text-2xl font-lora text-[#C49A6C] mb-8 max-w-4xl mx-auto">
-              Complete Step-by-Step Instructions for Forming Your Unincorporated Nonprofit Association
+              Complete Step-by-Step Instructions for Forming Your Unincorporated Association
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
@@ -134,7 +134,7 @@ const UnaFormationGuide: React.FC = () => {
               </h2>
               <div className="prose prose-lg prose-invert max-w-none">
                 <p className="text-white font-lora leading-relaxed mb-4">
-                  Forming an <strong className="text-[#C49A6C]">Unincorporated Nonprofit Association (UNA)</strong> is a decisive act of collective creation. It is a way of creating organizations that reflect their members and their shared vision. A UNA offers a parallel path: it is legally recognized, yet flexible enough to let your group define how it values people, resources, and purpose.
+                  Forming an <strong className="text-[#C49A6C]">Unincorporated Association (UNA)</strong> is a decisive act of collective creation. It is a way of creating organizations that reflect their members and their shared vision. A UNA offers a parallel path: it is legally recognized, yet flexible enough to let your group define how it values people, resources, and purpose.
                 </p>
                 <p className="text-white font-lora leading-relaxed mb-4">
                   At its heart, UNA formation is about <strong className="text-[#C49A6C]">sovereignty in community</strong>. It allows groups to come together, organize around shared goals, and make choices that align with their values, whether that includes pursuing profit to reinvest in the mission, cultivating cultural expression, or sustaining collective wellbeing.

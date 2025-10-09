@@ -2,11 +2,11 @@
 
 ## About This Platform
 
-**Important Note:** This platform is specifically designed for California Unincorporated Nonprofit Association (UNA) formation. The documents, guidance, and filing requirements are optimized for California laws and regulations.
+**Important Note:** This platform is specifically designed for California Unincorporated Association (UNA) formation. The documents, guidance, and filing requirements are optimized for California laws and regulations.
 
 ## What is a UNA?
 
-An **Unincorporated Nonprofit Association (UNA)** is a flexible legal structure that allows groups to:
+An **Unincorporated Association (UNA)** is a flexible legal structure that allows groups to:
 - Operate as a collective without formal incorporation
 - Maintain tax-exempt status eligibility
 - Have legal recognition for contracts and property
@@ -26,7 +26,7 @@ Other states may have different laws or no UNA statutes at all.
 
 ### 1. Research Your State's Laws
 - **Visit your state's Secretary of State website**
-- **Search for "Unincorporated Nonprofit Association" statutes**
+- **Search for "Unincorporated Association" statutes**
 - **Check for alternative legal structures** (LLC, Corporation, etc.)
 
 ### 2. Common State Variations

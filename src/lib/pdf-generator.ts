@@ -22,7 +22,7 @@ export function generateUNAFormationGuidePDF(): void {
   doc.setFontSize(16);
   doc.setFont('helvetica', 'normal');
   doc.text('Complete Step-by-Step Instructions', 20, 45);
-  doc.text('for Unincorporated Nonprofit Association Formation', 20, 55);
+  doc.text('for Unincorporated Association Formation', 20, 55);
   
   // Add branding
   doc.setFontSize(12);
@@ -69,7 +69,7 @@ export function generateUNAFormationGuidePDF(): void {
   
   doc.setFontSize(12);
   doc.setFont('helvetica', 'normal');
-  const section1Content = `An Unincorporated Nonprofit Association (UNA) is a flexible legal structure that allows groups to operate collectively without the formal requirements of a corporation. UNAs are recognized in all 50 states and provide:
+  const section1Content = `An Unincorporated Association (UNA) is a flexible legal structure that allows groups to operate collectively without the formal requirements of a corporation. UNAs are recognized in all 50 states and provide:
 
 • Legal recognition for your collective
 • Liability protection for members
@@ -322,7 +322,7 @@ Free Resources:
 • Webinar Series - Monthly educational sessions
 
 About UNA Platform:
-UNA Platform is the leading resource for Unincorporated Nonprofit Association formation. We combine legal research with real-world experience to provide comprehensive guidance for collective organizing.
+UNA Platform is the leading resource for Unincorporated Association formation. We combine legal research with real-world experience to provide comprehensive guidance for collective organizing.
 
 Our Approach:
 • Research-based guidance for all 50 states

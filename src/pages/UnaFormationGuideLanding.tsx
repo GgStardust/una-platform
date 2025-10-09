@@ -47,7 +47,7 @@ const UnaFormationGuideLanding: React.FC = () => {
     <>
       <SEOHead
         title="UNA Formation Guide - Free Download | UNA Platform"
-        description="Download your free UNA Formation Guide — a step-by-step resource to start your UNA confidently. Get comprehensive guidance for Unincorporated Nonprofit Association formation."
+        description="Download your free UNA Formation Guide — a step-by-step resource to start your UNA confidently. Get comprehensive guidance for Unincorporated Association formation."
       />
       
       <div className="min-h-screen bg-gradient-to-br from-[#1E2A38] via-[#3DB5B0] to-[#2C2C2C]">

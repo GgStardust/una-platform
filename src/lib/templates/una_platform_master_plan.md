@@ -1,7 +1,7 @@
 # UNA Start-Up Consulting Platform – System Architecture, Build Plan & Messaging
 
 ## Context
-A UNA (Unincorporated Nonprofit Association) is a decentralized, low-cost structure that allows mission-driven collectives to operate with clarity. This platform provides education, generates documents via a single intake flow, and integrates a verification layer for compliance and referrals.
+A UNA (Unincorporated Association) is a decentralized, low-cost structure that allows mission-driven collectives to operate with clarity. This platform provides education, generates documents via a single intake flow, and integrates a verification layer for compliance and referrals.
 
 ## Sitemap
 1. Home – What is a UNA? Who is this for? Why it matters

@@ -112,7 +112,7 @@ const UNA_AGREEMENT_TEMPLATE = `# UNINCORPORATED NONPROFIT ASSOCIATION AGREEMENT
 
 ## ARTICLE IX: EFFECTIVE DATE AND TERM
 
-This agreement establishes the Unincorporated Nonprofit Association known as **{{entityName}}** and shall be effective as of **{{entityStartDate}}**.
+This agreement establishes the Unincorporated Association known as **{{entityName}}** and shall be effective as of **{{entityStartDate}}**.
 
 **Note:** This agreement is designed to comply with California UNA formation requirements. For legal compliance and risk management, consider consulting with legal professionals for complex organizational structures or high-risk activities.
 
@@ -182,7 +182,7 @@ An Employer Identification Number (EIN) is required for your UNA to open bank ac
 **Organization Details:**
 - Legal name: {{entityName}}
 - Mailing address: {{mailingAddress}}, {{mailingCity}}, {{mailingState}} {{mailingZip}}
-- Type of entity: Unincorporated Nonprofit Association
+- Type of entity: Unincorporated Association
 - State of formation: {{entityState}}
 
 **Organizer Information:**
@@ -263,7 +263,7 @@ const LP_UNA_128_TEMPLATE = `# LP/UNA-128 FILING PACKAGE
 ## California LP/UNA-128 Form Instructions
 
 ### Form Purpose
-The LP/UNA-128 form is required for California-based Unincorporated Nonprofit Associations that:
+The LP/UNA-128 form is required for California-based Unincorporated Associations that:
 - Operate in California
 - Have a mailing address in California
 - Conduct business activities in California
@@ -283,7 +283,7 @@ The LP/UNA-128 form is required for California-based Unincorporated Nonprofit As
 #### 2. Required Information
 - **Section 1:** Entity Information
   - Name: {{entityName}}
-  - Type: Unincorporated Nonprofit Association
+  - Type: Unincorporated Association
   - Date of formation: {{entityStartDate}}
 
 - **Section 2:** Mailing Address
@@ -520,7 +520,7 @@ export async function generateComprehensiveGuide(data: IntakeData): Promise<Uint
 ## California LP/UNA-128 Form Instructions
 
 ### Form Purpose
-The LP/UNA-128 form is required for California-based Unincorporated Nonprofit Associations that:
+The LP/UNA-128 form is required for California-based Unincorporated Associations that:
 - Operate in California
 - Have a mailing address in California
 - Conduct business activities in California
@@ -540,7 +540,7 @@ The LP/UNA-128 form is required for California-based Unincorporated Nonprofit As
 #### 2. Required Information
 - **Section 1:** Entity Information
   - Name: {{entityName}}
-  - Type: Unincorporated Nonprofit Association
+  - Type: Unincorporated Association
   - Date of formation: {{entityStartDate}}
 
 - **Section 2:** Mailing Address
@@ -652,7 +652,7 @@ A DBA allows you to operate under a name different from your legal entity name. 
 - **Entity Name:** {{entityName}}
 - **DBA Name:** [Your desired business name]
 - **Business Address:** {{mailingAddress}}, {{mailingCity}}, {{mailingState}} {{mailingZip}}
-- **Business Type:** Unincorporated Nonprofit Association
+- **Business Type:** Unincorporated Association
 - **Owner Information:** {{organizerName}}
 
 #### 4. Publication Requirements
@@ -948,11 +948,11 @@ export async function generateOutOfStateGuide(data: IntakeData): Promise<Uint8Ar
 
 ## About This Platform
 
-**Important Note:** This platform is specifically designed for California Unincorporated Nonprofit Association (UNA) formation. The documents, guidance, and filing requirements are optimized for California laws and regulations.
+**Important Note:** This platform is specifically designed for California Unincorporated Association (UNA) formation. The documents, guidance, and filing requirements are optimized for California laws and regulations.
 
 ## What is a UNA?
 
-An **Unincorporated Nonprofit Association (UNA)** is a flexible legal structure that allows groups to:
+An **Unincorporated Association (UNA)** is a flexible legal structure that allows groups to:
 - Operate as a collective without formal incorporation
 - Maintain tax-exempt status eligibility
 - Have legal recognition for contracts and property
@@ -972,7 +972,7 @@ Other states may have different laws or no UNA statutes at all.
 
 ### 1. Research Your State's Requirements
 - **Visit your state's Secretary of State website**
-- **Search for "Unincorporated Nonprofit Association" statutes**
+- **Search for "Unincorporated Association" statutes**
 - **Check for alternative legal structures** (LLC, Corporation, etc.)
 
 ### 2. Common State Variations
@@ -1059,7 +1059,7 @@ This guide is prepared for {{entityName}} based on the information provided duri
 
 ### 1. Research Your State's Requirements
 - **State Website:** Visit your state's Secretary of State website
-- **UNA Laws:** Look for Unincorporated Nonprofit Association statutes
+- **UNA Laws:** Look for Unincorporated Association statutes
 - **Filing Requirements:** Check if any forms need to be filed
 
 ### 2. Common State Variations
@@ -1750,7 +1750,7 @@ export async function generateComprehensiveFormationGuide(data: IntakeData): Pro
 
 ## EXECUTIVE SUMMARY
 
-This comprehensive guide provides everything you need to successfully form and operate your Unincorporated Nonprofit Association (UNA) in California. It consolidates all essential information, requirements, and next steps into one document.
+This comprehensive guide provides everything you need to successfully form and operate your Unincorporated Association (UNA) in California. It consolidates all essential information, requirements, and next steps into one document.
 
 ---
 

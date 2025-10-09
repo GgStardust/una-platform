@@ -22,7 +22,7 @@ export default function SEOHead({
   const fullTitle = `${title} | UNA Formation Done Right`;
   const defaultKeywords = [
     'UNA formation California',
-    'Unincorporated Nonprofit Association',
+    'Unincorporated Association',
     'alternative nonprofit formation',
     'California UNA formation',
     'sovereign legal structure',

@@ -64,7 +64,7 @@ export default function Blog() {
           "@context": "https://schema.org",
           "@type": "Blog",
           "name": "UNA Formation Insights",
-          "description": "Expert guidance on Unincorporated Nonprofit Association formation, legal compliance, and operational excellence in California.",
+          "description": "Expert guidance on Unincorporated Association formation, legal compliance, and operational excellence in California.",
           "publisher": {
             "@type": "Organization",
             "name": "UNA Formation Platform"

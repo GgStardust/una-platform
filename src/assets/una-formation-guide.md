@@ -13,7 +13,7 @@ modified: "2025-09-16"
 ---
 
 ## Introduction
-Forming an **Unincorporated Nonprofit Association (UNA)** is a decisive act of collective creation. It is a way of creating organizations that reflect their members and their shared vision. A UNA offers a parallel path: it is legally recognized, yet flexible enough to let your group define how it values people, resources, and purpose.
+Forming an **Unincorporated Association (UNA)** is a decisive act of collective creation. It is a way of creating organizations that reflect their members and their shared vision. A UNA offers a parallel path: it is legally recognized, yet flexible enough to let your group define how it values people, resources, and purpose.
 
 At its heart, UNA formation is about sovereignty in community. It allows groups to come together, organize around shared goals, and make choices that align with their values, whether that includes pursuing profit to reinvest in the mission, cultivating cultural expression, or sustaining collective wellbeing.
 
@@ -59,7 +59,7 @@ An EIN allows you to open a bank account and manage funds collectively.
 ### 5. Check State Requirements
 Some states require UNA registration; others do not. Filing usually involves a short form and small fee ($25–$100).  
 
-> **Action:** Visit your Secretary of State's website and search for *"Unincorporated Nonprofit Association"* or *"Nonprofit filings."*
+> **Action:** Visit your Secretary of State's website and search for *"Unincorporated Association"* or *"Nonprofit filings."*
 
 ---
 

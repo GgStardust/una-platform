@@ -5,7 +5,7 @@
 const blogPosts = [
   {
     title: "UNA Formation Done Right: Why Specificity Matters in California",
-    description: "Discover why generic UNA formation guides fall short and how California-specific legal guidance ensures your Unincorporated Nonprofit Association is structured correctly from day one.",
+    description: "Discover why generic UNA formation guides fall short and how California-specific legal guidance ensures your Unincorporated Association is structured correctly from day one.",
     canonical: "/blog/una-formation-california-specificity",
     image: "/blog/una-formation-california.jpg",
     publishDate: "2024-08-20",
@@ -18,7 +18,7 @@ const blogPosts = [
   },
   {
     title: "The Complete UNA Formation Guide: From Concept to Compliance",
-    description: "A comprehensive step-by-step guide to forming your Unincorporated Nonprofit Association, covering legal requirements, governance structure, and operational best practices.",
+    description: "A comprehensive step-by-step guide to forming your Unincorporated Association, covering legal requirements, governance structure, and operational best practices.",
     canonical: "/blog/complete-una-formation-guide",
     image: "/blog/complete-formation-guide.jpg",
     publishDate: "2024-08-19",
@@ -44,7 +44,7 @@ const blogPosts = [
   },
   {
     title: "UNA Governance Best Practices: Building Strong Foundations for Success",
-    description: "Learn the essential governance practices that ensure your Unincorporated Nonprofit Association operates effectively, maintains compliance, and achieves its mission.",
+    description: "Learn the essential governance practices that ensure your Unincorporated Association operates effectively, maintains compliance, and achieves its mission.",
     canonical: "/blog/una-governance-best-practices",
     image: "/blog/governance-best-practices.jpg",
     publishDate: "2024-08-17",
@@ -57,7 +57,7 @@ const blogPosts = [
   },
   {
     title: "UNA Financial Management: Building Sustainable Financial Foundations",
-    description: "Master the essential financial management practices that ensure your Unincorporated Nonprofit Association maintains financial health, compliance, and long-term sustainability.",
+    description: "Master the essential financial management practices that ensure your Unincorporated Association maintains financial health, compliance, and long-term sustainability.",
     canonical: "/blog/financial-management-una",
     image: "/blog/financial-management.jpg",
     publishDate: "2024-08-16",

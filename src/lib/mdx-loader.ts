@@ -31,7 +31,7 @@ export function getAllBlogPosts(): BlogPost[] {
       slug: 'complete-una-formation-guide',
       frontmatter: {
         title: 'The Complete UNA Formation Guide: From Concept to Compliance',
-        description: 'Master the complete UNA formation process from initial concept through ongoing compliance. A comprehensive guide covering legal structure, documentation, and best practices for Unincorporated Nonprofit Associations.',
+        description: 'Master the complete UNA formation process from initial concept through ongoing compliance. A comprehensive guide covering legal structure, documentation, and best practices for Unincorporated Associations.',
         date: '2025-01-15',
         tags: ['UNA Formation', 'Legal Guide', 'Nonprofit Law', 'Formation Process', 'Compliance'],
         canonical: '/blog/complete-una-formation-guide',
@@ -43,11 +43,11 @@ export function getAllBlogPosts(): BlogPost[] {
       },
       content: `# The Complete UNA Formation Guide: From Concept to Compliance
 
-*Everything you need to know about forming and maintaining an Unincorporated Nonprofit Association*
+*Everything you need to know about forming and maintaining an Unincorporated Association*
 
-## Understanding Unincorporated Nonprofit Associations
+## Understanding Unincorporated Associations
 
-Unincorporated Nonprofit Associations (UNAs) represent a unique and flexible organizational structure that has gained significant popularity among mission-driven groups. Unlike traditional corporations or LLCs, UNAs offer a simpler, more accessible path to formal organization while maintaining the legal protections and operational capabilities needed for effective nonprofit work.
+Unincorporated Associations (UNAs) represent a unique and flexible organizational structure that has gained significant popularity among mission-driven groups. Unlike traditional corporations or LLCs, UNAs offer a simpler, more accessible path to formal organization while maintaining the legal protections and operational capabilities needed for effective collective work.
 
 ### What is a UNA?
 
@@ -192,7 +192,7 @@ Remember that every UNA is unique, and your specific needs may require customize
 ## What a UNA Is and How It Works
 
 ### Legal Structure
-An Unincorporated Nonprofit Association (UNA) is a flexible legal entity that allows groups to operate collectively for nonprofit purposes without the formal requirements of incorporation.
+An Unincorporated Association (UNA) is a flexible legal entity that allows groups to operate collectively for nonprofit purposes without the formal requirements of incorporation.
 
 ### Key Characteristics
 - **Flexible Governance**: Members can design their own decision-making processes
@@ -254,7 +254,7 @@ An Unincorporated Nonprofit Association (UNA) is a flexible legal entity that al
 ### Purpose Clause
 \`\`\`markdown
 ## Article II: Purpose
-This Unincorporated Nonprofit Association is formed exclusively for charitable and educational purposes within the meaning of Section 501(c)(3) of the Internal Revenue Code, including but not limited to:
+This Unincorporated Association is formed exclusively for charitable and educational purposes within the meaning of Section 501(c)(3) of the Internal Revenue Code, including but not limited to:
 
 1. Providing educational resources and support to [target community]
 2. Organizing community events and programs
@@ -319,7 +319,7 @@ Ready to form your UNA? Here's what to do:
       slug: 'una-banking-guide',
       frontmatter: {
         title: 'The Complete Guide to Banking for UNAs: Mission-Aligned Financial Partners',
-        description: 'Discover the best banking options for Unincorporated Nonprofit Associations. Learn about UNA-friendly banks, credit unions, and financial institutions that understand nonprofit needs and support your mission.',
+        description: 'Discover the best banking options for Unincorporated Associations. Learn about UNA-friendly banks, credit unions, and financial institutions that understand nonprofit needs and support your mission.',
         date: '2024-12-19',
         tags: ['UNA Banking', 'Nonprofit Banking', 'Credit Unions', 'Mission-Aligned Banking', 'Financial Partners'],
         canonical: '/blog/una-banking-guide',
@@ -331,7 +331,7 @@ Ready to form your UNA? Here's what to do:
       },
       content: `# The Complete Guide to Banking for UNAs: Mission-Aligned Financial Partners
 
-*Finding the right banking partner for your Unincorporated Nonprofit Association goes beyond convenience. It's about aligning with institutions that understand your mission and support your collective purpose.*
+*Finding the right banking partner for your Unincorporated Association goes beyond convenience. It's about aligning with institutions that understand your mission and support your collective purpose.*
 
 ## Why Banking Matters for UNAs
 
@@ -585,7 +585,7 @@ When we think about inheritance, we often think about division. Assets get liqui
 
 But what if there was another way? What if inheritance could be transformed from a process of division into one of preservation? What if we could create structures that honor the past while building frameworks for the future?
 
-This is where the Unincorporated Nonprofit Association (UNA) becomes more than just a legal structure - it becomes a vessel for stewardship, continuity, and the preservation of what matters most.
+This is where the Unincorporated Association (UNA) becomes more than just a legal structure - it becomes a vessel for stewardship, continuity, and the preservation of what matters most.
 
 ## The Emotional and Cultural Intelligence Behind UNA
 
@@ -695,7 +695,7 @@ This is the deeper meaning of UNA formation - not just creating a legal structur
       slug: 'financial-management-una',
       frontmatter: {
         title: 'UNA Financial Management: Building Sustainable Financial Foundations',
-        description: 'Master the essential financial management practices that ensure your Unincorporated Nonprofit Association maintains financial health, compliance, and long-term sustainability.',
+        description: 'Master the essential financial management practices that ensure your Unincorporated Association maintains financial health, compliance, and long-term sustainability.',
         date: '2024-08-16',
         tags: ['UNA Finance', 'Financial Management', 'Compliance', 'Sustainability'],
         canonical: '/blog/financial-management-una',
@@ -1132,7 +1132,7 @@ The path to financial sustainability requires commitment, discipline, and ongoin
       slug: 'una-governance-best-practices',
       frontmatter: {
         title: 'UNA Governance Best Practices',
-        description: 'Effective governance structures and practices for Unincorporated Nonprofit Associations',
+        description: 'Effective governance structures and practices for Unincorporated Associations',
         date: '2024-08-14',
         tags: ['Governance', 'Best Practices', 'UNA Management', 'Leadership'],
         canonical: '/blog/una-governance-best-practices',
@@ -1150,7 +1150,7 @@ The path to financial sustainability requires commitment, discipline, and ongoin
 
 ## The Foundation of Effective UNA Governance
 
-Governance is the backbone of any successful Unincorporated Nonprofit Association. While UNAs offer flexibility in structure and operations, effective governance practices are essential for maintaining member trust, ensuring legal compliance, and achieving organizational goals. This guide explores the best practices that can transform your UNA from a loosely organized group into a thriving, sustainable organization.
+Governance is the backbone of any successful Unincorporated Association. While UNAs offer flexibility in structure and operations, effective governance practices are essential for maintaining member trust, ensuring legal compliance, and achieving organizational goals. This guide explores the best practices that can transform your UNA from a loosely organized group into a thriving, sustainable organization.
 
 ### Why Governance Matters
 
@@ -1644,11 +1644,11 @@ The path to effective governance requires commitment and ongoing attention, but 
 
 ## Understanding California's UNA Landscape
 
-California offers a unique environment for Unincorporated Nonprofit Associations, with specific legal frameworks, regulatory requirements, and opportunities that differ from other states. This comprehensive guide explores the California-specific considerations that can make or break your UNA formation and ongoing operations.
+California offers a unique environment for Unincorporated Associations, with specific legal frameworks, regulatory requirements, and opportunities that differ from other states. This comprehensive guide explores the California-specific considerations that can make or break your UNA formation and ongoing operations.
 
 ### California's Legal Framework for UNAs
 
-California recognizes UNAs under the **Unincorporated Nonprofit Association Act** (California Corporations Code Section 1800-1810), which provides:
+California recognizes UNAs under the **Unincorporated Association Act** (California Corporations Code Section 1800-1810), which provides:
 
 - **Legal Entity Status**: UNAs can hold property, enter contracts, and sue/be sued
 - **Member Protection**: Limited liability for members in most circumstances
@@ -2016,7 +2016,7 @@ The path to UNA success in California requires dedication and expertise, but the
 
 ## The Complex World of Multi-State UNA Operations
 
-Operating an Unincorporated Nonprofit Association across multiple states presents unique challenges and opportunities. While UNAs offer flexibility and simplicity in many areas, multi-state operations require careful planning, legal compliance, and strategic management to ensure success and avoid costly mistakes.
+Operating an Unincorporated Association across multiple states presents unique challenges and opportunities. While UNAs offer flexibility and simplicity in many areas, multi-state operations require careful planning, legal compliance, and strategic management to ensure success and avoid costly mistakes.
 
 ### Why Multi-State Operations Matter
 
@@ -2421,7 +2421,7 @@ The path to multi-state UNA success requires dedication, expertise, and ongoing 
       },
       content: `# UNA Formation Requirements: Top 10 States You Need to Know
 
-Unincorporated Nonprofit Associations (UNAs) offer a powerful alternative to traditional incorporation, providing legal recognition while maintaining the flexibility and sovereignty that many organizations value. Unlike corporations, UNAs don't require complex bylaws, board meetings, or extensive paperwork. Instead, they operate under state-specific statutes that recognize their existence and provide basic legal protections.
+Unincorporated Associations (UNAs) offer a powerful alternative to traditional incorporation, providing legal recognition while maintaining the flexibility and sovereignty that many organizations value. Unlike corporations, UNAs don't require complex bylaws, board meetings, or extensive paperwork. Instead, they operate under state-specific statutes that recognize their existence and provide basic legal protections.
 
 Each state has its own approach to UNA recognition and requirements. Some states have comprehensive statutes, while others provide minimal guidance. Understanding these differences is crucial for choosing the right state for your UNA formation. This guide focuses on the top 10 states by population and economic activity, where most UNA formations occur.
 

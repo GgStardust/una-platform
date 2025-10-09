@@ -86,7 +86,7 @@
 ## California LP/UNA-128 Form Instructions
 
 ### Form Purpose
-The LP/UNA-128 form is required for California-based Unincorporated Nonprofit Associations that:
+The LP/UNA-128 form is required for California-based Unincorporated Associations that:
 - Operate in California
 - Have a mailing address in California
 - Conduct business activities in California
@@ -106,7 +106,7 @@ The LP/UNA-128 form is required for California-based Unincorporated Nonprofit As
 #### 2. Required Information
 - **Section 1:** Entity Information
   - Name: {{entityName}}
-  - Type: Unincorporated Nonprofit Association
+  - Type: Unincorporated Association
   - Date of formation: {{entityStartDate}}
 
 - **Section 2:** Mailing Address
@@ -218,7 +218,7 @@ A DBA allows you to operate under a name different from your legal entity name. 
 - **Entity Name:** {{entityName}}
 - **DBA Name:** [Your desired business name]
 - **Business Address:** {{mailingAddress}}, {{mailingCity}}, {{mailingState}} {{mailingZip}}
-- **Business Type:** Unincorporated Nonprofit Association
+- **Business Type:** Unincorporated Association
 - **Owner Information:** {{organizerName}}
 
 #### 4. Publication Requirements

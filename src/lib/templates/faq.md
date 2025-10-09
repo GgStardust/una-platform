@@ -1,7 +1,7 @@
 # FAQ
 
 **What is a UNA?**  
-An Unincorporated Nonprofit Association: a simple, low-cost legal container for mission-driven work.
+An Unincorporated Association: a simple, low-cost legal container for mission-driven work.
 
 **Do I need a lawyer?**  
 Not usually. Complex cases are flagged and may require review.

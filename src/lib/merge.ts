@@ -84,7 +84,7 @@ export function generateUNAAgreement(data: IntakeData): string {
 
 ## Agreement Terms
 
-This Unincorporated Nonprofit Association (UNA) Agreement is entered into on {{currentDate}} by the members of the organization.
+This Unincorporated Association (UNA) Agreement is entered into on {{currentDate}} by the members of the organization.
 
 ### Purpose
 This organization is organized exclusively for {{mission}}.
@@ -121,7 +121,7 @@ Download Form SS-4 from the IRS website or call 1-800-829-4933.
 - Legal name of organization
 - Address
 - Responsible party information
-- Type of organization (Unincorporated Nonprofit Association)
+- Type of organization (Unincorporated Association)
 
 ### 3. Submit Application
 - **Online:** Use the IRS EIN Assistant (recommended)

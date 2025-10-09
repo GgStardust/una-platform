@@ -5,7 +5,7 @@ The EIN provides your UNA with a recognized identity in the economic system. It 
 
 ## Prefilled Data from Intake
 - **Legal Name:** [UNA Name]  
-- **Entity Type:** Unincorporated Nonprofit Association  
+- **Entity Type:** Unincorporated Association  
 - **Responsible Party:** [Officer Name, Title]  
 - **Mailing Address:** [Address]  
 - **Start Date:** [Date]

@@ -329,7 +329,7 @@ function App() {
             <div className="md:col-span-2">
               <h3 className="text-xl font-bold font-montserrat mb-4">UNA Platform</h3>
               <p className="text-white/80 font-lora mb-4 leading-relaxed">
-                Expert guidance for Unincorporated Nonprofit Association formation. From assessment to complete formation with sovereignty-aligned expertise.
+                Expert guidance for Unincorporated Association formation. From assessment to complete formation with sovereignty-aligned expertise.
               </p>
             </div>
             <div>
