@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Calendar, User, Clock, ArrowLeft, Share2 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import SEOHead from '../components/SEOHead';
+import { ResponsiveText } from '@/components/ui';
 
 interface BlogPost {
   id: string;
@@ -275,9 +276,9 @@ export default function BlogPost() {
                 </span>
               </div>
 
-              <h1 className="text-4xl md:text-5xl font-bold text-navy-900 mb-6 leading-tight">
+              <ResponsiveText variant="h1" weight="bold" className="text-navy-900 mb-6 leading-tight">
                 {post.title}
-              </h1>
+              </ResponsiveText>
 
               <div className="flex items-center justify-center space-x-6 text-sm text-navy-500">
                 <span className="flex items-center">

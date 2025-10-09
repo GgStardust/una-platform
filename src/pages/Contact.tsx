@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import { Mail, Phone, MessageCircle, ArrowRight, Send } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
 import { getRouteParams } from '../lib/routes';
-import { GlassCard, GradientHeader, PremiumButton, SectionContainer } from '@/components/ui';
+import { GlassCard, GradientHeader, PremiumButton, SectionContainer, ResponsiveText } from '@/components/ui';
 
 export default function Contact() {
   const [searchParams] = useSearchParams();
@@ -101,33 +101,45 @@ export default function Contact() {
               <div className="bg-gradient-to-r from-[#C49A6C] to-[#2F7E7E] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
                 <Mail className="h-8 w-8 text-white" />
               </div>
-              <h3 className="font-semibold text-white mb-2 font-montserrat">Email</h3>
-              <p className="text-white/90 text-sm font-lora">gigi@gigistardust.com</p>
+              <ResponsiveText variant="h4" weight="semibold" font="montserrat" className="text-white mb-2">
+                Email
+              </ResponsiveText>
+              <ResponsiveText variant="caption" font="lora" className="text-white/90 block">
+                gigi@gigistardust.com
+              </ResponsiveText>
             </GlassCard>
 
             <GlassCard className="text-center">
               <div className="bg-gradient-to-r from-[#2F7E7E] to-[#7A4CA0] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
                 <MessageCircle className="h-8 w-8 text-white" />
               </div>
-              <h3 className="font-semibold text-white mb-2 font-montserrat">Contact Form</h3>
-              <p className="text-white/90 text-sm font-lora">Fill out the form below</p>
+              <ResponsiveText variant="h4" weight="semibold" font="montserrat" className="text-white mb-2">
+                Contact Form
+              </ResponsiveText>
+              <ResponsiveText variant="caption" font="lora" className="text-white/90 block">
+                Fill out the form below
+              </ResponsiveText>
             </GlassCard>
 
             <GlassCard className="text-center">
               <div className="bg-gradient-to-r from-[#7A4CA0] to-[#C49A6C] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
                 <Phone className="h-8 w-8 text-white" />
               </div>
-              <h3 className="font-semibold text-white mb-2 font-montserrat">Schedule Call</h3>
-              <p className="text-white/90 text-sm font-lora">Book a consultation</p>
+              <ResponsiveText variant="h4" weight="semibold" font="montserrat" className="text-white mb-2">
+                Schedule Call
+              </ResponsiveText>
+              <ResponsiveText variant="caption" font="lora" className="text-white/90 block">
+                Book a consultation
+              </ResponsiveText>
             </GlassCard>
           </div>
 
           {/* Contact Form */}
           <div className="max-w-3xl mx-auto">
             <GlassCard variant="solid" padding="lg">
-              <h2 className="text-2xl font-semibold text-[#1C1F3B] mb-6 font-montserrat">
+              <ResponsiveText variant="h2" weight="semibold" font="montserrat" className="text-[#1C1F3B] mb-6">
                 {formData.subject === 'Referral' ? 'Request a Referral' : 'Send Us a Message'}
-              </h2>
+              </ResponsiveText>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
@@ -142,7 +154,7 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      className="w-full p-3 border-2 border-[#1C1F3B]/20 rounded-lg focus:ring-2 focus:ring-[#C49A6C] focus:border-[#C49A6C] text-[#1C1F3B] font-lora transition-all"
+                      className="w-full p-3 border-2 border-[#1C1F3B]/20 rounded-lg focus:ring-2 focus:ring-[#C49A6C] focus:border-[#C49A6C] text-[#1C1F3B] font-lora transition-all text-base"
                       placeholder="Your full name"
                     />
                   </div>
@@ -158,7 +170,7 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full p-3 border-2 border-[#1C1F3B]/20 rounded-lg focus:ring-2 focus:ring-[#C49A6C] focus:border-[#C49A6C] text-[#1C1F3B] font-lora transition-all"
+                      className="w-full p-3 border-2 border-[#1C1F3B]/20 rounded-lg focus:ring-2 focus:ring-[#C49A6C] focus:border-[#C49A6C] text-[#1C1F3B] font-lora transition-all text-base"
                       placeholder="your.email@example.com"
                     />
                   </div>
@@ -175,7 +187,7 @@ export default function Contact() {
                     value={formData.subject}
                     onChange={handleInputChange}
                     required
-                    className="w-full p-3 border-2 border-[#1C1F3B]/20 rounded-lg focus:ring-2 focus:ring-[#C49A6C] focus:border-[#C49A6C] text-[#1C1F3B] font-lora transition-all"
+                    className="w-full p-3 border-2 border-[#1C1F3B]/20 rounded-lg focus:ring-2 focus:ring-[#C49A6C] focus:border-[#C49A6C] text-[#1C1F3B] font-lora transition-all text-base"
                     placeholder="What can we help you with?"
                   />
                 </div>
@@ -190,7 +202,7 @@ export default function Contact() {
                       name="referralType"
                       value={formData.referralType}
                       onChange={handleInputChange}
-                      className="w-full p-3 border-2 border-[#1C1F3B]/20 rounded-lg focus:ring-2 focus:ring-[#C49A6C] focus:border-[#C49A6C] text-[#1C1F3B] font-lora transition-all"
+                      className="w-full p-3 border-2 border-[#1C1F3B]/20 rounded-lg focus:ring-2 focus:ring-[#C49A6C] focus:border-[#C49A6C] text-[#1C1F3B] font-lora transition-all text-base"
                     >
                       <option value="">Select referral type</option>
                       <option value="cpa">CPA / Accountant</option>
@@ -212,7 +224,7 @@ export default function Contact() {
                     onChange={handleInputChange}
                     required
                     rows={6}
-                    className="w-full p-3 border-2 border-[#1C1F3B]/20 rounded-lg focus:ring-2 focus:ring-[#C49A6C] focus:border-[#C49A6C] text-[#1C1F3B] font-lora transition-all resize-none"
+                    className="w-full p-3 border-2 border-[#1C1F3B]/20 rounded-lg focus:ring-2 focus:ring-[#C49A6C] focus:border-[#C49A6C] text-[#1C1F3B] font-lora transition-all resize-none text-base"
                     placeholder={getSubjectPlaceholder()}
                   />
                 </div>
@@ -222,9 +234,9 @@ export default function Contact() {
                     Send Message
                     <Send className="ml-2 h-5 w-5" />
                   </PremiumButton>
-                  <p className="text-sm text-[#1C1F3B]/70 mt-3 font-lora">
+                  <ResponsiveText variant="caption" font="lora" className="text-[#1C1F3B]/70 mt-3 block">
                     We typically respond within 24-48 hours during business days.
-                  </p>
+                  </ResponsiveText>
                 </div>
               </form>
             </GlassCard>
@@ -232,9 +244,9 @@ export default function Contact() {
 
           {/* Alternative Contact */}
           <div className="mt-12 text-center">
-            <p className="text-white/90 mb-4 font-lora text-lg">
+            <ResponsiveText variant="bodyLarge" font="lora" className="text-white/90 mb-4 block">
               Prefer to schedule a consultation instead?
-            </p>
+            </ResponsiveText>
             <PremiumButton
               as="a"
               href="/services"

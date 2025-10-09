@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
 import { Calendar, Tag, ArrowRight } from 'lucide-react';
+import { ResponsiveText } from '@/components/ui';
 
 interface BlogPost {
   id: string;
@@ -84,13 +85,13 @@ export default function BlogIndex() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-navy-900 mb-4">
+          <ResponsiveText variant="h1" weight="bold" className="text-navy-900 mb-4">
             UNA Formation Blog
-          </h1>
-          <p className="text-xl text-navy-700 max-w-2xl mx-auto">
-            Expert guidance on Unincorporated Nonprofit Association formation, 
+          </ResponsiveText>
+          <ResponsiveText variant="bodyLarge" className="text-navy-700 max-w-2xl mx-auto block">
+            Expert guidance on Unincorporated Nonprofit Association formation,
             state requirements, and best practices for your organization.
-          </p>
+          </ResponsiveText>
         </div>
 
         {/* Blog Posts */}
@@ -116,13 +117,13 @@ export default function BlogIndex() {
                     )}
                   </div>
                   
-                  <h2 className="text-2xl font-bold text-navy-900 mb-4">
+                  <ResponsiveText variant="h2" weight="bold" className="text-navy-900 mb-4">
                     {blog.title}
-                  </h2>
-                  
+                  </ResponsiveText>
+
                   <div className="flex flex-wrap gap-2 mb-6">
                     {blog.tags.map((tag) => (
-                      <span 
+                      <span
                         key={tag}
                         className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-[#C49A6C]/10 text-[#C49A6C]"
                       >
@@ -131,11 +132,11 @@ export default function BlogIndex() {
                       </span>
                     ))}
                   </div>
-                  
+
                   <div className="prose prose-navy max-w-none mb-6">
-                    <p className="text-navy-700 leading-relaxed">
+                    <ResponsiveText variant="body" className="text-navy-700 leading-relaxed block">
                       {blog.content.substring(0, 200)}...
-                    </p>
+                    </ResponsiveText>
                   </div>
                   
                   <Link

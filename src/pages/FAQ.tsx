@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom';
 import { ChevronDown, ChevronUp, Target, Building2, Calculator, Shield, Users, HelpCircle } from 'lucide-react';
 import { useState } from 'react';
-import { GlassCard, GradientHeader, PremiumButton, SectionContainer } from '@/components/ui';
+import { GlassCard, GradientHeader, PremiumButton, SectionContainer, ResponsiveText } from '@/components/ui';
 
 const faqCategories = [
   {
@@ -181,7 +181,9 @@ export default function FAQ() {
                     <div className={`p-2 bg-gradient-to-r ${category.color} rounded-lg`}>
                       <IconComponent className="h-5 w-5 text-white" />
                     </div>
-                    <h2 className="text-xl font-semibold text-white font-montserrat">{category.title}</h2>
+                    <ResponsiveText variant="h4" weight="semibold" font="montserrat" className="text-white">
+                      {category.title}
+                    </ResponsiveText>
                   </div>
                 </div>
 
@@ -198,18 +200,22 @@ export default function FAQ() {
                             onClick={() => toggleQuestion(questionId)}
                             className="w-full px-4 py-4 text-left flex items-center justify-between hover:bg-white/10 transition-colors"
                           >
-                            <span className="font-medium text-white font-montserrat">{faq.question}</span>
+                            <ResponsiveText variant="body" weight="medium" font="montserrat" className="text-white">
+                              {faq.question}
+                            </ResponsiveText>
                             {isOpen ? (
-                              <ChevronUp className="h-5 w-5 text-[#3DB5B0]" />
+                              <ChevronUp className="h-5 w-5 text-[#3DB5B0] flex-shrink-0 ml-2" />
                             ) : (
-                              <ChevronDown className="h-5 w-5 text-[#3DB5B0]" />
+                              <ChevronDown className="h-5 w-5 text-[#3DB5B0] flex-shrink-0 ml-2" />
                             )}
                           </button>
 
                           {isOpen && (
                             <div className="px-4 pb-4">
                               <div className="border-t border-white/20 pt-4">
-                                <p className="text-white/90 leading-relaxed font-lora">{faq.answer}</p>
+                                <ResponsiveText variant="body" font="lora" className="text-white/90 leading-relaxed block">
+                                  {faq.answer}
+                                </ResponsiveText>
                               </div>
                             </div>
                           )}
@@ -225,12 +231,12 @@ export default function FAQ() {
 
         {/* Additional Help */}
         <GlassCard className="mt-12 p-8 text-center bg-gradient-to-r from-[#1C1F3B]/80 to-[#2F7E7E]/80">
-          <h2 className="text-3xl font-bold mb-4 font-montserrat text-white">
+          <ResponsiveText variant="h2" weight="bold" font="montserrat" className="text-white mb-4">
             Still Have Questions?
-          </h2>
-          <p className="text-xl mb-8 text-white/90 font-lora">
+          </ResponsiveText>
+          <ResponsiveText variant="bodyLarge" font="lora" className="text-white/90 mb-8 block">
             Start your UNA formation journey and get personalized guidance every step of the way.
-          </p>
+          </ResponsiveText>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/explore">
               <PremiumButton variant="secondary">

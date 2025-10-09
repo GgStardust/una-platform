@@ -3,29 +3,29 @@ import { ExternalLink, Building, AlertCircle, Search, Filter } from 'lucide-reac
 import { useState } from 'react';
 import SEOHead from '../components/SEOHead';
 import AffiliateLink from '../components/AffiliateLink';
-import { GradientHeader, SectionContainer, GlassCard } from '@/components/ui';
+import { GradientHeader, SectionContainer, GlassCard, ResponsiveText } from '@/components/ui';
 import { getAllAffiliatePartners, getAllBankRecommendations, getAffiliatePartnersByCategory } from '@/lib/affiliate-system';
 
 export default function Resources() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
-  
+
   // Get all affiliates from backend
   const allAffiliates = getAllAffiliatePartners();
   const allBanks = getAllBankRecommendations();
-  
+
   // Filter affiliates based on search and category
   const filteredAffiliates = allAffiliates.filter(affiliate => {
-    const matchesSearch = searchTerm === '' || 
+    const matchesSearch = searchTerm === '' ||
       affiliate.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       affiliate.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
       affiliate.bestFor.toLowerCase().includes(searchTerm.toLowerCase());
-    
+
     const matchesCategory = selectedCategory === 'all' || affiliate.category === selectedCategory;
-    
+
     return matchesSearch && matchesCategory;
   });
-  
+
   const categories = [
     { id: 'all', name: 'All Resources', count: allAffiliates.length },
     { id: 'financial', name: 'Financial Tools', count: getAffiliatePartnersByCategory('financial').length },
@@ -62,10 +62,12 @@ export default function Resources() {
               <div className="flex items-start gap-3">
                 <AlertCircle className="h-5 w-5 text-blue-300 flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="font-semibold text-white mb-1 font-montserrat">Affiliate Disclosure</h3>
-                  <p className="text-sm text-white/80 font-lora">
+                  <ResponsiveText variant="body" weight="semibold" font="montserrat" className="text-white mb-1">
+                    Affiliate Disclosure
+                  </ResponsiveText>
+                  <ResponsiveText variant="caption" font="lora" className="text-white/80">
                     Some of the tools and services listed below are affiliate partners. This means we may earn a commission when you sign up, at no extra cost to you. We only recommend products we genuinely believe will benefit your UNA, and your support helps us maintain this free educational platform.
-                  </p>
+                  </ResponsiveText>
                 </div>
               </div>
             </GlassCard>
@@ -78,7 +80,7 @@ export default function Resources() {
                   <input
                     type="text"
                     placeholder="Search resources..."
-                    className="w-full pl-10 pr-4 py-2 rounded-lg bg-white/5 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#C49A6C]"
+                    className="w-full pl-10 pr-4 py-3 rounded-lg bg-white/5 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#C49A6C] text-base"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                   />
@@ -86,7 +88,7 @@ export default function Resources() {
                 <div className="relative">
                   <Filter className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-white/60" />
                   <select
-                    className="w-full md:w-auto pl-10 pr-8 py-2 rounded-lg bg-white/5 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-[#C49A6C] appearance-none"
+                    className="w-full md:w-auto pl-10 pr-8 py-3 rounded-lg bg-white/5 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-[#C49A6C] appearance-none text-base"
                     value={selectedCategory}
                     onChange={(e) => setSelectedCategory(e.target.value)}
                   >
@@ -98,9 +100,9 @@ export default function Resources() {
                   </select>
                 </div>
               </div>
-              <p className="text-white/70 text-sm text-center">
+              <ResponsiveText variant="caption" font="lora" className="text-white/70 text-center block">
                 Showing {filteredAffiliates.length} of {allAffiliates.length} resources.
-              </p>
+              </ResponsiveText>
             </GlassCard>
 
             {/* All Resources Grid */}
@@ -109,7 +111,9 @@ export default function Resources() {
                 <div className="bg-gradient-to-r from-[#C49A6C] to-[#2F7E7E] rounded-full p-3">
                   <Building className="h-6 w-6 text-white" />
                 </div>
-                <h2 className="text-3xl font-bold text-white font-montserrat">All Resources</h2>
+                <ResponsiveText variant="h2" weight="bold" font="montserrat" className="text-white">
+                  All Resources
+                </ResponsiveText>
               </div>
 
               {filteredAffiliates.length > 0 ? (
@@ -117,16 +121,20 @@ export default function Resources() {
                   {filteredAffiliates.map(affiliate => (
                     <GlassCard key={affiliate.id} variant="default">
                       <div className="flex items-center justify-between mb-3">
-                        <h3 className="text-xl font-semibold text-white font-montserrat">{affiliate.name}</h3>
+                        <ResponsiveText variant="h4" weight="semibold" font="montserrat" className="text-white">
+                          {affiliate.name}
+                        </ResponsiveText>
                         <span className="bg-white/10 px-2 py-1 rounded-full text-xs text-white/70 font-lora">
                           {affiliate.category}
                         </span>
                       </div>
-                      <p className="text-white/80 mb-4 font-lora text-sm">
+                      <ResponsiveText variant="caption" font="lora" className="text-white/80 mb-4 block">
                         {affiliate.description}
-                      </p>
+                      </ResponsiveText>
                       <div className="mb-4">
-                        <p className="text-white/90 text-sm font-medium font-montserrat mb-2">Key Features:</p>
+                        <ResponsiveText variant="caption" weight="medium" font="montserrat" className="text-white/90 mb-2 block">
+                          Key Features:
+                        </ResponsiveText>
                         <ul className="text-white/70 text-sm space-y-1 font-lora">
                           {affiliate.features.slice(0, 3).map((feature, index) => (
                             <li key={index}>• {feature}</li>
@@ -137,8 +145,12 @@ export default function Resources() {
                         </ul>
                       </div>
                       <div className="mb-4">
-                        <p className="text-white/90 text-sm font-medium font-montserrat mb-1">Best For:</p>
-                        <p className="text-white/70 text-sm font-lora">{affiliate.bestFor}</p>
+                        <ResponsiveText variant="caption" weight="medium" font="montserrat" className="text-white/90 mb-1 block">
+                          Best For:
+                        </ResponsiveText>
+                        <ResponsiveText variant="caption" font="lora" className="text-white/70">
+                          {affiliate.bestFor}
+                        </ResponsiveText>
                       </div>
                       <AffiliateLink partnerId={affiliate.id} />
                     </GlassCard>
@@ -146,9 +158,9 @@ export default function Resources() {
                 </div>
               ) : (
                 <GlassCard variant="default" className="text-center py-12">
-                  <p className="text-white/70 font-lora">
+                  <ResponsiveText variant="body" font="lora" className="text-white/70">
                     No resources found matching your criteria. Try adjusting your search or filter.
-                  </p>
+                  </ResponsiveText>
                 </GlassCard>
               )}
             </div>
@@ -160,23 +172,29 @@ export default function Resources() {
                   <div className="bg-gradient-to-r from-[#C49A6C] to-[#2F7E7E] rounded-full p-3">
                     <Building className="h-6 w-6 text-white" />
                   </div>
-                  <h2 className="text-3xl font-bold text-white font-montserrat">Banking Services</h2>
+                  <ResponsiveText variant="h2" weight="bold" font="montserrat" className="text-white">
+                    Banking Services
+                  </ResponsiveText>
                 </div>
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {allBanks.map(bank => (
                     <GlassCard key={bank.id} variant="default">
                       <div className="flex items-center justify-between mb-3">
-                        <h3 className="text-xl font-semibold text-white font-montserrat">{bank.name}</h3>
+                        <ResponsiveText variant="h4" weight="semibold" font="montserrat" className="text-white">
+                          {bank.name}
+                        </ResponsiveText>
                         <span className="bg-white/10 px-2 py-1 rounded-full text-xs text-white/70 font-lora">
                           {bank.type.replace('-', ' ')}
                         </span>
                       </div>
-                      <p className="text-white/80 mb-4 font-lora text-sm">
+                      <ResponsiveText variant="caption" font="lora" className="text-white/80 mb-4 block">
                         {bank.mission}
-                      </p>
+                      </ResponsiveText>
                       <div className="mb-4">
-                        <p className="text-white/90 text-sm font-medium font-montserrat mb-2">Key Features:</p>
+                        <ResponsiveText variant="caption" weight="medium" font="montserrat" className="text-white/90 mb-2 block">
+                          Key Features:
+                        </ResponsiveText>
                         <ul className="text-white/70 text-sm space-y-1 font-lora">
                           {bank.features.slice(0, 3).map((feature, index) => (
                             <li key={index}>• {feature}</li>
@@ -184,8 +202,12 @@ export default function Resources() {
                         </ul>
                       </div>
                       <div className="mb-4">
-                        <p className="text-white/90 text-sm font-medium font-montserrat mb-1">Notes:</p>
-                        <p className="text-white/70 text-sm font-lora">{bank.notes}</p>
+                        <ResponsiveText variant="caption" weight="medium" font="montserrat" className="text-white/90 mb-1 block">
+                          Notes:
+                        </ResponsiveText>
+                        <ResponsiveText variant="caption" font="lora" className="text-white/70">
+                          {bank.notes}
+                        </ResponsiveText>
                       </div>
                       {bank.affiliateLink ? (
                         <a
@@ -216,12 +238,12 @@ export default function Resources() {
 
             {/* Need Help Choosing? CTA */}
             <GlassCard variant="solid" className="bg-gradient-to-r from-[#C49A6C]/80 to-[#2F7E7E]/80 backdrop-blur-md border-[#C49A6C]/50 text-center">
-              <h3 className="text-2xl font-bold text-white mb-3 font-montserrat">
+              <ResponsiveText variant="h3" weight="bold" font="montserrat" className="text-white mb-3">
                 Need Help Choosing the Right Tools?
-              </h3>
-              <p className="text-white/95 mb-6 font-lora max-w-2xl mx-auto">
+              </ResponsiveText>
+              <ResponsiveText variant="body" font="lora" className="text-white/95 mb-6 max-w-2xl mx-auto block">
                 Every UNA has unique needs. Our Strategy Session includes personalized recommendations for banking, accounting, legal, and organizational tools based on your specific situation.
-              </p>
+              </ResponsiveText>
               <Link
                 to="/services"
                 className="inline-flex items-center justify-center px-8 py-3 bg-white text-[#1E2A38] rounded-full font-semibold hover:shadow-lg transition-all duration-200 font-montserrat hover:bg-white/90"

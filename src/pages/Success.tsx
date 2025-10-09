@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Users, DollarSign, Award, Heart, BookOpen, Palette, Scissors, Car, PawPrint, PenTool } from 'lucide-react';
-import { GlassCard, GradientHeader, PremiumButton, SectionContainer } from '@/components/ui';
+import { GlassCard, GradientHeader, PremiumButton, SectionContainer, ResponsiveText } from '@/components/ui';
 
 interface SuccessStory {
   id: string;
@@ -637,8 +637,12 @@ export default function Success() {
                     {story.icon}
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-[#1C1F3B] font-montserrat">{story.title}</h3>
-                    <p className="text-sm text-[#1C1F3B]/70 font-lora">{story.subtitle}</p>
+                    <ResponsiveText variant="h4" weight="semibold" font="montserrat" className="text-[#1C1F3B]">
+                      {story.title}
+                    </ResponsiveText>
+                    <ResponsiveText variant="caption" font="lora" className="text-[#1C1F3B]/70 block">
+                      {story.subtitle}
+                    </ResponsiveText>
                   </div>
                 </div>
                 <span className="inline-block px-3 py-1 text-xs font-medium bg-[#C49A6C]/20 text-[#C49A6C] rounded-full font-montserrat">
@@ -649,12 +653,16 @@ export default function Success() {
               {/* Key Metrics */}
               <div className="p-6">
                 <div className="mb-4">
-                  <h4 className="text-sm font-medium text-[#1C1F3B] mb-2 font-montserrat">Key Achievements</h4>
+                  <ResponsiveText variant="caption" weight="medium" font="montserrat" className="text-[#1C1F3B] mb-2 block">
+                    Key Achievements
+                  </ResponsiveText>
                   <ul className="space-y-1">
                     {story.keyMetrics.map((metric, index) => (
-                      <li key={index} className="text-sm text-[#1C1F3B]/70 flex items-center font-lora">
+                      <li key={index} className="flex items-center">
                         <div className="w-1.5 h-1.5 bg-[#C49A6C] rounded-full mr-2 flex-shrink-0"></div>
-                        {metric}
+                        <ResponsiveText variant="caption" font="lora" className="text-[#1C1F3B]/70">
+                          {metric}
+                        </ResponsiveText>
                       </li>
                     ))}
                   </ul>
@@ -662,8 +670,12 @@ export default function Success() {
 
                 {/* Quick Impact */}
                 <div className="mb-4">
-                  <h4 className="text-sm font-medium text-[#1C1F3B] mb-2 font-montserrat">Quick Impact</h4>
-                  <p className="text-sm text-[#1C1F3B]/70 font-lora">{story.quickImpact}</p>
+                  <ResponsiveText variant="caption" weight="medium" font="montserrat" className="text-[#1C1F3B] mb-2 block">
+                    Quick Impact
+                  </ResponsiveText>
+                  <ResponsiveText variant="caption" font="lora" className="text-[#1C1F3B]/70 block">
+                    {story.quickImpact}
+                  </ResponsiveText>
                 </div>
 
                 {/* Read Full Story Button */}
@@ -694,8 +706,12 @@ export default function Success() {
                     {selectedCaseStudy.icon}
                   </div>
                   <div>
-                    <h2 className="text-2xl font-bold text-[#1C1F3B] font-montserrat">{selectedCaseStudy.title}</h2>
-                    <p className="text-lg text-[#1C1F3B]/70 font-lora">{selectedCaseStudy.subtitle}</p>
+                    <ResponsiveText variant="h2" weight="bold" font="montserrat" className="text-[#1C1F3B]">
+                      {selectedCaseStudy.title}
+                    </ResponsiveText>
+                    <ResponsiveText variant="bodyLarge" font="lora" className="text-[#1C1F3B]/70 block">
+                      {selectedCaseStudy.subtitle}
+                    </ResponsiveText>
                   </div>
                 </div>
                 <button
@@ -713,30 +729,46 @@ export default function Success() {
             <div className="p-6 space-y-6">
               {/* Business Overview */}
               <div>
-                <h3 className="text-lg font-semibold text-[#1C1F3B] mb-2 font-montserrat">Business Overview</h3>
-                <p className="text-[#1C1F3B]/80 font-lora">{selectedCaseStudy.businessType}</p>
+                <ResponsiveText variant="h4" weight="semibold" font="montserrat" className="text-[#1C1F3B] mb-2">
+                  Business Overview
+                </ResponsiveText>
+                <ResponsiveText variant="body" font="lora" className="text-[#1C1F3B]/80 block">
+                  {selectedCaseStudy.businessType}
+                </ResponsiveText>
               </div>
 
               {/* Challenge */}
               <div>
-                <h3 className="text-lg font-semibold text-[#1C1F3B] mb-2 font-montserrat">Context and Intention</h3>
-                <p className="text-[#1C1F3B]/80 font-lora">{selectedCaseStudy.challenge}</p>
+                <ResponsiveText variant="h4" weight="semibold" font="montserrat" className="text-[#1C1F3B] mb-2">
+                  Context and Intention
+                </ResponsiveText>
+                <ResponsiveText variant="body" font="lora" className="text-[#1C1F3B]/80 block">
+                  {selectedCaseStudy.challenge}
+                </ResponsiveText>
               </div>
 
               {/* Solution */}
               <div>
-                <h3 className="text-lg font-semibold text-[#1C1F3B] mb-2 font-montserrat">The UNA Structure</h3>
-                <p className="text-[#1C1F3B]/80 font-lora">{selectedCaseStudy.solution}</p>
+                <ResponsiveText variant="h4" weight="semibold" font="montserrat" className="text-[#1C1F3B] mb-2">
+                  The UNA Structure
+                </ResponsiveText>
+                <ResponsiveText variant="body" font="lora" className="text-[#1C1F3B]/80 block">
+                  {selectedCaseStudy.solution}
+                </ResponsiveText>
               </div>
 
               {/* Results */}
               <div>
-                <h3 className="text-lg font-semibold text-[#1C1F3B] mb-2 font-montserrat">Results & Impact</h3>
+                <ResponsiveText variant="h4" weight="semibold" font="montserrat" className="text-[#1C1F3B] mb-2">
+                  Results & Impact
+                </ResponsiveText>
                 <ul className="space-y-2">
                   {selectedCaseStudy.results.map((result, index) => (
-                    <li key={index} className="text-[#1C1F3B]/80 flex items-start font-lora">
+                    <li key={index} className="flex items-start">
                       <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-2 mt-2 flex-shrink-0"></div>
-                      {result}
+                      <ResponsiveText variant="body" font="lora" className="text-[#1C1F3B]/80">
+                        {result}
+                      </ResponsiveText>
                     </li>
                   ))}
                 </ul>
@@ -744,12 +776,16 @@ export default function Success() {
 
               {/* Key Takeaways */}
               <div>
-                <h3 className="text-lg font-semibold text-[#1C1F3B] mb-2 font-montserrat">Principles in Practice</h3>
+                <ResponsiveText variant="h4" weight="semibold" font="montserrat" className="text-[#1C1F3B] mb-2">
+                  Principles in Practice
+                </ResponsiveText>
                 <ul className="space-y-2">
                   {selectedCaseStudy.keyTakeaways.map((takeaway, index) => (
-                    <li key={index} className="text-[#1C1F3B]/80 flex items-start font-lora">
+                    <li key={index} className="flex items-start">
                       <div className="w-1.5 h-1.5 bg-[#C49A6C] rounded-full mr-2 mt-2 flex-shrink-0"></div>
-                      {takeaway}
+                      <ResponsiveText variant="body" font="lora" className="text-[#1C1F3B]/80">
+                        {takeaway}
+                      </ResponsiveText>
                     </li>
                   ))}
                 </ul>
@@ -757,10 +793,12 @@ export default function Success() {
 
               {/* Full Story */}
               <div>
-                <h3 className="text-lg font-semibold text-[#1C1F3B] mb-2 font-montserrat">The Full Story</h3>
-                <div className="text-[#1C1F3B]/80 leading-relaxed whitespace-pre-line font-lora">
+                <ResponsiveText variant="h4" weight="semibold" font="montserrat" className="text-[#1C1F3B] mb-2">
+                  The Full Story
+                </ResponsiveText>
+                <ResponsiveText variant="body" font="lora" className="text-[#1C1F3B]/80 leading-relaxed whitespace-pre-line block">
                   {selectedCaseStudy.fullStory}
-                </div>
+                </ResponsiveText>
               </div>
             </div>
 
