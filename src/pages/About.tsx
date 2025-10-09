@@ -8,7 +8,7 @@ export default function About() {
       {/* Hero Section */}
       <GradientHeader
         title="About the UNA Platform"
-        subtitle="Empowering purpose-driven founders to align structure with sovereignty through accessible, lawful frameworks."
+        subtitle="Sovereign architecture for founders and creators, aligning structure, coherence, and lawful design."
       />
 
       {/* Creator Section */}
@@ -19,13 +19,10 @@ export default function About() {
           </ResponsiveText>
           <GlassCard variant="solid" padding="lg">
             <ResponsiveText variant="bodyLarge" font="lora" className="text-[#1C1F3B]/90 leading-relaxed mb-6 block">
-              Gigi Stardust is a systems architect, consultant, and creator of <em>Stardust to Sovereignty™</em>,
-              a multidimensional book and interactive system that integrates science, metaphysics, creativity, and community practice into a living journey of sovereignty.
+              Gigi Stardust is a systems architect, consultant, and creator of <em>Stardust to Sovereignty™</em>, a multidimensional Codex and living framework integrating science, consciousness, and creative design into coherent structures for evolution and collaboration.
             </ResponsiveText>
             <ResponsiveText variant="bodyLarge" font="lora" className="text-[#1C1F3B]/90 leading-relaxed block">
-              With decades of experience in building purpose-driven organizations, she designed this UNA platform
-              to give visionaries, educators, artists, and community builders a clear and sovereign pathway to
-              establish their own Unincorporated Nonprofit Association (UNA).
+              The UNA platform translates this system into practice, offering founders, educators, and community builders a clear path to form lawful Unincorporated Associations that embody integrity, resonance, and sovereignty in their organizational DNA.
             </ResponsiveText>
           </GlassCard>
         </div>
@@ -34,22 +31,18 @@ export default function About() {
         <div className="max-w-4xl mx-auto">
           <GlassCard className="text-center">
             <ResponsiveText variant="h2" weight="bold" font="montserrat" className="text-white mb-6">
-              A Vision for Sovereignty
+              Structure as Sovereign Design
             </ResponsiveText>
             <div className="max-w-3xl mx-auto space-y-4">
               <ResponsiveText variant="bodyLarge" font="lora" className="text-white/90 leading-relaxed block">
-                "My mission is to help visionaries, educators, artists, and community builders create organizations
-                that truly reflect their values and purpose. Many are guided to fit their dreams into
-                structures that no longer serve their evolving purpose."
+                "The UNA platform is built on the principle that structure serves consciousness. By designing lawful containers that amplify coherence, creativity, and shared purpose, we create new systems that honor your vision."
               </ResponsiveText>
               <ResponsiveText variant="bodyLarge" font="lora" className="text-white/90 leading-relaxed block">
-                "The UNA platform represents a different path—one where structure serves sovereignty, where
-                legal frameworks support rather than constrain our collective vision. This is about creating
-                the world we want to live in, one organization at a time."
+                "Every UNA formed through this framework becomes a living node in a greater field of sovereign design, where law and consciousness move in rhythm, and governance becomes an act of creation."
               </ResponsiveText>
               <div className="mt-6">
                 <span className="inline-block bg-gradient-to-r from-[#C49A6C] to-[#B8955A] text-white px-6 py-3 rounded-lg font-bold font-montserrat">
-                  — Gigi Stardust, Founder
+                  Gigi Stardust, Founder
                 </span>
               </div>
             </div>
@@ -65,12 +58,10 @@ export default function About() {
           </ResponsiveText>
           <div className="max-w-4xl mx-auto">
             <ResponsiveText variant="bodyLarge" font="lora" className="text-white/90 leading-relaxed block">
-              The UNA platform exists to make mission-aligned structuring accessible, simple, and powerful.
-              It guides clients through intake, generates professional agreements and filings, and provides
-              a dashboard that tracks progress and indicates when additional legal or financial review could strengthen alignment.
+              The UNA platform makes sovereignty operational. It simplifies formation, agreement generation, and governance, translating complex legal processes into accessible, elegant, and lawful design.
             </ResponsiveText>
             <ResponsiveText variant="bodyLarge" font="lora" className="text-white/90 leading-relaxed mt-4 block">
-              At its core, the platform creates structures that serve creativity, purpose, and collective integrity.
+              Each structure created through this system reflects harmonic architecture, form aligned with resonance, purpose, and field coherence.
             </ResponsiveText>
           </div>
         </div>
@@ -85,7 +76,7 @@ export default function About() {
               Mission-Aligned
             </ResponsiveText>
             <ResponsiveText variant="body" font="lora" className="text-white/90 block">
-              Structures that serve your creative vision and collective purpose, not bureaucratic requirements.
+              Structures that amplify your signal and purpose, where governance aligns with creative intention.
             </ResponsiveText>
           </GlassCard>
 
@@ -97,7 +88,7 @@ export default function About() {
               Legal Protection
             </ResponsiveText>
             <ResponsiveText variant="body" font="lora" className="text-white/90 block">
-              Professional agreements and filings that establish clear governance and protect collective interests.
+              Clear, lawful agreements that uphold collective integrity while preserving autonomy.
             </ResponsiveText>
           </GlassCard>
 
@@ -109,7 +100,7 @@ export default function About() {
               Collective Integrity
             </ResponsiveText>
             <ResponsiveText variant="body" font="lora" className="text-white/90 block">
-              Frameworks that honor collaboration, sovereignty, and the unique needs of mission-driven groups.
+              Frameworks that strengthen collaboration, transparency, and coherence across all members.
             </ResponsiveText>
           </GlassCard>
         </div>
@@ -123,11 +114,10 @@ export default function About() {
           </ResponsiveText>
           <div className="max-w-4xl mx-auto">
             <ResponsiveText variant="bodyLarge" font="lora" className="text-white/90 leading-relaxed mb-6 block">
-              This platform is both a consulting service and a lived example of sovereignty in action.
-              <em>Stardust to Sovereignty™</em> is a multidimensional book and interactive system that integrates science, metaphysics, creativity, and community practice into a living journey of sovereignty.
+              The UNA platform arises directly from <em>Stardust to Sovereignty™</em>, a multidimensional resonance-based architecture that activates memory, restores coherence, and provides functional architecture for sovereign design. It bridges encoded memory, sovereign consciousness, and emergent human signal through a living system of 13 fundamental Orbs that govern consciousness, embodiment, and creation.
             </ResponsiveText>
             <ResponsiveText variant="bodyLarge" font="lora" className="text-white/90 leading-relaxed block">
-              It extends beyond the page into physical portals: an art studio, meditation and event spaces, and a creative property that blends living, teaching, and collaboration. Structured as a UNA, it embodies decentralization, parallel economies, and coherence, showing how vision-driven projects can hold both creative expression and community impact in one sovereign container.
+              It extends beyond concept into embodiment, through art studios, gatherings, and consulting practice, modeling how coherence, creativity, and lawful structure unite as one living system.
             </ResponsiveText>
           </div>
         </div>
@@ -139,10 +129,10 @@ export default function About() {
               <BookOpen className="h-6 w-6 text-white" />
             </div>
             <ResponsiveText variant="h4" weight="semibold" font="montserrat" className="text-white mb-2">
-              Book
+              Books
             </ResponsiveText>
             <ResponsiveText variant="caption" font="lora" className="text-white/90 block">
-              Multidimensional exploration of sovereignty and consciousness
+              Written works exploring the 13-Orb system and living fiction field reports from consciousness systems.
             </ResponsiveText>
           </div>
 
@@ -151,10 +141,10 @@ export default function About() {
               <Lightbulb className="h-6 w-6 text-white" />
             </div>
             <ResponsiveText variant="h4" weight="semibold" font="montserrat" className="text-white mb-2">
-              Digital Portal
+              Living Dashboard
             </ResponsiveText>
             <ResponsiveText variant="caption" font="lora" className="text-white/90 block">
-              Interactive systems and tools for transformation
+              Digital interface that receives user input and returns field-aligned scrolls, essays, and tools.
             </ResponsiveText>
           </div>
 
@@ -163,10 +153,10 @@ export default function About() {
               <Heart className="h-6 w-6 text-white" />
             </div>
             <ResponsiveText variant="h4" weight="semibold" font="montserrat" className="text-white mb-2">
-              Physical Spaces
+              Field Tools
             </ResponsiveText>
             <ResponsiveText variant="caption" font="lora" className="text-white/90 block">
-              Art studios, meditation spaces, and gathering environments
+              Functional offerings including glyphs, calibration maps, and movement-based rituals.
             </ResponsiveText>
           </div>
 
@@ -175,10 +165,10 @@ export default function About() {
               <Users className="h-6 w-6 text-white" />
             </div>
             <ResponsiveText variant="h4" weight="semibold" font="montserrat" className="text-white mb-2">
-              Field Gatherings
+              Scrollstream Archive
             </ResponsiveText>
             <ResponsiveText variant="caption" font="lora" className="text-white/90 block">
-              Community events and embodied creative projects
+              Library of poetic, precise transmissions mapped to specific consciousness domains.
             </ResponsiveText>
           </div>
         </div>
@@ -193,11 +183,13 @@ export default function About() {
           <GlassCard>
             <div className="text-left">
               <ResponsiveText variant="bodyLarge" font="lora" className="text-white/90 leading-relaxed mb-6 block">
-                UNAs are flexible, cost-effective, and underutilized legal structures that provide lawful standing and banking access without the weight of incorporation. For creatives, healers,
-                educators, and organizers, they create a foundation that honors sovereignty and collaboration.
+                An Unincorporated Association is a lawful, flexible structure that provides banking access and collective recognition without corporate dependency.
               </ResponsiveText>
               <ResponsiveText variant="bodyLarge" font="lora" className="text-white/90 leading-relaxed block">
-                This platform gives you the tools and guidance to step into that foundation with clarity and confidence.
+                It restores agency to creators and communities, making lawful formation accessible, ethical, and aligned with natural order.
+              </ResponsiveText>
+              <ResponsiveText variant="bodyLarge" font="lora" className="text-white/90 leading-relaxed block">
+                Sovereignty becomes the foundation of organization, not an afterthought.
               </ResponsiveText>
             </div>
           </GlassCard>
@@ -212,8 +204,10 @@ export default function About() {
               Essence Statement
             </ResponsiveText>
             <ResponsiveText variant="bodyLarge" font="lora" className="text-white leading-relaxed block">
-              Created by Gigi Stardust, the UNA platform empowers mission-driven founders to align structure with purpose.
-              It is rooted in the sovereignty-centered framework of <em>Stardust to Sovereignty™</em>, a sovereign design system expressed through writing, art, and community portals: a multidimensional map of creativity, consciousness, and coherence held in its own UNA.
+              The UNA platform bridges the metaphysical and the material. Rooted in <em>Stardust to Sovereignty™</em>, it embodies a living blueprint for structural coherence, where energy, purpose, and law operate as one.
+            </ResponsiveText>
+            <ResponsiveText variant="bodyLarge" font="lora" className="text-white leading-relaxed block">
+              Every association built through this system is an act of sovereign creation.
             </ResponsiveText>
           </div>
         </div>
@@ -243,7 +237,7 @@ export default function About() {
               Founder & Systems Architect
             </ResponsiveText>
             <ResponsiveText variant="body" font="lora" className="text-white/90 mb-4 block">
-              Creator of Stardust to Sovereignty™ and architect of purpose-driven organizational structures.
+              Creator of Stardust to Sovereignty™ and architect of sovereign frameworks integrating consciousness, design, and lawful formation.
             </ResponsiveText>
             <div className="text-sm text-white/90">
               <p>Systems Architecture</p>
@@ -264,7 +258,7 @@ export default function About() {
               Philosophical Foundation
             </ResponsiveText>
             <ResponsiveText variant="body" font="lora" className="text-white/90 mb-4 block">
-              Sovereign design system expressed through writing, art, and community portals.
+              The Codex that informs all UNA design, where sovereignty is coherence, and structure becomes art in motion.
             </ResponsiveText>
             <div className="text-sm text-white/90">
               <p>Metaphysics & Neuroscience</p>
@@ -281,7 +275,7 @@ export default function About() {
         <div className="border-t border-white/20 pt-8">
           <div className="text-center">
             <ResponsiveText variant="body" font="lora" className="text-white/90 mb-4 block">
-              Explore more about the UNA platform and our approach to sovereign structuring.
+              Explore how the UNA platform translates the Stardust to Sovereignty™ system into practical, lawful coherence.
             </ResponsiveText>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
